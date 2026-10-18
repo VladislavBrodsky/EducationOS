@@ -1,0 +1,12 @@
+.cube-stage .iso-live{--tn-0:var(--anatomy-shade-0);--tn-1:var(--anatomy-shade-1);--tn-2:var(--anatomy-shade-2);--tn-3:var(--anatomy-shade-3);--tn-4:var(--anatomy-top)}
+.cube-stage .iso-tn{stroke-width:.4;stroke-linejoin:round;--ta:var(--tn-0);--tb:var(--tn-1);fill:color-mix(in srgb,var(--ta) calc(100% - var(--f,0) * 100%),var(--tb));stroke:color-mix(in srgb,var(--ta) calc(100% - var(--f,0) * 100%),var(--tb))}
+.cube-stage .iso-tn[data-b="1"]{--ta:var(--tn-1);--tb:var(--tn-2)}
+.cube-stage .iso-tn[data-b="2"]{--ta:var(--tn-2);--tb:var(--tn-3)}
+.cube-stage .iso-tn[data-b="3"]{--ta:var(--tn-3);--tb:var(--tn-4)}
+.cube-stage .iso-line{fill:none;stroke:var(--anatomy-hi);stroke-linejoin:round;stroke-linecap:round;stroke-width:1}
+.cube-stage .iso-fill{fill:var(--anatomy-shade-0)}
+.cube-stage .iso-top{fill:var(--anatomy-top)}
+.cube-stage .iso-shade[data-shade="0"]{fill:var(--anatomy-shade-0)}
+.cube-stage .iso-shade[data-shade="1"]{fill:var(--anatomy-shade-1)}
+.cube-stage .iso-shade[data-shade="2"]{fill:var(--anatomy-shade-2)}
+.cube-stage .iso-shade[data-shade="3"]{fill:var(--anatomy-shade-3)}

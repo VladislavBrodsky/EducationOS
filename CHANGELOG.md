@@ -1,5 +1,17 @@
 # Changelog
 
+## Learner portal and Anatomy discovery labs — 2026-10-18
+
+- Added Loop Loom, Same Half Different Shape, and Hidden Cube Builder to the learner portal, with prediction, manipulation, explanation, and transfer checks.
+- Added mobile and keyboard controls, 2D alternatives, no-JavaScript worked examples, and independently checked browser-tab notebook records.
+- Integrated pinned MIT-licensed Anatomy SVG geometry and optional rigid 3D turning; kept the marketing site and existing demo separate.
+- Added a separate responsive learner portal with Today, Subjects, Projects, My progress, and an adult overview. Preserved the public marketing site and original demo.
+- Added 15 starter activities across programming, science, mathematics, writing, and arts/design; local draft recovery, feedback, reflections, work export and confirmed clearing.
+- Added an editable, bounded practice-code interpreter for print, variables, arithmetic and repeat, with line-specific errors. No arbitrary JavaScript/Python execution or new server endpoint.
+- Added light/dark appearance, mobile Learn/Activity/Result panels and labelled learning paths.
+- Deployed separate portal and marketing services at app.educationos.space and educationos.space, with hostname routing, separate metadata/crawler behaviour, verified HTTPS and preserved mail records.
+- Verified all three labs after deployment at two mobile viewport sizes, with 12 light/dark accessibility scans reporting no violations. See docs/DEPLOYMENT_STATUS.md for evidence and limits.
+
 ## 0.6.0 — 2026-10-18
 
 - Accepted the user's Python-first correction: FastAPI, Pydantic, SQLAlchemy 2/Alembic, PostgreSQL/pgvector and Redis replace the active Node/Prisma backend direction.

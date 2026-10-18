@@ -34,6 +34,8 @@ Supply a distinct owner database URL only to the controlled Alembic migration jo
 
 ## educationos.space target
 
+The learner portal has a separate surface prepared for `app.educationos.space`. See [PORTAL_DEPLOYMENT.md](PORTAL_DEPLOYMENT.md) for hostname routing, local preview, hosting choices and the DNS handoff. The public website remains at the apex domain.
+
 Preferred architecture: managed Next hosting or the supplied standalone web container; a managed Python container service for API and worker; managed PostgreSQL 18 with pgvector; private Redis; a TLS ingress that routes the canonical `https://educationos.space` UI and `/api/v1/*` to Python. With Vercel, set server-only `PYTHON_API_URL` to the real protected Python service HTTPS origin at build. Health probes go directly to Python `/health/live` and `/health/ready`. The Python service must not depend on Next for authorization.
 
 No provider or deployment is currently linked/verified. Do not use Node-only hosting for the Python service. Establish the real service origin and region first, then configure exact allowed origins, network access, secrets, TLS database verification, connection pools, request/body/time limits, WAF/public traffic limits, telemetry retention and availability alerts. Keep PR/preview environments separate from production data and credentials. Disable raw ingress/access logs containing IPs, query strings or authorization headers, or configure explicit redaction and retention.

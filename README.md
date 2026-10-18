@@ -4,9 +4,9 @@
 
 Python owns the application: FastAPI REST APIs, Pydantic contracts, permission/consent policy, SQLAlchemy 2 persistence, Alembic migrations, TRIZ orchestration, tasks, AI tooling and MCP. Next.js/React/TypeScript provides the existing responsive browser interface and generated API client. This supersedes the earlier TypeScript-backend/Prisma plan; archived code in `reference/legacy-typescript-backend/` is historical only.
 
-The public experience has five age stages, seven TRIZ steps, observations, portfolio/export/reset, guardian preview and SVG icons. Demonstration notes stay in the browser tab's session storage; no learner notes are sent by the demo. FastAPI supplies versioned curriculum, with a clearly labeled offline fallback.
+The public website and the original Inventors Lab demo remain separate from the new learner portal. The portal has 15 starter activities across Programming, Science, Mathematics, Language & Writing, and Arts & Design, plus three interactive Anatomy discovery labs, with editable practice code, activity feedback, local drafts, reflections, progress, and export/reset. The original demo retains five age stages and seven TRIZ steps. Demonstration notes stay in the browser tab's session storage; no learner notes are sent to a server. FastAPI supplies the original demo's versioned curriculum, with a clearly labeled offline fallback.
 
-**Synthetic demonstration only. Real enrollment and learner-facing generative AI remain closed in code.** There is no public session-issuance or asserted-consent endpoint. The development seed is synthetic and refuses production. No hosting deployment, domain cutover or GitHub push is implied by this source release.
+**Synthetic demonstration only. Real enrollment and learner-facing generative AI remain closed in code.** There is no public session-issuance or asserted-consent endpoint. The development seed is synthetic and refuses production. The frontend is now live on separate portal and marketing services; see [verified deployment status](docs/DEPLOYMENT_STATUS.md). Production accounts and the Python service were not launched. Hosting uses explicit CLI releases independently of the repository review.
 
 ## Run locally
 
@@ -25,7 +25,11 @@ npm ci
 npm run dev
 ```
 
-Open [EducationOS](http://127.0.0.1:3000), [the learner demo](http://127.0.0.1:3000/demo), and [FastAPI docs](http://127.0.0.1:8000/docs). Public curriculum needs neither PostgreSQL nor Redis. Readiness correctly reports unavailable dependencies until storage services are running. Protected synthetic APIs need migrated PostgreSQL, Redis, and a server-issued development token.
+Open [EducationOS](http://127.0.0.1:3000), [the learning portal](http://127.0.0.1:3000/portal), [the original learner demo](http://127.0.0.1:3000/demo), and [FastAPI docs](http://127.0.0.1:8000/docs). The new portal's bundled activities work without starting Python. Public API curriculum needs neither PostgreSQL nor Redis. Readiness correctly reports unavailable dependencies until storage services are running. Protected synthetic APIs need migrated PostgreSQL, Redis, and a server-issued development token.
+
+The portal is live at [app.educationos.space](https://app.educationos.space), serving clean lesson paths while [educationos.space](https://educationos.space) serves the separate marketing website. See [portal behaviour](docs/PORTAL.md) and [hostname/deployment handoff](docs/PORTAL_DEPLOYMENT.md). DNS, certificates and post-deployment mobile checks are recorded in [deployment status](docs/DEPLOYMENT_STATUS.md). Programming uses a bounded EducationOS practice language, not a complete Python or JavaScript runtime. New portal activities are starter content rather than five age-adapted curricula; younger learners should explore with adult assistance.
+
+[Anatomy discovery labs](docs/anatomy/README.md) includes the implemented Loop Loom, Same Half Different Shape, and Hidden Cube Builder, with mobile 2D alternatives and optional rigid 3D cube viewing. It also contains the pinned technical audit, a broader 15-class roadmap, and professional 2D/3D authoring prompts. See [implementation details](docs/anatomy/IMPLEMENTATION.md).
 
 For the complete local stack with Docker Compose:
 

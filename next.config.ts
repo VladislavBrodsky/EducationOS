@@ -3,6 +3,10 @@ const config: NextConfig = {
   output: 'standalone',
   poweredByHeader: false,
   reactStrictMode: true,
+  // Keep same-server rewrites on the original origin. Next otherwise turns
+  // 127.0.0.1 into localhost and treats the rewrite as an external request,
+  // which reruns the proxy and loses its trusted portal/nonce headers.
+  skipProxyUrlNormalize: true,
   async rewrites() {
     // Internal upstream is never exposed to browser JavaScript. All product API
     // and permission decisions belong to FastAPI; Next only forwards requests.

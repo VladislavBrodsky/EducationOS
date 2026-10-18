@@ -1,6 +1,6 @@
 # educationos.space: observed state and DNS handoff
 
-This is a deployment runbook, not a claim of a live EducationOS deployment. No DNS, hosting, certificate, or email settings were changed by this implementation.
+The frontend is now deployed on separate Railway portal and marketing services. See [verified live status](DEPLOYMENT_STATUS.md) and [evidence](deployment/live-2026-10-18.json) for the current configuration. The observations and initial provider recommendation below are retained as the earlier, pre-deployment DNS handoff; they do not describe the final hosting selection. Mail records were preserved.
 
 ## Public checks performed
 

@@ -1,5 +1,13 @@
 # EducationOS design system · v0.5.0
 
+## Learner portal addition
+
+The separate `/portal` surface uses `src/components/portal/portal-shell.tsx` and scoped `portal.css`. It retains paper, ink and lime while keeping learner navigation separate from the public site. Today, Subjects, Projects and My progress are primary; the adult overview is a secondary entry. The learner brand returns to the learner home.
+
+The home leads with a real next activity and visible subjects. Lessons share a goal/instruction/activity/feedback/reflection structure, with code, choice, writing and investigation workspaces. At mobile widths, Learn/Activity/Result panels replace side-by-side workspaces. Drafts, counts, feedback and output are real browser-local state; activity completion never implies mastery. Light/dark appearance is scoped to the portal, without changing the marketing theme.
+
+Portal text and form controls prioritize legibility and touch targets. Essential information is immediately readable; theme changes do not animate backgrounds against instantly changing foregrounds. No decorative typing animation delays output. See [PORTAL.md](PORTAL.md) for behaviour and limitations. The remaining sections preserve the original demo's design record.
+
 The learner interface pairs generous space and charcoal typography with lime. Adult views use the same components with soft peach surfaces and an editorial Georgia display style. The system uses locally available system fonts, so the demo does not contact a font provider.
 
 ## Tokens
