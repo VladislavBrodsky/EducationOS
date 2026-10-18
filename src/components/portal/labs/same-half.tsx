@@ -76,9 +76,9 @@ export function SameHalf({ record, ready, onChange, onRecord }: LabProps) {
   }
 
   return <div className="half-lab">
-    <section className="lab-panel half-predict" aria-labelledby="half-predict-heading">
+    <section className="lab-panel half-predict" aria-labelledby="lab-predict">
       <p className="p-eyebrow">1 · Predict</p>
-      <h2 id="half-predict-heading">Can different shapes cover the same amount?</h2>
+      <h2 id="lab-predict" tabIndex={-1}>Can different shapes cover the same amount?</h2>
       <p>Imagine six selected cells in a whole made of twelve equal cells. Move those six cells into a different pattern. Does the amount selected stay the same?</p>
       {!revealed ? <form onSubmit={reveal}>
         <fieldset className="half-choice-group"><legend>My prediction</legend>
@@ -90,9 +90,9 @@ export function SameHalf({ record, ready, onChange, onRecord }: LabProps) {
     </section>
 
     {revealed && <>
-      <section className="lab-panel" aria-labelledby="half-make-heading">
+      <section className="lab-panel" aria-labelledby="lab-explore">
         <p className="p-eyebrow">2 · Make and rearrange</p>
-        <h2 id="half-make-heading">Make a half with your own shape.</h2>
+        <h2 id="lab-explore" tabIndex={-1}>Make a half with your own shape.</h2>
         <p>Tap a cell to select it or clear it. The outside edge is one whole; every cell has the same area. Make a half, then try a new shape.</p>
         <div className="half-grid" role="group" aria-label="Twelve equal cells. Select cells to make half of the whole.">
           {Array.from({ length: HALF_GRID.cells }, (_, cell) => <button key={cell} className={`half-cell${selected.includes(cell) ? " is-selected" : ""}`} type="button" aria-label={`Cell ${cell + 1}, row ${Math.floor(cell / HALF_GRID.columns) + 1}, column ${cell % HALF_GRID.columns + 1}`} aria-pressed={selected.includes(cell)} disabled={!ready} onClick={() => changeSelection(toggleHalfCell(selected, cell))}><span aria-hidden="true">{cell + 1}</span>{selected.includes(cell) ? <Check size={18} aria-hidden="true" /> : <span className="half-cell-empty" aria-hidden="true" />}</button>)}
@@ -109,9 +109,9 @@ export function SameHalf({ record, ready, onChange, onRecord }: LabProps) {
       </section>
 
       <form onSubmit={recordPractice}>
-        <section className="lab-panel" aria-labelledby="half-observe-heading">
+        <section className="lab-panel" aria-labelledby="lab-explain">
           <p className="p-eyebrow">3 · Compare</p>
-          <h2 id="half-observe-heading">Same whole, different equal parts.</h2>
+          <h2 id="lab-explain" tabIndex={-1}>Same whole, different equal parts.</h2>
           <p>Both rectangles below have exactly the same width and height. Their cells are equal within each rectangle.</p>
           <div className="half-comparison"><FractionWhole parts={6} selected={3} label="Three of six" /><FractionWhole parts={4} selected={2} label="Two of four" /></div>
           <fieldset className="half-choice-group"><legend>What do the selected areas show?</legend>
@@ -128,9 +128,9 @@ export function SameHalf({ record, ready, onChange, onRecord }: LabProps) {
           <details className="p-help"><summary>Show the unequal-parts explanation</summary><p>The small selected pieces cover {unevenShare.selectedArea}/{unevenShare.totalArea} of the whole. They cover a quarter, not a half. Counting selected parts out of all parts describes area only when the parts are equal.</p></details>
         </section>
 
-        <section className="lab-panel" aria-labelledby="half-transfer-heading">
+        <section className="lab-panel" aria-labelledby="lab-transfer">
           <p className="p-eyebrow">4 · Try a new whole</p>
-          <h2 id="half-transfer-heading">What if the whole has eight equal cells?</h2>
+          <h2 id="lab-transfer" tabIndex={-1}>What if the whole has eight equal cells?</h2>
           <div className="half-transfer-grid" aria-hidden="true">{Array.from({ length: 8 }, (_, cell) => <span key={cell}>{cell + 1}</span>)}</div>
           <div className="p-field"><label htmlFor="half-transfer">How many of eight equal cells make half?</label><input id="half-transfer" type="number" inputMode="numeric" min="0" max="8" step="1" value={record.answers.transfer ?? ""} onChange={event => answer("transfer", event.target.value)} disabled={!ready} /></div>
           <fieldset className="half-choice-group"><legend>Why does your answer make half?</legend>

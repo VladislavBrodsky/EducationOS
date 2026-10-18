@@ -4,7 +4,7 @@ The portal implements the approved paper/ink/lime learning-workspace direction. 
 
 ## Current behaviour
 
-- **Today:** select a subject and start or resume its first unrecorded activity. The subject selection survives reloads in the current tab.
+- **Today:** return directly to edited unfinished activities and labs through Continue your work. Untouched starters and recorded work are excluded. Select a subject to see its first unrecorded activity; a finished path offers Revisit activity. The subject selection survives reloads in the current tab and announces explicit changes.
 - **Subjects:** five learning paths containing three starter activities each, with additional discovery labs in programming and mathematics, visible completion counts and direct links. Activities can be revisited or explored in any order.
 - **Projects:** purpose-led briefs connect each subject's three activities to work a learner can collect or create offline.
 - **Lesson workspace:** objective, teaching notes, instructions, hint, activity, feedback, optional reflection and next activity. Mobile panels show Learn, Activity and Result without squeezing several columns onto a phone.
@@ -12,6 +12,7 @@ The portal implements the approved paper/ink/lime learning-workspace direction. 
 - **My progress:** per-subject counts, a notebook of drafts and recorded work, JSON export and confirmed clearing. Editing a checked answer invalidates its completion until it is checked again. Editing a reflection preserves completion.
 - **Adult overview:** the same tab's practice and guidance. It is not an authenticated guardian dashboard and provides no access control.
 - **Appearance:** light and dark themes with labelled controls, keyboard focus, large touch targets and reduced-motion support.
+- **Mobile navigation:** Today, Subjects, Projects and My progress remain available at the bottom with space reserved for device safe areas. Projects remains selected while a discovery lab is open. Sticky Predict, Explore, Explain and New case shortcuts focus the corresponding lab heading; gated steps open only after a saved prediction.
 
 The new portal's starter activities are not five age-adapted curricula. For early readers, adult-assisted reading and recording are appropriate. The existing demo's five age stages are preserved separately. The portal does not create child identities, accounts, cloud records, public sharing, AI tutoring, or verified assessments.
 

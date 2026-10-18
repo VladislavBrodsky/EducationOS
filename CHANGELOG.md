@@ -1,5 +1,11 @@
 # Changelog
 
+## Portal navigation and resume — 2026-10-18
+
+- Added direct Today links to edited unfinished activities and labs; blank starters stay hidden and completed paths offer Revisit activity.
+- Kept mobile navigation reachable during long lessons, with safe-area spacing and Projects selected inside discovery labs.
+- Added sticky lab step shortcuts with native heading focus and prediction gates. Existing answers and 2D fallbacks stay available.
+
 ## Learner portal and Anatomy discovery labs — 2026-10-18
 
 - Added Loop Loom, Same Half Different Shape, and Hidden Cube Builder to the learner portal, with prediction, manipulation, explanation, and transfer checks.

@@ -107,8 +107,8 @@ function LoopLoomWorkspace({ record, ready, onChange, onRecord, repeats }: LabPr
   }
 
   return <div className="loom-lab" ref={rootRef}>
-    <section className="lab-panel loom-prediction" aria-labelledby={`${id}-predict-title`}>
-      <p className="p-eyebrow">01 / Predict</p><h2 id={`${id}-predict-title`}>Two instructions. How many lines?</h2>
+    <section className="lab-panel loom-prediction" aria-labelledby="lab-predict">
+      <p className="p-eyebrow">01 / Predict</p><h2 id="lab-predict" tabIndex={-1}>Two instructions. How many lines?</h2>
       <p>The block says Clap, then Tap. If it repeats {repeats} {repeats === 1 ? "time" : "times"}, how many lines will appear? A prediction is your first idea; it can change.</p>
       <form onSubmit={predict} className="loom-predict-form" noValidate>
         <div className="p-field"><label htmlFor={`${id}-prediction`}>My predicted number of lines</label><input id={`${id}-prediction`} type="number" inputMode="numeric" min="0" max="12" step="1" value={record.answers.prediction ?? ""} onChange={event => answer("prediction", event.target.value)} disabled={!ready} /></div>
@@ -118,8 +118,8 @@ function LoopLoomWorkspace({ record, ready, onChange, onRecord, repeats }: LabPr
       <p className="loom-status" role="status">{message || (record.answers.predictionSubmitted === "yes" ? "Your prediction is saved. Explore to test it." : "Make a prediction before the output is revealed.")}</p>
     </section>
 
-    <section className="lab-panel loom-explore" aria-labelledby={`${id}-explore-title`}>
-      <div className="loom-section-heading"><div><p className="p-eyebrow">02 / Explore</p><h2 id={`${id}-explore-title`}>Make a rhythm with a loop.</h2></div><button className="p-secondary" type="button" aria-pressed={flat} onClick={() => setFlat(current => !current)}>{flat ? "Isometric view" : "2D view"}</button></div>
+    <section className="lab-panel loom-explore" aria-labelledby="lab-explore">
+      <div className="loom-section-heading"><div><p className="p-eyebrow">02 / Explore</p><h2 id="lab-explore" tabIndex={-1}>Make a rhythm with a loop.</h2></div><button className="p-secondary" type="button" aria-pressed={flat} onClick={() => setFlat(current => !current)}>{flat ? "Isometric view" : "2D view"}</button></div>
       <p className="p-muted">The loom is a teaching analogy. Its tickets represent printed text. It does not make sound or show how a real computer is built.</p>
       <div className="loom-controls"><div className="loom-repeat-control"><label htmlFor={`${id}-repeats`}>Repeats</label><div><button className="p-secondary" type="button" aria-label="One fewer repeat" disabled={!ready || repeats === 0} onClick={() => changeRepeats(repeats - 1)}>−</button><input id={`${id}-repeats`} type="number" inputMode="numeric" min="0" max="6" step="1" value={repeats} onChange={event => { if (event.target.value !== "") changeRepeats(Number(event.target.value)); }} disabled={!ready} /><button className="p-secondary" type="button" aria-label="One more repeat" disabled={!ready || repeats === 6} onClick={() => changeRepeats(repeats + 1)}>+</button></div></div><p className="p-small p-muted">Changing repeats starts again and clears the answers for this case.</p></div>
 
@@ -130,9 +130,9 @@ function LoopLoomWorkspace({ record, ready, onChange, onRecord, repeats }: LabPr
       {revealed && <details className="p-help"><summary>Why does the line count grow?</summary><p>One block contains two print instructions. Repeating the whole block {repeats} {repeats === 1 ? "time" : "times"} creates {repeats} × 2 = {model.totalLines} lines. A repeat count counts whole blocks, not output lines.</p></details>}
     </section>
 
-    <section className="lab-panel loom-explain" aria-labelledby={`${id}-explain-title`}><p className="p-eyebrow">03 / Explain & try a new case</p><h2 id={`${id}-explain-title`}>Can you use the idea again?</h2><p>You can work these out with the code or the 2D trace. Playing the animation is optional.</p>
+    <section className="lab-panel loom-explain" aria-labelledby="lab-explain"><p className="p-eyebrow">03 / Explain & try a new case</p><h2 id="lab-explain" tabIndex={-1}>Can you use the idea again?</h2><p>You can work these out with the code or the 2D trace. Playing the animation is optional.</p>
       <div className="p-field"><label htmlFor={`${id}-observation`}>With {repeats} {repeats === 1 ? "repeat" : "repeats"} and two instructions per block, how many lines print?</label><input id={`${id}-observation`} type="number" inputMode="numeric" min="0" max="12" step="1" value={record.answers.observation ?? ""} onChange={event => answer("observation", event.target.value)} disabled={!ready} /></div>
-      <h3>New case: add Snap.</h3><pre className="loom-code"><code>{'repeat 4:\n  print("Clap")\n  print("Tap")\n  print("Snap")'}</code></pre>
+      <h3 id="lab-transfer" tabIndex={-1}>New case: add Snap.</h3><pre className="loom-code"><code>{'repeat 4:\n  print("Clap")\n  print("Tap")\n  print("Snap")'}</code></pre>
       <div className="p-field"><label htmlFor={`${id}-transfer`}>How many lines will this new program print?</label><input id={`${id}-transfer`} type="number" inputMode="numeric" min="0" max="24" step="1" value={record.answers.transfer ?? ""} onChange={event => answer("transfer", event.target.value)} disabled={!ready} /></div>
       <div className="p-field"><label htmlFor={`${id}-order`}>What are the first three output lines, in order?</label><select id={`${id}-order`} value={record.answers.transferFirst ?? ""} onChange={event => answer("transferFirst", event.target.value)} disabled={!ready}><option value="">Choose an order</option><option value="Clap, Clap, Clap">Clap, Clap, Clap</option><option value="Snap, Tap, Clap">Snap, Tap, Clap</option><option value="Clap, Tap, Snap">Clap, Tap, Snap</option></select></div>
       <button type="button" className="p-primary" disabled={!ready} onClick={() => setCheck(onRecord())}>Check & record my learning</button>

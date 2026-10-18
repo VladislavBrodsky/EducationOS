@@ -64,7 +64,7 @@ export function PortalShell({ children, appHost }: { children: ReactNode; appHos
     },
   }), [appHost]);
   const currentPath = pathname === "/portal" ? "/" : pathname.replace(/^\/portal(?=\/)/, "");
-  const isActive = (path: string) => path === "/" ? currentPath === "/" : currentPath === path || currentPath.startsWith(`${path}/`) || path === "/subjects" && currentPath.startsWith("/learn/");
+  const isActive = (path: string) => path === "/" ? currentPath === "/" : currentPath === path || currentPath.startsWith(`${path}/`) || path === "/subjects" && currentPath.startsWith("/learn/") || path === "/projects" && (currentPath === "/labs" || currentPath.startsWith("/labs/"));
   const toggleTheme = () => {
     fallbackTheme = theme === "light" ? "dark" : "light";
     try { window.localStorage.setItem(THEME_KEY, fallbackTheme); } catch { themeStorageFailed = true; }

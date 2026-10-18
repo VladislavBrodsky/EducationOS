@@ -2,6 +2,12 @@
 
 Observed on 2026-10-18. Tested source is the isolated Python-first release, continuing the existing frontend. Historical v0.4 test claims were not rerun because the original source archive remains unavailable.
 
+## Portal navigation and resume — 2026-10-18
+
+The UI follow-up passed lint, TypeScript, icon policy, a production build, **129 unit tests** and **33 browser tests**. New coverage checks meaningful unfinished work across every activity type and lab; zero observations and changed/cleared models; recorded-work exclusion; actual return to saved lab answers; and Revisit activity for finished paths.
+
+At 320px, 390px and 430px the persistent mobile navigation is visible and receives taps during a long lab. Lab step links focus visible headings below the sticky shortcuts. Gated sections unlock after prediction and relock after a changed cube preset. Moving between sections preserves answers. New light/dark mobile accessibility scans pass with zero detected violations. The full existing public/demo/portal/lab browser suite also passed. These are Chromium viewport/touch checks, not physical-device verification.
+
 ## Hosted deployment verification — 2026-10-18
 
 The portal and unchanged marketing content were deployed to isolated Railway services at `app.educationos.space` and `educationos.space`. Both builds succeeded; all three custom hostnames (including `www`) have verified ownership and valid certificates.

@@ -1,6 +1,6 @@
 # Prepared GitHub review update
 
-Publication is pending approval. This is the exact proposed title and body for the existing pull request #2; it has not been posted.
+This title and body were published to pull request #2 with explicit user approval alongside commit e08c9a7. The text below preserves that release handoff; later UI updates are recorded separately.
 
 ## Title
 

@@ -20,7 +20,7 @@
   },
   "source": {
     "baseCommit": "e96d350",
-    "method": "Frontend-only working-tree snapshot uploaded by Railway CLI. Application source and release records are committed locally on codex/python-first-foundation. Public GitHub publication is pending explicit approval; automatic GitHub deployment is not connected.",
+    "method": "Frontend-only working-tree snapshot uploaded by Railway CLI, subsequently saved as commit e08c9a7 and published to codex/python-first-foundation in pull request #2. Automatic GitHub deployment is not connected.",
     "files": 95,
     "bytes": 1221877,
     "manifestSha256": "3e481edf79638f38ee2f025d79ca6009443ddfa69b4e31c3371730670f6fcf66",
@@ -31,8 +31,9 @@
     "repositoryVerification": {
       "matchingApplicationAndConfigurationFiles": 94,
       "packagingOnlyOverrides": 1,
-      "publication": "Local commit only; public GitHub push pending explicit approval.",
-      "intendedPullRequest": "https://github.com/VladislavBrodsky/EducationOS/pull/2"
+      "publication": "Published with explicit user approval.",
+      "sourceCommit": "e08c9a79c4e1e7ead7f96556bde2edf7136866dd",
+      "pullRequest": "https://github.com/VladislavBrodsky/EducationOS/pull/2"
     }
   },
   "domainCertificates": {

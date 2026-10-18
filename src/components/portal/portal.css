@@ -243,6 +243,14 @@ pre.p-code-editor { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; }
 .p-subject-card > span:not(.p-subject-icon) { font-size: 13px; color: var(--p-muted); }
 .p-subject-card > .p-progress { margin-top: 16px; margin-bottom: 7px; }
 .p-home-bottom { margin-top: 27px; padding-top: 24px; border-top: 1px solid var(--p-line); display: flex; gap: 25px; align-items: center; justify-content: space-between; }
+.p-resume { margin-bottom: 24px; }
+.p-resume-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; list-style: none; margin: 14px 0 0; padding: 0; }
+.p-resume-list li { display: grid; align-content: start; gap: 3px; min-width: 0; padding: 10px 14px; border: 1px solid var(--p-line); border-radius: 9px; background: var(--p-paper); }
+.p-resume-list .p-text-link { display: flex; justify-content: space-between; min-height: 44px; line-height: 1.4; }
+.p-resume-list .p-text-link > span { overflow-wrap: anywhere; }
+.p-resume-list .p-small { font-size: 12px; }
+.p-resume > .p-help { margin-top: 14px; }
+.p-portal .p-subject-notice { margin: 10px 0 0; min-height: 20px; }
 .p-quiet-note { display: flex; gap: 13px; align-items: flex-start; }
 .p-quiet-note strong { font-size: 15px; font-weight: 500; }
 .p-portal .p-quiet-note p { font-size: 13px; color: var(--p-muted); margin: 4px 0 0; }
@@ -299,14 +307,16 @@ pre.p-code-editor { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; }
 @media (max-width: 1150px) { .p-content { padding: 30px 26px 42px; } .p-topbar, .p-footer { padding-inline: 26px; } .p-preview-note summary { padding-inline: 26px; } .p-portal .p-preview-note p { padding-left: 40px; padding-right: 26px; } .p-subject-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .p-hero { grid-template-columns: minmax(0, 1fr) 29%; } .p-hero-copy { padding: 25px; } .p-hero-visual { padding: 19px; } .p-hero-visual pre { font-size: 12px; } .p-lesson-layout { grid-template-columns: minmax(220px, .9fr) minmax(0, 1.1fr); gap: 20px; } }
 @media (max-width: 980px) { .p-portal { grid-template-columns: 210px minmax(0, 1fr); } .p-sidebar { padding-inline: 12px; } .p-brand { font-size: 20px; padding-inline: 3px; gap: 7px; } .p-sidebar-label { font-size: 10px !important; } .p-nav-link { font-size: 14px; padding-inline: 11px; gap: 10px; } .p-hero { grid-template-columns: 1fr; } .p-hero-visual { display: none; } .p-lesson-layout { grid-template-columns: 1fr; } .p-instructions { gap: 14px; } .p-grid { grid-template-columns: 1fr; } .p-footer { align-items: flex-start; flex-direction: column; gap: 7px; } .p-stats { gap: 9px; } .p-stat { padding: 18px 13px; } }
 @media (max-width: 760px) {
-  .p-portal { display: block; }
+  .p-portal { display: block; padding-bottom: calc(78px + env(safe-area-inset-bottom, 0px)); }
+  .p-resume-list { grid-template-columns: 1fr; gap: 8px; }
   .p-sidebar { position: static; height: auto; border-right: 0; border-bottom: 1px solid var(--p-line); padding: 15px 17px 11px; }
   .p-brand { font-size: 22px; padding: 0; }
   .p-portal .p-sidebar-label { margin: 4px 0 14px; padding: 0 0 0 42px; font-size: 10px; text-transform: none; letter-spacing: .02em; }
-  .p-navigation { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 5px; }
+  .p-navigation { position: fixed; z-index: 20; inset: auto 0 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 5px; padding: 6px max(12px, env(safe-area-inset-right, 0px)) calc(6px + env(safe-area-inset-bottom, 0px)) max(12px, env(safe-area-inset-left, 0px)); background: var(--p-surface); border-top: 1px solid var(--p-line); box-shadow: 0 -4px 20px #17200008; }
   .p-nav-link { padding: 9px 3px; min-height: 62px; flex-direction: column; gap: 3px; font-size: 12px; line-height: 1.4; white-space: nowrap; }
   .p-nav-link svg { width: 20px; height: 20px; }
   .p-nav-marker { display: none; }
+  .p-portal :is(input, select, textarea, button, a, summary) { scroll-margin-block: 95px; }
   .p-sidebar-bottom { display: none; }
   .p-topbar { min-height: 61px; padding: 8px 19px; gap: 10px; }
   .p-topbar-label { font-size: 12px; gap: 7px; }
