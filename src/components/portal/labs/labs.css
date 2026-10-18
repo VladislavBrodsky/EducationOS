@@ -65,3 +65,12 @@
 @media (max-width: 1150px) { .lab-card-grid { grid-template-columns: 1fr; } .lab-discovery-card { display: grid; grid-template-columns: 170px minmax(0, 1fr); } .lab-card-art { height: 100%; min-height: 220px; border-bottom: 0; border-right: 1px solid var(--p-line); } }
 @media (max-width: 760px) { .lab-workspace > .p-heading > .p-meta { padding-top: 0; flex-wrap: wrap; } .lab-notebook-answers { grid-template-columns: 1fr; } .p-portal .lab-card-copy h3 { font-size: 23px; } .lab-step-navigation { top: 5px; } .lab-step-navigation :is(a, .lab-step-locked) { flex-direction: column; gap: 3px; font-size: 12px; } }
 @media (max-width: 520px) { .lab-discovery-card { display: flex; } .lab-card-art { height: 140px; min-height: 0; border-right: 0; border-bottom: 1px solid var(--p-line); } .lab-card-copy { padding: 21px; } .lab-card-grid { gap: 18px; } .lab-actions { align-items: stretch; flex-direction: column; } .lab-actions .p-text-link { min-height: 44px; } }
+
+/* Decorative 3D cues sit behind the original interactive 2D/3D lab controls. */
+.lab-card-art{background:radial-gradient(circle at 78% 18%,#ffffffb8,transparent 40%),linear-gradient(135deg,#e9f8d3,#d2ecad)}
+.lab-card-art::before{content:"";position:absolute;inset:0;background:url('/images/learning-objects.png') 80% 47%/185px auto no-repeat;opacity:.38}
+.lab-card-art::after{content:"";position:absolute;left:50%;top:50%;width:87px;height:87px;transform:translate(-50%,-50%) rotate(18deg);border-radius:23px;background:linear-gradient(135deg,#f7ffd8,#9ad135);box-shadow:inset -12px -11px 18px #42682524,0 12px 25px #42682524}
+.lab-card-art>svg{position:relative;z-index:1;color:#172216;filter:drop-shadow(0 3px 1px #ffffffa6)}
+.lab-card-same-half .lab-card-art{background:linear-gradient(135deg,#e7f3ff,#c9defb)}.lab-card-same-half .lab-card-art::after{border-radius:50%;background:conic-gradient(#a4d9ff 0 50%,#9ff147 50% 100%)}
+.lab-card-hidden-cubes .lab-card-art{background:linear-gradient(135deg,#f1edff,#e1d8fb)}.lab-card-hidden-cubes .lab-card-art::after{border-radius:15px;background:linear-gradient(135deg,#d9c8ff,#997edc)}
+.p-portal[data-theme="dark"] .lab-card-art{filter:saturate(.75) brightness(.77)}
