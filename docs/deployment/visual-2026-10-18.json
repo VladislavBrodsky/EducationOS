@@ -1,0 +1,44 @@
+{
+  "observedAt": "2026-10-18T14:23:41.106Z",
+  "pullRequest": "https://github.com/VladislavBrodsky/EducationOS/pull/2",
+  "release": "Original EducationOS learning visuals on separate marketing and learner services",
+  "source": {
+    "marketingCommit": "2629f16fe2fb9ec674db19b5723a77b475d3b0d2",
+    "portalCommit": "a43f7c8918887a517474f5b9956f5432b320897b",
+    "portalFollowup": "The portal route guard was corrected so public/images assets are served directly on the learner host.",
+    "marketingManifest": "visual-marketing-manifest-2026-10-18.json",
+    "marketingManifestSha256": "342f8e5b24f58183bdaf54ce2f747ec21e8097ddc7d641042000c84023cfa96a",
+    "portalManifest": "visual-portal-manifest-2026-10-18.json",
+    "portalManifestSha256": "add4a88d5281011e485147118c42803f15668288525ded283250c7008bc0b1b7",
+    "uploadMethod": "Explicit frontend-only Railway CLI snapshots; GitHub automatic deployment is not connected."
+  },
+  "services": {
+    "marketing": {
+      "url": "https://educationos.space",
+      "serviceId": "bf43668a-197d-4b94-94d2-9b09d92e44f9",
+      "deploymentId": "5f271a0e-8790-434b-bd13-033aaa91db39",
+      "status": "SUCCESS"
+    },
+    "portal": {
+      "url": "https://app.educationos.space",
+      "serviceId": "2e6b7e2f-8ab9-4b7d-9f81-22c9c171c1fa",
+      "deploymentId": "976032de-3289-4494-b9c2-3036a36d7e67",
+      "status": "SUCCESS"
+    }
+  },
+  "verification": {
+    "mobileLabJourneys": 6,
+    "viewports": ["390x844", "430x932"],
+    "accessibilityScans": 12,
+    "detectedViolations": 0,
+    "uncaughtBrowserErrors": 0,
+    "failedAssets": 0,
+    "failedRequests": 0,
+    "remoteWrites": 0,
+    "marketingAndPortalSeparation": "passed",
+    "liveImages": "200 on both hosts; live homepage, programs, approach, portal Today and lab collection showed no broken images or horizontal overflow at 390px",
+    "local": "Lint, TypeScript, production build, 129 unit tests, 33 browser tests; asset host regression passed",
+    "networkNote": "Earlier attempts recorded transient ERR_NETWORK_CHANGED, ERR_CONNECTION_RESET and navigation timeouts. System and public DNS converged; a later complete run passed with normal DNS and TLS validation.",
+    "scope": "Chromium mobile viewport and touch emulation; no physical iOS or Android device was used."
+  }
+}

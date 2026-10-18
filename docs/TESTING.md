@@ -2,6 +2,10 @@
 
 Observed on 2026-10-18. Tested source is the isolated Python-first release, continuing the existing frontend. Historical v0.4 test claims were not rerun because the original source archive remains unavailable.
 
+## Visual release — 2026-10-18
+
+Original generated educational imagery and dimensional bento/portal cards were added without changing lesson semantics or 2D fallbacks. Local lint, TypeScript, production build, 129 unit tests and all 33 browser tests passed. A regression now checks that the shared 3D-object image returns 200 on both simulated production hosts. Production verification passed six complete mobile journeys across all three labs at 390×844 and 430×932, twelve light/dark accessibility scans with zero detected violations, and live image/layout checks on both hostnames. See [visual deployment evidence](deployment/visual-2026-10-18.json). Earlier attempts hit transient network resets; the final complete run used normal system DNS and TLS validation. No physical mobile device was tested.
+
 ## Portal navigation and resume — 2026-10-18
 
 The UI follow-up passed lint, TypeScript, icon policy, a production build, **129 unit tests** and **33 browser tests**. New coverage checks meaningful unfinished work across every activity type and lab; zero observations and changed/cleared models; recorded-work exclusion; actual return to saved lab answers; and Revisit activity for finished paths.

@@ -10,6 +10,12 @@ Verified on 18 October 2026. The original domain cutover is recorded below; the 
 
 The services are separate. The marketing deployment redirects `/portal/*` to clean app URLs; it does not serve the learner workspace at those paths. App policy links return to the public website. Unknown app paths remain in the portal. App pages send `noindex, nofollow`; its robots file disallows crawling and its sitemap URL returns 404. Existing marketing content and the original demo remain separate from the learner portal.
 
+## Visual release
+
+The original child-centred learning visuals and 3D object system are live on the separate marketing and learner services. Marketing deployment `5f271a0e-8790-434b-bd13-033aaa91db39` uses source `2629f16`; portal deployment `976032de-3289-4494-b9c2-3036a36d7e67` uses follow-up source `a43f7c8`, which fixes shared static-image routing on the app host. The apex continues to serve marketing pages and `app.educationos.space` continues to serve learner pages. The images are illustrative and do not claim AR hardware, real learner identities or measured outcomes.
+
+After the route correction, six complete live lab journeys passed at 390×844 and 430×932 with twelve light/dark accessibility scans and zero detected violations, browser errors, failed assets, failed requests, remote writes or horizontal overflow. New images loaded on live marketing and portal pages at mobile width. Normal DNS and TLS validation were enabled in the final passing run; earlier transient network-change failures are retained in local evidence. These are browser viewport/touch checks, not physical-device testing. The reviewed source snapshots and deployment IDs are recorded in [visual deployment evidence](deployment/visual-2026-10-18.json).
+
 ## Portal navigation update
 
 The portal update from source commit `9ec9eec` is live at `app.educationos.space` as successful deployment `4db90bd2-342d-4be1-96ae-0ab904f8cfb4`. The apex marketing service remained on deployment `dc4d7630-dcd5-469c-a979-864415beaebb`; the two surfaces and their routing were reverified. This update adds persistent mobile navigation, lab step shortcuts and saved unfinished-work resume.
