@@ -14,7 +14,7 @@ uv run alembic downgrade 0001_python_foundation:base --sql
 uv build --wheel
 ```
 
-Result: **34 passed, 1 skipped**. The skipped check requires disposable real PostgreSQL/pgvector, Redis, API and maintenance-role URLs. SQLite tests exercise persistence and service authorization; they do not prove PostgreSQL RLS, pgvector operations, role grants, or migration execution. The real integration test checks these boundaries and rehearses upgrade/downgrade on an explicitly named `*_test` database when CI supplies `EDUCATIONOS_TEST_DATABASE_URL`, `EDUCATIONOS_TEST_APP_DATABASE_URL`, `EDUCATIONOS_TEST_WORKER_DATABASE_URL` and optional `EDUCATIONOS_TEST_REDIS_URL`.
+Result: **35 passed, 1 skipped**. The skipped check requires disposable real PostgreSQL/pgvector, Redis, API and maintenance-role URLs. SQLite tests exercise persistence and service authorization; they do not prove PostgreSQL RLS, pgvector operations, role grants, or migration execution. The real integration test checks these boundaries and rehearses upgrade/downgrade on an explicitly named `*_test` database when CI supplies `EDUCATIONOS_TEST_DATABASE_URL`, `EDUCATIONOS_TEST_APP_DATABASE_URL`, `EDUCATIONOS_TEST_WORKER_DATABASE_URL` and optional `EDUCATIONOS_TEST_REDIS_URL`.
 
 The passing tests cover opaque session validation, expiration/revocation, tenant and guardian isolation, learner permissions, consent expiration/revocation, age boundaries, immutable version digest verification, persisted evidence, seven-step completion requirements, two distinct alternatives, controlled baseline/redesign measurements, evidence expiration/deletion, fail-closed Redis rate limits, bounded bodies and sanitized errors, corrupted Redis cache rejection/repair against reviewed source, unconditional live-AI/enrollment closure, curated retrieval provenance and exact citation spans, embedding shape validation, versioned prompts, adversarial retrieval fixtures, durable maintenance behavior, and a real MCP stdio initialize/list-tools/call-tool exchange. This is deterministic boundary evaluation, not live-model quality or moderation certification.
 
@@ -33,3 +33,5 @@ Official documentation reviewed:
 - [OpenTelemetry Python](https://opentelemetry.io/docs/languages/python/).
 
 See the root repository verification report for frontend, browser, CI and GitHub outcomes.
+
+The first remote PostgreSQL integration run passed the real database/worker migration checks; it also exposed a unit test assumption about absent Redis. The fixture now explicitly tests healthy Redis and simulated outage without depending on host services. Production readiness logic was unchanged. See PR checks for the final full CI result.

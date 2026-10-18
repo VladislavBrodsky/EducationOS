@@ -6,13 +6,13 @@ Observed on 2026-10-18. Tested source is the isolated Python-first release, cont
 |---|---|
 | Python dependencies from verified PyPI metadata and uv lock | Installed successfully; Python 3.13.3, uv 0.10.11 |
 | Backend Ruff | Passed |
-| Python tests | 34 passed, 1 skipped locally |
-| Real PostgreSQL/pgvector/RLS/migration integration | Skipped locally: no Docker/PostgreSQL service; committed GitHub CI runs it with three restricted roles and disposable `_test` database |
+| Python tests | 35 passed, 1 skipped locally |
+| Real PostgreSQL/pgvector/RLS/migration integration | Passed in the first remote run with real services, including RLS/migrations/worker; skipped locally because Docker/PostgreSQL is unavailable. Final complete CI status is on PR #2 |
 | Offline Alembic upgrade/downgrade SQL | Passed; does not prove live PostgreSQL execution |
 | Exported FastAPI OpenAPI drift | Passed |
 | Python wheel installed outside checkout | Passed; all five bundled missions load |
 | Actual MCP stdio initialization/list/call | Passed |
-| Frontend generated types, typecheck, lint, no-emoji and unit tests | Passed; 20 unit tests |
+| Frontend generated types, typecheck, lint, no-emoji and unit tests | Passed; 11 active unit tests; earlier unmounted interface/tests archived as reference |
 | Production frontend build | Passed with supported webpack builder; local Turbopack process binding was restricted |
 | Full npm dependency audit | Zero reported vulnerabilities, including development packages, after replacing the affected lint-config dependency chain |
 | Browser journeys/accessibility | Passed 4/4 browser tests, including 24 route/viewport axe scans at 1440/390 with no detected violations or overflow |

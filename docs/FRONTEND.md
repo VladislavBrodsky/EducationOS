@@ -3,8 +3,9 @@
 EducationOS v0.6.0 retains the public website and responsive learner demo: five
 age groups, seven TRIZ steps, independent local drafts, measurement comparisons,
 portfolio filtering, evidence export/reset, and keyboard-operable guardian tabs.
-The earlier single-page `EducationApp` source is also preserved, without
-replacing the current public site and `/demo` routes.
+The earlier unmounted single-page interface and its model/tests are preserved
+in `reference/frontend-v0.5/`, outside the active build. There is one active
+learner experience in the public site and `/demo` routes.
 
 Python/FastAPI is the application backend. `src/server/`, Next route handlers,
 Prisma, and their TypeScript backend tests are preserved only in
@@ -19,6 +20,9 @@ behavior, not authorization or a persisted learning service.
 - `openapi-fetch` provides a generated-contract client for
   `GET /api/v1/missions?age_band=10-12`. Browser runtime validation rejects
   malformed curriculum, unsupported age groups, or reordered/missing TRIZ steps.
+  The current demo also requires the exact reviewed curriculum version and
+  content (with equivalent UTC date formatting normalized), keeping existing
+  local drafts and version-1 exports tied to the same authored mission.
 - The lab reads its materials, adult guidance, and seven age-adapted prompts
   from the API response. Requests contain the selected age band only: no draft,
   learner identity, notes, or stored credentials are sent.
@@ -70,7 +74,7 @@ standalone output; the Docker image runs its standalone server.
 
 ## Verification on 2026-10-18
 
-The current lint, route type generation/TypeScript checks, all 20 unit tests,
+The current lint, route type generation/TypeScript checks, all 11 active unit tests,
 generated-client drift check, and no-emoji scan pass. The public pages and demo
 compiled successfully as a production webpack build. All four Chromium end-to-end tests pass against the production build: the
 seven-step mission with export/reset, separate drafts across five age bands
@@ -86,6 +90,15 @@ independent accessibility certification. Browser curriculum responses were
 intercepted in the behavioral suite; the root integration review separately
 uses the actual Python API on 8100 and frontend on 3100.
 
+A clean manifest-only lockfile rebuild restored the platform-specific and
+bundled optional dependency records required by clean CI installs. Native
+`npm ci` and Linux/x64 dependency resolution were checked in temporary
+directories without replacing the running preview dependencies. The four
+additional contract-pin tests accept equivalent UTC serialization and reject
+changed lesson version, identity, or content before existing local drafts can
+be mixed with new curriculum. Historical single-page frontend tests are
+archived with their original source.
+
 The full npm audit reports zero known vulnerabilities, including development
 dependencies (`frontend-npm-audit.json`). Independent ESLint TypeScript, React
 Hooks, and JSX accessibility rules replace `eslint-config-next`, whose lint
@@ -98,4 +111,4 @@ Official references reviewed: [Next CLI](https://nextjs.org/docs/app/api-referen
 [openapi-fetch](https://openapi-ts.dev/openapi-fetch/). Exact new tooling releases
 were checked through the official npm registry before installation.
 
-Primary-agent live integration check on 2026-10-18: the actual running FastAPI on8100 supplied the published mission through Next3100. The browser showed published-version readiness, switched from Makers to Explorers, and opened the age5–6 prompt with no mocked response.
+Primary-agent live integration check on 2026-10-18: the actual running FastAPI on 8100 supplied the published mission through Next on 3100. The browser showed published-version readiness, switched from Makers to Explorers, and opened the age 5–6 prompt with no mocked response.

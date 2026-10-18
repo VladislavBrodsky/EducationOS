@@ -1,6 +1,7 @@
 import json
 from datetime import UTC, datetime
 from pathlib import Path
+from unittest.mock import AsyncMock
 
 import pytest
 from redis.exceptions import ConnectionError
@@ -26,6 +27,15 @@ async def test_public_curriculum_without_identity(client):
     assert single.json() == missions[0]
     assert response.headers["x-content-type-options"] == "nosniff"
     assert (await client.get("/health/live")).json()["mode"] == "synthetic-only"
+
+
+async def test_readiness_reports_redis_dependency(client, fixture_app, monkeypatch):
+    # Unit readiness must be independent of whether Redis happens to run locally or in CI.
+    ping = AsyncMock(return_value=True)
+    monkeypatch.setattr(fixture_app.state.redis, "ping", ping)
+    assert (await client.get("/health/ready")).status_code == 200
+    ping.assert_awaited_once()
+    ping.side_effect = ConnectionError("Synthetic unavailable Redis fixture")
     assert (await client.get("/health/ready")).status_code == 503
 
 

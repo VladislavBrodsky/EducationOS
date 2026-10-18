@@ -26,7 +26,7 @@ Public mission content has immutable version IDs. An attempt pins one version an
 
 ## Contract and data boundaries
 
-Pydantic is the API contract source. Exported OpenAPI drives generated TypeScript types and an `openapi-fetch` client. CI regenerates and compares output to detect drift. Browser validation supports interaction quality; the API independently validates all writes. Alembic is the only active migration history. Old Node services, tests and SQL/Prisma history are archived under `reference/legacy-typescript-backend/` and excluded from active builds.
+Pydantic is the API contract source. Exported OpenAPI drives generated TypeScript types and an `openapi-fetch` client. CI regenerates and compares output to detect drift. Browser validation supports interaction quality; the API independently validates all writes. Alembic is the only active migration history. Old Node services, tests and SQL/Prisma history are archived under `reference/legacy-typescript-backend/` and excluded from active builds. The earlier unmounted single-page learner model is preserved separately in `reference/frontend-v0.5/`; the current `/demo` is the only active learner interface.
 
 Redis provides shared rate limiting with bounded keys and TTL, and fails closed for protected requests when unavailable. Public reviewed curriculum is cacheable; private evidence is not. Async workers are Python processes and must retain the same policy checks as request handlers. Do not place evidence bodies in queue payloads or retry rejected consent.
 

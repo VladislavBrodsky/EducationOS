@@ -90,6 +90,17 @@ test('unavailable and malformed curriculum clearly show offline preview and retr
   await page.getByRole('button', { name: 'Retry connection' }).click();
   await expect(page.getByRole('status').filter({ hasText: 'Offline lesson preview' })).toBeVisible();
   await page.unroute('**/api/v1/missions?*');
+  const reviewed = DEMO_MISSIONS.find(mission => mission.ageBand === '10-12')!;
+  // Even a schema-valid new version must not replace the lesson that existing
+  // local drafts and exported version-1 evidence refer to.
+  await page.route('**/api/v1/missions?*', route => route.fulfill({ json: { items: [{ ...reviewed, version: 2 }] } }));
+  await page.getByRole('button', { name: 'Retry connection' }).click();
+  await expect(page.getByRole('status').filter({ hasText: 'Offline lesson preview' })).toBeVisible();
+  await page.unroute('**/api/v1/missions?*');
+  await page.route('**/api/v1/missions?*', route => route.fulfill({ json: { items: [{ ...reviewed, content: { ...reviewed.content, summary: 'A changed summary under the same version identifier.' } }] } }));
+  await page.getByRole('button', { name: 'Retry connection' }).click();
+  await expect(page.getByRole('status').filter({ hasText: 'Offline lesson preview' })).toBeVisible();
+  await page.unroute('**/api/v1/missions?*');
   await serveCurriculum(page);
   await page.getByRole('button', { name: 'Retry connection' }).click();
   await expect(page.getByRole('status').filter({ hasText: 'Published lesson ready' })).toBeVisible();
