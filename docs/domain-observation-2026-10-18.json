@@ -1,0 +1,129 @@
+{
+  "checkedAt": "2026-10-18T06:35:50.844Z",
+  "domain": "educationos.space",
+  "resolver": "8.8.8.8",
+  "dns": [
+    {
+      "hostname": "educationos.space",
+      "type": "A",
+      "records": [
+        "192.64.119.65"
+      ]
+    },
+    {
+      "hostname": "educationos.space",
+      "type": "AAAA",
+      "records": [],
+      "error": "ENODATA"
+    },
+    {
+      "hostname": "educationos.space",
+      "type": "NS",
+      "records": [
+        "dns1.registrar-servers.com",
+        "dns2.registrar-servers.com"
+      ]
+    },
+    {
+      "hostname": "educationos.space",
+      "type": "MX",
+      "records": [
+        {
+          "exchange": "eforward2.registrar-servers.com",
+          "priority": 10,
+          "type": "MX"
+        },
+        {
+          "exchange": "eforward1.registrar-servers.com",
+          "priority": 10,
+          "type": "MX"
+        },
+        {
+          "exchange": "eforward5.registrar-servers.com",
+          "priority": 20,
+          "type": "MX"
+        },
+        {
+          "exchange": "eforward4.registrar-servers.com",
+          "priority": 15,
+          "type": "MX"
+        },
+        {
+          "exchange": "eforward3.registrar-servers.com",
+          "priority": 10,
+          "type": "MX"
+        }
+      ]
+    },
+    {
+      "hostname": "educationos.space",
+      "type": "TXT",
+      "records": [
+        [
+          "v=spf1 include:spf.efwd.registrar-servers.com ~all"
+        ]
+      ]
+    },
+    {
+      "hostname": "www.educationos.space",
+      "type": "CNAME",
+      "records": [
+        "parkingpage.namecheap.com"
+      ]
+    },
+    {
+      "hostname": "www.educationos.space",
+      "type": "A",
+      "records": [
+        "2.59.170.19",
+        "104.219.250.36"
+      ]
+    },
+    {
+      "hostname": "_dmarc.educationos.space",
+      "type": "TXT",
+      "records": [],
+      "error": "ENOTFOUND"
+    }
+  ],
+  "http": [
+    {
+      "start": "http://educationos.space",
+      "chain": [
+        {
+          "url": "http://educationos.space/",
+          "status": 302,
+          "location": "http://www.educationos.space/"
+        },
+        {
+          "url": "http://www.educationos.space/",
+          "status": 200,
+          "location": null
+        }
+      ]
+    },
+    {
+      "start": "https://educationos.space",
+      "chain": [],
+      "error": 23
+    },
+    {
+      "start": "http://www.educationos.space",
+      "chain": [
+        {
+          "url": "http://www.educationos.space/",
+          "status": 200,
+          "location": null
+        }
+      ]
+    },
+    {
+      "start": "https://www.educationos.space",
+      "chain": [],
+      "error": "ECONNRESET"
+    }
+  ],
+  "dkim": "Not checked: no provider-issued DKIM_SELECTOR supplied.",
+  "canonicalApexChecksPass": false,
+  "note": "Successful transport checks alone do not prove this is an EducationOS deployment. Check the release version, app content, API and provider configuration separately."
+}

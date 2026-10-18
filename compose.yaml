@@ -1,0 +1,50 @@
+# Local synthetic development only. Hosted deployments use managed secrets and TLS.
+services:
+  db:
+    image: postgres:17-bookworm
+    environment:
+      POSTGRES_USER: educationos
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-educationos-local-only}
+      POSTGRES_DB: educationos
+    ports:
+      - '127.0.0.1:5432:5432'
+    volumes:
+      - educationos-postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U educationos -d educationos']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+  migrate:
+    profiles: [tools]
+    build:
+      context: .
+      target: builder
+    environment:
+      DATABASE_URL: postgresql://educationos:${POSTGRES_PASSWORD:-educationos-local-only}@db:5432/educationos
+      DIRECT_URL: postgresql://educationos:${POSTGRES_PASSWORD:-educationos-local-only}@db:5432/educationos
+    command: ['npx', 'prisma', 'migrate', 'deploy']
+    depends_on:
+      db:
+        condition: service_healthy
+  web:
+    build:
+      context: .
+      target: runner
+      args:
+        NEXT_PUBLIC_APP_URL: http://localhost:3000
+    ports:
+      - '127.0.0.1:3000:3000'
+    environment:
+      NODE_ENV: production
+      APP_ORIGIN: http://localhost:3000
+      NEXT_PUBLIC_APP_URL: http://localhost:3000
+      AUTH_MODE: disabled
+      DATABASE_URL: postgresql://educationos:${POSTGRES_PASSWORD:-educationos-local-only}@db:5432/educationos
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+volumes:
+  educationos-postgres:

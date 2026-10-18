@@ -1,0 +1,171 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Tenant {
+  id        String   @id @db.Uuid
+  slug      String   @unique @db.VarChar(80)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
+  adults    AdultAccount[]
+  learners  Learner[]
+  sessions  Session[]
+  audit     AuditEvent[]
+  @@map("tenants")
+}
+
+model AdultAccount {
+  id              String   @id @db.Uuid
+  tenantId        String   @map("tenant_id") @db.Uuid
+  providerSubject String   @unique @map("provider_subject") @db.VarChar(255)
+  createdAt       DateTime @default(now()) @map("created_at") @db.Timestamptz
+  tenant          Tenant   @relation(fields: [tenantId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  grants          GuardianGrant[]
+  consents        ConsentRecord[]
+  sessions        Session[]
+  @@unique([id, tenantId])
+  @@map("adult_accounts")
+}
+
+model Learner {
+  id        String   @id @db.Uuid
+  tenantId  String   @map("tenant_id") @db.Uuid
+  alias     String   @db.VarChar(40)
+  ageBand   String   @map("age_band") @db.VarChar(5)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
+  tenant    Tenant   @relation(fields: [tenantId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  grants    GuardianGrant[]
+  consents  ConsentRecord[]
+  sessions  Session[]
+  attempts  Attempt[]
+  @@unique([id, tenantId])
+  @@map("learners")
+}
+
+model GuardianGrant {
+  id              String       @id @db.Uuid
+  tenantId        String       @map("tenant_id") @db.Uuid
+  guardianId      String       @map("guardian_id") @db.Uuid
+  learnerId       String       @map("learner_id") @db.Uuid
+  canRead         Boolean      @default(true) @map("can_read")
+  canContribute   Boolean      @default(false) @map("can_contribute")
+  revokedAt       DateTime?    @map("revoked_at") @db.Timestamptz
+  adult           AdultAccount @relation(fields: [guardianId, tenantId], references: [id, tenantId], onDelete: NoAction, onUpdate: NoAction)
+  learner         Learner      @relation(fields: [learnerId, tenantId], references: [id, tenantId], onDelete: NoAction, onUpdate: NoAction)
+  @@unique([guardianId, learnerId])
+  @@map("guardian_grants")
+}
+
+model ConsentRecord {
+  id               String       @id @db.Uuid
+  tenantId         String       @map("tenant_id") @db.Uuid
+  guardianId       String       @map("guardian_id") @db.Uuid
+  learnerId        String       @map("learner_id") @db.Uuid
+  purpose          String       @db.VarChar(40)
+  policyVersion    String       @map("policy_version") @db.VarChar(80)
+  verificationProvider String   @map("verification_provider") @db.VarChar(80)
+  proofReference   String       @map("proof_reference") @db.VarChar(255)
+  verifiedAt       DateTime     @map("verified_at") @db.Timestamptz
+  expiresAt        DateTime     @map("expires_at") @db.Timestamptz
+  revokedAt        DateTime?    @map("revoked_at") @db.Timestamptz
+  adult            AdultAccount @relation(fields: [guardianId, tenantId], references: [id, tenantId], onDelete: NoAction, onUpdate: NoAction)
+  learner          Learner      @relation(fields: [learnerId, tenantId], references: [id, tenantId], onDelete: NoAction, onUpdate: NoAction)
+  @@index([learnerId, tenantId], map: "consent_records_learner_idx")
+  @@map("consent_records")
+}
+
+model Session {
+  id          String        @id @db.Uuid
+  tenantId    String        @map("tenant_id") @db.Uuid
+  tokenHash   String        @unique @map("token_hash") @db.Char(64)
+  kind        String        @db.VarChar(10)
+  accountId   String?       @map("account_id") @db.Uuid
+  learnerId   String?       @map("learner_id") @db.Uuid
+  expiresAt   DateTime      @map("expires_at") @db.Timestamptz
+  revokedAt   DateTime?     @map("revoked_at") @db.Timestamptz
+  createdAt   DateTime      @default(now()) @map("created_at") @db.Timestamptz
+  tenant      Tenant        @relation(fields: [tenantId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  adult       AdultAccount? @relation(fields: [accountId, tenantId], references: [id, tenantId], onDelete: NoAction, onUpdate: NoAction)
+  learner     Learner?      @relation(fields: [learnerId, tenantId], references: [id, tenantId], onDelete: NoAction, onUpdate: NoAction)
+  @@index([expiresAt], map: "sessions_expiry_idx")
+  @@map("sessions")
+}
+
+model Mission {
+  id       String           @id @db.Uuid
+  slug     String           @unique @db.VarChar(100)
+  versions MissionVersion[]
+  @@map("missions")
+}
+
+model MissionVersion {
+  id          String    @id @db.Uuid
+  missionId   String    @map("mission_id") @db.Uuid
+  version     Int
+  title       String    @db.VarChar(120)
+  ageBand     String    @map("age_band") @db.VarChar(5)
+  world       String    @db.VarChar(40)
+  content     Json      @db.JsonB
+  publishedAt DateTime? @map("published_at") @db.Timestamptz
+  mission     Mission   @relation(fields: [missionId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  attempts    Attempt[]
+  @@unique([missionId, version, ageBand])
+  @@map("mission_versions")
+}
+
+model Attempt {
+  id               String         @id @db.Uuid
+  tenantId         String         @map("tenant_id") @db.Uuid
+  learnerId        String         @map("learner_id") @db.Uuid
+  missionVersionId String         @map("mission_version_id") @db.Uuid
+  status           String         @default("active") @db.VarChar(10)
+  createdAt        DateTime       @default(now()) @map("created_at") @db.Timestamptz
+  learner          Learner        @relation(fields: [learnerId, tenantId], references: [id, tenantId], onDelete: NoAction, onUpdate: NoAction)
+  mission          MissionVersion @relation(fields: [missionVersionId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  evidence         Evidence[]
+  @@unique([id, learnerId, tenantId])
+  @@index([learnerId, tenantId, createdAt], map: "attempts_learner_idx")
+  @@map("attempts")
+}
+
+model Evidence {
+  id             String   @id @db.Uuid
+  tenantId       String   @map("tenant_id") @db.Uuid
+  learnerId      String   @map("learner_id") @db.Uuid
+  attemptId      String   @map("attempt_id") @db.Uuid
+  step           String   @db.VarChar(20)
+  payload        Json     @db.JsonB
+  createdAt      DateTime @default(now()) @map("created_at") @db.Timestamptz
+  retentionUntil DateTime @map("retention_until") @db.Timestamptz
+  attempt        Attempt  @relation(fields: [attemptId, learnerId, tenantId], references: [id, learnerId, tenantId], onDelete: NoAction, onUpdate: NoAction)
+  @@index([learnerId, tenantId, createdAt], map: "evidence_learner_idx")
+  @@index([retentionUntil], map: "evidence_retention_idx")
+  @@map("evidence")
+}
+
+model AuditEvent {
+  id          String   @id @db.Uuid
+  tenantId    String   @map("tenant_id") @db.Uuid
+  actorKind   String   @map("actor_kind") @db.VarChar(10)
+  actorId     String   @map("actor_id") @db.Uuid
+  action      String   @db.VarChar(80)
+  subjectId   String   @map("subject_id") @db.Uuid
+  requestId   String   @map("request_id") @db.Uuid
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz
+  tenant      Tenant   @relation(fields: [tenantId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  @@index([tenantId, createdAt], map: "audit_events_tenant_idx")
+  @@map("audit_events")
+}
+
+model RateLimitBucket {
+  key       String   @id @db.Char(64)
+  count     Int
+  expiresAt DateTime @map("expires_at") @db.Timestamptz
+  @@index([expiresAt], map: "rate_limit_expiry_idx")
+  @@map("rate_limit_buckets")
+}
