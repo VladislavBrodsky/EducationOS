@@ -1,0 +1,46 @@
+# Changelog
+
+## 0.6.0 — 2026-10-18
+
+- Accepted the user's Python-first correction: FastAPI, Pydantic, SQLAlchemy 2/Alembic, PostgreSQL/pgvector and Redis replace the active Node/Prisma backend direction.
+- Preserved the polished Next/React frontend and synthetic TRIZ journey; added typed FastAPI curriculum integration with explicit offline state.
+- Added Python permission/evidence services, versioned contracts/OpenAPI, tasks, read-only MCP and bounded AI provenance/prompt/evaluation foundation. Enrollment and generative learner AI stay closed.
+- Added locked dependencies, safety/contract tests, separate-role Compose, health checks, CI and an educationos.space deployment runbook. Historical Node backend and documentation remain archived.
+- Isolated the current source to avoid concurrent-chat edits. The connector write path returns403; authenticated CLI delivery and check results are recorded in the PR. No domain change or deployment claimed. Exact checks and limitations: docs/TESTING.md.
+
+# Version history
+
+All dates use the project date. Earlier versions below describe recovered documents or conversation records, not verified Git tags or deployed releases.
+
+## 0.5.0 — 2026-10-18
+
+Application foundation and reconstruction of the recorded v0.4 demonstration:
+
+- Next.js App Router, React, and TypeScript application shell.
+- Shared accessible SVG/Lucide components, a restrained editorial guardian view, and lime learner visuals with a frontend emoji check.
+- Five age bands, learner worlds, a seven-step TRIZ Inventors Lab, fair experiment comparisons, session progress, evidence, Skills Vault, JSON portfolio export, and clearing demonstration work.
+- Versioned mission and evidence contracts, PostgreSQL migration foundation, and server permission boundaries with negative authorization tests.
+- Synthetic-only demonstration with real enrollment disabled and explicit privacy limitations.
+- Test commands, browser accessibility checks, CI configuration, baseline provenance, architecture documentation, and milestone gates.
+
+Validation status is recorded in [TESTING.md](docs/TESTING.md). This version is not production-safe for child enrollment and has no independent safety or accessibility certification.
+
+## 0.4.0 — recorded in prior conversation
+
+The conversation describes a standalone interactive frontend with learner dashboard, seven mission steps, five age stages, Skills Vault, evidence comparisons, JSON export, guardian preview, SVG icons, and eleven reported unit tests. It references a 105-file source ZIP and desktop/mobile previews. Those artifacts and test reports were unavailable during this reconstruction, so their implementation and reported results cannot be independently verified here.
+
+## 0.3.1 — recorded in prior conversation
+
+Formalized zero frontend emojis and professional SVG iconography. The conversation reports an updated design-system ZIP and preview, unavailable during this reconstruction.
+
+## 0.3.0 — recorded in prior conversation
+
+Steep/Refero audit, editorial/discovery theme reconciliation, design tokens, age-adaptive flows, and accessible component specifications. The conversation references eleven specifications and two token sets; source artifacts were unavailable during this reconstruction.
+
+## 0.2.0 — private founder material
+
+A private founder playbook was found locally. Its contents are excluded from this public repository and are not an application baseline.
+
+## 0.1.0 — 2026-10-17, recovered public documentation
+
+Architecture and product proposal covering TRIZ learning, five stages, evidence-backed assessment, modular monolith, PostgreSQL, privacy and safeguarding gates, editorial/discovery themes, and version governance. The recovered archive contains 27 files; documents 01–05 referenced by its README are absent. Original archive preserved under `reference/` with a checksum.
