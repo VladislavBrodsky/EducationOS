@@ -123,6 +123,14 @@ test('the app host serves only the portal and keeps clean paths, policy redirect
   expect(await appHome.text()).toMatch(/<h1[^>]*>What will you discover\?/);
   expect(await appHome.text()).toContain('href="/subjects"');
 
+  // The two surfaces share decorative assets; the portal router must not
+  // rewrite their paths into missing learner pages.
+  for (const host of ['app.educationos.space', 'educationos.space']) {
+    const image = await request.get('/images/learning-objects.png', { headers: { Host: host } });
+    expect(image.status(), `${host} learning image`).toBe(200);
+    expect(image.headers()['content-type']).toContain('image/png');
+  }
+
   const cleanPath = await request.get('/portal/subjects?from=home', { headers: appHeaders, maxRedirects: 0 });
   expect(cleanPath.status()).toBe(308);
   const redirect = new URL(cleanPath.headers().location);

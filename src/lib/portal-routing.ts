@@ -37,6 +37,7 @@ export function resolvePortalRoute(host: string, pathname: string, surface = pro
   // Shared assets, the dynamic robots route, and FastAPI forwarding keep their
   // existing Next handlers. The app host never serves the public sitemap.
   if (pathname === '/robots.txt' || pathname === '/favicon.ico' || pathname === '/icon.svg'
+    || pathname === '/images' || pathname.startsWith('/images/')
     || pathname === '/api' || pathname.startsWith('/api/')
     || pathname === '/_next' || pathname.startsWith('/_next/')) {
     return { ...context, action: 'next' };
