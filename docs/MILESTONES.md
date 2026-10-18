@@ -35,7 +35,7 @@ Reference tests verify reference behavior only. They are not canonical backend a
 - [x] Recovered the public v0.1.0 documentation archive; preserved checksum and missing-file notice.
 - [x] Reconstructed the recorded v0.4 feature inventory as acceptance targets.
 - [ ] Recover actual v0.4 source ZIP and verify source-level parity.
-- [ ] Publish a reviewable draft PR through the verified GitHub CLI path; connector branch creation returned HTTP 403.
+- [x] Published [draft PR #1](https://github.com/VladislavBrodsky/EducationOS/pull/1) through the verified GitHub CLI path; connector branch creation returned HTTP 403. The PR remains unmerged; hosted CI status is separate from local validation.
 
 The unavailable historical source remains an explicit limitation; its recovery is not required to review the new presentation handoff.
 

@@ -2,6 +2,8 @@
 
 **v0.5.0 — Next.js presentation foundation and synthetic learner vertical slice.**
 
+Review [draft pull request #1](https://github.com/VladislavBrodsky/EducationOS/pull/1). [Local validation results](docs/TESTING.md) and hosted CI status are separate.
+
 EducationOS helps learners notice a problem, frame a contradiction, invent alternatives, test a prediction, and explain what they learned. This handoff delivers the React/TypeScript learner experience and shared design system. **Python/FastAPI is the canonical backend**, with SQLAlchemy and Alembic for PostgreSQL. Backend/API/domain/authentication work belongs to that separate Python workstream; this Next.js application contains no active Node domain or authentication service.
 
 **This release is not approved for use with real children or real child data.** Real enrollment is disabled. The demonstration uses synthetic browser-memory state. Do not enter names, contact information, photos, or other personal information into demonstration fields.

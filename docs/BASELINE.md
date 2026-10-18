@@ -22,7 +22,7 @@ The public documentation archive has SHA256:
 
 ## GitHub delivery status
 
-Repository metadata reported push/admin permission, but connector branch creation returned HTTP 403. A later network-enabled check verified working GitHub CLI authentication, providing an alternative delivery path. Metadata alone does not establish effective connector write access. Draft PR creation remains a separate concrete delivery step; no PR is claimed from these permission checks alone.
+Repository metadata reported push/admin permission, but connector branch creation returned HTTP 403. A later network-enabled GitHub CLI check verified an alternative authenticated write path. The branch `codex/v0.5.0-foundation-20261018` was successfully pushed and [draft PR #1](https://github.com/VladislavBrodsky/EducationOS/pull/1) was created and attached for review. Its initial implementation commit is `554c020`; later documentation updates may advance the branch. Nothing was merged into `main`. Local validation is recorded in [TESTING.md](TESTING.md); it does not imply hosted CI passed.
 
 ## Later architecture correction
 
