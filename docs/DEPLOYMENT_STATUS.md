@@ -1,6 +1,6 @@
 # Live EducationOS frontend deployment
 
-Verified on 18 October 2026, through 08:35 UTC.
+Verified on 18 October 2026. The original domain cutover is recorded below; the later portal navigation release is summarized here.
 
 | Surface | Live URL | Railway service | Routing mode |
 |---|---|---|---|
@@ -9,6 +9,14 @@ Verified on 18 October 2026, through 08:35 UTC.
 | Public www entry | https://www.educationos.space | Marketing service; redirects to apex | Public only |
 
 The services are separate. The marketing deployment redirects `/portal/*` to clean app URLs; it does not serve the learner workspace at those paths. App policy links return to the public website. Unknown app paths remain in the portal. App pages send `noindex, nofollow`; its robots file disallows crawling and its sitemap URL returns 404. Existing marketing content and the original demo remain separate from the learner portal.
+
+## Portal navigation update
+
+The portal update from source commit `9ec9eec` is live at `app.educationos.space` as successful deployment `4db90bd2-342d-4be1-96ae-0ab904f8cfb4`. The apex marketing service remained on deployment `dc4d7630-dcd5-469c-a979-864415beaebb`; the two surfaces and their routing were reverified. This update adds persistent mobile navigation, lab step shortcuts and saved unfinished-work resume.
+
+Six full hosted lab journeys passed at 390×844 and 430×932. Twelve light/dark accessibility scans found zero detected violations. Navigation tap targets, focused lab headings, resumed drafts, host separation, assets and horizontal fit passed. Local checks passed with 129 unit and 33 browser tests. These are browser viewport/touch checks, not physical-device tests. Source manifest and exact deployment summary: [UI deployment evidence](deployment/ui-2026-10-18.json) and [UI manifest](deployment/ui-manifest-2026-10-18.json).
+
+The release details below describe the earlier domain cutover and are retained as its historical record.
 
 ## Release and hosting
 

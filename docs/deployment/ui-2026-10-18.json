@@ -1,0 +1,34 @@
+{
+  "observedAt": "2026-10-18",
+  "sourceCommit": "9ec9eec82ec143e614c51d1f1196d4c0214c93c4",
+  "pullRequest": "https://github.com/VladislavBrodsky/EducationOS/pull/2",
+  "source": {
+    "method": "Reviewed frontend-only source snapshot uploaded explicitly to the portal service; GitHub automatic deployment is not connected.",
+    "files": 97,
+    "bytes": 1229733,
+    "manifestSha256": "ee43feb332299a62b69643aef6f53de86441760caad580c625ab4e80e3e077ad",
+    "manifestPath": "ui-manifest-2026-10-18.json"
+  },
+  "portal": {
+    "url": "https://app.educationos.space",
+    "serviceId": "2e6b7e2f-8ab9-4b7d-9f81-22c9c171c1fa",
+    "deploymentId": "4db90bd2-342d-4be1-96ae-0ab904f8cfb4",
+    "status": "SUCCESS"
+  },
+  "marketing": {
+    "url": "https://educationos.space",
+    "serviceId": "bf43668a-197d-4b94-94d2-9b09d92e44f9",
+    "deploymentId": "dc4d7630-dcd5-469c-a979-864415beaebb",
+    "status": "unchanged; verified separate"
+  },
+  "verification": {
+    "mobileLabJourneys": 6,
+    "viewportSizes": ["390x844", "430x932"],
+    "accessibleThemeScans": 12,
+    "detectedViolations": 0,
+    "navigationAndResumeCheck": "passed at 390px and 430px; bottom navigation tappable, step shortcuts focus headings, unfinished work resumes, no horizontal overflow",
+    "routingAndIsolation": "app and apex marketing host separation, policies, robots and noindex passed",
+    "local": "TypeScript, lint, production build, 129 unit tests and 33 browser tests passed",
+    "limits": "Chromium viewport/touch emulation and actual Chrome responsive checks; no physical iOS or Android device verification. Learning records remain in this browser tab."
+  }
+}
