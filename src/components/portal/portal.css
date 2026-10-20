@@ -415,3 +415,5 @@ pre.p-code-editor { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; }
 @media(prefers-reduced-motion:no-preference){.p-mascot-art img{animation:portal-mascot-bob 5.5s ease-in-out infinite}}
 @keyframes portal-mascot-bob{50%{transform:translateY(-7px) rotate(-1deg)}}
 .p-project{position:relative}
+.p-dialog,.p-dialog-overlay .p-dialog{width:min(100%,480px);max-height:min(80dvh,680px);overflow:auto;overscroll-behavior:contain;box-shadow:0 24px 70px #101a0d3d}
+@media(max-width:430px){.p-dialog-overlay{padding:12px}.p-dialog,.p-dialog-overlay .p-dialog{padding:22px;border-radius:16px}}

@@ -32,6 +32,14 @@ test('mobile artwork and sections fit the viewport', async ({ page }) => {
       });
       expect(inset, 'Portal welcome copy keeps its inner margin').toBeGreaterThanOrEqual(16);
     }
+    if (route === '/') {
+      await expect(page.locator('.learning-bento-card')).toHaveCount(4);
+      await expect(page.locator('.bridge-mini svg')).toBeVisible();
+    }
+    if (route === '/blog') {
+      const heroHeight = await page.locator('.page-hero-journal').evaluate(element => element.getBoundingClientRect().height);
+      expect(heroHeight, 'Journal introduction stays compact on mobile').toBeLessThan(550);
+    }
     const visibleArt = page.locator('main img[src*="cutout"], main img[src*="mascot"]');
     if (await visibleArt.count()) {
       const first = visibleArt.first();
@@ -41,7 +49,12 @@ test('mobile artwork and sections fit the viewport', async ({ page }) => {
     }
     if (process.env.VISUAL_AUDIT === '1') {
       await page.screenshot({ path: `test-results/visual-${route === '/' ? 'home' : route.slice(1).replaceAll('/', '-')}.png`, fullPage: true });
-      if (route === '/') await page.locator('.learning-bento').screenshot({ path: 'test-results/visual-mobile-bento.png' });
+      if (route === '/') {
+        await page.locator('.learning-bento').screenshot({ path: 'test-results/visual-mobile-bento.png' });
+        await page.locator('.lab-card').screenshot({ path: 'test-results/visual-mobile-lab-card.png' });
+        await page.locator('.trust-strip').screenshot({ path: 'test-results/visual-mobile-trust-card.png' });
+      }
+      if (route === '/blog') await page.locator('.page-hero-journal').screenshot({ path: 'test-results/visual-mobile-journal-hero.png' });
       if (route === '/portal') await page.locator('.p-heading-mascot').screenshot({ path: 'test-results/visual-mobile-mascot.png' });
     }
   }
@@ -57,7 +70,10 @@ test('desktop artwork loads without layout overflow', async ({ page }) => {
     if (route === '/' && process.env.VISUAL_AUDIT === '1') {
       await page.locator('.hero').screenshot({ path: 'test-results/visual-desktop-hero.png' });
       await page.locator('.learning-bento').screenshot({ path: 'test-results/visual-desktop-bento.png' });
+      await page.locator('.lab-card').screenshot({ path: 'test-results/visual-desktop-lab-card.png' });
+      await page.locator('.trust-strip').screenshot({ path: 'test-results/visual-desktop-trust-card.png' });
     }
+    if (route === '/blog' && process.env.VISUAL_AUDIT === '1') await page.locator('.page-hero-journal').screenshot({ path: 'test-results/visual-desktop-journal-hero.png' });
     if (route === '/portal' && process.env.VISUAL_AUDIT === '1') {
       await page.locator('.p-heading-mascot').screenshot({ path: 'test-results/visual-desktop-mascot.png' });
     }
