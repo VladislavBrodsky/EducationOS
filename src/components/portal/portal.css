@@ -396,4 +396,22 @@ pre.p-code-editor { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; }
 @media(max-width:980px){.p-photo-visual{display:block;min-height:205px;border-left:0;border-top:1px solid var(--p-line)}.p-photo-visual>img{object-position:75% 43%}}
 @media(max-width:760px){.p-portal .p-heading{min-height:130px;padding:20px 21px}.p-portal .p-heading::after{right:-36px;top:-12px;width:155px;height:155px;opacity:.55}.p-portal .p-heading h1,.p-portal .p-heading p{max-width:calc(100% - 82px)}.p-photo-visual{min-height:170px}.p-subject-path::after{opacity:.35;width:70px;height:70px}.p-progress-summary::after{opacity:.25}}
 @media(max-width:430px){.p-portal .p-heading::after{right:-42px;top:18px;width:125px;height:125px;opacity:.38}.p-portal .p-heading h1,.p-portal .p-heading p{max-width:calc(100% - 50px)}.p-photo-visual{min-height:145px}.p-photo-visual-label{bottom:10px;left:10px}}
+
+/* The learner and holograms are transparent foreground art over a quiet portal surface. */
+.p-photo-visual{isolation:isolate;overflow:hidden;background:radial-gradient(circle at 69% 46%,#ddf4d5,#f2f9ec 70%)}
+.p-photo-visual::before{display:block;content:"";position:absolute;inset:12% 8%;border:1px solid #b5ddae;border-radius:50%;transform:rotate(-24deg)}
+.p-photo-visual>img{object-fit:contain;object-position:center bottom;filter:drop-shadow(0 16px 17px #243b2238)}
+.p-photo-visual-label{background:#ffffffed}
+@media(max-width:980px){.p-photo-visual>img{object-position:center bottom}}
+@media(max-width:430px){.p-photo-visual{min-height:205px}}
+.p-portal .p-heading-mascot{position:relative;isolation:isolate;min-height:175px;overflow:hidden;background:radial-gradient(circle at 80% 52%,#e4f8d8,#f5faf1 70%)}
+.p-heading-mascot>div:first-child{position:relative;z-index:2;max-width:70%}
+.p-portal .p-heading-mascot::after{display:none}
+.p-portal .p-heading-mascot h1,.p-portal .p-heading-mascot p{max-width:100%}
+.p-heading .p-mascot-art{position:absolute;z-index:1;right:12px;bottom:-31px;width:210px;height:210px;pointer-events:none}
+.p-mascot-art img{object-fit:contain;object-position:center bottom;filter:drop-shadow(0 13px 13px #263b2333)}
+@media(max-width:760px){.p-portal .p-heading-mascot{min-height:175px}.p-heading .p-mascot-art{right:-10px;bottom:-28px;width:165px;height:165px}.p-heading-mascot>div:first-child{max-width:69%}}
+@media(max-width:430px){.p-heading-mascot>div:first-child{max-width:68%}.p-heading-mascot h1{font-size:clamp(27px,8vw,36px)}.p-heading .p-mascot-art{right:-26px;bottom:-27px;width:172px;height:172px}}
+@media(prefers-reduced-motion:no-preference){.p-mascot-art img{animation:portal-mascot-bob 5.5s ease-in-out infinite}}
+@keyframes portal-mascot-bob{50%{transform:translateY(-7px) rotate(-1deg)}}
 .p-project{position:relative}

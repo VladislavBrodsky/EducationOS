@@ -1,14 +1,18 @@
 # EducationOS learning visuals
 
-The user-provided EducationOS slides informed the visual direction: warm white space, black type, lime and blue accents, dimensional learning objects, and child-centred concept scenes. These are original generated illustrations, not copies of the slides or photographs of real EducationOS learners. AR-style eyewear and holograms are visual concepts; they do not imply a current headset, robotics kit, learning score, or production AI feature.
+The user-provided EducationOS slides informed the visual direction: warm white space, black type, lime and blue accents, dimensional objects, cinematic learners in action, and friendly 3D-style mascots. Every shipped character is original generated concept art, not a copy of a reference or a photograph of an actual EducationOS learner. AR-style glasses and holograms illustrate ideas; they do not claim a current headset, robotics kit, or production AI feature.
 
-| Asset | Use | Prompt intent |
-|---|---|---|
-| `public/images/physics-vision.webp` | Home hero, science bento, journal, science subject | Fictional learner in subtle clear glasses with a conceptual Earth, orbit and wave visualization. No formulas or interface text. |
-| `public/images/math-vision.webp` | Programs hero, geometry bento, journal, mathematics subject | Fictional learner arranging translucent geometric solids and fraction pieces in a bright studio. |
-| `public/images/flight-vision.webp` | Approach hero, aerodynamics bento and journal | Fictional learner investigating a paper glider with conceptual airflow lines and wing parts. |
-| `public/images/learning-objects.webp` | Trust and journal heroes, portal headers and lab cards | Original isolated 3D constellation of learning objects. Transparency is retained. |
-| `public/images/maker-studio.webp` | Programming subject hero | Fictional learner at a bright table exploring a small toy robot and abstract visual diagrams. |
-| `public/images/curiosity-hero.webp` | Language and arts subject hero | Fictional curious child imagining a globe, book, paper plane, geometry and friendly robot. |
+| Asset | Placement | Stored size |
+|---|---|---:|
+| `physics-cutout.webp` | Home hero, journal, science portal card | 193 KB |
+| `math-cutout.webp` | Programs hero, geometry journal, mathematics portal card | 159 KB |
+| `code-cutout.webp` | Programming bento and portal card | 195 KB |
+| `flight-cutout.webp` | Approach hero, aerodynamics bento and journal | 183 KB |
+| `orbit-mascot.webp` | Science bento, trust hero, portal welcome | 99 KB |
+| `geometry-mascot.webp` | Mathematics bento and journal hero | 162 KB |
+| `learning-objects.webp` | Secondary portal and lab decoration | 130 KB |
+| `curiosity-hero.webp` | Language and arts subject illustration | 58 KB |
 
-All six current assets are WebP, 50–130 KB each at their stored dimensions. `next/image` provides responsive delivery for content images. The learning activities, diagrams, 2D fallback and progress controls are native HTML/SVG/CSS, so imagery can be removed without removing lesson meaning or input affordances. Marketing and portal share only the visual vocabulary and static assets; they remain separate routes and production services. Generated images never represent actual learners, actual measured outcomes, or current product hardware.
+These assets have real alpha transparency where the composition requires it. Background colour, depth, orbit strokes, and reduced-motion-safe animation come from CSS rather than baked-in image rectangles. The WebP files are sized for their display areas; `next/image` supplies responsive delivery and lazy loading below the fold. Copy and controls remain native HTML, so the visual art never carries essential instructions.
+
+Marketing and the learner portal share a visual language and optimized static assets while remaining separate production services. The three discovery labs also retain complete 2D mobile activities when 3D effects are unavailable.

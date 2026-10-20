@@ -7,9 +7,9 @@ import { PortalShell } from "@/components/portal/portal-shell";
 export const metadata: Metadata = {
   metadataBase: new URL("https://app.educationos.space"),
   title: { default: "Your learning space", template: "%s | EducationOS Learning" },
-  description: "Learn, practise and create across programming, science, mathematics, language and arts.",
+  description: "Learn, practise and create across programming, science, mathematics, language and arts",
   alternates: { canonical: null },
-  openGraph: { title: "EducationOS learning space", url: "https://app.educationos.space", description: "A space to learn, practise and create." },
+  openGraph: { title: "EducationOS learning space", url: "https://app.educationos.space", description: "A space to learn, practise and create" },
   robots: { index: false, follow: false },
 };
 

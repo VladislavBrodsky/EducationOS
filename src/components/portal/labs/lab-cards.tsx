@@ -15,8 +15,8 @@ export function LabCards({ subjectId }: { subjectId?: PortalSubjectId }) {
 }
 export function DiscoveryLabsSection() {
   const { href } = usePortalNavigation();
-  return <section aria-labelledby="discovery-labs-heading"><div className="p-section-heading"><div><p className="p-eyebrow">SMALL QUESTIONS. BIG DISCOVERIES.</p><h2 id="discovery-labs-heading">Try a discovery lab.</h2></div><Link className="p-text-link" href={href("/labs")}>All labs<ArrowUpRight size={16} aria-hidden="true" /></Link></div><LabCards /></section>;
+  return <section aria-labelledby="discovery-labs-heading"><div className="p-section-heading"><div><p className="p-eyebrow">SMALL QUESTIONS. BIG DISCOVERIES</p><h2 id="discovery-labs-heading">Try a discovery lab</h2></div><Link className="p-text-link" href={href("/labs")}>All labs<ArrowUpRight size={16} aria-hidden="true" /></Link></div><LabCards /></section>;
 }
 export function DiscoveryLabsPage() {
-  return <><div className="p-heading"><div><p className="p-eyebrow">PREDICT. EXPLORE. EXPLAIN.</p><h1>See an idea from a new side.</h1><p>Make a guess, change a model, and test your thinking with a fresh question. Every lab also works in 2D.</p></div></div><LabCards /><aside className="p-quiet-note lab-collection-note"><Repeat2 size={22} aria-hidden="true" /><div><strong>Changed your mind? That’s part of learning.</strong><p>Your first prediction can be a mistake. Record your work after exploring and explaining a new example.</p></div></aside></>;
+  return <><div className="p-heading"><div><p className="p-eyebrow">PREDICT. EXPLORE. EXPLAIN</p><h1>See an idea from a new side</h1><p>Make a guess, change a model, and test your thinking with a fresh question — every lab also works in 2D</p></div></div><LabCards /><aside className="p-quiet-note lab-collection-note"><Repeat2 size={22} aria-hidden="true" /><div><strong>Changed your mind? That’s part of learning.</strong><p>Your first prediction can be a mistake. Record your work after exploring and explaining a new example.</p></div></aside></>;
 }

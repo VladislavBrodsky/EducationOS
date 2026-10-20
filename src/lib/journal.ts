@@ -3,8 +3,8 @@ export const journalArticles = [
     slug: 'see-the-invisible',
     category: 'PHYSICS',
     title: 'How can we see what we cannot touch?',
-    description: 'A child-friendly way to make motion, waves, and gravity easier to discuss.',
-    image: '/images/physics-vision.webp',
+    description: 'A child-friendly way to make motion, waves, and gravity easier to discuss',
+    image: '/images/physics-cutout.webp',
     imageAlt: 'Concept artwork of a learner exploring Earth, orbits, and waves through clear glasses',
     readTime: '4 MIN READ',
     sections: [
@@ -17,8 +17,8 @@ export const journalArticles = [
     slug: 'math-you-can-move',
     category: 'MATHEMATICS',
     title: 'Math you can turn, fold, and explain',
-    description: 'Geometry becomes more memorable when a learner can change the view.',
-    image: '/images/math-vision.webp',
+    description: 'Geometry becomes more memorable when a learner can change the view',
+    image: '/images/math-cutout.webp',
     imageAlt: 'Concept artwork of a learner arranging transparent geometric solids',
     readTime: '3 MIN READ',
     sections: [
@@ -30,8 +30,8 @@ export const journalArticles = [
     slug: 'paper-glider-experiment',
     category: 'DESIGN & SCIENCE',
     title: 'A paper glider can become a fair test',
-    description: 'Change one detail, compare a flight, and let the observation guide the next design.',
-    image: '/images/flight-vision.webp',
+    description: 'Change one detail, compare a flight, and let the observation guide the next design',
+    image: '/images/flight-cutout.webp',
     imageAlt: 'Concept artwork of a learner studying a paper glider with visual airflow lines',
     readTime: '4 MIN READ',
     sections: [

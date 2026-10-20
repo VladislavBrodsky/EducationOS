@@ -54,7 +54,7 @@ test('public website opens the current demo and all seven steps produce local ev
   await expect(page.getByText('All seven steps have recorded evidence.', { exact: false })).toBeVisible();
   await page.getByRole('button', { name: 'Clear demo notes', exact: true }).click();
   await page.getByRole('button', { name: 'Clear all demo notes', exact: true }).click();
-  await expect(page.getByRole('heading', { name: 'A blank page is a good beginning.' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'A blank page is a good beginning' })).toBeVisible();
   expect(await page.evaluate(() => sessionStorage.getItem('educationos.synthetic-demo.v1'))).toBeNull();
 });
 
@@ -75,7 +75,7 @@ test('five age bands retain separate drafts through navigation and browser reloa
   await expect(page.getByLabel('What do you notice?')).toHaveValue('Made-up maker notes remain in this tab.');
   await page.getByRole('link', { name: 'Guardian preview', exact: true }).click();
   await page.getByRole('tab', { name: 'Safety boundaries' }).click();
-  await expect(page.getByRole('heading', { name: 'A small, contained learning space.' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'A small, contained learning space' })).toBeVisible();
   await page.getByRole('tab', { name: 'Safety boundaries' }).press('ArrowRight');
   await expect(page.getByRole('tab', { name: 'Before real accounts' })).toBeFocused();
 });

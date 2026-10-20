@@ -6,7 +6,7 @@ const labPath = '/portal/labs/same-half';
 async function revealInvestigation(page: Page) {
   await page.getByRole('radio', { name: 'The amount changes with the shape.', exact: true }).check();
   await page.getByRole('button', { name: 'Try my prediction', exact: true }).click();
-  await expect(page.getByRole('heading', { name: 'Make a half with your own shape.', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Make a half with your own shape', exact: true })).toBeVisible();
 }
 
 async function completeInvestigation(page: Page) {

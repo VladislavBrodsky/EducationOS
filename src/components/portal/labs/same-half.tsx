@@ -92,7 +92,7 @@ export function SameHalf({ record, ready, onChange, onRecord }: LabProps) {
     {revealed && <>
       <section className="lab-panel" aria-labelledby="lab-explore">
         <p className="p-eyebrow">2 · Make and rearrange</p>
-        <h2 id="lab-explore" tabIndex={-1}>Make a half with your own shape.</h2>
+        <h2 id="lab-explore" tabIndex={-1}>Make a half with your own shape</h2>
         <p>Tap a cell to select it or clear it. The outside edge is one whole; every cell has the same area. Make a half, then try a new shape.</p>
         <div className="half-grid" role="group" aria-label="Twelve equal cells. Select cells to make half of the whole.">
           {Array.from({ length: HALF_GRID.cells }, (_, cell) => <button key={cell} className={`half-cell${selected.includes(cell) ? " is-selected" : ""}`} type="button" aria-label={`Cell ${cell + 1}, row ${Math.floor(cell / HALF_GRID.columns) + 1}, column ${cell % HALF_GRID.columns + 1}`} aria-pressed={selected.includes(cell)} disabled={!ready} onClick={() => changeSelection(toggleHalfCell(selected, cell))}><span aria-hidden="true">{cell + 1}</span>{selected.includes(cell) ? <Check size={18} aria-hidden="true" /> : <span className="half-cell-empty" aria-hidden="true" />}</button>)}
@@ -111,14 +111,14 @@ export function SameHalf({ record, ready, onChange, onRecord }: LabProps) {
       <form onSubmit={recordPractice}>
         <section className="lab-panel" aria-labelledby="lab-explain">
           <p className="p-eyebrow">3 · Compare</p>
-          <h2 id="lab-explain" tabIndex={-1}>Same whole, different equal parts.</h2>
+          <h2 id="lab-explain" tabIndex={-1}>Same whole, different equal parts</h2>
           <p>Both rectangles below have exactly the same width and height. Their cells are equal within each rectangle.</p>
           <div className="half-comparison"><FractionWhole parts={6} selected={3} label="Three of six" /><FractionWhole parts={4} selected={2} label="Two of four" /></div>
           <fieldset className="half-choice-group"><legend>What do the selected areas show?</legend>
             <label className="p-choice"><input type="radio" name="half-observation" value="same-half" checked={record.answers.observation === "same-half"} onChange={() => answer("observation", "same-half")} disabled={!ready} /><span>Both cover half of the same-sized whole.</span></label>
             <label className="p-choice"><input type="radio" name="half-observation" value="different-amount" checked={record.answers.observation === "different-amount"} onChange={() => answer("observation", "different-amount")} disabled={!ready} /><span>Three selected parts must cover more than two.</span></label>
           </fieldset>
-          <h3>A tricky whole: these parts are unequal.</h3>
+          <h3>A tricky whole: these parts are unequal</h3>
           <div className="half-uneven" role="img" aria-label="One whole split into four unequal pieces. The first two small pieces are selected; together they cover two eighths of the whole.">{UNEQUAL_PARTS.map((width, index) => <span key={index} className={`half-part${index < 2 ? " is-selected" : ""}`} style={{ flex: width }} aria-hidden="true">{index < 2 ? <Check size={18} /> : null}</span>)}</div>
           <p>Two of four pieces are selected. Look at the space they cover before deciding.</p>
           <fieldset className="half-choice-group"><legend>Is this selected area half?</legend>

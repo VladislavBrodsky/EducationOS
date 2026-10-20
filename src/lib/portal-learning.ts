@@ -77,17 +77,17 @@ export type ActivityCheck = {
 };
 
 export const PORTAL_SUBJECTS: PortalSubject[] = [
-  { id: "programming", title: "Programming", shortTitle: "Code", description: "Give ideas instructions. Make something that works.", color: "lime", icon: "code", skillPath: ["Sequences", "Variables", "Loops"], lessonIds: ["programming-first-message", "programming-variables", "programming-repeat"] },
-  { id: "science", title: "Science", shortTitle: "Science", description: "Ask a question. Test an idea. Follow the evidence.", color: "blue", icon: "flask", skillPath: ["Fair tests", "Observe", "Explain"], lessonIds: ["science-fair-test", "science-paper-bridge", "science-evidence"] },
-  { id: "mathematics", title: "Mathematics", shortTitle: "Maths", description: "Find patterns and explain why they work.", color: "orange", icon: "shapes", skillPath: ["Patterns", "Fractions", "Area"], lessonIds: ["mathematics-patterns", "mathematics-fractions", "mathematics-area"] },
-  { id: "language", title: "Language & writing", shortTitle: "Writing", description: "Choose clear words. Build a story worth sharing.", color: "purple", icon: "book", skillPath: ["Observe", "Revise", "Tell a story"], lessonIds: ["language-precise-description", "language-strong-sentence", "language-short-story"] },
-  { id: "arts", title: "Arts & design", shortTitle: "Arts", description: "Notice, imagine and make your own visual language.", color: "pink", icon: "palette", skillPath: ["Patterns", "Colour", "Design"], lessonIds: ["arts-patterns", "arts-color-story", "arts-design-brief"] },
+  { id: "programming", title: "Programming", shortTitle: "Code", description: "Give ideas instructions. Make something that works", color: "lime", icon: "code", skillPath: ["Sequences", "Variables", "Loops"], lessonIds: ["programming-first-message", "programming-variables", "programming-repeat"] },
+  { id: "science", title: "Science", shortTitle: "Science", description: "Ask a question. Test an idea. Follow the evidence", color: "blue", icon: "flask", skillPath: ["Fair tests", "Observe", "Explain"], lessonIds: ["science-fair-test", "science-paper-bridge", "science-evidence"] },
+  { id: "mathematics", title: "Mathematics", shortTitle: "Maths", description: "Find patterns and explain why they work", color: "orange", icon: "shapes", skillPath: ["Patterns", "Fractions", "Area"], lessonIds: ["mathematics-patterns", "mathematics-fractions", "mathematics-area"] },
+  { id: "language", title: "Language & writing", shortTitle: "Writing", description: "Choose clear words. Build a story worth sharing", color: "purple", icon: "book", skillPath: ["Observe", "Revise", "Tell a story"], lessonIds: ["language-precise-description", "language-strong-sentence", "language-short-story"] },
+  { id: "arts", title: "Arts & design", shortTitle: "Arts", description: "Notice, imagine and make your own visual language", color: "pink", icon: "palette", skillPath: ["Patterns", "Colour", "Design"], lessonIds: ["arts-patterns", "arts-color-story", "arts-design-brief"] },
 ];
 
 const practiceLanguage = "EducationOS practice code";
 export const PORTAL_LESSONS: PortalLesson[] = [
   {
-    id: "programming-first-message", subjectId: "programming", title: "Your first message", subtitle: "A small instruction. A visible result.", minutes: 6, skill: "Sequences",
+    id: "programming-first-message", subjectId: "programming", title: "Your first message", subtitle: "A small instruction. A visible result", minutes: 6, skill: "Sequences",
     objective: "Write two instructions and see how their order changes the output.",
     learn: ["A program is a sequence of instructions. This workspace runs one line after another, from top to bottom.", 'print("Hello") displays the text inside the quotes. Quotes tell the program that Hello is text.', "Try changing the message, run it, then arrange two lines to match the activity goal."],
     instructions: 'Make the output show Hello, world! on the first line and I can make things. on the second line. Use two print() instructions.',
@@ -95,7 +95,7 @@ export const PORTAL_LESSONS: PortalLesson[] = [
     reflection: "What changes if you swap the two instructions? Try it, then restore your solution.",
   },
   {
-    id: "programming-variables", subjectId: "programming", title: "Give an idea a name", subtitle: "Store a value. Use it again.", minutes: 8, skill: "Variables",
+    id: "programming-variables", subjectId: "programming", title: "Give an idea a name", subtitle: "Store a value. Use it again", minutes: 8, skill: "Variables",
     objective: "Use a variable to hold a number and calculate a new value.",
     learn: ["A variable is a name for a stored value. seeds = 4 stores the number 4 under the name seeds.", "print(seeds) reads that value. print(seeds + 2) calculates a result without changing seeds.", "You can also update a value: seeds = seeds + 2. The right side is calculated before the new value is stored."],
     instructions: "You have 4 seeds and find 3 more. Set seeds to 4, add 3 to seeds, then print seeds. The output should be 7.",
@@ -103,7 +103,7 @@ export const PORTAL_LESSONS: PortalLesson[] = [
     reflection: "If you start with 10 seeds, which line would you change? What would the result be?",
   },
   {
-    id: "programming-repeat", subjectId: "programming", title: "Make a little rhythm", subtitle: "Let a loop do the repeating.", minutes: 8, skill: "Loops",
+    id: "programming-repeat", subjectId: "programming", title: "Make a little rhythm", subtitle: "Let a loop do the repeating", minutes: 8, skill: "Loops",
     objective: "Use a repeat block to produce a three-part pattern.",
     learn: ["A loop repeats a group of instructions. repeat 3: runs the indented lines three times.", 'Place two spaces before a line that belongs to a repeat block. For example: repeat 2: followed by an indented print("Clap").', "The number after repeat counts the whole block. Two instructions inside a loop of three repeats produce six output lines."],
     instructions: 'Make a rhythm with three repeats of Clap followed by Tap. Use a repeat block and two indented print() lines.',
@@ -111,7 +111,7 @@ export const PORTAL_LESSONS: PortalLesson[] = [
     reflection: "Add a third sound inside the block. Predict how many lines you will get before you run it.",
   },
   {
-    id: "science-fair-test", subjectId: "science", title: "Ask a testable question", subtitle: "Change one thing. Watch what happens.", minutes: 6, skill: "Fair tests",
+    id: "science-fair-test", subjectId: "science", title: "Ask a testable question", subtitle: "Change one thing. Watch what happens", minutes: 6, skill: "Fair tests",
     objective: "Identify a comparison that can help test an explanation.",
     learn: ["A useful test starts with a question you can investigate: does folding a paper bridge change how long it holds a light block?", "Change one main feature at a time. Keep the paper, the 10 cm gap between supports and the light block the same.", "This helps you connect a difference in the result to the feature you changed. Repeating the test helps you see how much the result varies."],
     instructions: "Choose the plan that makes the clearest comparison.",
@@ -119,7 +119,7 @@ export const PORTAL_LESSONS: PortalLesson[] = [
     reflection: "Name two things you would keep the same in your own test.",
   },
   {
-    id: "science-paper-bridge", subjectId: "science", title: "Build, test, notice", subtitle: "Your observations are the material.", minutes: 15, skill: "Observe",
+    id: "science-paper-bridge", subjectId: "science", title: "Build, test, notice", subtitle: "Your observations are the material", minutes: 15, skill: "Observe",
     objective: "Record a simple comparison, including results that surprise you.",
     learn: ["With an adult, set two stable supports 10 cm apart on a low table. Place a sheet of paper across them. Put one large, light toy block in the middle and time how long it holds, stopping at 60 seconds.", "Record the time. Fold the same-sized paper into a zigzag, keep the 10 cm gap the same and test again with the same block. The adult can help time the trial.", "A lower result is useful evidence too. Describe what happened without changing the numbers to fit your prediction. Use large materials and keep the test close to the tabletop."],
     instructions: "Run both trials and record what you actually observed. Zero is a valid result if the bridge collapses immediately. Record 60 if it is still standing at the time limit.",
@@ -127,7 +127,7 @@ export const PORTAL_LESSONS: PortalLesson[] = [
     reflection: "Which result would you expect if you repeated the test? What might make it change?",
   },
   {
-    id: "science-evidence", subjectId: "science", title: "What can evidence say?", subtitle: "A result is the start of an explanation.", minutes: 6, skill: "Explain",
+    id: "science-evidence", subjectId: "science", title: "What can evidence say?", subtitle: "A result is the start of an explanation", minutes: 6, skill: "Explain",
     objective: "Choose a conclusion that fits the available evidence.",
     learn: ["Imagine a flat bridge held a block for 3 seconds and a folded bridge held it for 8 seconds in one test.", "You can report that the folded bridge held the block for 5 seconds longer in that comparison. You cannot yet say it will always be stronger in every situation.", "Repeat the comparison, write down all results and look for a pattern. Evidence can strengthen or change an explanation."],
     instructions: "Read the result carefully, then choose the conclusion it supports.",
@@ -135,7 +135,7 @@ export const PORTAL_LESSONS: PortalLesson[] = [
     reflection: "What other explanation could you investigate if a second trial gave a different result?",
   },
   {
-    id: "mathematics-patterns", subjectId: "mathematics", title: "Find the rule", subtitle: "See what stays the same as numbers change.", minutes: 6, skill: "Patterns",
+    id: "mathematics-patterns", subjectId: "mathematics", title: "Find the rule", subtitle: "See what stays the same as numbers change", minutes: 6, skill: "Patterns",
     objective: "Find and apply an addition rule in a number sequence.",
     learn: ["In the sequence 3, 6, 9, 12, each number is 3 more than the one before it.", "Compare neighbouring numbers to look for a repeating change. Here, 6 − 3, 9 − 6 and 12 − 9 all equal 3.", "A few numbers can fit several possible rules. In this activity, use the rule add 3 each time."],
     instructions: "Continue the sequence using the stated rule.",
@@ -143,7 +143,7 @@ export const PORTAL_LESSONS: PortalLesson[] = [
     reflection: "Make your own four-number sequence. Tell someone the rule and ask them for the next number.",
   },
   {
-    id: "mathematics-fractions", subjectId: "mathematics", title: "Share the whole", subtitle: "Equal parts make fractions useful.", minutes: 8, skill: "Fractions",
+    id: "mathematics-fractions", subjectId: "mathematics", title: "Share the whole", subtitle: "Equal parts make fractions useful", minutes: 8, skill: "Fractions",
     objective: "Recognise equivalent fractions using equal-sized parts.",
     learn: ["A fraction describes equal parts of a whole. In 2/4, the whole is divided into 4 equal parts and 2 of them are selected.", "Imagine folding a paper in half, then folding each half in half again. Two of the four equal sections cover one half.", "2/4 and 1/2 represent the same amount of the same-sized whole."],
     instructions: "Compare the fractions using the same whole.",
@@ -151,7 +151,7 @@ export const PORTAL_LESSONS: PortalLesson[] = [
     reflection: "Draw a shape divided into 6 equal parts. How many parts would cover half?",
   },
   {
-    id: "mathematics-area", subjectId: "mathematics", title: "Build a tiny garden", subtitle: "Count space in square units.", minutes: 8, skill: "Area",
+    id: "mathematics-area", subjectId: "mathematics", title: "Build a tiny garden", subtitle: "Count space in square units", minutes: 8, skill: "Area",
     objective: "Calculate the area of a rectangle from rows and columns.",
     learn: ["Area measures how much surface a shape covers. A square unit is one unit wide and one unit tall.", "A rectangular garden with 3 rows of 4 square tiles contains 4 + 4 + 4 = 12 tiles.", "For a rectangle, rows × columns gives the total number of square units. The distance around its edge is a different measurement: perimeter."],
     instructions: "Imagine or draw the rows of tiles before choosing your answer.",
@@ -159,7 +159,7 @@ export const PORTAL_LESSONS: PortalLesson[] = [
     reflection: "Can you arrange 12 tiles into a different rectangle? Name its rows and columns.",
   },
   {
-    id: "language-precise-description", subjectId: "language", title: "Help a reader see it", subtitle: "Trade a vague word for a useful detail.", minutes: 8, skill: "Observe",
+    id: "language-precise-description", subjectId: "language", title: "Help a reader see it", subtitle: "Trade a vague word for a useful detail", minutes: 8, skill: "Observe",
     objective: "Describe an ordinary object using specific observations.",
     learn: ["A description gives a reader details they can imagine. Nice tells us your opinion; a chipped blue handle tells us something we can picture.", "Choose an object near you. Notice its shape, texture, colour or sound. You do not need to use every sense.", "Select two or three details that help distinguish this object from another one."],
     instructions: "Write at least 20 words about a nearby object without naming it. Then ask someone to guess the object.",
@@ -167,7 +167,7 @@ export const PORTAL_LESSONS: PortalLesson[] = [
     reflection: "Which detail helped someone guess your object? Which detail could be clearer?",
   },
   {
-    id: "language-strong-sentence", subjectId: "language", title: "Choose the useful detail", subtitle: "A clearer sentence has a job to do.", minutes: 6, skill: "Revise",
+    id: "language-strong-sentence", subjectId: "language", title: "Choose the useful detail", subtitle: "A clearer sentence has a job to do", minutes: 6, skill: "Revise",
     objective: "Recognise a revision that makes an action more specific.",
     learn: ["Revision means choosing words that better express your idea. Longer sentences are not automatically clearer.", "The bird moved gives little information. The sparrow hopped along the windowsill names the bird, the movement and the place.", "Choose details that serve the meaning. You can remove extra words when they distract from the action."],
     instructions: "Find the sentence that helps you picture the action most clearly.",
@@ -175,7 +175,7 @@ export const PORTAL_LESSONS: PortalLesson[] = [
     reflection: "Write your own specific version of A person went somewhere.",
   },
   {
-    id: "language-short-story", subjectId: "language", title: "A problem, a choice, a change", subtitle: "Build a story in a few sentences.", minutes: 12, skill: "Tell a story",
+    id: "language-short-story", subjectId: "language", title: "A problem, a choice, a change", subtitle: "Build a story in a few sentences", minutes: 12, skill: "Tell a story",
     objective: "Write a short story in which a character responds to a problem.",
     learn: ["A story can begin when someone wants something and a problem gets in the way.", "Give your character a choice. What do they try? What happens because of that choice?", "An ending can show a change in the situation, the character or what the reader understands."],
     instructions: "Write at least 40 words about someone who finds a mysterious key. Include a problem, a choice and a change.",
@@ -183,7 +183,7 @@ export const PORTAL_LESSONS: PortalLesson[] = [
     reflection: "Read your story aloud. Where could one detail make the character's choice easier to understand?",
   },
   {
-    id: "arts-patterns", subjectId: "arts", title: "Notice a visual rhythm", subtitle: "Shapes can repeat, too.", minutes: 6, skill: "Patterns",
+    id: "arts-patterns", subjectId: "arts", title: "Notice a visual rhythm", subtitle: "Shapes can repeat, too", minutes: 6, skill: "Patterns",
     objective: "Recognise the repeating unit in a visual pattern.",
     learn: ["Artists and designers use repeated shapes, colours or marks to create rhythm.", "A repeating unit is the smallest group that starts again. In circle, triangle, triangle, circle, triangle, triangle, the unit has three shapes.", "You can create variety by changing the size, spacing or direction while keeping a pattern recognisable."],
     instructions: "Find the group that repeats.",
@@ -191,7 +191,7 @@ export const PORTAL_LESSONS: PortalLesson[] = [
     reflection: "Draw your own repeating unit, then repeat it four times. Change the spacing and notice the effect.",
   },
   {
-    id: "arts-color-story", subjectId: "arts", title: "Tell a story with colour", subtitle: "Make choices, then explain their effect.", minutes: 12, skill: "Colour",
+    id: "arts-color-story", subjectId: "arts", title: "Tell a story with colour", subtitle: "Make choices, then explain their effect", minutes: 12, skill: "Colour",
     objective: "Choose a small colour palette for an intended mood.",
     learn: ["Colour can suggest a mood, but people do not all experience it in the same way. Context, culture and personal memories matter.", "Choose three colours for an imaginary place. Think about their brightness, contrast and the amount of space each colour takes.", "Sketch the place on paper if you like. Then explain your choices. Your explanation matters more than choosing a supposedly correct colour."],
     instructions: "Invent a peaceful, energetic or mysterious place. Write at least 25 words describing three colour choices and the effect you want.",
@@ -199,7 +199,7 @@ export const PORTAL_LESSONS: PortalLesson[] = [
     reflection: "Change one colour in your plan. How might the place feel different?",
   },
   {
-    id: "arts-design-brief", subjectId: "arts", title: "Design for someone", subtitle: "A useful idea starts with a real need.", minutes: 12, skill: "Design",
+    id: "arts-design-brief", subjectId: "arts", title: "Design for someone", subtitle: "A useful idea starts with a real need", minutes: 12, skill: "Design",
     objective: "Connect a design decision to the needs of its user.",
     learn: ["Design starts by asking who something is for and what they need to do.", "Imagine a sign that helps a new learner find a quiet reading corner. Words, a simple symbol and good contrast can work together.", "A useful design explanation connects each choice to a need: large lettering can be read from farther away; a book symbol can help someone who is still learning to read."],
     instructions: "Sketch a reading-corner sign on paper, then write at least 30 words explaining who will use it and two choices that help them.",

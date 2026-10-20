@@ -14,7 +14,7 @@ test('the visual journal and subject artwork load on narrow screens without hori
   }
   await page.goto('/');
   await page.getByRole('link', { name: 'Journal', exact: true }).click();
-  await expect(page.getByRole('heading', { name: 'Little questions. Big discoveries.' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Little questions. Big discoveries' })).toBeVisible();
   await expect(page.locator('.journal-card')).toHaveCount(3);
   await expect.poll(() => page.locator('.journal-card-image img').first().evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
@@ -25,9 +25,9 @@ test('the visual journal and subject artwork load on narrow screens without hori
 
   await page.goto('/portal');
   await page.getByRole('button', { name: /^Mathematics\b/ }).click();
-  await expect(page.locator('.p-photo-visual img')).toHaveAttribute('src', /math-vision\.webp/);
+  await expect(page.locator('.p-photo-visual img')).toHaveAttribute('src', /math-cutout\.webp/);
   await page.getByRole('button', { name: /^Science\b/ }).click();
-  await expect(page.locator('.p-photo-visual img')).toHaveAttribute('src', /physics-vision\.webp/);
+  await expect(page.locator('.p-photo-visual img')).toHaveAttribute('src', /physics-cutout\.webp/);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });
 
@@ -101,9 +101,9 @@ test('coding work runs locally, survives reload, appears in progress and can be 
   await expect(entry.getByText('Activity recorded', { exact: true })).toBeVisible();
   await page.getByRole('button', { name: 'Clear portal work', exact: true }).click();
   await page.getByRole('button', { name: 'Clear all portal work', exact: true }).click();
-  await expect(page.getByRole('heading', { name: 'A blank page is a good beginning.', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'A blank page is a good beginning', exact: true })).toBeVisible();
   await page.reload();
-  await expect(page.getByRole('heading', { name: 'A blank page is a good beginning.', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'A blank page is a good beginning', exact: true })).toBeVisible();
   expect(await page.evaluate(() => sessionStorage.getItem('educationos.portal.v1'))).toBeNull();
 });
 

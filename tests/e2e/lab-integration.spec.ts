@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 import { blankDemoSession, DEMO_STORAGE_KEY } from "../../src/lib/demo-state";
 
 test("new lab routes use the clean app host while the public home stays separate", async ({ request }) => {
-  for (const [path, title] of [["/labs", "See an idea from a new side."], ["/labs/loop-loom", "Loop Loom"], ["/labs/same-half", "Same Half Different Shape"], ["/labs/hidden-cubes", "Hidden Cube Builder"]]) {
+  for (const [path, title] of [["/labs", "See an idea from a new side"], ["/labs/loop-loom", "Loop Loom"], ["/labs/same-half", "Same Half Different Shape"], ["/labs/hidden-cubes", "Hidden Cube Builder"]]) {
     const response = await request.get(path, { headers: { Host: "app.educationos.space" } });
     expect(response.status()).toBe(200);
     expect(response.headers()["x-robots-tag"]).toBe("noindex, nofollow");
@@ -44,7 +44,7 @@ test("lab drafts join the notebook export and confirmed clear without erasing le
   await expect(entry).toBeVisible();
   await page.getByRole("button", { name: "Clear portal work", exact: true }).click();
   await page.getByRole("button", { name: "Clear all portal work", exact: true }).click();
-  await expect(page.getByRole("heading", { name: "A blank page is a good beginning.", exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "A blank page is a good beginning", exact: true })).toBeVisible();
   expect(await page.evaluate(key => sessionStorage.getItem(key), DEMO_STORAGE_KEY)).toBe(savedDemo);
 });
 
@@ -53,7 +53,7 @@ test("the cube paper lesson works without JavaScript and keeps its answer closed
   try {
     const page = await context.newPage();
     await page.goto(`${baseURL}/portal/labs/hidden-cubes`);
-    await expect(page.getByRole("heading", { name: "Count with layers on paper.", exact: true })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Count with layers on paper", exact: true })).toBeVisible();
     const example = page.locator("noscript details");
     await expect(example).not.toHaveAttribute("open");
     await page.getByText("Show a worked layer example", { exact: true }).click();

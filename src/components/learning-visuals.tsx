@@ -1,12 +1,13 @@
 import Image from 'next/image';
-import { Code2 } from 'lucide-react';
 
-/** Editorial imagery is illustrative. All learning controls remain real HTML. */
+/** Concept art illustrates possible ways to see ideas; activities remain browser based. */
 export function LearningHeroArt() {
-  return <div className="learning-hero-art">
-    <Image src="/images/physics-vision.webp" alt="Concept artwork of a young learner wearing clear glasses and exploring a floating model of Earth and waves" fill priority sizes="(max-width: 760px) 100vw, 48vw" />
+  return <div className="learning-hero-art learning-cutout-stage">
+    <span className="learning-orbit learning-orbit-one" aria-hidden="true" />
+    <span className="learning-orbit learning-orbit-two" aria-hidden="true" />
+    <Image src="/images/physics-cutout.webp" alt="Concept artwork of a learner in clear glasses exploring Earth, motion, and waves" fill priority sizes="(max-width: 760px) 100vw, 48vw" />
     <div className="learning-hero-caption"><span className="status-dot" /> IDEAS YOU CAN EXPLORE</div>
-    <div className="learning-hero-note"><span>01 / NOTICE</span><strong>See a question differently.</strong><span>Ask · try · make · reflect</span></div>
+    <div className="learning-hero-note"><span>01 / NOTICE</span><strong>See a question differently</strong><span>Ask · try · make · reflect</span></div>
   </div>;
 }
 
@@ -16,24 +17,33 @@ export function LearningObjects({ className = '' }: { className?: string }) {
 
 export function LearningPageVisual({ theme }: { theme: 'stages' | 'method' | 'care' }) {
   const content = {
-    stages: { eyebrow: 'A PATH TO EXPLORE', title: 'Every stage starts with a question.', detail: 'Five ways to meet a growing mind.' },
-    method: { eyebrow: 'NOTICE → TRY → EXPLAIN', title: 'Ideas become clearer when you test them.', detail: 'A guided cycle with room to think again.' },
-    care: { eyebrow: 'THOUGHTFUL BY DESIGN', title: 'A place to try, with clear boundaries.', detail: 'An account-free demonstration for families.' },
+    stages: { eyebrow: 'A PATH TO EXPLORE', title: 'Every stage starts with a question', detail: 'Five ways to meet a growing mind' },
+    method: { eyebrow: 'NOTICE → TRY → EXPLAIN', title: 'Ideas become clearer when you test them', detail: 'A guided cycle with room to think again' },
+    care: { eyebrow: 'THOUGHTFUL BY DESIGN', title: 'A place to try, with clear boundaries', detail: 'An account-free demonstration for families' },
   }[theme];
   return <div className={`learning-page-visual learning-page-visual-${theme}`}>
-    {theme === 'care' ? <LearningObjects /> : <Image src={theme === 'stages' ? '/images/math-vision.webp' : '/images/flight-vision.webp'} alt={theme === 'stages' ? 'Concept artwork of a child exploring colorful three-dimensional geometry' : 'Concept artwork of a child studying a paper glider and airflow'} fill sizes="(max-width: 760px) 100vw, 80vw" />}
+    {theme === 'care' ? <LearningObjects /> : <Image src={theme === 'stages' ? '/images/math-cutout.webp' : '/images/flight-cutout.webp'} alt={theme === 'stages' ? 'Concept artwork of a child exploring colorful three-dimensional geometry' : 'Concept artwork of a child studying a paper glider and airflow'} fill sizes="(max-width: 760px) 100vw, 80vw" />}
     <div className="learning-page-visual-copy"><span>{content.eyebrow}</span><strong>{content.title}</strong><p>{content.detail}</p></div>
   </div>;
 }
 
+const cards = [
+  { number: '01', action: 'EXPLORE', title: 'Wonder is a good starting point', detail: 'Follow a question across science, mathematics, programming, language, and art', image: '/images/orbit-mascot.webp', theme: 'physics', label: 'SCIENCE / IMAGINE' },
+  { number: '02', action: 'PROGRAM', title: 'Make a pattern move', detail: 'Write a tiny loop and see what changes when you edit it', image: '/images/code-cutout.webp', theme: 'code', label: 'PROGRAMMING / CREATE' },
+  { number: '03', action: 'REASON', title: 'Turn a shape, test an idea', detail: 'Use visual models to explain what stays the same', image: '/images/geometry-mascot.webp', theme: 'math', label: 'MATH / DISCOVER' },
+  { number: '04', action: 'BUILD', title: 'What makes a glider fly?', detail: 'Change one feature, compare two flights, and explain what you notice', image: '/images/flight-cutout.webp', theme: 'flight', label: 'AERODYNAMICS / TRY' },
+] as const;
+
 export function LearningBento() {
   return <section className="section container learning-bento" aria-labelledby="learning-bento-heading">
-    <div className="learning-bento-heading"><p className="eyebrow">BUILT FOR THE WAY KIDS LEARN</p><h2 id="learning-bento-heading">See an idea.<br />Make it your own.</h2><p className="muted">Questions become experiments, patterns become programs, and a small project becomes something a learner can explain.</p></div>
+    <div className="learning-bento-heading"><p className="eyebrow">BUILT FOR THE WAY KIDS LEARN</p><h2 id="learning-bento-heading">See an idea<br />Make it your own</h2><p className="muted">Questions become experiments, patterns become programs, and a small project becomes something a learner can explain</p></div>
     <div className="learning-bento-grid">
-      <article className="learning-bento-card learning-bento-feature"><Image src="/images/physics-vision.webp" alt="" fill sizes="(max-width: 760px) 100vw, 45vw" /><div><span className="bento-index">01 / EXPLORE</span><h3>Wonder is a good starting point.</h3><p>Follow a question across science, mathematics, programming, language, and art.</p></div><span className="bento-visual-label">PHYSICS / IMAGINE</span></article>
-      <article className="learning-bento-card learning-bento-code"><Code2 aria-hidden="true" /><span className="bento-index">02 / PROGRAM</span><h3>Make a pattern move.</h3><p>Write a tiny loop and see what changes when you edit it.</p><div className="bento-loop" aria-hidden="true"><span>repeat</span><span>→</span><span>notice</span><span>→</span><span>change</span></div></article>
-      <article className="learning-bento-card learning-bento-photo"><Image src="/images/math-vision.webp" alt="" fill sizes="(max-width: 760px) 100vw, 30vw" /><div><span className="bento-index">03 / REASON</span><h3>Turn a shape. Test an idea.</h3><p>Use visual models to explain what stays the same.</p></div></article>
-      <article className="learning-bento-card learning-bento-photo learning-bento-flight"><Image src="/images/flight-vision.webp" alt="" fill sizes="(max-width: 760px) 100vw, 50vw" /><div><span className="bento-index">04 / BUILD</span><h3>What makes a glider fly?</h3><p>Change one feature, compare two flights, and explain what you notice.</p></div><span className="bento-visual-label">AERODYNAMICS / TRY</span></article>
+      {cards.map(card => <article className={`learning-bento-card learning-bento-${card.theme}`} key={card.number}>
+        <span className="bento-index">{card.number} / {card.action}</span>
+        <div className="learning-bento-copy"><h3>{card.title}</h3><p>{card.detail}</p></div>
+        <div className="learning-bento-art" aria-hidden="true"><Image src={card.image} alt="" fill sizes="(max-width: 760px) 100vw, 47vw" /></div>
+        <span className="bento-visual-label">{card.label}</span>
+      </article>)}
     </div>
   </section>;
 }
