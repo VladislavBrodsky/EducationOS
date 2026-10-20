@@ -2,6 +2,35 @@ import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import { readFile } from 'node:fs/promises';
 
+test('the visual journal and subject artwork load on narrow screens without horizontal overflow', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/');
+  await expect(page.getByRole('link', { name: 'Journal', exact: true })).toBeVisible();
+  await expect.poll(() => page.locator('.learning-hero-art img').evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
+  for (const path of ['/programs', '/approach', '/trust']) {
+    await page.goto(path);
+    await expect.poll(() => page.locator('.page-hero-scene-art img').evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), path).toBe(true);
+  }
+  await page.goto('/');
+  await page.getByRole('link', { name: 'Journal', exact: true }).click();
+  await expect(page.getByRole('heading', { name: 'Little questions. Big discoveries.' })).toBeVisible();
+  await expect(page.locator('.journal-card')).toHaveCount(3);
+  await expect.poll(() => page.locator('.journal-card-image img').first().evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await page.getByRole('link', { name: /Math you can turn, fold, and explain/ }).click();
+  await expect(page.getByRole('heading', { name: 'Math you can turn, fold, and explain' })).toBeVisible();
+  await expect.poll(() => page.locator('.journal-article-image img').evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+
+  await page.goto('/portal');
+  await page.getByRole('button', { name: /^Mathematics\b/ }).click();
+  await expect(page.locator('.p-photo-visual img')).toHaveAttribute('src', /math-vision\.webp/);
+  await page.getByRole('button', { name: /^Science\b/ }).click();
+  await expect(page.locator('.p-photo-visual img')).toHaveAttribute('src', /physics-vision\.webp/);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+});
+
 const firstCodeSolution = 'print("Hello, world!")\nprint("I can make things.")';
 const lessonIds = [
   'programming-first-message', 'programming-variables', 'programming-repeat',
@@ -126,9 +155,9 @@ test('the app host serves only the portal and keeps clean paths, policy redirect
   // The two surfaces share decorative assets; the portal router must not
   // rewrite their paths into missing learner pages.
   for (const host of ['app.educationos.space', 'educationos.space']) {
-    const image = await request.get('/images/learning-objects.png', { headers: { Host: host } });
+    const image = await request.get('/images/learning-objects.webp', { headers: { Host: host } });
     expect(image.status(), `${host} learning image`).toBe(200);
-    expect(image.headers()['content-type']).toContain('image/png');
+    expect(image.headers()['content-type']).toContain('image/webp');
   }
 
   const cleanPath = await request.get('/portal/subjects?from=home', { headers: appHeaders, maxRedirects: 0 });

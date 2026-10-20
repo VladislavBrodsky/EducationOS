@@ -66,7 +66,7 @@ describe('portal and public host separation', () => {
     expect(isPortalPath('/portals')).toBe(false);
   });
 
-  it.each(['/privacy', '/safety', '/accessibility', '/terms', '/approach', '/programs', '/trust'])('sends the public %s page to the marketing origin', (pathname) => {
+  it.each(['/privacy', '/safety', '/accessibility', '/terms', '/approach', '/programs', '/trust', '/blog', '/blog/see-the-invisible'])('sends the public %s page to the marketing origin', (pathname) => {
     expect(resolvePortalRoute('app.educationos.space', pathname, 'auto')).toMatchObject({ action: 'redirect', destination: `https://educationos.space${pathname}`, noindex: true });
   });
 
