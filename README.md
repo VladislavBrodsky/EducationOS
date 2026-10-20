@@ -1,5 +1,7 @@
 # EducationOS
 
+**Working rule for this project and all active documents:** use the Pareto principle. Prioritize the smallest roughly 20% of work that delivers 80–100% of the useful result, ship it first, and stop adding scope once the outcome is clear and verified. See [AGENTS.md](AGENTS.md) for the standing development and copy rules.
+
 **v0.6.0 — Python-first application foundation for educationos.space.**
 
 Python owns the application: FastAPI REST APIs, Pydantic contracts, permission/consent policy, SQLAlchemy 2 persistence, Alembic migrations, TRIZ orchestration, tasks, AI tooling and MCP. Next.js/React/TypeScript provides the existing responsive browser interface and generated API client. This supersedes the earlier TypeScript-backend/Prisma plan; archived code in `reference/legacy-typescript-backend/` is historical only.
