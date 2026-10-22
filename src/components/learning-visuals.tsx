@@ -5,7 +5,7 @@ export function LearningHeroArt() {
   return <div className="learning-hero-art learning-cutout-stage">
     <span className="learning-orbit learning-orbit-one" aria-hidden="true" />
     <span className="learning-orbit learning-orbit-two" aria-hidden="true" />
-    <Image src="/images/physics-cutout.webp" alt="Concept artwork of a learner in clear glasses exploring Earth, motion, and waves" fill priority sizes="(max-width: 760px) 100vw, 48vw" />
+    <Image src="/images/physics-cutout.webp" alt="Concept artwork of a learner in clear glasses exploring Earth, motion, and waves" fill priority loading="eager" sizes="(max-width: 760px) 100vw, 48vw" />
     <div className="learning-hero-caption"><span className="status-dot" /> IDEAS YOU CAN EXPLORE</div>
     <div className="learning-hero-note"><span>01 / NOTICE</span><strong>See a question differently</strong><span>Ask · try · make · reflect</span></div>
   </div>;
