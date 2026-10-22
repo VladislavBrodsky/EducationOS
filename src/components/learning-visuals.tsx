@@ -1,4 +1,6 @@
 import Image from 'next/image';
+import Link from 'next/link';
+import { ArrowUpRight } from 'lucide-react';
 
 /** Concept art illustrates possible ways to see ideas; activities remain browser based. */
 export function LearningHeroArt() {
@@ -28,22 +30,23 @@ export function LearningPageVisual({ theme }: { theme: 'stages' | 'method' | 'ca
 }
 
 const cards = [
-  { number: '01', action: 'EXPLORE', title: 'Wonder is a good starting point', detail: 'Follow a question across science, mathematics, programming, language, and art', image: '/images/orbit-mascot.webp', theme: 'physics', label: 'SCIENCE / IMAGINE' },
-  { number: '02', action: 'PROGRAM', title: 'Make a pattern move', detail: 'Write a tiny loop and see what changes when you edit it', image: '/images/code-cutout.webp', theme: 'code', label: 'PROGRAMMING / CREATE' },
-  { number: '03', action: 'REASON', title: 'Turn a shape, test an idea', detail: 'Use visual models to explain what stays the same', image: '/images/geometry-mascot.webp', theme: 'math', label: 'MATH / DISCOVER' },
-  { number: '04', action: 'BUILD', title: 'What makes a glider fly?', detail: 'Change one feature, compare two flights, and explain what you notice', image: '/images/flight-cutout.webp', theme: 'flight', label: 'AERODYNAMICS / TRY' },
+  { number: '01', action: 'EXPLORE', title: 'Wonder is a good starting point', detail: 'Start with a question, then see where the evidence leads', image: '/images/orbit-mascot.webp', theme: 'physics', label: 'SCIENCE / IMAGINE', href: '/blog/see-the-invisible' },
+  { number: '02', action: 'PROGRAM', title: 'Make a pattern move', detail: 'Write a tiny loop and see what changes when you edit it', image: '/images/code-cutout.webp', theme: 'code', label: 'PROGRAMMING / CREATE', href: '/blog/program-a-paper-robot' },
+  { number: '03', action: 'REASON', title: 'Turn a shape, test an idea', detail: 'Use visual models to explain what stays the same', image: '/images/geometry-mascot.webp', theme: 'math', label: 'MATH / DISCOVER', href: '/blog/math-you-can-move' },
+  { number: '04', action: 'BUILD', title: 'What makes a glider fly?', detail: 'Change one feature, compare two flights, and explain what you notice', image: '/images/flight-cutout.webp', theme: 'flight', label: 'AERODYNAMICS / TRY', href: '/blog/paper-glider-experiment' },
 ] as const;
 
 export function LearningBento() {
   return <section className="section container learning-bento" aria-labelledby="learning-bento-heading">
     <div className="learning-bento-heading"><p className="eyebrow">BUILT FOR THE WAY KIDS LEARN</p><h2 id="learning-bento-heading">See an idea<br />Make it your own</h2><p className="muted">Questions become experiments, patterns become programs, and a small project becomes something a learner can explain</p></div>
     <div className="learning-bento-grid">
-      {cards.map(card => <article className={`learning-bento-card learning-bento-${card.theme}`} key={card.number}>
+      {cards.map(card => <Link className={`learning-bento-card learning-bento-${card.theme}`} href={card.href} key={card.number}>
         <span className="bento-index">{card.number} / {card.action}</span>
         <div className="learning-bento-copy"><h3>{card.title}</h3><p>{card.detail}</p></div>
         <div className="learning-bento-art" aria-hidden="true"><Image src={card.image} alt="" fill sizes="(max-width: 760px) 100vw, 47vw" /></div>
+        <span className="bento-card-link">Explore the idea <ArrowUpRight size={17} aria-hidden="true" /></span>
         <span className="bento-visual-label">{card.label}</span>
-      </article>)}
+      </Link>)}
     </div>
   </section>;
 }

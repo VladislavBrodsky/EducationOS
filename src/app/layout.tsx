@@ -8,7 +8,8 @@ export const metadata: Metadata = {
   title: { default: 'EducationOS — A world for curious minds', template: '%s | EducationOS' },
   description: 'Explore hands-on invention, creative problem solving, and the joy of asking better questions. Discover the EducationOS Inventors Lab demo for ages 5–17',
   alternates: { canonical: '/' },
-  openGraph: { type: 'website', siteName: 'EducationOS', locale: 'en_US', title: 'EducationOS — A world for curious minds', description: 'Small experiments. Big possibilities', url: SITE_URL },
+  openGraph: { type: 'website', siteName: 'EducationOS', locale: 'en_US', title: 'EducationOS — A world for curious minds', description: 'Small experiments. Big possibilities', url: SITE_URL, images: [{ url: '/images/curiosity-hero.webp', width: 1400, height: 933, alt: 'A curious learner imagines a world of discovery' }] },
+  twitter: { card: 'summary_large_image', images: ['/images/curiosity-hero.webp'] },
   robots: process.env.DEPLOYMENT_ENV === 'production' ? { index: true, follow: true } : { index: false, follow: false },
 };
 export const viewport: Viewport = { width: 'device-width', initialScale: 1, themeColor: '#d5fc51' };
