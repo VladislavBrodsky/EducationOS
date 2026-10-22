@@ -64,6 +64,7 @@
 .p-portal[data-theme="dark"] .lab-solid.is-accent { --lab-fill: #a5c63f; --lab-top: #d8f97a; --lab-edge: #e4f6ad; }
 @media (max-width: 1150px) { .lab-card-grid { grid-template-columns: 1fr; } .lab-discovery-card { display: grid; grid-template-columns: 170px minmax(0, 1fr); } .lab-card-art { height: 100%; min-height: 220px; border-bottom: 0; border-right: 1px solid var(--p-line); } }
 @media (max-width: 760px) { .lab-workspace > .p-heading > .p-meta { padding-top: 0; flex-wrap: wrap; } .lab-notebook-answers { grid-template-columns: 1fr; } .p-portal .lab-card-copy h3 { font-size: 23px; } .lab-step-navigation { top: 5px; } .lab-step-navigation :is(a, .lab-step-locked) { flex-direction: column; gap: 3px; font-size: 12px; } }
+@media (max-width: 760px) { .lab-card-copy h3 a { min-height: 44px; align-items: center; } }
 @media (max-width: 520px) { .lab-discovery-card { display: flex; } .lab-card-art { height: 140px; min-height: 0; border-right: 0; border-bottom: 1px solid var(--p-line); } .lab-card-copy { padding: 21px; } .lab-card-grid { gap: 18px; } .lab-actions { align-items: stretch; flex-direction: column; } .lab-actions .p-text-link { min-height: 44px; } }
 
 /* Decorative 3D cues sit behind the original interactive 2D/3D lab controls. */
