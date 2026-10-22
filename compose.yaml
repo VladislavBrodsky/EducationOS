@@ -1,0 +1,88 @@
+# Synthetic local development. Never expose this Compose stack to the internet.
+name: educationos-python
+x-api: &api
+  build:
+    context: .
+    dockerfile: backend/Dockerfile
+  environment: &api-env
+    EDUCATIONOS_ENVIRONMENT: development
+    EDUCATIONOS_DATABASE_URL: postgresql+psycopg://educationos_app:educationos-app-local-only@postgres:5432/educationos
+    EDUCATIONOS_REDIS_URL: redis://redis:6379/0
+    EDUCATIONOS_ALLOWED_ORIGINS: '["http://localhost:3000","http://127.0.0.1:3000"]'
+  init: true
+services:
+  postgres:
+    image: pgvector/pgvector:pg18-bookworm@sha256:2358fcba361ed2233a5ed81b5fe4ca779ccb304120ce531a3bf51c0ed7e2bc11
+    environment:
+      POSTGRES_USER: educationos
+      POSTGRES_PASSWORD: educationos-local-only
+      POSTGRES_DB: educationos
+    ports: ["127.0.0.1:5432:5432"]
+    volumes:
+      - postgres-data:/var/lib/postgresql
+      - ./infra/init-runtime-role.sql:/docker-entrypoint-initdb.d/010-runtime-role.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U educationos -d educationos"]
+      interval: 5s
+      timeout: 5s
+      retries: 15
+  redis:
+    image: redis:8-bookworm@sha256:47670742d7924adbcdb404d1288b6327815b23141969c0939b8e5d61f78c2634
+    command: ["redis-server", "--save", "", "--appendonly", "no"]
+    ports: ["127.0.0.1:6379:6379"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 15
+  migrate:
+    <<: *api
+    environment:
+      <<: *api-env
+      EDUCATIONOS_DATABASE_URL: postgresql+psycopg://educationos:educationos-local-only@postgres:5432/educationos
+    command: ["python", "-m", "alembic", "upgrade", "head"]
+    depends_on:
+      postgres: {condition: service_healthy}
+  api:
+    <<: *api
+    ports: ["127.0.0.1:8000:8000"]
+    depends_on:
+      migrate: {condition: service_completed_successfully}
+      redis: {condition: service_healthy}
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health/ready', timeout=3)"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+  worker:
+    <<: *api
+    environment:
+      <<: *api-env
+      EDUCATIONOS_DATABASE_URL: postgresql+psycopg://educationos_worker:educationos-worker-local-only@postgres:5432/educationos
+    command: ["python", "-m", "educationos.worker"]
+    depends_on:
+      migrate: {condition: service_completed_successfully}
+      redis: {condition: service_healthy}
+  seed:
+    <<: *api
+    environment:
+      <<: *api-env
+      EDUCATIONOS_DATABASE_URL: postgresql+psycopg://educationos:educationos-local-only@postgres:5432/educationos
+    profiles: [tools]
+    command: ["python", "-m", "educationos.seed_demo"]
+    depends_on:
+      migrate: {condition: service_completed_successfully}
+  web:
+    build:
+      context: .
+      args:
+        PYTHON_API_URL: http://api:8000
+    environment:
+      NODE_ENV: production
+      NEXT_TELEMETRY_DISABLED: '1'
+    ports: ["127.0.0.1:3000:3000"]
+    init: true
+    depends_on:
+      api: {condition: service_healthy}
+volumes:
+  postgres-data:

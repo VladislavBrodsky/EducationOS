@@ -1,0 +1,50 @@
+{
+  "name": "educationos",
+  "version": "0.6.0",
+  "private": true,
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "next dev --hostname 127.0.0.1",
+    "build": "next build --webpack",
+    "start": "next start --hostname 127.0.0.1",
+    "typecheck": "next typegen && tsc --noEmit",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "check:icons": "node scripts/check-icons.mjs",
+    "check": "npm run api:check && npm run check:icons && npm run lint && npm run typecheck && npm test && npm run build",
+    "release:check": "node scripts/release.mjs",
+    "domain:check": "node scripts/domain-check.mjs",
+    "api:generate": "node scripts/generate-api.mjs",
+    "api:check": "node scripts/generate-api.mjs --check",
+    "build:turbo": "next build --turbopack"
+  },
+  "dependencies": {
+    "lucide-react": "1.59.0",
+    "next": "16.4.2",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "tailwindcss": "4.3.3",
+    "zod": "4.6.7",
+    "openapi-fetch": "0.17.0"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.10.2",
+    "@playwright/test": "1.64.1",
+    "@tailwindcss/postcss": "4.3.3",
+    "@types/node": "22.19.1",
+    "@types/react": "19.2.7",
+    "@types/react-dom": "19.2.3",
+    "eslint": "9.39.1",
+    "typescript": "5.9.3",
+    "vitest": "5.0.5",
+    "openapi-typescript": "7.13.0",
+    "@eslint/js": "9.39.5",
+    "typescript-eslint": "8.71.2",
+    "eslint-plugin-react-hooks": "7.1.1",
+    "eslint-plugin-jsx-a11y": "6.10.2"
+  },
+  "type": "module"
+}

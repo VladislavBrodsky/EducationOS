@@ -1,0 +1,30 @@
+.half-lab { display: grid; gap: 24px; }
+.half-lab form { display: grid; gap: 24px; }
+.half-lab .p-toolbar { flex-wrap: wrap; }
+.half-note { padding: 14px 16px; border-left: 3px solid var(--p-ink); background: var(--p-soft); }
+.half-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); max-width: 440px; border: 2px solid var(--p-ink); border-radius: 7px; overflow: hidden; margin: 24px auto 16px; }
+.half-cell { min-width: 44px; min-height: 72px; display: flex; align-items: center; justify-content: center; gap: 8px; border: 1px solid var(--p-muted); border-radius: 0; background: var(--p-surface); color: var(--p-ink); font: inherit; font-weight: 600; cursor: pointer; }
+.half-cell.is-selected, .half-part.is-selected { background: var(--p-lime); color: var(--p-lime-ink); }
+.half-cell:hover { box-shadow: inset 0 0 0 2px var(--p-ink); }
+.half-cell:focus-visible { outline: 3px solid var(--p-ink); outline-offset: -5px; }
+.half-cell:disabled { cursor: wait; }
+.half-cell-empty { width: 18px; height: 18px; }
+.half-count { text-align: center; }
+.half-choice-group { border: 0; padding: 0; margin: 18px 0 22px; display: grid; gap: 9px; min-width: 0; }
+.half-choice-group legend { padding: 0; margin-bottom: 11px; font-weight: 600; }
+.half-choice-group .p-choice { min-height: 48px; font-size: 16px; }
+.half-choice-group input { flex: 0 0 auto; width: 18px; height: 18px; }
+.half-comparison { display: grid; gap: 20px; max-width: 560px; margin: 24px auto; }
+.half-whole { margin: 0; }
+.half-parts, .half-uneven { height: 96px; border: 2px solid var(--p-ink); display: grid; overflow: hidden; }
+.half-part { display: flex; justify-content: center; align-items: center; background: var(--p-surface); color: var(--p-ink); min-width: 0; border-right: 1px solid var(--p-ink); }
+.half-part:last-child { border-right: 0; }
+.half-whole figcaption { font-size: 16px; text-align: center; margin-top: 8px; }
+.half-uneven { display: flex; max-width: 560px; margin: 18px auto; }
+.half-tilted { margin: 24px 0; padding: 12px; border: 1px solid var(--p-line); border-radius: 12px; }
+.half-tilted svg { width: 100%; display: block; max-height: 280px; }
+.half-tilted figcaption { font-size: 14px; color: var(--p-muted); text-align: center; }
+.half-transfer-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); max-width: 440px; margin: 20px auto; border: 2px solid var(--p-ink); }
+.half-transfer-grid span { min-height: 58px; border: 1px solid var(--p-muted); display: flex; justify-content: center; align-items: center; font-weight: 600; }
+.half-lab .p-assessment-feedback { margin-top: 20px; }
+@media (max-width: 600px) { .half-cell { min-height: 60px; gap: 4px; } .half-parts, .half-uneven { height: 80px; } .half-lab .p-toolbar > button { justify-content: center; } }
