@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowDown, ArrowUpRight, ChevronDown } from 'lucide-react';
 import { DemoCTA, SiteShell } from '@/components/site-shell';
 import { programs } from '@/lib/site';
 
@@ -26,9 +26,15 @@ export default function Programs() {
           <p className="eyebrow">FIVE STAGES · ONE CURIOUS MIND</p>
           <h1>Room to wonder<br />Space to become</h1>
           <p className="section-lead">From a first “why?” to a carefully tested idea. Explore how the same invention challenge changes with a learner’s stage</p>
-          <div className="notice">These are learning pathways in development. Today, you can try an age-adapted paper bridge mission in our account-free demo. This is not an accredited program or a promise of learning outcomes.</div>
+          <div className="program-hero-actions"><a className="button button-dark" href="#stages">Explore the stages <ArrowDown size={17} aria-hidden="true" /></a><Link className="text-link" href="/demo">Try the paper bridge mission <ArrowUpRight size={17} aria-hidden="true" /></Link></div>
+          <details className="program-hero-disclosure"><summary>Pathways in development <ChevronDown size={16} aria-hidden="true" /></summary><p>Today, you can try an age-adapted paper bridge mission in our account-free demo. These pathways are not accredited programs or promises of learning outcomes.</p></details>
         </div>
       </section>
+
+      <nav className="program-stage-nav" id="stages" aria-label="Explore learning stages">
+        <div className="program-stage-nav-intro"><span className="eyebrow">FIND YOUR STAGE</span><strong>Five ways to grow</strong></div>
+        <div className="program-stage-links">{programs.map((program, index) => <a href={`#${program.name.toLowerCase()}`} key={program.name}><span>0{index + 1} <span aria-hidden="true">/</span> AGES {program.ages}</span><strong>{program.name}</strong></a>)}</div>
+      </nav>
 
       <div className="program-detail-grid">
         {programs.map((program, index) => {

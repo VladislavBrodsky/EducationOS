@@ -300,3 +300,84 @@
   .approach-step p{padding-right:24px;font-size:13px}
   .approach-step-arrow{right:20px;bottom:20px}
 }
+
+.program-hero-actions{display:flex;align-items:center;flex-wrap:wrap;gap:17px 24px;margin-top:24px}
+.program-hero-actions .button{min-height:48px}
+.program-hero-actions .text-link{min-height:44px}
+.program-hero-disclosure{max-width:470px;margin-top:22px;color:#53604d;font-size:12px}
+.program-hero-disclosure summary{display:inline-flex;align-items:center;gap:9px;min-height:44px;cursor:pointer;font-weight:600;list-style:none}
+.program-hero-disclosure summary::-webkit-details-marker{display:none}
+.program-hero-disclosure summary svg{transition:transform .2s ease}
+.program-hero-disclosure[open] summary svg{transform:rotate(180deg)}
+.program-hero-disclosure p{max-width:48ch;margin:4px 0 0;padding:12px 15px;border-left:3px solid #97bf47;border-radius:0 8px 8px 0;background:#ffffffd9;line-height:1.55}
+.program-stage-nav{display:grid;grid-template-columns:170px minmax(0,1fr);align-items:center;gap:22px;margin:-35px 0 24px;scroll-margin-top:24px}
+.program-stage-nav-intro{display:grid;gap:4px}
+.program-stage-nav-intro .eyebrow{margin:0;color:#637b39}
+.program-stage-nav-intro strong{font-size:19px;font-weight:600;letter-spacing:-.035em}
+.program-stage-links{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.program-stage-links a{display:flex;min-width:0;min-height:72px;flex-direction:column;justify-content:center;gap:3px;padding:11px 13px;border:1px solid #dce4d2;border-radius:12px;background:#f8faf5;transition:background .2s,transform .2s,border-color .2s}
+.program-stage-links a:hover{transform:translateY(-3px);border-color:#a5ca5c;background:#eefaD7}
+.program-stage-links a span{color:#66804b;font:10px monospace;white-space:nowrap}
+.program-stage-links a strong{font-size:15px;font-weight:600;letter-spacing:-.03em}
+@media(max-width:900px){.program-stage-nav{grid-template-columns:1fr;margin-top:-13px}.program-stage-links{gap:6px}}
+@media(max-width:760px){
+  .page-hero-math{padding-bottom:230px;margin-bottom:31px}
+  .page-hero-math .page-hero-scene-art{height:228px}
+  .page-hero-math .section-lead{margin-bottom:0}
+  .program-hero-actions{align-items:stretch;gap:6px 15px;margin-top:20px}
+  .program-hero-actions .button{padding:13px 16px}
+  .program-hero-actions .text-link{font-size:12px}
+  .program-hero-disclosure{margin-top:8px}
+  .program-stage-nav{gap:13px;margin:0 0 18px}
+  .program-stage-nav-intro{display:flex;align-items:baseline;justify-content:space-between}
+  .program-stage-nav-intro strong{font-size:17px}
+  .program-stage-links{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:thin;padding:0 0 10px}
+  .program-stage-links a{flex:0 0 132px;min-height:70px;scroll-snap-align:start}
+}
+@media(prefers-reduced-motion:reduce){.program-stage-links a,.program-hero-disclosure summary svg{transition:none}}
+
+/* Card icons share the heading line so content starts sooner on every screen. */
+.trust-card{display:flex;flex-direction:column;gap:18px;padding:27px}
+.trust-card-heading,.program-card-heading,.approach-step-heading,.lab-card-heading,.trust-strip-heading{display:flex;align-items:center;gap:14px}
+.trust-card-icon{display:grid;flex:0 0 46px;width:46px;height:46px;place-items:center;border:1px solid #dce6d0;border-radius:13px;background:#f3f8ec}
+.trust-card-heading svg{margin:0;color:#647b3e}
+.trust-card-heading h2{min-width:0;margin:0;font-size:clamp(21px,2vw,26px)}
+.trust-card p{flex:1;margin:0}
+.trust-card .text-link{align-self:flex-start;margin-top:4px}
+.program-card-heading{min-height:48px;margin:19px 0 10px;gap:11px}
+.program-card-heading .program-glyph{flex:0 0 45px;width:45px;height:45px;margin:0}
+.program-card-heading h3{min-width:0;margin:0;font-size:clamp(18px,1.7vw,23px)}
+.program-card>p{min-height:0;margin:0 0 20px}
+.approach-step{justify-content:flex-start}
+.approach-step-top{position:absolute;top:24px;right:25px}
+.approach-step-heading{min-height:49px;padding-right:30px;margin:16px 0 13px}
+.approach-step-heading .approach-step-icon{flex:0 0 49px}
+.approach-step-heading h2{min-width:0;margin:0}
+.lab-card-heading{align-items:flex-start;margin:25px 0 0;gap:15px}
+.lab-card-heading svg{margin-top:7px}
+.lab-card-heading h3{margin:0}
+.trust-strip.container{grid-template-columns:minmax(0,1fr) auto}
+.trust-strip-heading{align-items:flex-start;margin-bottom:9px}
+.trust-strip-heading svg{width:36px;height:36px;color:#647b3e}
+.trust-strip-heading h3{margin:2px 0 0}
+.trust-strip p{padding-left:50px}
+@media(max-width:760px){
+  .trust-card{gap:15px;padding:22px}
+  .trust-card-heading{gap:12px}
+  .trust-card-heading h2{font-size:24px}
+  .program-card:last-child{display:block}
+  .program-card:last-child .program-glyph{display:grid;justify-self:auto}
+  .program-card-heading{gap:9px;margin:15px 0 11px}
+  .program-card-heading .program-glyph{flex-basis:43px;width:43px;height:43px}
+  .program-card-heading h3{font-size:20px}
+  .approach-step-top{top:20px;right:21px}
+  .approach-step-heading{margin:0 0 12px;padding-right:33px}
+  .approach-step-heading .approach-step-icon{flex-basis:44px}
+  .lab-card-heading{gap:11px}
+  .trust-strip.container{grid-template-columns:1fr}
+  .trust-strip .text-link{grid-column:1;justify-self:start;margin-left:50px}
+}
+@media(max-width:360px){
+  .program-grid{grid-template-columns:1fr}
+  .program-card:last-child{grid-column:auto}
+}

@@ -33,9 +33,8 @@ export default function Approach() {
         {steps.map(({ title, body, icon: Icon }, index) => <section className={`approach-step approach-step-${index + 1}`} key={title}>
           <div className="approach-step-top">
             <span className="step-number">0{index + 1}</span>
-            <span className="approach-step-icon"><Icon size={25} strokeWidth={1.6} aria-hidden="true" /></span>
           </div>
-          <div><h2>{title}</h2><p>{body}</p></div>
+          <div><div className="approach-step-heading"><span className="approach-step-icon"><Icon size={25} strokeWidth={1.6} aria-hidden="true" /></span><h2>{title}</h2></div><p>{body}</p></div>
           {index < steps.length - 1 && <ArrowRight className="approach-step-arrow" size={20} aria-hidden="true" />}
         </section>)}
       </div>
