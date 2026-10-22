@@ -381,3 +381,15 @@
   .program-grid{grid-template-columns:1fr}
   .program-card:last-child{grid-column:auto}
 }
+
+/* Paired hero actions retain one visual rhythm as the layout narrows. */
+.button-outline{border-color:#b9c8ac;background:#ffffffeb;color:var(--ink)}
+.button-outline:hover{border-color:#77984a;background:#f2f8e9}
+.hero-actions,.program-hero-actions{gap:10px 12px}
+.hero-actions .button,.program-hero-actions .button{justify-content:space-between;min-height:52px;gap:18px;text-align:left}
+.program-hero-actions .button{padding:14px 18px}
+@media(max-width:760px){
+  .hero-actions,.program-hero-actions{display:grid;grid-template-columns:minmax(0,1fr);max-width:420px;gap:10px}
+  .hero-actions .button,.program-hero-actions .button{width:100%;min-height:52px;padding:14px 17px;font-size:14px}
+  .lab-feature .button,.demo-cta .button{width:min(100%,420px);justify-content:space-between}
+}

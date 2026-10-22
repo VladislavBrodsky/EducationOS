@@ -26,7 +26,7 @@ export default function Programs() {
           <p className="eyebrow">FIVE STAGES · ONE CURIOUS MIND</p>
           <h1>Room to wonder<br />Space to become</h1>
           <p className="section-lead">From a first “why?” to a carefully tested idea. Explore how the same invention challenge changes with a learner’s stage</p>
-          <div className="program-hero-actions"><a className="button button-dark" href="#stages">Explore the stages <ArrowDown size={17} aria-hidden="true" /></a><Link className="text-link" href="/demo">Try the paper bridge mission <ArrowUpRight size={17} aria-hidden="true" /></Link></div>
+          <div className="program-hero-actions"><a className="button button-dark" href="#stages">Explore the stages <ArrowDown size={17} aria-hidden="true" /></a><Link className="button button-outline" href="/demo">Try the bridge mission <ArrowUpRight size={17} aria-hidden="true" /></Link></div>
           <details className="program-hero-disclosure"><summary>Pathways in development <ChevronDown size={16} aria-hidden="true" /></summary><p>Today, you can try an age-adapted paper bridge mission in our account-free demo. These pathways are not accredited programs or promises of learning outcomes.</p></details>
         </div>
       </section>
