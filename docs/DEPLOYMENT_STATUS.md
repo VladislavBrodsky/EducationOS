@@ -1,5 +1,13 @@
 # Live EducationOS frontend deployment
 
+## Solvable interactive tasks on 25 October 2026
+
+The checked paper-bridge mini-challenge and shared success/error/retry workflow are live on both [the public website](https://educationos.space) and [the learner portal](https://app.educationos.space). Marketing deployment `63047e28-e1fa-4aef-9cc4-b20bd23d4e24` and portal deployment `9151626c-459c-4006-bc70-818a7ee1b96f` report `SUCCESS` from the same frontend-only source `2fe3e17`, tagged `v0.6.0-preview.8`. The source archive has 142 files and excludes backend and environment files.
+
+All six GitHub checks passed: 134 frontend unit tests, 68 browser tests, 39 backend tests, and the full-stack smoke test. Twenty live browser checks passed, including all fifteen lesson recovery flows, the three landing languages, mobile code errors, lab prediction guidance, blocked skipped mission steps, and a complete seven-step mission with export. The public redirect preserves path/query; the portal and demo retain `noindex, nofollow`. Localhost remains available on port 3100.
+
+[Release evidence](deployment/interactive-tasks-2026-10-25.json) records source, deployment IDs, archive details, checks, and limits. [The interactive task contract](INTERACTIVE_TASKS.md) distinguishes objective checks from self-recorded writing and physical observations. Browser checks use Chromium viewports; no physical-device or accessibility certification is claimed. The release changes no DNS, private Python API, enrollment, or learner-data access controls.
+
 ## Magic UI visual upgrade on 25 October 2026
 
 The animated science hero, spotlight cards, responsive bento showcase with a working paper model, original age-group artwork, and locally served Manrope typography are live at [educationos.space](https://educationos.space). Railway marketing deployment `53862ae1-7c5a-4074-8113-b24382d30343` reports `SUCCESS` from source `ce44ebc` and release tag `v0.6.0-preview.7`. The frontend-only archive has 138 files. The earlier navigation and accessibility audit fixes are included.
