@@ -19,7 +19,18 @@ export function LandingPage({ locale }: { locale: Locale }) {
   const copy = marketingCopy[locale];
   return <MarketingShell locale={locale}>
     <section className="m-hero container">
-      <div className="m-hero-copy"><span className="m-kicker"><span className="m-live-dot" />{copy.eyebrow}</span><h1>{copy.heroLead}<br /><em>{copy.heroAccent}</em></h1><p>{copy.heroDescription}</p><div className="m-hero-actions"><Link href="/demo/lab" className="m-button m-button-dark fx-shimmer">{copy.heroAction}<ArrowUpRight size={19} aria-hidden="true" /></Link><Link href="#method" className="m-button m-button-ghost">{copy.heroSecondary}<ArrowRight size={18} aria-hidden="true" /></Link></div><div className="m-hero-note"><ShieldCheck size={17} aria-hidden="true" />{copy.heroNote}</div></div>
+      <div className="m-hero-copy">
+        <div className="m-hero-eyebrow"><span className="m-kicker"><span className="m-live-dot" />{copy.eyebrow}</span><span className="m-hero-age">{copy.heroAge}</span></div>
+        <h1>{copy.heroLead}<br /><em>{copy.heroAccent}</em></h1>
+        <p>{copy.heroDescription}</p>
+        <div className="m-hero-actions">
+          <div className="m-hero-primary">
+            <Link href="/demo/lab" className="m-button m-button-dark fx-shimmer" aria-label={copy.heroAction} aria-describedby="hero-mission-details hero-demo-note"><span><strong>{copy.heroAction}</strong><small id="hero-mission-details">{copy.heroMission}</small></span><ArrowUpRight size={20} aria-hidden="true" /></Link>
+            <div className="m-hero-note" id="hero-demo-note"><ShieldCheck size={15} aria-hidden="true" /><span>{copy.heroNote}</span></div>
+          </div>
+          <Link href="#method" className="m-hero-secondary">{copy.heroSecondary}<ArrowRight size={17} aria-hidden="true" /></Link>
+        </div>
+      </div>
       <div className="m-hero-stage fx-hero-stage">
         <div className="fx-dot-pattern" aria-hidden="true" /><ShineBorder />
         <span className="m-stage-label"><span className="fx-status-dot" />{copy.visualLabel}</span><MotionToggle locale={locale} />
