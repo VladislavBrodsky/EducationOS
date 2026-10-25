@@ -5,6 +5,7 @@ import { readFile } from 'node:fs/promises';
 test('the visual journal and subject artwork load on narrow screens without horizontal overflow', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/');
+  await page.locator('.m-mobile-menu summary').click();
   await expect(page.getByRole('navigation', { name: 'Navegación principal' }).getByRole('link', { name: 'Revista' })).toBeVisible();
   await expect.poll(() => page.locator('.m-stage-object img').evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
   for (const path of ['/programs', '/approach', '/trust']) {
@@ -13,6 +14,7 @@ test('the visual journal and subject artwork load on narrow screens without hori
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), path).toBe(true);
   }
   await page.goto('/');
+  await page.locator('.m-mobile-menu summary').click();
   await page.getByRole('navigation', { name: 'Navegación principal' }).getByRole('link', { name: 'Revista' }).click();
   await expect(page.getByRole('heading', { name: 'Pequeñas preguntas. Grandes descubrimientos' })).toBeVisible();
   await expect(page.locator('.m-story')).toHaveCount(4);
