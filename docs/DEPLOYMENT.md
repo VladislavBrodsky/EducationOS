@@ -22,7 +22,7 @@ Pinned OCI index digests and verification timestamps are in `infra/images.json`.
 | Variable | Scope | Purpose |
 |---|---|---|
 | `PYTHON_API_URL` | Next server, dev startup / production build | FastAPI origin used by rewrites; local `http://127.0.0.1:8000`, Compose `http://api:8000` |
-| `EDUCATIONOS_ENVIRONMENT` | Python | development/test/production; production rejects synthetic private sessions |
+| `EDUCATIONOS_ENVIRONMENT` | Python | development/test/staging/production; staging and production close private learner APIs and synthetic seeding |
 | `EDUCATIONOS_DATABASE_URL` | Python runtime | `postgresql+psycopg://` restricted runtime role; managed verified TLS in hosting |
 | `EDUCATIONOS_REDIS_URL` | Python | private authenticated Redis with TLS for hosting |
 | `EDUCATIONOS_ALLOWED_ORIGINS` | Python JSON list | exact browser origins; production HTTPS only |
@@ -38,7 +38,7 @@ The learner portal has a separate surface prepared for `app.educationos.space`. 
 
 Preferred architecture: managed Next hosting or the supplied standalone web container; a managed Python container service for API and worker; managed PostgreSQL 18 with pgvector; private Redis; a TLS ingress that routes the canonical `https://educationos.space` UI and `/api/v1/*` to Python. With Vercel, set server-only `PYTHON_API_URL` to the real protected Python service HTTPS origin at build. Health probes go directly to Python `/health/live` and `/health/ready`. The Python service must not depend on Next for authorization.
 
-No provider or deployment is currently linked/verified. Do not use Node-only hosting for the Python service. Establish the real service origin and region first, then configure exact allowed origins, network access, secrets, TLS database verification, connection pools, request/body/time limits, WAF/public traffic limits, telemetry retention and availability alerts. Keep PR/preview environments separate from production data and credentials. Disable raw ingress/access logs containing IPs, query strings or authorization headers, or configure explicit redaction and retention.
+The Next marketing and learner surfaces are hosted on Railway at the apex and `app` hostnames; see [DEPLOYMENT_STATUS.md](DEPLOYMENT_STATUS.md). The Python API, PostgreSQL and Redis are not deployed. A separate Railway `staging` environment has private PostgreSQL/pgvector and Redis resources staged for review; applying that patch provisions billable services. The API's staging mode requires PostgreSQL, authenticated Redis and exact HTTPS origins, while keeping private learner APIs and synthetic seeding closed. Do not use Node-only hosting for the Python service. Establish the staging API origin and restricted database roles before connecting the frontend. Configure network access, secrets, TLS verification for production, connection pools, request/body time limits, traffic limits, telemetry retention and alerts. Keep preview environments separate from production data and credentials. Disable or redact ingress logs containing IPs, query strings or authorization headers.
 
 1. Deploy the reviewed images/commit to an isolated staging environment with enrollment and AI still closed.
 2. Take a backup; run `uv run --frozen alembic upgrade head` as a single protected migration job. Inspect `alembic current` and verify restricted runtime role grants/RLS.

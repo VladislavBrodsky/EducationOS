@@ -13,6 +13,7 @@ from educationos.errors import DomainError
 from educationos.limits import RedisRateLimiter
 from educationos.models import Tenant
 from educationos.seed_demo import LEARNER_ID
+from educationos.seed_demo import main as seed_main
 
 
 async def test_public_curriculum_without_identity(client):
@@ -109,6 +110,41 @@ def test_nonfinite_or_extra_evidence_rejected():
 def test_production_requires_explicit_secure_settings():
     with pytest.raises(ValueError):
         Settings(environment="production")
+
+
+def test_staging_requires_managed_credentials_and_https_origins():
+    with pytest.raises(ValueError):
+        Settings(environment="staging")
+    settings = Settings(
+        environment="staging",
+        database_url="postgresql+psycopg://educationos_app:generated-staging-secret@postgres.internal:5432/educationos_staging",
+        redis_url="redis://default:generated-staging-secret@redis.internal:6379/0",
+        allowed_origins=["https://app.educationos.space"],
+    )
+    assert settings.environment == "staging"
+
+
+async def test_staging_keeps_curriculum_public_and_private_calls_closed(client, fixture_app, auth):
+    fixture_app.state.settings.environment = "staging"
+    assert (await client.get("/api/v1/missions?age_band=10-12")).status_code == 200
+    response = await client.get(
+        "/api/v1/attempts/00000000-0000-4000-8000-000000000001", headers=auth
+    )
+    assert response.status_code == 503
+
+
+async def test_staging_refuses_synthetic_seed(monkeypatch):
+    monkeypatch.setenv("EDUCATIONOS_ENVIRONMENT", "staging")
+    monkeypatch.setenv(
+        "EDUCATIONOS_DATABASE_URL",
+        "postgresql+psycopg://educationos_app:generated-staging-secret@postgres.internal:5432/educationos_staging",
+    )
+    monkeypatch.setenv(
+        "EDUCATIONOS_REDIS_URL", "redis://default:generated-staging-secret@redis.internal:6379/0"
+    )
+    monkeypatch.setenv("EDUCATIONOS_ALLOWED_ORIGINS", '["https://app.educationos.space"]')
+    with pytest.raises(SystemExit, match="disabled in deployed environments"):
+        await seed_main()
 
 
 def test_exact_pins_backed_by_registry_evidence():

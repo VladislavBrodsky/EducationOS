@@ -69,8 +69,8 @@ async def provision(session, curriculum: Curriculum):
 
 async def main():
     settings = Settings()
-    if settings.environment == "production":
-        raise SystemExit("Synthetic fixture provisioning is disabled in production")
+    if settings.environment in {"staging", "production"}:
+        raise SystemExit("Synthetic fixture provisioning is disabled in deployed environments")
     database = Database(settings)
     try:
         async for session in database.session():

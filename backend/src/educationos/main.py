@@ -64,7 +64,7 @@ async def principal_dependency(
     session: Session,
     credentials: Annotated[HTTPAuthorizationCredentials | None, Depends(bearer)],
 ) -> Principal:
-    if request.app.state.settings.environment == "production":
+    if request.app.state.settings.environment in {"staging", "production"}:
         raise unavailable()
     principal = await authenticate(session, credentials.credentials if credentials else None)
     if session.bind.dialect.name == "postgresql":
