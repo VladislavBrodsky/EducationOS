@@ -1,5 +1,11 @@
 # Live EducationOS frontend deployment
 
+## Verified release on 25 October 2026
+
+Both production frontend services were explicitly redeployed from the frontend-only contents of Git tag `v0.6.0-preview.3` (commit `da6fa2c`). Railway reports `SUCCESS` for marketing deployment `13b25370-9c83-4a7d-9eb5-0fb0c0c67c11` and portal deployment `89e503e6-63c0-4ef9-9f33-5e36ca49f950`. The tagged frontend files match the previous live frontend; this release aligns the running builds with the reviewed GitHub snapshot. Automated deployment from GitHub remains disabled.
+
+External HTTPS checks returned 200 for the apex homepage and `/programs`, and confirmed that `www` redirects to the apex while preserving `/demo?source=deploy-check`. The portal homepage, `/labs`, and `/subjects` returned 200 with `noindex, nofollow`; its `/privacy` link reached the apex policy page. Both hosts returned HSTS, and the marketing host returned `nosniff`. The Python API remains private in isolated staging and is not connected to these production Next services. No account enrollment or learner-facing AI was enabled.
+
 ## Verification on 24 October 2026
 
 Marketing deployment `8f41c993-9ca0-4c8f-bb4e-02b83bc75376` succeeded from reviewed frontend commit `50fe5ca`. The live `/programs` page returned HTTPS 200 at 1440px and 390px. Its age-stage label color is `#52683d` (5.87:1 against its card background); both hosted browser scans found zero automated WCAG A/AA violations and no horizontal overflow. Desktop and mobile screenshots are saved locally under `artifacts/programs-live-*.png`. The portal service was not redeployed. Draft PR #2 passed all six CI jobs on `d473710`, which also adds a closed Python staging mode.
