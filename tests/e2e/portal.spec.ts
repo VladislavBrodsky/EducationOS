@@ -14,8 +14,8 @@ test('the visual journal and subject artwork load on narrow screens without hori
   }
   await page.goto('/');
   await page.getByRole('link', { name: 'Journal', exact: true }).click();
-  await expect(page.getByRole('heading', { name: 'Little questions. Big discoveries' })).toBeVisible();
-  await expect(page.locator('.journal-card')).toHaveCount(3);
+  await expect(page.getByRole('heading', { name: 'Little questions Big discoveries' })).toBeVisible();
+  await expect(page.locator('.journal-card')).toHaveCount(4);
   await expect.poll(() => page.locator('.journal-card-image img').first().evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await page.getByRole('link', { name: /Math you can turn, fold, and explain/ }).click();
