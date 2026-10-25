@@ -41,7 +41,7 @@
 .fx-hero-stage .m-stage-card { z-index:4; left:22px; right:22px; bottom:20px; width:auto; min-height:0; padding:17px 19px; border:1px solid #e1e5db; border-radius:14px; background:#fffffff2; box-shadow:0 5px 18px #17251008; transform:none; backdrop-filter:blur(14px); }
 .fx-hero-stage .m-stage-card>span:first-child { font-family:inherit; color:#59694b; font-size:10px; text-transform:none; letter-spacing:0; }
 .fx-hero-stage .m-stage-card strong { display:block; max-width:100%; margin:6px 0 12px; font-size:20px; font-weight:650; line-height:1.2; letter-spacing:-.045em; }
-.fx-hero-stage .m-stage-card>span:last-child { display:flex; align-items:center; justify-content:space-between; font-size:8px; letter-spacing:.07em; color:#445237; }
+.fx-hero-stage .m-stage-card>span:last-child { display:flex; align-items:center; justify-content:space-between; font-family:inherit; font-size:12px; font-weight:650; letter-spacing:0; color:#344b2c; }
 .fx-hero-stage .m-stage-card:hover { border-color:#a8b89a; }
 .fx-hero-stage .m-stage-card:focus-visible { outline:2px solid #344b2c; outline-offset:3px; }
 .fx-orbits { position:absolute; inset:0; z-index:3; pointer-events:none; }
