@@ -25,7 +25,6 @@ test('decorative motion can be paused and respects the device preference', async
   await expect(page.locator('.fx-orbit-node').first()).toHaveCSS('animation-play-state', 'running');
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await expect(page.locator('.fx-orbit-node').first()).toHaveCSS('animation-name', 'none');
-  await expect(page.locator('.fx-shine-border').first()).toHaveCSS('animation-name', 'none');
   await expect(page.locator('.fx-motion-toggle').first()).toBeHidden();
   await page.getByRole('button', { name: 'Folded paper', exact: true }).click();
   await expect(page.locator('.fx-model-status')).toHaveText('The same sheet, a different shape');

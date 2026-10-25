@@ -5,7 +5,6 @@ import { localizedPath, marketingCopy, type Locale } from '@/lib/marketing-i18n'
 import { JournalGrid } from './journal';
 import { MarketingShell } from './marketing-shell';
 import { OrbitingCircles } from '@/components/magicui/orbiting-circles';
-import { ShineBorder } from '@/components/magicui/shine-border';
 import { MagicCard } from '@/components/magicui/magic-card';
 import { MotionToggle } from './motion-surface';
 import { LearningBento } from './learning-bento';
@@ -32,7 +31,6 @@ export function LandingPage({ locale }: { locale: Locale }) {
         </div>
       </div>
       <div className="m-hero-stage fx-hero-stage">
-        <div className="fx-dot-pattern" aria-hidden="true" /><ShineBorder />
         <span className="m-stage-label"><span className="fx-status-dot" />{copy.visualLabel}</span><MotionToggle locale={locale} />
         <OrbitingCircles radius="clamp(108px, 17vw, 210px)" duration={42}><Atom size={24} /><Code2 size={24} /><FlaskConical size={24} /><Shapes size={24} /></OrbitingCircles>
         <div className="m-stage-object"><Image src="/images/learning-objects.webp" alt="" fill priority sizes="(max-width: 760px) 88vw, 46vw" /></div>
