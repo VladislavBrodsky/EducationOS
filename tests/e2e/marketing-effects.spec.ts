@@ -32,12 +32,18 @@ test('decorative motion can be paused and respects the device preference', async
 });
 
 test('the enhanced page keeps its content and links without JavaScript', async ({ browser, baseURL }) => {
-  const context = await browser.newContext({ javaScriptEnabled: false, baseURL });
+  const context = await browser.newContext({ javaScriptEnabled: false, baseURL, viewport: { width: 390, height: 844 } });
   const page = await context.newPage();
   await page.goto('/ru');
   await expect(page.getByRole('heading', { level: 1 })).toContainText('Любопытство');
   await expect(page.locator('.fx-model-note')).toContainText('Визуальная модель');
   await expect(page.locator('.fx-bento-feature-footer a')).toHaveAttribute('href', '/demo/lab');
   await expect(page.locator('.m-method-card')).toHaveCount(4);
+  await page.locator('.m-mobile-menu summary').click();
+  await page.getByRole('navigation', { name: 'Основная навигация' }).getByRole('link', { name: 'Метод', exact: true }).click();
+  await expect(page).toHaveURL(/\/ru\/approach$/);
+  await page.locator('.m-language summary').click();
+  await page.getByRole('navigation', { name: 'Language / Idioma / Язык' }).getByRole('link', { name: 'English', exact: true }).click();
+  await expect(page).toHaveURL(/\/en\/approach$/);
   await context.close();
 });

@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import { ArrowUpRight, Asterisk } from 'lucide-react';
-import { localizedPath, locales, marketingCopy, type Locale } from '@/lib/marketing-i18n';
+import { localizedPath, marketingCopy, type Locale } from '@/lib/marketing-i18n';
 import { MotionSurface } from './motion-surface';
+import { LanguageSwitcher } from './language-switcher';
+import { MobileMenu } from './mobile-menu';
 import '@fontsource-variable/manrope';
 import './experience.css';
-
-const languageNames = { es: 'Español', en: 'English', ru: 'Русский' } as const;
 
 export function MarketingShell({ locale, children, section = '' }: { locale: Locale; children: React.ReactNode; section?: string }) {
   const copy = marketingCopy[locale];
@@ -21,10 +21,15 @@ export function MarketingShell({ locale, children, section = '' }: { locale: Loc
           <Link href={localizedPath(locale, 'trust')} aria-current={section === 'trust' ? 'page' : undefined}>{copy.nav.care}</Link>
         </nav>
         <div className="m-header-actions">
-          <nav className="m-language" aria-label="Language / Idioma / Язык">
-            {locales.map(item => <Link key={item} href={localizedPath(item, section)} hrefLang={item} lang={item} aria-label={`${item.toUpperCase()} — ${languageNames[item]}`} title={languageNames[item]} aria-current={item === locale ? 'page' : undefined}>{item.toUpperCase()}</Link>)}
-          </nav>
+          <LanguageSwitcher key={locale} locale={locale} section={section} />
           <Link className="m-header-cta" href="/demo/lab">{copy.demo}<ArrowUpRight size={16} aria-hidden="true" /></Link>
+          <MobileMenu key={`${locale}/${section}`} label={{ es: 'Menú principal', en: 'Main menu', ru: 'Главное меню' }[locale]} navigationLabel={copy.navigation} items={[
+            { href: localizedPath(locale, 'approach'), label: copy.nav.method, current: section === 'approach' },
+            { href: localizedPath(locale, 'programs'), label: copy.nav.programs, current: section === 'programs' },
+            { href: localizedPath(locale, 'blog'), label: copy.nav.journal, current: section.startsWith('blog') },
+            { href: localizedPath(locale, 'trust'), label: copy.nav.care, current: section === 'trust' },
+            { href: '/demo/lab', label: copy.demo, primary: true },
+          ]} />
         </div>
       </div>
     </header>

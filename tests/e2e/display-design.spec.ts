@@ -105,6 +105,22 @@ test('localized landing and journal routes pass accessibility checks', async ({ 
 test('article language switch keeps the story and sharing uses the selected language', async ({ page }) => {
   await page.addInitScript(() => Object.defineProperty(navigator, 'share', { configurable: true, value: async () => undefined }));
   await page.goto('/blog/see-the-invisible');
+  const languageTrigger = page.locator('.m-language summary');
+  await languageTrigger.focus();
+  await languageTrigger.press('Enter');
+  const languages = page.getByRole('navigation', { name: 'Language / Idioma / Язык' });
+  await expect(languages).toBeVisible();
+  await expect(languages.getByRole('link', { name: 'Español' })).toHaveAttribute('aria-current', 'page');
+  expect((await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze()).violations).toEqual([]);
+  await languageTrigger.press('Tab');
+  await expect(languages.getByRole('link', { name: 'Español' })).toBeFocused();
+  await page.keyboard.press('Escape');
+  await expect(languages).toBeHidden();
+  await expect(languageTrigger).toBeFocused();
+  await languageTrigger.click();
+  await page.getByRole('heading', { level: 1 }).click();
+  await expect(languages).toBeHidden();
+  await languageTrigger.click();
   await page.getByRole('navigation', { name: 'Language / Idioma / Язык' }).getByRole('link', { name: 'Русский' }).click();
   await expect(page).toHaveURL(/\/ru\/blog\/see-the-invisible$/);
   await expect(page.getByRole('heading', { level: 1 })).toContainText('Как увидеть');
@@ -126,6 +142,7 @@ test('age, method, and trust pages preserve locale and label English-only destin
       expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth), route).toBeLessThanOrEqual(1);
     }
     await page.goto(`/${section}`);
+    await page.locator('.m-language summary').click();
     await page.getByRole('navigation', { name: 'Language / Idioma / Язык' }).getByRole('link', { name: 'Русский' }).click();
     await expect(page).toHaveURL(new RegExp(`/ru/${section}$`));
   }
@@ -167,7 +184,7 @@ test('marketing navigation has comfortable targets without crowding narrow scree
     await page.setViewportSize({ width, height: 900 });
     for (const route of ['/', '/en', '/ru']) {
       await page.goto(route);
-      const metrics = await page.locator('.m-header a, .m-footer-links a').evaluateAll(links => links.filter(link => link.getClientRects().length > 0).map(link => {
+      const metrics = await page.locator('.m-header a, .m-header summary, .m-footer-links a').evaluateAll(links => links.filter(link => link.getClientRects().length > 0).map(link => {
         const box = link.getBoundingClientRect();
         return { label: link.getAttribute('aria-label') ?? link.textContent, width: box.width, height: box.height };
       }));
@@ -181,6 +198,45 @@ test('marketing navigation has comfortable targets without crowding narrow scree
       expect(brand!.x + brand!.width).toBeLessThanOrEqual(languages!.x);
       expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(1);
     }
+  }
+});
+
+test('mobile header opens localized navigation and keeps disclosures independent', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 844 });
+  for (const [prefix, menuLabel, method, navigation] of [
+    ['', 'Menú principal', 'Método', 'Navegación principal'],
+    ['/en', 'Main menu', 'Method', 'Main navigation'],
+    ['/ru', 'Главное меню', 'Метод', 'Основная навигация'],
+  ]) {
+    await page.goto(prefix || '/');
+    const menu = page.locator('.m-mobile-menu summary');
+    await expect(menu).toHaveAttribute('aria-label', menuLabel);
+    const nav = page.getByRole('navigation', { name: navigation, exact: true });
+    await expect(nav).toBeHidden();
+    await menu.focus();
+    await menu.press('Enter');
+    await expect(nav).toBeVisible();
+    await expect(nav.getByRole('link')).toHaveCount(5);
+    expect((await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze()).violations).toEqual([]);
+    await menu.press('Tab');
+    await expect(nav.getByRole('link', { name: method, exact: true })).toBeFocused();
+    await page.keyboard.press('Escape');
+    await expect(nav).toBeHidden();
+    await expect(menu).toBeFocused();
+    await menu.click();
+    await page.locator('.m-language summary').click();
+    await expect(nav).toBeHidden();
+    await expect(page.locator('.m-language-options')).toBeVisible();
+    await menu.click();
+    await expect(page.locator('.m-language-options')).toBeHidden();
+    await nav.getByRole('link', { name: method, exact: true }).click();
+    await expect(page).toHaveURL(new RegExp(`${prefix}/approach$`));
+    await expect(page.locator('.m-mobile-menu')).not.toHaveAttribute('open');
+    await menu.click();
+    await expect(nav.getByRole('link', { name: method, exact: true })).toHaveAttribute('aria-current', 'page');
+    await page.mouse.click(10, 500); // Page gutter below the expanded navigation panel
+    await expect(nav).toBeHidden();
+    expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(1);
   }
 });
 
