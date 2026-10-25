@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { localizedPath, type Locale } from './marketing-i18n';
+import { marketingShareImage } from './marketing-social';
 import { SITE_URL } from './site';
 
 export type DetailPage = 'programs' | 'approach' | 'trust';
@@ -154,6 +155,6 @@ export function detailMetadata(locale: Locale, page: DetailPage): Metadata {
     title: content.title,
     description: content.description,
     alternates: { canonical: path, languages },
-    openGraph: { locale: locale === 'es' ? 'es_MX' : locale === 'en' ? 'en_US' : 'ru_RU', url: `${SITE_URL}${path}`, title: content.title, description: content.description },
+    openGraph: { locale: locale === 'es' ? 'es_MX' : locale === 'en' ? 'en_US' : 'ru_RU', url: `${SITE_URL}${path}`, title: content.title, description: content.description, images: [marketingShareImage(locale)] },
   };
 }

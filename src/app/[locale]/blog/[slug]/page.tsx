@@ -12,7 +12,7 @@ export async function generateMetadata({ params }: PageProps<'/[locale]/blog/[sl
   if (!isLocale(locale) || locale === 'es') return {};
   const article = getMarketingArticle(locale, slug);
   if (!article) return {};
-  return { title: article.title, description: article.description, alternates: { canonical: `/${locale}/blog/${slug}`, languages: { es: `/blog/${slug}`, en: `/en/blog/${slug}`, ru: `/ru/blog/${slug}`, 'x-default': `/blog/${slug}` } }, openGraph: { type: 'article', locale: locale === 'en' ? 'en_US' : 'ru_RU', url: `${SITE_URL}/${locale}/blog/${slug}`, title: article.title, description: article.description, images: [article.image] } };
+  return { title: article.title, description: article.description, alternates: { canonical: `/${locale}/blog/${slug}`, languages: { es: `/blog/${slug}`, en: `/en/blog/${slug}`, ru: `/ru/blog/${slug}`, 'x-default': `/blog/${slug}` } }, openGraph: { type: 'article', locale: locale === 'en' ? 'en_US' : 'ru_RU', url: `${SITE_URL}/${locale}/blog/${slug}`, title: article.title, description: article.description, images: [article.image] }, twitter: { card: 'summary_large_image', images: [article.image] } };
 }
 
 export default async function LocalizedArticle({ params }: PageProps<'/[locale]/blog/[slug]'>) {

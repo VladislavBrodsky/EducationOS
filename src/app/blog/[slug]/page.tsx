@@ -10,7 +10,7 @@ export async function generateMetadata({ params }: PageProps<'/blog/[slug]'>): P
   const { slug } = await params;
   const article = getMarketingArticle('es', slug);
   if (!article) return {};
-  return { title: article.title, description: article.description, alternates: { canonical: `/blog/${slug}`, languages: { es: `/blog/${slug}`, en: `/en/blog/${slug}`, ru: `/ru/blog/${slug}`, 'x-default': `/blog/${slug}` } }, openGraph: { type: 'article', locale: 'es_MX', url: `${SITE_URL}/blog/${slug}`, title: article.title, description: article.description, images: [article.image] } };
+  return { title: article.title, description: article.description, alternates: { canonical: `/blog/${slug}`, languages: { es: `/blog/${slug}`, en: `/en/blog/${slug}`, ru: `/ru/blog/${slug}`, 'x-default': `/blog/${slug}` } }, openGraph: { type: 'article', locale: 'es_MX', url: `${SITE_URL}/blog/${slug}`, title: article.title, description: article.description, images: [article.image] }, twitter: { card: 'summary_large_image', images: [article.image] } };
 }
 
 export default async function ArticlePage({ params }: PageProps<'/blog/[slug]'>) {

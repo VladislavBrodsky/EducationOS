@@ -148,3 +148,15 @@ test('landing cards open the matching detail in the selected language', async ({
   await expect(page).toHaveURL(/\/ru\/approach#step-2$/);
   await expect(page.locator('#step-2 h2')).toHaveText('Найти противоречие');
 });
+
+test('marketing pages expose a share image in each language', async ({ page }) => {
+  for (const route of ['/', '/en', '/ru', '/blog', '/en/blog', '/ru/blog', '/programs', '/en/approach', '/ru/trust']) {
+    await page.goto(route);
+    await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content', 'https://educationos.space/images/curiosity-hero.webp');
+    await expect(page.locator('meta[name="twitter:image"]')).toHaveAttribute('content', 'https://educationos.space/images/curiosity-hero.webp');
+  }
+  await page.goto('/ru/blog/see-the-invisible');
+  const articleImage = await page.locator('meta[property="og:image"]').getAttribute('content');
+  expect(articleImage).toContain('/images/');
+  await expect(page.locator('meta[name="twitter:image"]')).toHaveAttribute('content', articleImage!);
+});
