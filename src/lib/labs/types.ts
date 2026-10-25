@@ -9,7 +9,7 @@ export type LabRecord = {
   completedAt?: string;
 };
 export type LabPatch = Partial<Pick<LabRecord, "settings" | "answers" | "reflection">>;
-export type LabCheck = { passed: boolean; feedback: string };
+export type LabCheck = { passed: boolean; feedback: string; field?: string };
 export type LabProps = {
   record: LabRecord;
   ready: boolean;

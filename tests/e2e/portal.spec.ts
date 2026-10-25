@@ -74,7 +74,7 @@ test('coding work runs locally, survives reload, appears in progress and can be 
   await expect(page.locator('.p-output pre')).toHaveText('Hello, world!\nI can make things.');
   await expect(page.getByText('Run finished · 2 output lines', { exact: true })).toBeVisible();
   await page.getByRole('button', { name: 'Check & record activity', exact: true }).click();
-  await expect(page.getByRole('status').filter({ hasText: 'Activity recorded.' })).toBeVisible();
+  await expect(page.getByRole('status').filter({ hasText: 'activity recorded' })).toBeVisible();
   await page.getByLabel('My reflection', { exact: false }).fill('The output follows the order of my two instructions.');
   await page.getByRole('link', { name: 'My progress', exact: true }).click();
   const entry = page.locator('.p-notebook-entry').filter({ has: page.getByRole('heading', { name: 'Your first message', exact: true }) });
@@ -111,11 +111,11 @@ test('a maths attempt explains errors and records a corrected answer', async ({ 
   await page.goto('/portal/learn/mathematics-patterns');
   await page.getByRole('radio', { name: '14', exact: true }).check();
   await page.getByRole('button', { name: 'Check my answer', exact: true }).click();
-  await expect(page.getByRole('main').getByRole('alert')).toContainText('Try another way.');
+  await expect(page.getByRole('main').getByRole('alert')).toContainText('Try another way');
   await expect(page.getByRole('main').getByRole('alert')).toContainText('12 + 3 = 15');
   await page.getByRole('radio', { name: '15', exact: true }).check();
   await page.getByRole('button', { name: 'Check my answer', exact: true }).click();
-  await expect(page.getByRole('status').filter({ hasText: 'Activity recorded.' })).toBeVisible();
+  await expect(page.getByRole('status').filter({ hasText: 'activity recorded' })).toBeVisible();
   await page.getByRole('link', { name: 'My progress', exact: true }).click();
   await expect(page.locator('.p-notebook-entry').filter({ has: page.getByRole('heading', { name: 'Find the rule', exact: true }) })).toContainText('Activity recorded');
 });
@@ -129,14 +129,14 @@ test('writing records the visible minimum-length requirement and science accepts
   const story = 'A curious explorer found a small silver key beside the locked garden gate. The plants inside looked thirsty, but nobody knew where the gardener had gone. She chose to ask a neighbour before opening anything. Together they found the owner, watered the flowers, and made a plan to care for the garden each morning.';
   await page.getByLabel('What does the key change?', { exact: true }).fill(story);
   await page.getByRole('button', { name: 'Record my practice', exact: true }).click();
-  await expect(page.getByRole('status').filter({ hasText: 'Activity recorded.' })).toContainText('not writing quality');
+  await expect(page.getByRole('status').filter({ hasText: 'activity recorded' })).toContainText('not writing quality');
 
   await page.goto('/portal/learn/science-paper-bridge');
   await page.getByLabel('Flat bridge: seconds held (0–60)', { exact: true }).fill('0');
   await page.getByLabel('Folded bridge: seconds held (0–60)', { exact: true }).fill('0');
   await page.getByLabel('What happened?', { exact: true }).fill('Both paper bridges slipped before supporting the block.');
   await page.getByRole('button', { name: 'Record my practice', exact: true }).click();
-  await expect(page.getByRole('status').filter({ hasText: 'Activity recorded.' })).toContainText('does not verify the experiment');
+  await expect(page.getByRole('status').filter({ hasText: 'activity recorded' })).toContainText('does not verify the experiment');
   await page.reload();
   await expect(page.getByLabel('Flat bridge: seconds held (0–60)', { exact: true })).toHaveValue('0');
   await page.getByRole('link', { name: 'My progress', exact: true }).click();

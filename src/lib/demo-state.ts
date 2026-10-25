@@ -44,8 +44,22 @@ export function parseMeasurement(value: string): number | null {
 }
 const enough = (text: string) => text.trim().length >= 12;
 export function stepEvidence(draft: DemoDraft): readonly boolean[] {
-  const ideas = new Set(draft.ideas.map((idea) => idea.trim().toLowerCase()).filter((idea) => idea.length >= 5));
+  const ideas = new Set(draft.ideas.slice(0, 2).map((idea) => idea.trim().replace(/\s+/g, ' ').toLowerCase()).filter((idea) => idea.length >= 5));
   return [enough(draft.notice), enough(draft.contradiction), ideas.size >= 2, enough(draft.hypothesis), parseMeasurement(draft.baseline) !== null && parseMeasurement(draft.redesigned) !== null && enough(draft.experiment), enough(draft.reflect), enough(draft.transfer)];
+}
+/** Input completeness only: observations and predictions are never graded as facts. */
+export function demoStepIssue(draft: DemoDraft, step: number): { field: string; message: string } | null {
+  if (stepEvidence(draft)[step]) return null;
+  if (step === 2) {
+    if (draft.ideas[0].trim().length < 5) return { field: 'idea-0', message: 'Describe Idea 01 with at least five characters.' };
+    return { field: 'idea-1', message: 'Add a different Idea 02 with at least five characters. Repeating the same idea does not give you a second design.' };
+  }
+  if (step === 4) {
+    if (parseMeasurement(draft.baseline) === null) return { field: 'baseline', message: 'Enter the flat-paper time from 0 to 60 seconds, with at most one decimal place. Zero is a valid result.' };
+    if (parseMeasurement(draft.redesigned) === null) return { field: 'redesigned', message: 'Enter the redesigned-paper time from 0 to 60 seconds, with at most one decimal place. A lower result is useful evidence too.' };
+  }
+  const fields = ['notice', 'contradiction', '', 'hypothesis', 'experiment', 'reflect', 'transfer'];
+  return { field: fields[step], message: 'Add a sentence describing your thinking before you continue. Use at least 12 characters; your prediction does not have to be right.' };
 }
 export function evidenceCount(draft: DemoDraft): number { return stepEvidence(draft).filter(Boolean).length; }
 export function measurementComparison(draft: DemoDraft): { baseline: number; redesigned: number; difference: number; capped: boolean } | null {

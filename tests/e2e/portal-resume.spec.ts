@@ -25,7 +25,7 @@ test("Today offers edited lessons and removes them from unfinished work once rec
   await resume.getByRole("link", { name: "Your first message", exact: true }).click();
   await page.getByLabel("Your code", { exact: true }).fill('print("Hello, world!")\nprint("I can make things.")');
   await page.getByRole("button", { name: "Check & record activity", exact: true }).click();
-  await expect(page.getByRole("status").filter({ hasText: "Activity recorded." })).toBeVisible();
+  await expect(page.getByRole("status").filter({ hasText: "activity recorded" })).toBeVisible();
   await page.goto("/portal");
   await expect(resume).toHaveCount(0);
   await expect(page.getByRole("link", { name: "Start learning", exact: true })).toHaveAttribute("href", "/portal/learn/programming-variables");
@@ -36,7 +36,7 @@ test("a fully recorded subject offers a revisit and announces subject changes", 
     await page.goto(`/portal/learn/${id}`);
     await page.getByRole("radio", { name: answer, exact: true }).check();
     await page.getByRole("button", { name: "Check my answer", exact: true }).click();
-    await expect(page.getByRole("status").filter({ hasText: "Activity recorded." })).toBeVisible();
+    await expect(page.getByRole("status").filter({ hasText: "activity recorded" })).toBeVisible();
   }
   await page.goto("/portal");
   await page.getByRole("button", { name: /^Mathematics\b/ }).click();

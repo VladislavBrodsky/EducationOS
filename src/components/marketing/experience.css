@@ -197,3 +197,13 @@
   .fx-spotlight { display:none; }
   .m-main *, .m-main *::before, .m-main *::after { scroll-behavior:auto!important; transition:none!important; }
 }
+
+/* A visible task, controls, and checked feedback replace the decorative-only model. */
+.fx-task-goal { margin:22px 0 18px; color:#34472d; font-size:15px; line-height:1.6; }
+.fx-task-step { margin:18px 0 10px; color:#415737; font-size:12px; font-weight:750; }
+.fx-task-answer label { display:block; color:#23321e; font-size:15px; font-weight:650; line-height:1.5; }
+.fx-task-answer select { width:100%; min-height:48px; margin:10px 0 0; padding:10px 12px; border:1px solid #a2b592; border-radius:10px; background:#fff; color:#23321e; font:inherit; font-size:14px; }
+.fx-task-actions { display:flex; flex-wrap:wrap; gap:10px; margin:18px 0; }
+.fx-task-actions .m-button { min-height:46px; white-space:normal; text-align:center; }
+.fx-bridge-preview .fx-shape-controls { margin-top:0; }
+.fx-bridge-preview .fx-model-note { margin-top:14px; }

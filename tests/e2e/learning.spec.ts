@@ -18,9 +18,7 @@ test('public website opens the current demo and all seven steps produce local ev
   await page.goto('/');
   await expect(page.getByRole('heading', { name: /La curiosidad/ })).toBeVisible();
   await page.getByRole('link', { name: 'Explorar la misión', exact: true }).click();
-  await expect(page.getByRole('heading', { name: /A good day/ })).toBeVisible();
   await expect(page.getByRole('status').filter({ hasText: 'Published lesson ready' })).toBeVisible();
-  await page.getByRole('link', { name: 'Explore the mission', exact: true }).click();
   await page.getByRole('button', { name: 'Next step', exact: true }).click();
   await expect(page.locator('#demo-step-error')).toContainText('Add a sentence');
   await page.getByLabel('What do you notice?').fill('The flat paper bends in the middle in this made-up example.');
@@ -39,7 +37,7 @@ test('public website opens the current demo and all seven steps produce local ev
   await page.getByLabel('What does your evidence suggest?').fill('This made-up trial does not support the prediction; I would repeat it.');
   await page.getByRole('button', { name: 'Next step', exact: true }).click();
   await page.getByLabel('Where could this idea go next?').fill('I could test a folded paper roof under the same controlled conditions.');
-  await page.getByRole('button', { name: 'View your portfolio', exact: true }).click();
+  await page.getByRole('button', { name: 'Complete mission', exact: true }).click();
   await expect(page.getByText('All seven steps have recorded evidence.', { exact: false })).toBeVisible();
   const downloadPromise = page.waitForEvent('download');
   await page.getByRole('button', { name: 'Export demo JSON' }).click();

@@ -27,10 +27,10 @@ test('Same Half checks evidence and transfer, preserves work, and invalidates an
   await expect(page.locator('.half-count')).toContainText('6 of 12 equal cells selected.');
 
   await page.getByRole('button', { name: 'Check and record my discovery', exact: true }).click();
-  await expect(page.locator('.p-assessment-feedback')).toContainText('Keep investigating.');
+  await expect(page.locator('.p-assessment-feedback')).toContainText('Keep investigating');
   await expect(page.locator('.p-assessment-feedback')).toContainText('Three of six and two of four');
   await completeInvestigation(page);
-  await expect(page.locator('.p-assessment-feedback')).toContainText('Discovery recorded.');
+  await expect(page.locator('.p-assessment-feedback')).toContainText('discovery recorded');
   await expect(page.locator('.p-heading .p-tag')).toHaveText('Activity recorded');
   await page.reload();
   await expect(page.getByRole('spinbutton', { name: 'How many of eight equal cells make half?', exact: true })).toHaveValue('4');
@@ -75,7 +75,7 @@ test('Same Half is usable in its mobile flat view, optional Anatomy view, and bo
   expect(scan.violations, 'mobile dark Anatomy fractions').toEqual([]);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
   await completeInvestigation(page);
-  await expect(page.locator('.p-assessment-feedback')).toContainText('Discovery recorded.');
+  await expect(page.locator('.p-assessment-feedback')).toContainText('discovery recorded');
 });
 
 test('Same Half supplies an initially closed native worked example without JavaScript', async ({ browser, baseURL }) => {

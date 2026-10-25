@@ -16,9 +16,10 @@ test("mobile navigation stays reachable during a long lab and marks its parent",
     })).toBe(true);
     const hit = await navigation.getByRole("link", { name: "Today", exact: true }).evaluate(element => {
       const rect = element.getBoundingClientRect();
-      return rect.bottom <= innerHeight && rect.top > innerHeight - 100 && element.contains(document.elementFromPoint(rect.x + rect.width / 2, rect.y + rect.height / 2));
+      const covering = document.elementFromPoint(rect.x + rect.width / 2, rect.y + rect.height / 2);
+      return { reachable: rect.bottom <= innerHeight && rect.top > innerHeight - 100 && element.contains(covering), coveringTag: covering?.tagName };
     });
-    expect(hit, `Today remains visible and tappable at ${width}px`).toBe(true);
+    expect(hit.reachable, `Today remains visible and tappable at ${width}px; covering element: ${hit.coveringTag}`).toBe(true);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
     await navigation.getByRole("link", { name: "Today", exact: true }).click();
     await expect(page.getByRole("heading", { name: "What will you discover?", exact: true })).toBeVisible();

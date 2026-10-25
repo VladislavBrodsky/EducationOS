@@ -71,6 +71,7 @@ export type ActivitySubmission = {
 };
 export type ActivityCheck = {
   passed: boolean;
+  field?: string;
   feedback: string;
   output?: string[];
   error?: PracticeCodeResult["error"];
@@ -218,28 +219,28 @@ export function checkPortalActivity(lesson: PortalLesson, submission: ActivitySu
   const activity = lesson.activity;
   if (activity.kind === "code") {
     const result = runPracticeCode(submission.code ?? "");
-    if (!result.ok) return { passed: false, feedback: `Line ${result.error?.line}: ${result.error?.message}`, output: result.output, error: result.error };
+    if (!result.ok) return { passed: false, field: "code", feedback: `Line ${result.error?.line}: ${result.error?.message}`, output: result.output, error: result.error };
     const matches = result.output.length === activity.expectedOutput.length && result.output.every((line, index) => line === activity.expectedOutput[index]);
-    return { passed: matches, output: result.output, feedback: matches ? `${activity.successMessage} This checks output, so compare your instructions with the goal too.` : "Your program ran. Compare its output with the goal, change one thing and try again." };
+    return { passed: matches, field: matches ? undefined : "code", output: result.output, feedback: matches ? `${activity.successMessage} This checks output, so compare your instructions with the goal too.` : "Your program ran. Compare its output with the goal, change one thing and try again." };
   }
   if (activity.kind === "choice") {
-    if (!activity.options.some((option) => option.id === submission.answer)) return { passed: false, feedback: "Choose an answer, then check your thinking." };
+    if (!activity.options.some((option) => option.id === submission.answer)) return { passed: false, field: "answer", feedback: "Choose an answer, then check your thinking." };
     const matches = submission.answer === activity.correctOptionId;
-    return { passed: matches, feedback: matches ? activity.explanation : `Try again. ${activity.explanation}` };
+    return { passed: matches, field: matches ? undefined : "answer", feedback: matches ? activity.explanation : `Try again. ${activity.explanation}` };
   }
   if (activity.kind === "writing") {
     const writing = submission.writing ?? "";
-    if (writing.length > 6000) return { passed: false, feedback: "Keep your response under 6,000 characters so it can be saved in this workspace." };
+    if (writing.length > 6000) return { passed: false, field: "writing", feedback: "Keep your response under 6,000 characters so it can be saved in this workspace." };
     const words = countWords(writing);
-    if (words < activity.minWords) return { passed: false, feedback: `You have ${words} ${words === 1 ? "word" : "words"}. Write at least ${activity.minWords}, then review the checklist.` };
+    if (words < activity.minWords) return { passed: false, field: "writing", feedback: `You have ${words} ${words === 1 ? "word" : "words"}. Write at least ${activity.minWords}, then review the checklist.` };
     return { passed: true, feedback: `Your ${words}-word draft is recorded. This checks length, not writing quality. Read the checklist, revise your draft and discuss it with someone when you can.` };
   }
   for (const field of activity.fields) {
     const value = submission.observations?.[field.id]?.trim() ?? "";
-    if (value.length > 2000) return { passed: false, feedback: `Keep “${field.label}” under 2,000 characters.` };
+    if (value.length > 2000) return { passed: false, field: field.id, feedback: `Keep “${field.label}” under 2,000 characters.` };
     if (field.type === "number") {
-      if (!/^\d+$/.test(value) || !Number.isSafeInteger(Number(value)) || Number(value) < (field.min ?? 0) || Number(value) > (field.max ?? 1000)) return { passed: false, feedback: `Enter a whole number from ${field.min ?? 0} to ${field.max ?? 1000} for “${field.label}”.` };
-    } else if (countWords(value) < (field.minWords ?? 3)) return { passed: false, feedback: `Add at least ${field.minWords ?? 3} words to “${field.label}” to describe your observation.` };
+      if (!/^\d+$/.test(value) || !Number.isSafeInteger(Number(value)) || Number(value) < (field.min ?? 0) || Number(value) > (field.max ?? 1000)) return { passed: false, field: field.id, feedback: `Enter a whole number from ${field.min ?? 0} to ${field.max ?? 1000} for “${field.label}”.` };
+    } else if (countWords(value) < (field.minWords ?? 3)) return { passed: false, field: field.id, feedback: `Add at least ${field.minWords ?? 3} words to “${field.label}” to describe your observation.` };
   }
   return { passed: true, feedback: "Your observations are recorded. This checks that the fields are filled in; it does not verify the experiment or prove an explanation. Review the checklist and consider a repeat trial." };
 }

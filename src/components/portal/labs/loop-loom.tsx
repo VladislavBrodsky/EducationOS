@@ -1,9 +1,11 @@
 "use client";
 
-import { useEffect, useId, useMemo, useRef, useState, useSyncExternalStore, type FormEvent } from "react";
+import { ActivityFeedback, useActivityCheck } from "@/components/learning/activity-feedback";
+
+import { useEffect, useId, useMemo, useState, useSyncExternalStore, type FormEvent } from "react";
 import { Pause, Play, RotateCcw, SkipForward } from "lucide-react";
-import { LOOP_LOOM_INTERVAL_MS, loopLoomRepeats, loopLoomSnapshot, loopLoomSource } from "@/lib/labs/loop-loom";
-import type { LabCheck, LabProps } from "@/lib/labs/types";
+import { assessLoopLoom, LOOP_LOOM_INTERVAL_MS, loopLoomRepeats, loopLoomSnapshot, loopLoomSource } from "@/lib/labs/loop-loom";
+import type { LabProps } from "@/lib/labs/types";
 import { boxCorners, fitProjection, iso, slabOf } from "@/vendor/anatomy/iso-kit";
 import { AnatomySolid } from "./anatomy-solid";
 import "./loop-loom.css";
@@ -58,8 +60,7 @@ function LoopLoomWorkspace({ record, ready, onChange, onRecord, repeats }: LabPr
   const [showMe, setShowMe] = useState(false);
   const [flat, setFlat] = useState(false);
   const [message, setMessage] = useState("");
-  const [check, setCheck] = useState<LabCheck | null>(null);
-  const rootRef = useRef<HTMLDivElement>(null);
+  const { result: check, rootRef, feedbackId, fieldProps, focusError, clearResult, showResult, check: checkAnswers } = useActivityCheck(onRecord);
   const reducedMotion = useSyncExternalStore(subscribeReducedMotion, reducedMotionSnapshot, reducedMotionServerSnapshot);
   const model = useMemo(() => loopLoomSnapshot(repeats, steps), [repeats, steps]);
   const revealed = showMe || record.answers.predictionSubmitted === "yes";
@@ -81,10 +82,11 @@ function LoopLoomWorkspace({ record, ready, onChange, onRecord, repeats }: LabPr
     });
     if (rootRef.current) observer?.observe(rootRef.current);
     return () => { document.removeEventListener("visibilitychange", pauseWhenHidden); observer?.disconnect(); };
-  }, []);
+  }, [rootRef]);
 
   function answer(key: string, value: string) {
-    setCheck(null);
+    clearResult();
+    setMessage("");
     if (key === "prediction") setRunRequested(false);
     onChange({ answers: { ...record.answers, [key]: value, ...(key === "prediction" ? { predictionSubmitted: "" } : {}) } });
   }
@@ -93,15 +95,17 @@ function LoopLoomWorkspace({ record, ready, onChange, onRecord, repeats }: LabPr
     setRunRequested(false);
     setSteps(0);
     setShowMe(false);
-    setCheck(null);
+    clearResult();
     onChange({ settings: { ...record.settings, repeats: String(next) }, answers: {} });
   }
   function predict(event: FormEvent) {
     event.preventDefault();
     if (!/^\d{1,2}$/.test((record.answers.prediction ?? "").trim()) || Number(record.answers.prediction) > 12) {
-      setMessage("Choose a whole number from 0 to 12 for your prediction.");
+      setMessage("");
+      showResult({ passed: false, field: "prediction", feedback: "Choose a whole number from 0 to 12 for your prediction." });
       return;
     }
+    clearResult();
     onChange({ answers: { ...record.answers, predictionSubmitted: "yes" } });
     setMessage(Number(record.answers.prediction) === repeats * 2 ? "Prediction saved. Use Step to see how each block works." : "Prediction saved. Count the instructions inside one block, then count how many blocks repeat. Explore to test your idea.");
   }
@@ -111,7 +115,7 @@ function LoopLoomWorkspace({ record, ready, onChange, onRecord, repeats }: LabPr
       <p className="p-eyebrow">01 / Predict</p><h2 id="lab-predict" tabIndex={-1}>Two instructions. How many lines?</h2>
       <p>The block says Clap, then Tap. If it repeats {repeats} {repeats === 1 ? "time" : "times"}, how many lines will appear? A prediction is your first idea; it can change.</p>
       <form onSubmit={predict} className="loom-predict-form" noValidate>
-        <div className="p-field"><label htmlFor={`${id}-prediction`}>My predicted number of lines</label><input id={`${id}-prediction`} type="number" inputMode="numeric" min="0" max="12" step="1" value={record.answers.prediction ?? ""} onChange={event => answer("prediction", event.target.value)} disabled={!ready} /></div>
+        <div className="p-field"><label htmlFor={`${id}-prediction`}>My predicted number of lines</label><input id={`${id}-prediction`} {...fieldProps("prediction")} type="number" inputMode="numeric" min="0" max="12" step="1" value={record.answers.prediction ?? ""} onChange={event => answer("prediction", event.target.value)} disabled={!ready} /></div>
         <button type="submit" className="p-primary" disabled={!ready}>Save my prediction</button>
         {!revealed && <button type="button" className="p-secondary" disabled={!ready} onClick={() => { setShowMe(true); setMessage("The model is revealed. Submit your own prediction too before recording your learning."); }}>Show me</button>}
       </form>
@@ -121,7 +125,7 @@ function LoopLoomWorkspace({ record, ready, onChange, onRecord, repeats }: LabPr
     <section className="lab-panel loom-explore" aria-labelledby="lab-explore">
       <div className="loom-section-heading"><div><p className="p-eyebrow">02 / Explore</p><h2 id="lab-explore" tabIndex={-1}>Make a rhythm with a loop</h2></div><button className="p-secondary" type="button" aria-pressed={flat} onClick={() => setFlat(current => !current)}>{flat ? "Isometric view" : "2D view"}</button></div>
       <p className="p-muted">The loom is a teaching analogy. Its tickets represent printed text. It does not make sound or show how a real computer is built.</p>
-      <div className="loom-controls"><div className="loom-repeat-control"><label htmlFor={`${id}-repeats`}>Repeats</label><div><button className="p-secondary" type="button" aria-label="One fewer repeat" disabled={!ready || repeats === 0} onClick={() => changeRepeats(repeats - 1)}>−</button><input id={`${id}-repeats`} type="number" inputMode="numeric" min="0" max="6" step="1" value={repeats} onChange={event => { if (event.target.value !== "") changeRepeats(Number(event.target.value)); }} disabled={!ready} /><button className="p-secondary" type="button" aria-label="One more repeat" disabled={!ready || repeats === 6} onClick={() => changeRepeats(repeats + 1)}>+</button></div></div><p className="p-small p-muted">Changing repeats starts again and clears the answers for this case.</p></div>
+      <div className="loom-controls"><div className="loom-repeat-control"><label htmlFor={`${id}-repeats`}>Repeats</label><div><button className="p-secondary" type="button" aria-label="One fewer repeat" disabled={!ready || repeats === 0} onClick={() => changeRepeats(repeats - 1)}>−</button><input id={`${id}-repeats`} {...fieldProps("repeats")} type="number" inputMode="numeric" min="0" max="6" step="1" value={repeats} onChange={event => { if (event.target.value !== "") changeRepeats(Number(event.target.value)); }} disabled={!ready} /><button className="p-secondary" type="button" aria-label="One more repeat" disabled={!ready || repeats === 6} onClick={() => changeRepeats(repeats + 1)}>+</button></div></div><p className="p-small p-muted">Changing repeats starts again and clears the answers for this case.</p></div>
 
       {!flat ? <div className="loom-diagram"><LoomFigure repeats={repeats} steps={model.steps} revealed={revealed} /></div> : <div className="loom-flat-trace"><h3>Flat instruction trace</h3><ol><li className={revealed && model.nextInstruction === "Clap" ? "is-next" : ""}>Print Clap.</li><li className={revealed && model.nextInstruction === "Tap" ? "is-next" : ""}>Print Tap.</li></ol><p>After Tap, go back to Clap if another block remains.</p>{revealed ? <p>{model.completedBlocks} of {repeats} blocks complete · {model.steps} lines printed</p> : <p>Make your prediction to reveal the trace counts.</p>}</div>}
       <div className="loom-code-output"><div><h3>EducationOS practice code</h3><pre className="loom-code"><code>{source}</code></pre><p className="p-small p-muted">A small learning language, with two-space indentation. This is not full Python or JavaScript.</p></div><div><h3>Printed output</h3>{revealed ? <><pre className="loom-code loom-output" aria-label="Printed output">{model.output.length ? model.output.join("\n") : repeats === 0 ? "(empty output)" : "(nothing printed yet)"}</pre><p className="loom-readout" aria-live="polite">{repeats === 0 ? "Zero repeats runs neither instruction." : model.finished ? `Block repeated ${repeats} ${repeats === 1 ? "time" : "times"} · ${model.totalLines} lines printed.` : `${model.completedBlocks} complete ${model.completedBlocks === 1 ? "block" : "blocks"} · ${model.steps} ${model.steps === 1 ? "line" : "lines"} printed. Next: ${model.nextInstruction}.`}</p></> : <div className="loom-hidden-output"><p>Your output is hidden.</p><p className="p-small p-muted">Save a prediction or choose Show me.</p></div>}</div></div>
@@ -131,12 +135,12 @@ function LoopLoomWorkspace({ record, ready, onChange, onRecord, repeats }: LabPr
     </section>
 
     <section className="lab-panel loom-explain" aria-labelledby="lab-explain"><p className="p-eyebrow">03 / Explain & try a new case</p><h2 id="lab-explain" tabIndex={-1}>Can you use the idea again?</h2><p>You can work these out with the code or the 2D trace. Playing the animation is optional.</p>
-      <div className="p-field"><label htmlFor={`${id}-observation`}>With {repeats} {repeats === 1 ? "repeat" : "repeats"} and two instructions per block, how many lines print?</label><input id={`${id}-observation`} type="number" inputMode="numeric" min="0" max="12" step="1" value={record.answers.observation ?? ""} onChange={event => answer("observation", event.target.value)} disabled={!ready} /></div>
+      <div className="p-field"><label htmlFor={`${id}-observation`}>With {repeats} {repeats === 1 ? "repeat" : "repeats"} and two instructions per block, how many lines print?</label><input id={`${id}-observation`} {...fieldProps("observation")} type="number" inputMode="numeric" min="0" max="12" step="1" value={record.answers.observation ?? ""} onChange={event => answer("observation", event.target.value)} disabled={!ready} /></div>
       <h3 id="lab-transfer" tabIndex={-1}>New case: add Snap</h3><pre className="loom-code"><code>{'repeat 4:\n  print("Clap")\n  print("Tap")\n  print("Snap")'}</code></pre>
-      <div className="p-field"><label htmlFor={`${id}-transfer`}>How many lines will this new program print?</label><input id={`${id}-transfer`} type="number" inputMode="numeric" min="0" max="24" step="1" value={record.answers.transfer ?? ""} onChange={event => answer("transfer", event.target.value)} disabled={!ready} /></div>
-      <div className="p-field"><label htmlFor={`${id}-order`}>What are the first three output lines, in order?</label><select id={`${id}-order`} value={record.answers.transferFirst ?? ""} onChange={event => answer("transferFirst", event.target.value)} disabled={!ready}><option value="">Choose an order</option><option value="Clap, Clap, Clap">Clap, Clap, Clap</option><option value="Snap, Tap, Clap">Snap, Tap, Clap</option><option value="Clap, Tap, Snap">Clap, Tap, Snap</option></select></div>
-      <button type="button" className="p-primary" disabled={!ready} onClick={() => setCheck(onRecord())}>Check & record my learning</button>
-      {check && <div className={`p-assessment-feedback ${check.passed ? "is-success" : "is-error"}`} role="status"><strong>{check.passed ? "Learning recorded." : "Keep investigating."}</strong><p>{check.feedback}</p></div>}
+      <div className="p-field"><label htmlFor={`${id}-transfer`}>How many lines will this new program print?</label><input id={`${id}-transfer`} {...fieldProps("transfer")} type="number" inputMode="numeric" min="0" max="24" step="1" value={record.answers.transfer ?? ""} onChange={event => answer("transfer", event.target.value)} disabled={!ready} /></div>
+      <div className="p-field"><label htmlFor={`${id}-order`}>What are the first three output lines, in order?</label><select {...fieldProps("transferFirst")} id={`${id}-order`} value={record.answers.transferFirst ?? ""} onChange={event => answer("transferFirst", event.target.value)} disabled={!ready}><option value="">Choose an order</option><option value="Clap, Clap, Clap">Clap, Clap, Clap</option><option value="Snap, Tap, Clap">Snap, Tap, Clap</option><option value="Clap, Tap, Snap">Clap, Tap, Snap</option></select></div>
+      <button type="button" className="p-primary" disabled={!ready} onClick={checkAnswers}>Check & record my learning</button>
+      <ActivityFeedback onReview={focusError} id={feedbackId} className="p-assessment-feedback" result={check ?? (record.completed ? assessLoopLoom(record) : null)} successTitle="Success — learning recorded" errorTitle="Keep investigating" />
     </section>
     <noscript><section className="lab-panel"><h2>Loop Loom without animation</h2><p>Start with the default program above: two print instructions repeat three times. Predict the number of lines before opening the worked example.</p><details><summary>Reveal the worked example</summary><table><caption>Three blocks, with two lines in each block</caption><thead><tr><th>Block</th><th>First line</th><th>Second line</th></tr></thead><tbody><tr><td>1</td><td>Clap</td><td>Tap</td></tr><tr><td>2</td><td>Clap</td><td>Tap</td></tr><tr><td>3</td><td>Clap</td><td>Tap</td></tr></tbody></table><p>Three groups of two make six lines. Zero repeats prints nothing. For a new case, try three instructions repeated four times.</p></details><p>Use paper to answer the questions. Saving answers requires JavaScript.</p></section></noscript>
   </div>;

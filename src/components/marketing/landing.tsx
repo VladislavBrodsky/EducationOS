@@ -19,7 +19,7 @@ export function LandingPage({ locale }: { locale: Locale }) {
   const copy = marketingCopy[locale];
   return <MarketingShell locale={locale}>
     <section className="m-hero container">
-      <div className="m-hero-copy"><span className="m-kicker"><span className="m-live-dot" />{copy.eyebrow}</span><h1>{copy.heroLead}<br /><em>{copy.heroAccent}</em></h1><p>{copy.heroDescription}</p><div className="m-hero-actions"><Link href="/demo" className="m-button m-button-dark fx-shimmer">{copy.heroAction}<ArrowUpRight size={19} aria-hidden="true" /></Link><Link href="#method" className="m-button m-button-ghost">{copy.heroSecondary}<ArrowRight size={18} aria-hidden="true" /></Link></div><div className="m-hero-note"><ShieldCheck size={17} aria-hidden="true" />{copy.heroNote}</div></div>
+      <div className="m-hero-copy"><span className="m-kicker"><span className="m-live-dot" />{copy.eyebrow}</span><h1>{copy.heroLead}<br /><em>{copy.heroAccent}</em></h1><p>{copy.heroDescription}</p><div className="m-hero-actions"><Link href="/demo/lab" className="m-button m-button-dark fx-shimmer">{copy.heroAction}<ArrowUpRight size={19} aria-hidden="true" /></Link><Link href="#method" className="m-button m-button-ghost">{copy.heroSecondary}<ArrowRight size={18} aria-hidden="true" /></Link></div><div className="m-hero-note"><ShieldCheck size={17} aria-hidden="true" />{copy.heroNote}</div></div>
       <div className="m-hero-stage fx-hero-stage">
         <div className="fx-dot-pattern" aria-hidden="true" /><ShineBorder />
         <span className="m-stage-label"><span className="fx-status-dot" />{copy.visualLabel}</span><MotionToggle locale={locale} />
@@ -34,6 +34,6 @@ export function LandingPage({ locale }: { locale: Locale }) {
     <LearningBento locale={locale} />
     <section className="m-journal-preview"><div className="container m-section"><div className="m-section-heading"><div><span className="m-kicker">{copy.journalKicker}</span><h2>{copy.journalTitle}</h2></div><div><p>{copy.journalDescription}</p><Link className="m-inline-link" href={localizedPath(locale, 'blog')}>{copy.journalAction}<ArrowUpRight size={17} aria-hidden="true" /></Link></div></div><JournalGrid locale={locale} limit={3} /></div></section>
     <section id="care" className="container m-care"><div className="m-care-icon"><ShieldCheck size={28} aria-hidden="true" /></div><div><span className="m-kicker">{copy.careKicker}</span><h2>{copy.careTitle}</h2><p>{copy.careDescription}</p></div><Link className="m-inline-link" href={localizedPath(locale, 'trust')}>{copy.careAction}<ChevronRight size={18} aria-hidden="true" /></Link></section>
-    <section className="m-closing"><div className="container"><span className="m-closing-icon"><Check size={24} aria-hidden="true" /></span><h2>{copy.closingTitle}</h2><Link className="m-button m-button-dark fx-shimmer" href="/demo">{copy.closingAction}<ArrowRight size={19} aria-hidden="true" /></Link></div></section>
+    <section className="m-closing"><div className="container"><span className="m-closing-icon"><Check size={24} aria-hidden="true" /></span><h2>{copy.closingTitle}</h2><Link className="m-button m-button-dark fx-shimmer" href="/demo/lab">{copy.closingAction}<ArrowRight size={19} aria-hidden="true" /></Link></div></section>
   </MarketingShell>;
 }

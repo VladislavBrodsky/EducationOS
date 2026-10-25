@@ -1,10 +1,12 @@
 "use client";
 
+import { ActivityFeedback, useActivityCheck } from "@/components/learning/activity-feedback";
+
 import { useState, type FormEvent } from "react";
 import { ArrowRight, Check, RotateCcw } from "lucide-react";
 import { boxCorners, depthOf, fitProjection, slabOf } from "@/vendor/anatomy/iso-kit";
-import { DEFAULT_HALF_SELECTION, HALF_GRID, HALF_PATTERNS, readHalfSelection, toggleHalfCell, UNEQUAL_PARTS, unequalSelectedShare, writeHalfSelection } from "@/lib/labs/same-half";
-import type { LabCheck, LabProps } from "@/lib/labs/types";
+import { assessSameHalf, DEFAULT_HALF_SELECTION, HALF_GRID, HALF_PATTERNS, readHalfSelection, toggleHalfCell, UNEQUAL_PARTS, unequalSelectedShare, writeHalfSelection } from "@/lib/labs/same-half";
+import type { LabProps } from "@/lib/labs/types";
 import { AnatomySolid } from "./anatomy-solid";
 import "./same-half.css";
 
@@ -39,16 +41,16 @@ export function SameHalf({ record, ready, onChange, onRecord }: LabProps) {
   const selected = readHalfSelection(record.settings.selection);
   const revealed = record.answers.revealed === "yes";
   const [tilted, setTilted] = useState(false);
-  const [feedback, setFeedback] = useState<LabCheck | null>(null);
+  const { result: feedback, rootRef, feedbackId, fieldProps, focusError, clearResult, showResult, check: checkAnswers } = useActivityCheck(onRecord);
   const [selectionNotice, setSelectionNotice] = useState("");
   const unevenShare = unequalSelectedShare([0, 1]);
 
   function answer(key: string, value: string) {
-    setFeedback(null);
+    clearResult();
     onChange({ answers: { ...record.answers, [key]: value } });
   }
   function changeSelection(cells: readonly number[], message = "") {
-    setFeedback(null);
+    clearResult();
     setSelectionNotice(message);
     // Only the initial guess and its reveal survive a changed investigation.
     onChange({
@@ -67,25 +69,25 @@ export function SameHalf({ record, ready, onChange, onRecord }: LabProps) {
   }
   function reveal(event: FormEvent) {
     event.preventDefault();
-    if (!record.answers.prediction) return;
+    if (!record.answers.prediction) { showResult({ passed: false, field: "prediction", feedback: "Choose a prediction first. It can be a guess, including I am not sure yet." }); return; }
     answer("revealed", "yes");
   }
   function recordPractice(event: FormEvent) {
     event.preventDefault();
-    setFeedback(onRecord());
+    checkAnswers();
   }
 
-  return <div className="half-lab">
+  return <div className="half-lab" ref={rootRef}>
     <section className="lab-panel half-predict" aria-labelledby="lab-predict">
       <p className="p-eyebrow">1 · Predict</p>
       <h2 id="lab-predict" tabIndex={-1}>Can different shapes cover the same amount?</h2>
       <p>Imagine six selected cells in a whole made of twelve equal cells. Move those six cells into a different pattern. Does the amount selected stay the same?</p>
       {!revealed ? <form onSubmit={reveal}>
         <fieldset className="half-choice-group"><legend>My prediction</legend>
-          {[["same", "The amount stays the same."], ["different", "The amount changes with the shape."], ["unsure", "I am not sure yet."]].map(([value, label]) => <label key={value} className="p-choice"><input type="radio" name="half-prediction" value={value} checked={record.answers.prediction === value} onChange={() => answer("prediction", value)} disabled={!ready} /><span>{label}</span></label>)}
+          {[["same", "The amount stays the same."], ["different", "The amount changes with the shape."], ["unsure", "I am not sure yet."]].map(([value, label]) => <label key={value} className="p-choice"><input type="radio" {...fieldProps("prediction")} name="half-prediction" value={value} checked={record.answers.prediction === value} onChange={() => answer("prediction", value)} disabled={!ready} /><span>{label}</span></label>)}
         </fieldset>
-        <button className="p-primary" type="submit" disabled={!ready || !record.answers.prediction}>Try my prediction <ArrowRight size={17} aria-hidden="true" /></button>
-      </form> : <div className="half-note"><strong>Prediction saved.</strong> A guess is a starting point. Use the cells to test it.</div>}
+        <button className="p-primary" type="submit" disabled={!ready}>Try my prediction <ArrowRight size={17} aria-hidden="true" /></button>
+      <ActivityFeedback onReview={focusError} id={feedbackId} result={feedback} /></form> : <div className="half-note"><strong>Prediction saved.</strong> A guess is a starting point. Use the cells to test it.</div>}
       <noscript><p>Draw a rectangle with three rows of four equal cells. Select six cells, then select a different set of six.</p><details><summary>Open the worked comparison</summary><p>Both patterns cover six of twelve equal cells: half. Three of six and two of four equal parts also cover half, when the whole is the same size. Two small pieces of an uneven four-piece whole need not be half. Four of eight equal cells make half because each of two equal groups has four cells.</p></details></noscript>
     </section>
 
@@ -95,7 +97,7 @@ export function SameHalf({ record, ready, onChange, onRecord }: LabProps) {
         <h2 id="lab-explore" tabIndex={-1}>Make a half with your own shape</h2>
         <p>Tap a cell to select it or clear it. The outside edge is one whole; every cell has the same area. Make a half, then try a new shape.</p>
         <div className="half-grid" role="group" aria-label="Twelve equal cells. Select cells to make half of the whole.">
-          {Array.from({ length: HALF_GRID.cells }, (_, cell) => <button key={cell} className={`half-cell${selected.includes(cell) ? " is-selected" : ""}`} type="button" aria-label={`Cell ${cell + 1}, row ${Math.floor(cell / HALF_GRID.columns) + 1}, column ${cell % HALF_GRID.columns + 1}`} aria-pressed={selected.includes(cell)} disabled={!ready} onClick={() => changeSelection(toggleHalfCell(selected, cell))}><span aria-hidden="true">{cell + 1}</span>{selected.includes(cell) ? <Check size={18} aria-hidden="true" /> : <span className="half-cell-empty" aria-hidden="true" />}</button>)}
+          {Array.from({ length: HALF_GRID.cells }, (_, cell) => <button key={cell} {...(cell === 0 ? fieldProps("selection") : {})} className={`half-cell${selected.includes(cell) ? " is-selected" : ""}`} type="button" aria-label={`Cell ${cell + 1}, row ${Math.floor(cell / HALF_GRID.columns) + 1}, column ${cell % HALF_GRID.columns + 1}`} aria-pressed={selected.includes(cell)} disabled={!ready} onClick={() => changeSelection(toggleHalfCell(selected, cell))}><span aria-hidden="true">{cell + 1}</span>{selected.includes(cell) ? <Check size={18} aria-hidden="true" /> : <span className="half-cell-empty" aria-hidden="true" />}</button>)}
         </div>
         <p className="half-count" role="status"><strong>{selected.length} of {HALF_GRID.cells} equal cells selected.</strong> {selected.length === 6 ? "That is half: six selected and six left." : selected.length < 6 ? "Select more cells to make half." : "Clear some cells to make half."}</p>
         <div className="p-toolbar">
@@ -115,15 +117,15 @@ export function SameHalf({ record, ready, onChange, onRecord }: LabProps) {
           <p>Both rectangles below have exactly the same width and height. Their cells are equal within each rectangle.</p>
           <div className="half-comparison"><FractionWhole parts={6} selected={3} label="Three of six" /><FractionWhole parts={4} selected={2} label="Two of four" /></div>
           <fieldset className="half-choice-group"><legend>What do the selected areas show?</legend>
-            <label className="p-choice"><input type="radio" name="half-observation" value="same-half" checked={record.answers.observation === "same-half"} onChange={() => answer("observation", "same-half")} disabled={!ready} /><span>Both cover half of the same-sized whole.</span></label>
-            <label className="p-choice"><input type="radio" name="half-observation" value="different-amount" checked={record.answers.observation === "different-amount"} onChange={() => answer("observation", "different-amount")} disabled={!ready} /><span>Three selected parts must cover more than two.</span></label>
+            <label className="p-choice"><input type="radio" {...fieldProps("observation")} name="half-observation" value="same-half" checked={record.answers.observation === "same-half"} onChange={() => answer("observation", "same-half")} disabled={!ready} /><span>Both cover half of the same-sized whole.</span></label>
+            <label className="p-choice"><input type="radio" {...fieldProps("observation")} name="half-observation" value="different-amount" checked={record.answers.observation === "different-amount"} onChange={() => answer("observation", "different-amount")} disabled={!ready} /><span>Three selected parts must cover more than two.</span></label>
           </fieldset>
           <h3>A tricky whole: these parts are unequal</h3>
           <div className="half-uneven" role="img" aria-label="One whole split into four unequal pieces. The first two small pieces are selected; together they cover two eighths of the whole.">{UNEQUAL_PARTS.map((width, index) => <span key={index} className={`half-part${index < 2 ? " is-selected" : ""}`} style={{ flex: width }} aria-hidden="true">{index < 2 ? <Check size={18} /> : null}</span>)}</div>
           <p>Two of four pieces are selected. Look at the space they cover before deciding.</p>
           <fieldset className="half-choice-group"><legend>Is this selected area half?</legend>
-            <label className="p-choice"><input type="radio" name="half-unequal" value="not-half" checked={record.answers.unequal === "not-half"} onChange={() => answer("unequal", "not-half")} disabled={!ready} /><span>No. Those two pieces together cover less than half.</span></label>
-            <label className="p-choice"><input type="radio" name="half-unequal" value="half" checked={record.answers.unequal === "half"} onChange={() => answer("unequal", "half")} disabled={!ready} /><span>Yes. Two pieces out of four always make half.</span></label>
+            <label className="p-choice"><input type="radio" {...fieldProps("unequal")} name="half-unequal" value="not-half" checked={record.answers.unequal === "not-half"} onChange={() => answer("unequal", "not-half")} disabled={!ready} /><span>No. Those two pieces together cover less than half.</span></label>
+            <label className="p-choice"><input type="radio" {...fieldProps("unequal")} name="half-unequal" value="half" checked={record.answers.unequal === "half"} onChange={() => answer("unequal", "half")} disabled={!ready} /><span>Yes. Two pieces out of four always make half.</span></label>
           </fieldset>
           <details className="p-help"><summary>Show the unequal-parts explanation</summary><p>The small selected pieces cover {unevenShare.selectedArea}/{unevenShare.totalArea} of the whole. They cover a quarter, not a half. Counting selected parts out of all parts describes area only when the parts are equal.</p></details>
         </section>
@@ -132,15 +134,15 @@ export function SameHalf({ record, ready, onChange, onRecord }: LabProps) {
           <p className="p-eyebrow">4 · Try a new whole</p>
           <h2 id="lab-transfer" tabIndex={-1}>What if the whole has eight equal cells?</h2>
           <div className="half-transfer-grid" aria-hidden="true">{Array.from({ length: 8 }, (_, cell) => <span key={cell}>{cell + 1}</span>)}</div>
-          <div className="p-field"><label htmlFor="half-transfer">How many of eight equal cells make half?</label><input id="half-transfer" type="number" inputMode="numeric" min="0" max="8" step="1" value={record.answers.transfer ?? ""} onChange={event => answer("transfer", event.target.value)} disabled={!ready} /></div>
+          <div className="p-field"><label htmlFor="half-transfer">How many of eight equal cells make half?</label><input id="half-transfer" {...fieldProps("transfer")} type="number" inputMode="numeric" min="0" max="8" step="1" value={record.answers.transfer ?? ""} onChange={event => answer("transfer", event.target.value)} disabled={!ready} /></div>
           <fieldset className="half-choice-group"><legend>Why does your answer make half?</legend>
-            {[["equal-groups", "I can split the eight equal cells into two groups with the same number."], ["any-pieces", "Choosing any two pieces always makes half."], ["same-shape", "The selected cells must form the same shape as before."]].map(([value, label]) => <label key={value} className="p-choice"><input type="radio" name="half-reason" value={value} checked={record.answers.transferReason === value} onChange={() => answer("transferReason", value)} disabled={!ready} /><span>{label}</span></label>)}
+            {[["equal-groups", "I can split the eight equal cells into two groups with the same number."], ["any-pieces", "Choosing any two pieces always makes half."], ["same-shape", "The selected cells must form the same shape as before."]].map(([value, label]) => <label key={value} className="p-choice"><input type="radio" {...fieldProps("transferReason")} name="half-reason" value={value} checked={record.answers.transferReason === value} onChange={() => answer("transferReason", value)} disabled={!ready} /><span>{label}</span></label>)}
           </fieldset>
           <button className="p-primary" type="submit" disabled={!ready}>Check and record my discovery <Check size={17} aria-hidden="true" /></button>
-          {feedback && <div className={`p-assessment-feedback ${feedback.passed ? "is-success" : "is-error"}`} role="status"><strong>{feedback.passed ? "Discovery recorded." : "Keep investigating."}</strong><p>{feedback.feedback}</p></div>}
+          <ActivityFeedback onReview={focusError} id={feedbackId} className="p-assessment-feedback" result={feedback ?? (record.completed ? assessSameHalf(record) : null)} successTitle="Success — discovery recorded" errorTitle="Keep investigating" />
         </section>
       </form>
-      <button className="p-text-link" type="button" disabled={!ready} onClick={() => { setFeedback(null); setTilted(false); setSelectionNotice(""); onChange({ settings: { selection: writeHalfSelection(DEFAULT_HALF_SELECTION) }, answers: {} }); }}>Start this investigation again</button>
+      <button className="p-text-link" type="button" disabled={!ready} onClick={() => { clearResult(); setTilted(false); setSelectionNotice(""); onChange({ settings: { selection: writeHalfSelection(DEFAULT_HALF_SELECTION) }, answers: {} }); }}>Start this investigation again</button>
     </>}
   </div>;
 }

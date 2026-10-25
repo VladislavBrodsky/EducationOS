@@ -24,7 +24,7 @@ export function MarketingShell({ locale, children, section = '' }: { locale: Loc
           <nav className="m-language" aria-label="Language / Idioma / Язык">
             {locales.map(item => <Link key={item} href={localizedPath(item, section)} hrefLang={item} lang={item} aria-label={`${item.toUpperCase()} — ${languageNames[item]}`} title={languageNames[item]} aria-current={item === locale ? 'page' : undefined}>{item.toUpperCase()}</Link>)}
           </nav>
-          <Link className="m-header-cta" href="/demo">{copy.demo}<ArrowUpRight size={16} aria-hidden="true" /></Link>
+          <Link className="m-header-cta" href="/demo/lab">{copy.demo}<ArrowUpRight size={16} aria-hidden="true" /></Link>
         </div>
       </div>
     </header>
