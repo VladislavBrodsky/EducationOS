@@ -77,8 +77,7 @@
 
 .fx-learning { padding-bottom:100px; }
 .fx-bento { display:grid; grid-template-columns:minmax(0,1.65fr) minmax(0,1fr); gap:18px; }
-.fx-bento-feature { position:relative; grid-row:span 2; overflow:hidden; min-width:0; padding:32px; border:1px solid #dce5cf; border-radius:23px; background:radial-gradient(ellipse at 45% 50%,#edf7d6,transparent 65%),#f7faef; }
-.fx-bento-feature::before { content:''; position:absolute; inset:0; pointer-events:none; opacity:.25; background-image:radial-gradient(#93aa6b .7px,transparent .7px); background-size:17px 17px; mask-image:linear-gradient(transparent,#0008,transparent); }
+.fx-bento-feature { position:relative; grid-row:span 2; overflow:hidden; min-width:0; padding:32px; border:1px solid #e1e5db; border-radius:23px; background:transparent; }
 .fx-bento-feature>* { position:relative; }
 .fx-bento-feature-head { display:flex; align-items:center; gap:12px; color:#59713c; }
 .fx-icon-tile { display:grid; place-items:center; flex:none; width:43px; height:43px; border:1px solid #d3e0bf; border-radius:12px; background:#ffffffc9; color:#486131; }
