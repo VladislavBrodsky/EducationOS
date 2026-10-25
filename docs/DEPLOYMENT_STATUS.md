@@ -1,5 +1,11 @@
 # Live EducationOS frontend deployment
 
+## Verification on 24 October 2026
+
+Marketing deployment `8f41c993-9ca0-4c8f-bb4e-02b83bc75376` succeeded from reviewed frontend commit `50fe5ca`. The live `/programs` page returned HTTPS 200 at 1440px and 390px. Its age-stage label color is `#52683d` (5.87:1 against its card background); both hosted browser scans found zero automated WCAG A/AA violations and no horizontal overflow. Desktop and mobile screenshots are saved locally under `artifacts/programs-live-*.png`. The portal service was not redeployed. Draft PR #2 passed all six CI jobs on `d473710`, which also adds a closed Python staging mode.
+
+An isolated Railway `staging` environment (`06300c84-ab85-4149-8683-abc3845b5fcc`) exists. Private PostgreSQL/pgvector and Redis services with persistent volumes and generated credentials are **staged only**; no database, Redis, Python API or worker is running there yet. The pending patch has no public database TCP proxy. Applying it would provision billable resources and requires review before the migration and restricted-role setup.
+
 Verified on 18 October 2026. The original domain cutover is recorded below; the later portal navigation release is summarized here.
 
 | Surface | Live URL | Railway service | Routing mode |
