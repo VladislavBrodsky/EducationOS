@@ -1,5 +1,7 @@
 # Live EducationOS frontend deployment
 
+The robot hero illustration now sits on a transparent backdrop: the dark green gradient, glow, dots and animated frame are removed, and labels/caption use contrast suited to the white page. This corrects the previously misidentified paper-card edit, whose original appearance is restored. Verified source `90c2a35`, tag `v0.6.0-preview.12`, marketing deployment `9a17058c-96db-4fa0-a15e-205c402e88ac` (`SUCCESS`): lint/TypeScript and four focused local browser checks passed; two live interaction/motion checks passed, with local mobile and live desktop screenshots confirming the hero backdrop.
+
 The interactive paper-bridge card now has a transparent background with its green gradient and dotted texture removed. This CSS-only follow-up is live from `01a7d9c`, tag `v0.6.0-preview.11`, marketing deployment `cbc049c4-ea54-407d-9310-29648f233730` (`SUCCESS`). The existing paper-model pointer/keyboard test passed locally and over live HTTPS; the published card was visually checked against the white page.
 
 ## Compact language dropdown and mobile menu on 25 October 2026
