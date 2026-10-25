@@ -150,6 +150,8 @@ test('landing cards open the matching detail in the selected language', async ({
 });
 
 test('marketing pages expose a share image in each language', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.locator('link[rel="icon"]')).toHaveAttribute('href', '/icon.svg');
   for (const route of ['/', '/en', '/ru', '/blog', '/en/blog', '/ru/blog', '/programs', '/en/approach', '/ru/trust']) {
     await page.goto(route);
     await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content', 'https://educationos.space/images/curiosity-hero.webp');
