@@ -1,5 +1,7 @@
 # Live EducationOS frontend deployment
 
+The interactive paper-bridge card now has a transparent background with its green gradient and dotted texture removed. This CSS-only follow-up is live from `01a7d9c`, tag `v0.6.0-preview.11`, marketing deployment `cbc049c4-ea54-407d-9310-29648f233730` (`SUCCESS`). The existing paper-model pointer/keyboard test passed locally and over live HTTPS; the published card was visually checked against the white page.
+
 ## Compact language dropdown and mobile menu on 25 October 2026
 
 The compact language dropdown and mobile hamburger navigation are live at [educationos.space](https://educationos.space), source `c8441f5`, release `v0.6.0-preview.10`, successful marketing deployment `a4aeedb0-81c4-4aa5-863f-71ddcdcb92b2`. Both controls support keyboard access, Escape and outside dismissal; mobile links close after selection, show the current section, and stay reachable in a short landscape viewport. Native disclosures retain navigation without JavaScript. The frontend-only archive contains 145 files (2,626,116 bytes); the learner portal remains on `9151626c-459c-4006-bc70-818a7ee1b96f`.
