@@ -14,12 +14,16 @@ test('hero entry leads to a localized challenge with honest progress and a clean
     } });
   });
   for (const path of ['/', '/en', '/ru']) {
+    await page.setViewportSize({ width: path === '/ru' ? 320 : 390, height: 844 });
     await page.goto(`${path}?source=preview`);
     await page.locator('.m-stage-card').click();
     const challenge = page.locator('#paper-bridge-challenge');
     await expect(challenge).toBeFocused();
     expect((await challenge.boundingBox())!.y).toBeGreaterThanOrEqual(82);
     await expect(challenge.locator('.fx-task-progress [aria-current=step]')).toContainText('1');
+    for (const step of await challenge.locator('.fx-task-progress li').all()) {
+      expect(await step.evaluate(element => element.scrollWidth - element.clientWidth)).toBeLessThanOrEqual(1);
+    }
     await expect(challenge.locator('.fx-task-share')).toHaveCount(0);
     await challenge.locator('[data-answer=folded]').click();
     await expect(challenge.locator('.fx-task-progress [data-completed=true]')).toHaveCount(1);
