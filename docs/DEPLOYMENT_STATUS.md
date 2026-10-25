@@ -1,5 +1,9 @@
 # Live EducationOS frontend deployment
 
+## Clearer landing hero on 25 October 2026
+
+The refined hero is live at [educationos.space](https://educationos.space) from source `808e3d3`, tagged `v0.6.0-preview.9`. Marketing deployment `a9388488-8441-4b72-8107-134fbe6e4e25` reports `SUCCESS`. A compact age label, concrete learning description, dominant mission action with paper-bridge/seven-step context, visible English-demo notice, and quieter method link improve the mobile and desktop hierarchy in all three languages. All six GitHub checks passed (134 frontend unit, 68 browser, 39 backend tests and the full-stack smoke test); four focused live browser checks passed for layout, artwork, localized accessibility and the complete mission. The portal remains on `9151626c-459c-4006-bc70-818a7ee1b96f`; HTTPS redirects and portal indexing protection remain verified. [Release evidence](deployment/hero-2026-10-25.json) records the frontend-only archive and scope. No DNS, API, enrollment or learner-data access changes were made.
+
 ## Solvable interactive tasks on 25 October 2026
 
 The checked paper-bridge mini-challenge and shared success/error/retry workflow are live on both [the public website](https://educationos.space) and [the learner portal](https://app.educationos.space). Marketing deployment `63047e28-e1fa-4aef-9cc4-b20bd23d4e24` and portal deployment `9151626c-459c-4006-bc70-818a7ee1b96f` report `SUCCESS` from the same frontend-only source `2fe3e17`, tagged `v0.6.0-preview.8`. The source archive has 142 files and excludes backend and environment files.

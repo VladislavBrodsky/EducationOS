@@ -1,0 +1,79 @@
+{
+  "date": "2026-10-25",
+  "sourceCommit": "808e3d3959865d38be461972d93214e5160e37c5",
+  "releaseTag": "v0.6.0-preview.9",
+  "deployment": {
+    "url": "https://educationos.space",
+    "serviceId": "bf43668a-197d-4b94-94d2-9b09d92e44f9",
+    "deploymentId": "a9388488-8441-4b72-8107-134fbe6e4e25",
+    "status": "SUCCESS"
+  },
+  "unchangedPortalDeployment": "9151626c-459c-4006-bc70-818a7ee1b96f",
+  "frontendArchive": {
+    "fileCount": 142,
+    "totalBytes": 2619943,
+    "manifestSha256": "bb64cdf852dad927e183b06a79ed8808e6a06347c4fd057a68d9354851b11251",
+    "gitArchivePaths": [
+      ".dockerignore",
+      "Dockerfile",
+      "next-env.d.ts",
+      "next.config.ts",
+      "package-lock.json",
+      "package.json",
+      "postcss.config.mjs",
+      "tsconfig.json",
+      "public",
+      "src",
+      "shared"
+    ]
+  },
+  "validation": {
+    "githubRuns": [
+      40220042642,
+      40220046504
+    ],
+    "githubChecksPassed": 6,
+    "frontendUnitTestsPassed": 134,
+    "browserTestsPassed": 68,
+    "backendTestsPassed": 39,
+    "focusedLocalBrowserTestsPassed": 4,
+    "focusedLiveBrowserTestsPassed": 4,
+    "liveViewportWidths": [
+      320,
+      390,
+      1440
+    ],
+    "liveChecks": [
+      "responsive marketing and product layouts",
+      "loaded desktop artwork without overflow",
+      "three-language landing and journal automated accessibility",
+      "complete seven-step mission with local evidence and export"
+    ],
+    "visualReview": [
+      "438px mobile preview",
+      "1280px live desktop hero"
+    ]
+  },
+  "httpChecks": {
+    "www": {
+      "status": 308,
+      "from": "https://www.educationos.space/demo/lab?source=hero-release",
+      "to": "https://educationos.space/demo/lab?source=hero-release"
+    },
+    "portal": {
+      "url": "https://app.educationos.space",
+      "status": 200,
+      "robots": "noindex, nofollow"
+    },
+    "localhost": {
+      "url": "http://127.0.0.1:3100",
+      "status": 200,
+      "robots": "noindex, nofollow"
+    }
+  },
+  "scope": "Hero hierarchy, copy and responsive spacing on existing marketing service only; no DNS, API, enrollment or learner-data access changes",
+  "limits": [
+    "Chromium viewport and automated accessibility checks do not certify physical-device or assistive-technology behavior",
+    "Spanish and Russian marketing copy awaits native-speaker editorial review; learner activities remain English"
+  ]
+}
