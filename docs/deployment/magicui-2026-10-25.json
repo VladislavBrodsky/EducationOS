@@ -1,0 +1,72 @@
+{
+  "date": "2026-10-25",
+  "sourceCommit": "ce44ebc0f810461d0165ba2f89fb3063cd9edddf",
+  "releaseTag": "v0.6.0-preview.7",
+  "url": "https://educationos.space",
+  "deploymentId": "53862ae1-7c5a-4074-8113-b24382d30343",
+  "deploymentStatus": "SUCCESS",
+  "frontendArchive": {
+    "fileCount": 138,
+    "totalBytes": 2600668,
+    "manifestSha256": "5ba80427c537db2f672417d71be28c46af8e1de53fe43a42d0a82a665972bcb7",
+    "gitArchivePaths": [
+      ".dockerignore",
+      "Dockerfile",
+      "next-env.d.ts",
+      "next.config.ts",
+      "package-lock.json",
+      "package.json",
+      "postcss.config.mjs",
+      "tsconfig.json",
+      "public",
+      "src",
+      "shared"
+    ]
+  },
+  "validation": {
+    "githubRuns": [
+      40216359950,
+      40216366396
+    ],
+    "githubChecksPassed": 6,
+    "frontendUnitTestsPassed": 131,
+    "browserTestsPassed": 49,
+    "backendTestsPassed": 39,
+    "liveBrowserTestsPassed": 6,
+    "liveViewportWidths": [
+      320,
+      390,
+      1440
+    ],
+    "liveInteractionChecks": [
+      "paper shape via pointer and keyboard",
+      "animation pause and resume",
+      "device reduced motion",
+      "Russian content without JavaScript",
+      "locale routes and journal navigation",
+      "loaded artwork and horizontal fit"
+    ]
+  },
+  "httpChecks": {
+    "wwwRedirect": {
+      "status": 308,
+      "from": "https://www.educationos.space/blog?source=magicui-release",
+      "to": "https://educationos.space/blog?source=magicui-release"
+    },
+    "portal": {
+      "status": 200,
+      "robots": "noindex, nofollow",
+      "unchangedDeployment": "89e503e6-63c0-4ef9-9f33-5e36ca49f950"
+    },
+    "localhost": {
+      "url": "http://127.0.0.1:3100",
+      "status": 200
+    }
+  },
+  "scope": "Existing marketing service only; no DNS, backend, portal, enrollment, or learner-data changes",
+  "limits": [
+    "Chromium viewport checks, not physical-device or assistive-technology certification",
+    "Legal, safety, accessibility, and learner activities remain English",
+    "Spanish and Russian copy awaits native-speaker editorial review"
+  ]
+}

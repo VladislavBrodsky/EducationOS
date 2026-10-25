@@ -1,5 +1,13 @@
 # Live EducationOS frontend deployment
 
+## Magic UI visual upgrade on 25 October 2026
+
+The animated science hero, spotlight cards, responsive bento showcase with a working paper model, original age-group artwork, and locally served Manrope typography are live at [educationos.space](https://educationos.space). Railway marketing deployment `53862ae1-7c5a-4074-8113-b24382d30343` reports `SUCCESS` from source `ce44ebc` and release tag `v0.6.0-preview.7`. The frontend-only archive has 138 files. The earlier navigation and accessibility audit fixes are included.
+
+All six GitHub checks passed: 131 frontend unit tests, 49 browser tests, 39 backend tests, and the full-stack smoke test. Six focused live browser tests verified the three marketing languages, journal navigation, paper controls, pause/resume, reduced motion, no-JavaScript content, artwork, and horizontal fit at 320px, 390px, and 1440px. The public `www` redirect preserves path/query; the separate portal remains on deployment `89e503e6-63c0-4ef9-9f33-5e36ca49f950` with `noindex, nofollow`. Localhost remains available at port 3100.
+
+[Release evidence](deployment/magicui-2026-10-25.json) records the exact source archive and checks. [Component decisions and attribution](design/magicui/DESIGN.md) document the adapted Magic UI components and licenses. This release changes the existing marketing service only. The PR remains draft pending native-speaker editorial review; legal, safety, accessibility, and learner activities remain English. Browser checks use Chromium viewports rather than physical devices.
+
 ## Marketing polish on 25 October 2026
 
 The corrected age-group and learning-method hero artwork, linked landing cards, localized Open Graph previews, article-specific social images, and SVG favicon are live at [educationos.space](https://educationos.space). Railway marketing deployment `618375a7-5ef3-40e5-a1fe-643984a143ff` reports `SUCCESS` from source commit `e1a2c29` and release tag `v0.6.0-preview.6`. Its exact frontend-only upload contains 125 files and no backend or environment files. All six GitHub checks passed; five focused browser tests passed against live HTTPS.
