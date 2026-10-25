@@ -12,6 +12,8 @@ The new visual system uses an editorial split hero, a single lime 3D-style stage
 
 ## Implemented so far
 
+The follow-up [Magic UI visual system](design/magicui/DESIGN.md) adds source-attributed orbiting icons, shine borders, spotlight links, a working paper-shape bento preview, original learner artwork in the age cards, locally served multilingual typography, and reduced-motion/pause controls. It extends the current app with small client components and scoped CSS, preserving the Python and learner-data boundaries.
+
 | Surface | Route | Language |
 | --- | --- | --- |
 | Landing | `/`, `/en`, `/ru` | Spanish default, English, Russian |

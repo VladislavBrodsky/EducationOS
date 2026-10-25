@@ -5,15 +5,16 @@ import { localizedPath, marketingCopy, type Locale } from '@/lib/marketing-i18n'
 import { getMarketingArticle, marketingJournal } from '@/lib/marketing-journal';
 import { JournalShare } from '@/components/journal-share';
 import { MarketingShell } from './marketing-shell';
+import { MagicCard } from '@/components/magicui/magic-card';
 
 export function JournalGrid({ locale, limit, headingLevel = 3 }: { locale: Locale; limit?: number; headingLevel?: 2 | 3 }) {
   const copy = marketingCopy[locale];
   const articles = limit ? marketingJournal[locale].slice(0, limit) : marketingJournal[locale];
   const Heading = headingLevel === 2 ? 'h2' : 'h3';
-  return <div className="m-journal-grid">{articles.map(article => <Link href={localizedPath(locale, `blog/${article.slug}`)} className="m-story" key={article.slug}>
+  return <div className="m-journal-grid">{articles.map(article => <MagicCard href={localizedPath(locale, `blog/${article.slug}`)} className="m-story" key={article.slug}>
     <div className="m-story-image"><Image src={article.image} alt={article.imageAlt} fill sizes="(max-width: 720px) 100vw, 33vw" /></div>
     <div className="m-story-body"><div className="m-story-meta"><span>{article.category}</span><span><Clock3 size={13} aria-hidden="true" /> {article.minutes} MIN</span></div><Heading>{article.title}</Heading><p>{article.description}</p><span className="m-story-link">{copy.readStory}<ArrowUpRight size={17} aria-hidden="true" /></span></div>
-  </Link>)}</div>;
+  </MagicCard>)}</div>;
 }
 
 export function JournalIndex({ locale }: { locale: Locale }) {

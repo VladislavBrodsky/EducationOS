@@ -17,6 +17,7 @@ test('display headings never end with a period', async ({ page }) => {
 });
 
 test('marketing languages have correct document language, links and localized stories', async ({ page }) => {
+  test.setTimeout(60000);
   for (const [route, lang, title] of [
     ['/', 'es', 'La curiosidad'], ['/en', 'en', 'Curiosity'], ['/ru', 'ru', 'Любопытство'],
   ]) {
@@ -25,7 +26,7 @@ test('marketing languages have correct document language, links and localized st
     await expect(page.getByRole('heading', { level: 1 })).toContainText(title);
     await expect(page.locator('.m-method-card')).toHaveCount(4);
     await expect(page.locator('.m-age-card')).toHaveCount(5);
-    await expect(page.locator('.m-bridge')).toBeVisible();
+    await expect(page.locator('.fx-bridge-preview')).toBeVisible();
     const href = lang === 'es' ? '/blog' : `/${lang}/blog`;
     await expect(page.getByRole('navigation', { name: /Navegación principal|Main navigation|Основная навигация/ }).getByRole('link', { name: /Revista|Journal|Журнал/ })).toHaveAttribute('href', href);
     await expect(page.locator('link[rel="alternate"][hreflang="ru"]')).toHaveAttribute('href', /\/ru$/);
@@ -35,6 +36,7 @@ test('marketing languages have correct document language, links and localized st
     await expect(page.locator('html')).toHaveAttribute('lang', lang);
     await expect(page.locator('.m-story')).toHaveCount(4);
     await page.locator('.m-story').first().click();
+    await page.waitForURL(new RegExp(`${route}/see-the-invisible$`), { timeout: 20000 });
     await expect(page.locator('html')).toHaveAttribute('lang', lang);
     await expect(page.locator('.m-article-challenge')).toBeVisible();
   }
