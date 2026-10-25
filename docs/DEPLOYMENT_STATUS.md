@@ -1,5 +1,13 @@
 # Live EducationOS frontend deployment
 
+## Marketing v2 release on 25 October 2026
+
+The Spanish-first landing page and trilingual Curiosity Journal are live at [educationos.space](https://educationos.space). Railway marketing deployment `aab2a994-d81a-4fc5-8fbf-2c3257427bbc` reports `SUCCESS` from a frontend-only snapshot of reviewed source commit `429bf9c` on branch `codex/marketing-v2-i18n`. The snapshot contains 119 files and no backend or environment files. The pinned Node 24 Dockerfile compiled the Next.js application and generated all 39 pages. Automatic GitHub deployment remains disabled; this was an explicit marketing-service upload.
+
+Live HTTPS checks returned 200 for all 18 landing, journal-index, and article routes across Spanish, English, and Russian. The sampled pages had matching document languages, localized titles, canonical URLs, and reciprocal language alternatives. Four homepage images returned 200. `www.educationos.space/blog?source=release-check` returned 308 to the equivalent apex URL. Desktop and mobile browser checks found no page errors or horizontal overflow. The separate learner portal still returned 200 with `noindex, nofollow`, and its Railway deployment remained `89e503e6-63c0-4ef9-9f33-5e36ca49f950`.
+
+The exact upload contents are in the [marketing v2 manifest](deployment/marketing-v2-manifest-2026-10-25.json), and the live checks are summarized in [marketing v2 evidence](deployment/marketing-v2-2026-10-25.json). [Draft PR #3](https://github.com/VladislavBrodsky/EducationOS/pull/3) retains the code review and six passing CI checks. Learner demo, legal, and trust pages remain English pending specialist translation review. The Python API remains private in staging, disconnected from this marketing release.
+
 ## Verified release on 25 October 2026
 
 Both production frontend services were explicitly redeployed from the frontend-only contents of Git tag `v0.6.0-preview.3` (commit `da6fa2c`). Railway reports `SUCCESS` for marketing deployment `13b25370-9c83-4a7d-9eb5-0fb0c0c67c11` and portal deployment `89e503e6-63c0-4ef9-9f33-5e36ca49f950`. The tagged frontend files match the previous live frontend; this release aligns the running builds with the reviewed GitHub snapshot. Automated deployment from GitHub remains disabled.
