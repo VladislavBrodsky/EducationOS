@@ -13,7 +13,7 @@ export const showcaseCopy = {
     evidenceItems: ['Una predicción', 'Lo que observaste', 'La siguiente pregunta'], evidenceAction: 'Explorar el portafolio',
     codeTag: 'PEQUEÑAS INSTRUCCIONES', codeTitle: 'Una regla. Muchas posibilidades',
     codeDescription: 'Predice, cambia una instrucción y sigue el patrón', codeAction: 'Probar Loop Loom',
-    visualLabel: 'UNA IDEA PUEDE CAMBIARLO TODO', heroTag: 'De la pregunta al descubrimiento',
+    visualLabel: 'UNA IDEA PUEDE CAMBIARLO TODO', heroTag: 'De la pregunta al descubrimiento', heroChallengeAction: 'Prueba el minirreto',
   },
   en: {
     kicker: '03 / LESS PASSIVE SCROLLING. MORE IDEAS', title: 'Put learning in motion',
@@ -27,7 +27,7 @@ export const showcaseCopy = {
     evidenceItems: ['A prediction', 'What you noticed', 'Your next question'], evidenceAction: 'Explore the portfolio',
     codeTag: 'SMALL INSTRUCTIONS', codeTitle: 'One rule. Many possibilities',
     codeDescription: 'Predict, change an instruction, and follow the pattern', codeAction: 'Try Loop Loom',
-    visualLabel: 'ONE IDEA CAN CHANGE EVERYTHING', heroTag: 'From question to discovery',
+    visualLabel: 'ONE IDEA CAN CHANGE EVERYTHING', heroTag: 'From question to discovery', heroChallengeAction: 'Try the mini-challenge',
   },
   ru: {
     kicker: '03 / МЕНЬШЕ ПАССИВНОГО ПРОСМОТРА. БОЛЬШЕ ИДЕЙ', title: 'Обучение приходит в движение',
@@ -41,6 +41,6 @@ export const showcaseCopy = {
     evidenceItems: ['Предположение', 'Ваши наблюдения', 'Следующий вопрос'], evidenceAction: 'Посмотреть портфолио',
     codeTag: 'ПРОСТЫЕ ИНСТРУКЦИИ', codeTitle: 'Одно правило. Много возможностей',
     codeDescription: 'Предскажите результат, измените инструкцию и проследите за узором', codeAction: 'Попробовать Loop Loom',
-    visualLabel: 'ОДНА ИДЕЯ МЕНЯЕТ ВСЁ', heroTag: 'От вопроса к открытию',
+    visualLabel: 'ОДНА ИДЕЯ МЕНЯЕТ ВСЁ', heroTag: 'От вопроса к открытию', heroChallengeAction: 'Попробовать мини-задачу',
   },
 } satisfies Record<Locale, object>;

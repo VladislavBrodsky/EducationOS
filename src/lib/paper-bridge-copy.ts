@@ -2,6 +2,8 @@ import type { Locale } from './marketing-i18n';
 
 export const paperBridgeCopy = {
   es: {
+    progressLabel: 'Progreso del minirreto', progressSteps: ['Forma', 'Explicación'], done: 'Completado',
+    shareTitle: 'Una buena pregunta se comparte', shareDescription: 'Invita a alguien a resolver este mismo reto', shareAction: 'Compartir el reto', shareMessage: '¿Puede un puente de papel resistir más? Prueba este minirreto de EducationOS',
     goal: 'Tu reto: crea un puente con pliegues usando la misma hoja. Después, identifica qué cambió',
     shapeStep: '1 · Cambia la forma', principleStep: '2 · Explica tu cambio', question: '¿Qué cambiaste al doblar la misma hoja?',
     choose: 'Elige una explicación', options: ['La forma del papel', 'El material del papel', 'El número de apoyos'],
@@ -13,6 +15,8 @@ export const paperBridgeCopy = {
     noScript: 'Activa JavaScript para cambiar el modelo y comprobar tu respuesta. La ilustración no simula la resistencia del papel.',
   },
   en: {
+    progressLabel: 'Mini-challenge progress', progressSteps: ['Shape', 'Explanation'], done: 'Completed',
+    shareTitle: 'Good questions are worth sharing', shareDescription: 'Invite someone to try this same challenge', shareAction: 'Share the challenge', shareMessage: 'Can a paper bridge hold more? Try this EducationOS mini-challenge',
     goal: 'Your challenge: make a folded bridge using the same sheet. Then identify what changed',
     shapeStep: '1 · Change the shape', principleStep: '2 · Explain your change', question: 'What changed when you folded the same sheet?',
     choose: 'Choose an explanation', options: ['The shape of the paper', 'The paper material', 'The number of supports'],
@@ -24,6 +28,8 @@ export const paperBridgeCopy = {
     noScript: 'Enable JavaScript to change the model and check your answer. The illustration does not simulate paper strength.',
   },
   ru: {
+    progressLabel: 'Прогресс мини-задачи', progressSteps: ['Форма', 'Объяснение'], done: 'Выполнено',
+    shareTitle: 'Хорошим вопросом хочется поделиться', shareDescription: 'Предложите кому-нибудь решить эту же задачу', shareAction: 'Поделиться задачей', shareMessage: 'Может ли бумажный мост выдержать больше? Попробуйте мини-задачу EducationOS',
     goal: 'Ваша задача: сложите мост из того же листа. Затем объясните, что изменилось',
     shapeStep: '1 · Измените форму', principleStep: '2 · Объясните изменение', question: 'Что изменилось, когда вы сложили тот же лист?',
     choose: 'Выберите объяснение', options: ['Форма бумаги', 'Материал бумаги', 'Количество опор'],

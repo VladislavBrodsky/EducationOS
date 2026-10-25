@@ -1,7 +1,10 @@
 'use client';
 
 import { useId, useState, type FormEvent } from 'react';
-import type { Locale } from '@/lib/marketing-i18n';
+import { Check } from 'lucide-react';
+import { localizedPath, type Locale } from '@/lib/marketing-i18n';
+import { SITE_URL } from '@/lib/site';
+import { ShareLink } from '@/components/share-link';
 import { showcaseCopy } from '@/lib/marketing-showcase';
 import { paperBridgeCopy } from '@/lib/paper-bridge-copy';
 import { checkPaperBridge } from '@/lib/paper-bridge-challenge';
@@ -20,6 +23,11 @@ export function BridgePreview({ locale }: { locale: Locale }) {
   function submit(event: FormEvent) { event.preventDefault(); check(); }
   return <div className="fx-bridge-preview" ref={rootRef}>
     <p className="fx-task-goal">{task.goal}</p>
+    <ol className="fx-task-progress" aria-label={task.progressLabel}>{task.progressSteps.map((label, index) => {
+      const completed = index === 0 ? folded : !!result?.passed;
+      const current = !result?.passed && index === (folded ? 1 : 0);
+      return <li key={label} data-completed={completed} aria-current={current ? 'step' : undefined}><span aria-hidden="true">{completed ? <Check size={14} /> : index + 1}</span>{label}{completed && <span className="visually-hidden"> — {task.done}</span>}</li>;
+    })}</ol>
     <form onSubmit={submit} noValidate>
     <p className="fx-task-step">{task.shapeStep}</p>
     <fieldset className="fx-shape-controls"><legend className="visually-hidden">{copy.controls}</legend>
@@ -48,8 +56,11 @@ export function BridgePreview({ locale }: { locale: Locale }) {
       </select>
     </div>
     <div className="fx-task-actions"><button className="m-button m-button-dark" type="submit">{task.check}</button><button className="m-button m-button-light" type="button" onClick={() => { setFolded(false); setPrinciple(''); clearResult(); }}>{task.reset}</button></div>
-    <ActivityFeedback onReview={focusError} reviewLabel={task.review} id={feedbackId} result={result} successTitle={task.successTitle} errorTitle={task.errorTitle} />
     </form>
+    <div id={feedbackId}>
+      <ActivityFeedback onReview={focusError} reviewLabel={task.review} result={result} successTitle={task.successTitle} errorTitle={task.errorTitle} />
+      {result?.passed && <aside className="fx-task-share"><h4>{task.shareTitle}</h4><p>{task.shareDescription}</p><ShareLink title={task.shareMessage} locale={locale} url={`${SITE_URL}${localizedPath(locale)}#paper-bridge-challenge`} buttonLabel={task.shareAction} /></aside>}
+    </div>
     <p className="fx-model-note">{copy.modelNote}</p>
     <noscript><p className="fx-task-noscript">{task.noScript}</p></noscript>
   </div>;

@@ -34,7 +34,7 @@ export function LandingPage({ locale }: { locale: Locale }) {
         <span className="m-stage-label"><span className="fx-status-dot" />{copy.visualLabel}</span><MotionToggle locale={locale} />
         <OrbitingCircles radius="clamp(108px, 17vw, 210px)" duration={42}><Atom size={24} /><Code2 size={24} /><FlaskConical size={24} /><Shapes size={24} /></OrbitingCircles>
         <div className="m-stage-object"><Image src="/images/learning-objects.webp" alt="" fill priority sizes="(max-width: 760px) 88vw, 46vw" /></div>
-        <div className="m-stage-card"><span>{showcaseCopy[locale].heroTag}</span><strong>{copy.visualCard}</strong><span>{copy.visualStep}<ArrowUpRight size={16} aria-hidden="true" /></span></div>
+        <a href="#paper-bridge-challenge" className="m-stage-card"><span>{showcaseCopy[locale].heroTag}</span><strong>{copy.visualCard}</strong><span>{showcaseCopy[locale].heroChallengeAction}<ArrowUpRight size={16} aria-hidden="true" /></span></a>
       </div>
     </section>
     <div className="m-ribbon"><div className="container">{copy.ribbon.map((item, index) => <span key={item}><span className="m-ribbon-number">0{index + 1}</span>{item}</span>)}</div></div>

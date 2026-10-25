@@ -13,9 +13,9 @@ export function LearningBento({ locale }: { locale: Locale }) {
   return <section className="m-section container fx-learning" aria-labelledby="learning-in-motion">
     <div className="m-section-heading"><div><span className="m-kicker">{copy.kicker}</span><h2 id="learning-in-motion">{copy.title}</h2></div><p>{copy.description}</p></div>
     <BentoGrid>
-      <article className="fx-bento-feature">
+      <article id="paper-bridge-challenge" className="fx-bento-feature" tabIndex={-1} aria-labelledby="paper-bridge-title">
         <div className="fx-bento-feature-head"><span className="fx-icon-tile"><FlaskConical size={22} aria-hidden="true" /></span><span className="m-kicker">{copy.model}</span></div>
-        <h3>{marketing.labTitle}</h3><p className="fx-bento-description">{copy.materials}</p>
+        <h3 id="paper-bridge-title">{marketing.labTitle}</h3><p className="fx-bento-description">{copy.materials}</p>
         <BridgePreview locale={locale} />
         <div className="fx-bento-feature-footer"><Link className="m-button m-button-dark fx-shimmer" href="/demo/lab">{marketing.labAction}<ArrowUpRight size={18} aria-hidden="true" /></Link><span>{copy.language}</span></div>
       </article>

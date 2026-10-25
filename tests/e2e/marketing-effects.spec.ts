@@ -38,6 +38,8 @@ test('the enhanced page keeps its content and links without JavaScript', async (
   await expect(page.locator('.fx-model-note')).toContainText('Визуальная модель');
   await expect(page.locator('.fx-bento-feature-footer a')).toHaveAttribute('href', '/demo/lab');
   await expect(page.locator('.m-method-card')).toHaveCount(4);
+  await page.locator('.m-stage-card').click();
+  await expect(page.locator('#paper-bridge-challenge')).toBeFocused();
   await page.locator('.m-mobile-menu summary').click();
   await page.getByRole('navigation', { name: 'Основная навигация' }).getByRole('link', { name: 'Метод', exact: true }).click();
   await expect(page).toHaveURL(/\/ru\/approach$/);

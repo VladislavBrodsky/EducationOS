@@ -42,6 +42,8 @@
 .fx-hero-stage .m-stage-card>span:first-child { font-family:inherit; color:#59694b; font-size:10px; text-transform:none; letter-spacing:0; }
 .fx-hero-stage .m-stage-card strong { display:block; max-width:100%; margin:6px 0 12px; font-size:20px; font-weight:650; line-height:1.2; letter-spacing:-.045em; }
 .fx-hero-stage .m-stage-card>span:last-child { display:flex; align-items:center; justify-content:space-between; font-size:8px; letter-spacing:.07em; color:#445237; }
+.fx-hero-stage .m-stage-card:hover { border-color:#a8b89a; }
+.fx-hero-stage .m-stage-card:focus-visible { outline:2px solid #344b2c; outline-offset:3px; }
 .fx-orbits { position:absolute; inset:0; z-index:3; pointer-events:none; }
 .fx-orbit-path { position:absolute; left:50%; top:45%; width:calc(var(--orbit-radius) * 2); height:calc(var(--orbit-radius) * 2); border:1px solid #e4e8df; border-radius:50%; transform:translate(-50%,-50%); }
 .fx-orbit-node { position:absolute; top:45%; left:50%; width:42px; height:42px; margin:-21px; transform:rotate(var(--orbit-angle)) translateX(var(--orbit-radius)) rotate(calc(var(--orbit-angle) * -1)); animation:fx-orbit var(--orbit-duration) linear infinite; }
@@ -78,6 +80,8 @@
 .fx-bento-feature { position:relative; grid-row:span 2; overflow:hidden; min-width:0; padding:32px; border:1px solid #dce5cf; border-radius:23px; background:radial-gradient(ellipse at 45% 50%,#edf7d6,transparent 65%),#f7faef; }
 .fx-bento-feature::before { content:''; position:absolute; inset:0; pointer-events:none; opacity:.25; background-image:radial-gradient(#93aa6b .7px,transparent .7px); background-size:17px 17px; mask-image:linear-gradient(transparent,#0008,transparent); }
 .fx-bento-feature>* { position:relative; }
+.fx-bento-feature { scroll-margin-top:100px; }
+.fx-bento-feature:focus-visible { outline:2px solid #344b2c; outline-offset:4px; }
 .fx-bento-feature-head { display:flex; align-items:center; gap:12px; color:#59713c; }
 .fx-icon-tile { display:grid; place-items:center; flex:none; width:43px; height:43px; border:1px solid #d3e0bf; border-radius:12px; background:#ffffffc9; color:#486131; }
 .fx-bento-feature h3 { max-width:540px; margin:24px 0 12px; font-size:clamp(31px,3.8vw,48px); font-weight:600; line-height:1.1; letter-spacing:-.065em; }
@@ -222,6 +226,19 @@
 
 /* A visible task, controls, and checked feedback replace the decorative-only model. */
 .fx-task-goal { margin:22px 0 18px; color:#34472d; font-size:15px; line-height:1.6; }
+.fx-task-progress { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; margin:20px 0; padding:0; list-style:none; }
+.fx-task-progress li { display:flex; align-items:center; gap:8px; min-height:44px; padding:9px 10px; border:1px solid #d3dec8; border-radius:10px; background:#ffffffa8; color:#4f6044; font-size:12px; font-weight:650; }
+.fx-task-progress li[aria-current=step] { border-color:#61764c; color:#243b1b; }
+.fx-task-progress li>span:first-child { display:grid; place-items:center; flex:none; width:22px; height:22px; border:1px solid #c2cfb4; border-radius:50%; font-size:11px; }
+.fx-task-progress li[data-completed=true]>span:first-child { border-color:#344b2c; background:#344b2c; color:#fff; }
+.fx-task-share { margin-top:20px; padding:20px 0; border-top:1px solid #ccd8bf; }
+.fx-task-share h4 { margin:0 0 8px; color:#243b1b; font-size:20px; font-weight:650; letter-spacing:-.035em; line-height:1.3; }
+.fx-task-share p { margin:0 0 14px; color:#4f6044; font-size:13px; line-height:1.6; }
+.m-share { flex-wrap:wrap; }
+.m-share .m-button { max-width:100%; white-space:normal; }
+.m-share .m-button:disabled { opacity:.65; cursor:wait; }
+.m-share-fallback { display:grid; gap:8px; width:100%; min-width:0; color:#34472d; font-size:12px; }
+.m-share-fallback input { width:100%; min-width:0; min-height:44px; padding:10px 12px; border:1px solid #a2b592; border-radius:8px; background:#fff; color:#23321e; font:inherit; }
 .fx-task-step { margin:18px 0 10px; color:#415737; font-size:12px; font-weight:750; }
 .fx-task-answer label { display:block; color:#23321e; font-size:15px; font-weight:650; line-height:1.5; }
 .fx-task-answer select { width:100%; min-height:48px; margin:10px 0 0; padding:10px 12px; border:1px solid #a2b592; border-radius:10px; background:#fff; color:#23321e; font:inherit; font-size:14px; }
