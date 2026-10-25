@@ -10,17 +10,12 @@
 .m-hero-eyebrow { display:flex; align-items:center; flex-wrap:wrap; gap:12px; }
 .m-hero-eyebrow .m-kicker { display:inline-flex; align-items:center; gap:10px; }
 .m-hero-age { display:inline-flex; align-items:center; min-height:28px; padding:4px 10px; border:1px solid #dce5d0; border-radius:100px; color:#46573c; background:#f5f8ef; font-size:11px; font-weight:650; white-space:nowrap; }
-.m-hero-actions { align-items:flex-start; gap:10px 23px; margin-top:26px; }
-.m-hero-primary { flex:0 1 260px; min-width:0; max-width:100%; }
-.m-hero-primary>.m-button { width:100%; justify-content:space-between; gap:25px; min-height:64px; padding:12px 18px; text-align:left; }
-.m-hero-primary>.m-button>span { display:grid; gap:5px; }
-.m-hero-primary strong { font-size:14px; font-weight:700; }
-.m-hero-primary small { color:#d3dfc8; font-size:11px; line-height:1.4; font-weight:500; letter-spacing:0; }
-.m-hero-primary>.m-button>svg { flex:none; }
-.m-hero-primary .m-hero-note { align-items:flex-start; gap:7px; max-width:310px; margin-top:12px; font-size:12px; font-weight:500; line-height:1.6; }
-.m-hero-note>svg { flex:none; margin-top:2px; }
-.m-hero-secondary { display:inline-flex; align-items:center; justify-content:center; gap:9px; min-height:64px; padding:10px 0; color:#34462b; font-size:13px; font-weight:650; text-decoration:underline; text-decoration-color:#a8b89a; text-underline-offset:5px; }
-.m-hero-secondary:hover { text-decoration-color:currentColor; }
+.m-hero-actions { align-items:stretch; gap:12px; max-width:430px; margin-top:26px; }
+.m-hero-actions>.m-button { flex:1 1 180px; justify-content:space-between; min-height:48px; padding:13px 17px; gap:16px; font-size:13px; white-space:nowrap; }
+.m-hero-secondary { color:#34462b; }
+.m-hero-secondary:hover { background:#f7f8f4; }
+.m-hero-context { display:flex; flex-wrap:wrap; align-items:center; gap:6px 16px; margin-top:15px; color:#666e60; font-size:12px; line-height:1.6; }
+.m-hero-context>.m-hero-note { gap:6px; margin:0; font-size:inherit; font-weight:400; }
 .m-kicker { font-size:10px; letter-spacing:.095em; }
 .m-button { border-radius:10px; letter-spacing:-.015em; }
 .m-button-dark { box-shadow:inset 0 1px 0 #ffffff1a,0 3px 0 #171a160d; }
@@ -147,6 +142,7 @@
 
 @media(max-width:1100px) {
   .m-hero { gap:30px; }.fx-hero-stage { min-height:510px; }
+  .m-hero h1 { font-size:clamp(40px,5.1vw,56px); }
   .fx-bento { grid-template-columns:minmax(0,1.3fr) minmax(0,1fr); }
   .fx-bento-feature { padding:26px; }.fx-bento-card { padding:23px; }
   .m-age-glyph { height:150px; }
@@ -155,12 +151,10 @@
 }
 @media(max-width:760px) {
   .m-hero { padding-top:28px; padding-bottom:38px; gap:26px; }
-  .m-hero h1 { margin:18px 0; font-size:clamp(36px,9.8vw,68px); letter-spacing:-.06em; }
+  .m-hero h1 { margin:18px 0; font-size:clamp(36px,8.5vw,60px); letter-spacing:-.055em; }
   .m-hero h1 em { white-space:normal; font-size:.96em; }
-  .m-hero-copy>p { max-width:500px; font-size:16px; line-height:1.6; }
-  .m-hero-actions { margin-top:22px; gap:4px 22px; }
-  .m-hero-primary .m-hero-note { font-size:12px; max-width:340px; }
-  .m-hero-secondary { min-height:48px; }
+  .m-hero-copy>p { max-width:40ch; font-size:16px; line-height:1.6; }
+  .m-hero-actions { margin-top:22px; }
   .fx-hero-stage { min-height:450px; border-radius:23px; }
   .fx-hero-stage .m-stage-object { inset:10% 6% 16%; }
   .fx-hero-stage .m-stage-card { left:16px; right:16px; bottom:15px; padding:14px 16px; }
@@ -190,9 +184,7 @@
   .m-hero-eyebrow .m-kicker { font-size:10px; letter-spacing:.08em; }
   .m-hero-age { font-size:10px; min-height:26px; }
   .m-hero-actions { display:grid; grid-template-columns:minmax(0,1fr); }
-  .m-hero-primary>.m-button { width:100%; }
-  .m-hero-primary small { font-size:12px; }
-  .m-hero-secondary { justify-self:center; }
+  .m-hero-actions>.m-button { justify-content:space-between; font-size:14px; }
   .fx-hero-stage { min-height:400px; }
   .fx-orbits { --orbit-radius:114px!important; }
   .fx-hero-stage .m-stage-label { top:18px; left:16px; padding:8px 9px; font-size:8px; letter-spacing:.02em; }

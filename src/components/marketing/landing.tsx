@@ -23,11 +23,12 @@ export function LandingPage({ locale }: { locale: Locale }) {
         <h1>{copy.heroLead}<br /><em>{copy.heroAccent}</em></h1>
         <p>{copy.heroDescription}</p>
         <div className="m-hero-actions">
-          <div className="m-hero-primary">
-            <Link href="/demo/lab" className="m-button m-button-dark fx-shimmer" aria-label={copy.heroAction} aria-describedby="hero-mission-details hero-demo-note"><span><strong>{copy.heroAction}</strong><small id="hero-mission-details">{copy.heroMission}</small></span><ArrowUpRight size={20} aria-hidden="true" /></Link>
-            <div className="m-hero-note" id="hero-demo-note"><ShieldCheck size={15} aria-hidden="true" /><span>{copy.heroNote}</span></div>
-          </div>
-          <Link href="#method" className="m-hero-secondary">{copy.heroSecondary}<ArrowRight size={17} aria-hidden="true" /></Link>
+          <Link href="/demo/lab" className="m-button m-button-dark m-hero-primary fx-shimmer" aria-describedby="hero-mission-details hero-demo-note">{copy.heroAction}<ArrowUpRight size={18} aria-hidden="true" /></Link>
+          <Link href="#method" className="m-button m-button-ghost m-hero-secondary">{copy.heroSecondary}<ArrowRight size={18} aria-hidden="true" /></Link>
+        </div>
+        <div className="m-hero-context">
+          <span id="hero-mission-details">{copy.heroMission}</span>
+          <span className="m-hero-note" id="hero-demo-note"><ShieldCheck size={14} aria-hidden="true" /><span>{copy.heroNote}</span></span>
         </div>
       </div>
       <div className="m-hero-stage fx-hero-stage">

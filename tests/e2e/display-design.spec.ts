@@ -42,15 +42,28 @@ test('marketing languages have correct document language, links and localized st
   }
 });
 
-test('marketing and product pages fit a narrow viewport', async ({ page }) => {
+test('marketing and product pages fit mobile and tablet viewports', async ({ page }) => {
   test.setTimeout(90000);
   await page.emulateMedia({ reducedMotion: 'reduce' });
-  for (const width of [320, 390]) {
+  for (const width of [320, 390, 560, 640, 768, 1024]) {
     await page.setViewportSize({ width, height: 844 });
-    for (const route of ['/', '/en', '/ru', '/blog', '/ru/blog', '/programs', '/approach', '/trust', '/portal']) {
+    const routes = width > 390 ? ['/', '/en', '/ru'] : ['/', '/en', '/ru', '/blog', '/ru/blog', '/programs', '/approach', '/trust', '/portal'];
+    for (const route of routes) {
       await page.goto(route);
       const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
       expect(overflow, `Horizontal overflow on ${route} at ${width}px`).toBeLessThanOrEqual(1);
+      if (['/', '/en', '/ru'].includes(route)) {
+        const actions = page.locator('.m-hero-actions > a');
+        await expect(actions).toHaveCount(2);
+        for (const action of await actions.all()) {
+          const bounds = await action.boundingBox();
+          expect(bounds?.height, `Hero touch target on ${route} at ${width}px`).toBeGreaterThanOrEqual(44);
+        }
+        if (process.env.VISUAL_AUDIT === '1') {
+          await expect.poll(() => page.locator('.m-stage-object img').evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
+          await page.screenshot({ path: `test-results/hero-${route === '/' ? 'es' : route.slice(1)}-${width}.png` });
+        }
+      }
       if (route === '/portal') {
         const inset = await page.locator('.p-heading-mascot').evaluate(heading => {
           const content = heading.querySelector(':scope > div:first-child');
