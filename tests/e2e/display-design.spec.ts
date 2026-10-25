@@ -238,6 +238,12 @@ test('mobile header opens localized navigation and keeps disclosures independent
     await expect(nav).toBeHidden();
     expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(1);
   }
+  await page.setViewportSize({ width: 667, height: 320 });
+  await page.goto('/');
+  await page.locator('.m-mobile-menu summary').click();
+  const demo = page.locator('.m-mobile-menu-cta');
+  await demo.scrollIntoViewIfNeeded();
+  await expect(demo).toBeInViewport({ ratio: 1 });
 });
 
 test('English policy and demo navigation keeps readers in English', async ({ page }) => {

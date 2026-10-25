@@ -160,6 +160,9 @@
   top:100%;
   left:0;
   right:0;
+  max-height:calc(100dvh - 70px);
+  overflow-y:auto;
+  overscroll-behavior:contain;
   display:grid;
   gap:4px;
   padding:10px 22px 18px;
