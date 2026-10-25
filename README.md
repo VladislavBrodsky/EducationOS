@@ -8,6 +8,8 @@ Python owns the application: FastAPI REST APIs, Pydantic contracts, permission/c
 
 The public website and the original Inventors Lab demo remain separate from the new learner portal. The portal has 15 starter activities across Programming, Science, Mathematics, Language & Writing, and Arts & Design, plus three interactive Anatomy discovery labs, with editable practice code, activity feedback, local drafts, reflections, progress, and export/reset. The original demo retains five age stages and seven TRIZ steps. Demonstration notes stay in the browser tab's session storage; no learner notes are sent to a server. FastAPI supplies the original demo's versioned curriculum, with a clearly labeled offline fallback.
 
+The new marketing landing and Curiosity Journal are available in Spanish (`/`, `/blog`), English (`/en`, `/en/blog`), and Russian (`/ru`, `/ru/blog`). Four stories are localized in all three languages. The learner demo, remaining marketing pages, and legal text are still in English; see the [marketing v2 audit, architecture, and roadmap](docs/MARKETING_V2_ROADMAP.md) for the next translation and editorial stages.
+
 **Synthetic demonstration only. Real enrollment and learner-facing generative AI remain closed in code.** There is no public session-issuance or asserted-consent endpoint. The development seed is synthetic and refuses production. The frontend is now live on separate portal and marketing services; see [verified deployment status](docs/DEPLOYMENT_STATUS.md). Production accounts and the Python service were not launched. Hosting uses explicit CLI releases independently of the repository review.
 
 ## Run locally

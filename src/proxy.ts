@@ -18,6 +18,11 @@ export function proxy(request: NextRequest) {
   const route = resolvePortalRoute(incomingHost, request.nextUrl.pathname);
   // Never trust a client-supplied value when the layout chooses its link base.
   requestHeaders.set(PORTAL_HOST_HEADER, String(route.portalHost));
+  const pathname = request.nextUrl.pathname;
+  const marketingLocale = route.portalHost ? 'en' : pathname === '/' || pathname === '/blog' || pathname.startsWith('/blog/')
+    ? 'es'
+    : pathname === '/ru' || pathname.startsWith('/ru/') ? 'ru' : 'en';
+  requestHeaders.set('x-educationos-locale', marketingLocale);
   const options = { request: { headers: requestHeaders } };
   let response: NextResponse;
   if (route.action === 'next') {

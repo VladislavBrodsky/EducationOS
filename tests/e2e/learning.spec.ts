@@ -16,8 +16,8 @@ test('public website opens the current demo and all seven steps produce local ev
   const mutations: string[] = [];
   page.on('request', request => { if (request.url().includes('/api/') && request.method() !== 'GET') mutations.push(request.url()); });
   await page.goto('/');
-  await expect(page.getByRole('heading', { name: /Big ideas/ })).toBeVisible();
-  await page.getByRole('link', { name: 'Explore Inventors Lab', exact: true }).click();
+  await expect(page.getByRole('heading', { name: /La curiosidad/ })).toBeVisible();
+  await page.getByRole('link', { name: 'Explorar la misión', exact: true }).click();
   await expect(page.getByRole('heading', { name: /A good day/ })).toBeVisible();
   await expect(page.getByRole('status').filter({ hasText: 'Published lesson ready' })).toBeVisible();
   await page.getByRole('link', { name: 'Explore the mission', exact: true }).click();

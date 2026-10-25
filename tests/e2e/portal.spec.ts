@@ -5,22 +5,22 @@ import { readFile } from 'node:fs/promises';
 test('the visual journal and subject artwork load on narrow screens without horizontal overflow', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/');
-  await expect(page.getByRole('link', { name: 'Journal', exact: true })).toBeVisible();
-  await expect.poll(() => page.locator('.learning-hero-art img').evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
+  await expect(page.getByRole('navigation', { name: 'Navegación principal' }).getByRole('link', { name: 'Revista' })).toBeVisible();
+  await expect.poll(() => page.locator('.m-stage-object img').evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
   for (const path of ['/programs', '/approach', '/trust']) {
     await page.goto(path);
     await expect.poll(() => page.locator('.page-hero-scene-art img').evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), path).toBe(true);
   }
   await page.goto('/');
-  await page.getByRole('link', { name: 'Journal', exact: true }).click();
-  await expect(page.getByRole('heading', { name: 'Little questions Big discoveries' })).toBeVisible();
-  await expect(page.locator('.journal-card')).toHaveCount(4);
-  await expect.poll(() => page.locator('.journal-card-image img').first().evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
+  await page.getByRole('navigation', { name: 'Navegación principal' }).getByRole('link', { name: 'Revista' }).click();
+  await expect(page.getByRole('heading', { name: 'Pequeñas preguntas. Grandes descubrimientos' })).toBeVisible();
+  await expect(page.locator('.m-story')).toHaveCount(4);
+  await expect.poll(() => page.locator('.m-story-image img').first().evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-  await page.getByRole('link', { name: /Math you can turn, fold, and explain/ }).click();
-  await expect(page.getByRole('heading', { name: 'Math you can turn, fold, and explain' })).toBeVisible();
-  await expect.poll(() => page.locator('.journal-article-image img').evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
+  await page.getByRole('link', { name: /Matemáticas que se pueden girar y doblar/ }).click();
+  await expect(page.getByRole('heading', { name: 'Matemáticas que se pueden girar y doblar' })).toBeVisible();
+  await expect.poll(() => page.locator('.m-article-art img').evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 
   await page.goto('/portal');
@@ -181,7 +181,7 @@ test('the app host serves only the portal and keeps clean paths, policy redirect
 
   const publicHome = await request.get('/', { headers: { Host: 'educationos.space', 'x-educationos-portal-host': 'true' } });
   expect(publicHome.status()).toBe(200);
-  expect(await publicHome.text()).toContain('Big ideas');
+  expect(await publicHome.text()).toContain('La curiosidad');
   expect(await publicHome.text()).not.toMatch(/<h1[^>]*>What will you discover\?/);
 });
 

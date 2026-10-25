@@ -1,10 +1,13 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
-import { DemoCTA, SiteShell } from '@/components/site-shell';
-import { JournalCards } from '@/components/journal-cards';
+import { JournalIndex } from '@/components/marketing/journal';
+import { marketingCopy } from '@/lib/marketing-i18n';
+import { SITE_URL } from '@/lib/site';
 
-export const metadata: Metadata = { title: 'The Curiosity Journal', description: 'Ideas for exploring physics, mathematics, and making with curious young minds', alternates: { canonical: '/blog' } };
+export const metadata: Metadata = {
+  title: marketingCopy.es.blogTitle,
+  description: marketingCopy.es.blogDescription,
+  alternates: { canonical: '/blog', languages: { es: '/blog', en: '/en/blog', ru: '/ru/blog', 'x-default': '/blog' } },
+  openGraph: { locale: 'es_MX', url: `${SITE_URL}/blog`, title: marketingCopy.es.blogTitle, description: marketingCopy.es.blogDescription },
+};
 
-export default function BlogPage() {
-  return <SiteShell><div className="container"><section className="page-hero page-hero-scene page-hero-journal"><div className="page-hero-scene-art"><Image src="/images/geometry-mascot.webp" alt="" fill priority sizes="(max-width: 760px) 100vw, 55vw" /></div><div className="page-hero-scene-copy"><p className="eyebrow">THE CURIOSITY JOURNAL</p><h1>Little questions<br />Big discoveries</h1><p className="section-lead">Curious stories and small experiments in physics, shape, and flight—made to try together</p></div></section><JournalCards /></div><DemoCTA small /></SiteShell>;
-}
+export default function BlogPage() { return <JournalIndex locale="es" />; }
