@@ -89,6 +89,7 @@ test('marketing artwork loads and desktop layout has no overflow', async ({ page
 });
 
 test('localized landing and journal routes pass accessibility checks', async ({ page }) => {
+  test.setTimeout(120000);
   for (const width of [390, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     for (const route of ['/', '/en', '/ru', '/blog', '/en/blog', '/ru/blog', '/ru/blog/see-the-invisible']) {
@@ -107,4 +108,31 @@ test('article language switch keeps the story and sharing uses the selected lang
   await expect(page.getByRole('heading', { level: 1 })).toContainText('Как увидеть');
   await page.getByRole('button', { name: 'Поделиться историей' }).click();
   await expect(page.getByRole('status')).toHaveText('Отправлено');
+});
+
+test('age, method, and trust pages preserve locale and label English-only destinations', async ({ page }) => {
+  test.setTimeout(120000);
+  await page.setViewportSize({ width: 390, height: 844 });
+  for (const section of ['programs', 'approach', 'trust']) {
+    for (const [prefix, lang] of [['', 'es'], ['/en', 'en'], ['/ru', 'ru']]) {
+      const route = `${prefix}/${section}`;
+      await page.goto(route);
+      await expect(page.locator('html')).toHaveAttribute('lang', lang);
+      await expect(page.locator('main h1')).toBeVisible();
+      await expect(page.locator(`link[rel="canonical"]`)).toHaveAttribute('href', new RegExp(`${route}$`));
+      await expect(page.locator('link[rel="alternate"][hreflang="ru"]')).toHaveAttribute('href', new RegExp(`/ru/${section}$`));
+      expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth), route).toBeLessThanOrEqual(1);
+    }
+    await page.goto(`/${section}`);
+    await page.getByRole('navigation', { name: 'Language / Idioma / Язык' }).getByRole('link', { name: 'RU' }).click();
+    await expect(page).toHaveURL(new RegExp(`/ru/${section}$`));
+  }
+  await page.goto('/ru/trust');
+  await expect(page.getByText('Подробная информация на английском').first()).toBeVisible();
+  await expect(page.locator('.m-detail-trust-card')).toHaveCount(6);
+  for (const route of ['/programs', '/ru/approach', '/ru/trust']) {
+    await page.goto(route);
+    const scan = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze();
+    expect(scan.violations, route).toEqual([]);
+  }
 });

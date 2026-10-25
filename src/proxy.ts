@@ -19,7 +19,7 @@ export function proxy(request: NextRequest) {
   // Never trust a client-supplied value when the layout chooses its link base.
   requestHeaders.set(PORTAL_HOST_HEADER, String(route.portalHost));
   const pathname = request.nextUrl.pathname;
-  const marketingLocale = route.portalHost ? 'en' : pathname === '/' || pathname === '/blog' || pathname.startsWith('/blog/')
+  const marketingLocale = route.portalHost ? 'en' : ['/', '/programs', '/approach', '/trust', '/blog'].includes(pathname) || pathname.startsWith('/blog/')
     ? 'es'
     : pathname === '/ru' || pathname.startsWith('/ru/') ? 'ru' : 'en';
   requestHeaders.set('x-educationos-locale', marketingLocale);

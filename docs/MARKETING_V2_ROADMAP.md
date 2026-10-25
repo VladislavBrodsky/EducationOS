@@ -10,14 +10,15 @@ The [Magic UI component catalogue](https://magicui.design/docs/components) sugge
 
 The new visual system uses an editorial split hero, a single lime 3D-style stage, numbered teaching cards, a dark age-group panel, and image-led journal cards. Motion uses CSS transforms only, respects reduced-motion preferences, and does not gate reading or navigation. The “viral” mechanism is a clear share action on each article and a memorable visual hook; growth claims are not implied.
 
-## Implemented in stage 1
+## Implemented so far
 
 | Surface | Route | Language |
 | --- | --- | --- |
 | Landing | `/`, `/en`, `/ru` | Spanish default, English, Russian |
 | Journal index | `/blog`, `/en/blog`, `/ru/blog` | Spanish default, English, Russian |
 | Four articles | `/blog/:slug`, `/en/blog/:slug`, `/ru/blog/:slug` | Spanish default, English, Russian |
-| Learner demo, legal, trust, other legacy marketing pages | Existing routes | English for now, visibly disclosed on the new marketing pages |
+| Programs, learning approach, trust center | `/programs`, `/approach`, `/trust` and `/en`, `/ru` equivalents | Spanish default, English, Russian |
+| Learner demo, safety, legal and accessibility pages | Existing routes | English for now, visibly disclosed on localized marketing pages |
 
 Content comes from typed dictionaries in `src/lib/marketing-i18n.ts` and `src/lib/marketing-journal.ts`. Language selection uses explicit URLs instead of auto-redirecting browser preferences, so shared links are stable. The proxy sends a trusted locale header to the root document for its `lang` attribute. Pages have locale-specific titles, descriptions, canonicals, `hreflang` alternatives, and sitemap entries. Spanish default URLs are unprefixed. Marketing pages are server components; the only client-side marketing behavior is the small native share action. Journal stories are reviewed files in Git, with no public submission or comment endpoint.
 
@@ -44,11 +45,11 @@ The backend remains Python/FastAPI with Pydantic, SQLAlchemy, Alembic, PostgreSQ
 
 1. **Stage 0 — audit and baseline (done):** inventory active routes, assets, stack, child-safety boundary, and Magic UI patterns. Record desktop/mobile baseline and real performance after staging deployment.
 2. **Stage 1 — first public release (deployed 25 October 2026):** new landing and article experience, three language routes, 3D-style hero, share action, SEO metadata, and accessible reduced-motion behavior. The build, lint, TypeScript, icon policy, browser, route, image, and mobile-overflow checks passed. Editorial review of Spanish and Russian copy remains open in draft PR #3.
-3. **Stage 2 — translation completion:** translate programs, approach, trust, safety, privacy, terms, accessibility, demo, and guardian preview with specialist review of legal/safety wording. Ensure every language switch preserves the equivalent page or clearly labels an English fallback. Gate: native-speaker editorial review and complete `hreflang` reciprocity.
+3. **Stage 2 — translation completion (in progress):** programs, approach, and trust now have equivalent Spanish, English, and Russian routes, consistent navigation, localized metadata, and explicit labels for English-only destinations. Safety, privacy, terms, accessibility, demo, and guardian preview still need specialist review and translation. Gate: native-speaker editorial review and complete `hreflang` reciprocity across every translated page.
 4. **Stage 3 — content operations:** establish a Python content schema/API only if multiple editors need scheduled publication. Add draft/review/publish roles, immutable article revisions, image licensing records, previews, and a separate adult-facing editorial workflow. Public content remains read-only and cacheable. Gate: editorial approval audit and rollback test.
 5. **Stage 4 — measured polish:** evaluate whether a lightweight 3D scene adds value over the current layered artwork. Enforce a static fallback, responsive image budgets, and no animation dependency. Add consent-aware aggregate analytics only after privacy review. Gate: WCAG 2.2 AA checks plus field Core Web Vitals targets of LCP ≤2.5 s, INP ≤200 ms, CLS ≤0.1 at the 75th percentile; these are targets, not current measurements.
 6. **Stage 5 — production rollout:** use a staging preview, editorial/language sign-off, smoke tests on all locale routes, and a controlled frontend release. Preserve the private Python API and child-data gates. Verify the live URL, HTTPS, redirects, and monitoring after deployment; do not mark a local build as a live release.
 
 ## Immediate action plan
 
-Review the live desktop/mobile screenshots and Spanish/Russian copy with native speakers, then merge draft PR #3 after editorial sign-off. Next, complete specialist translation of legal, trust, safety, and learner pages; keep the private Python API and child-data gates unchanged. The marketing-only release is live and its route, redirect, image, and host-separation checks are recorded in `docs/DEPLOYMENT_STATUS.md`.
+Review the live desktop/mobile screenshots and Spanish/Russian copy with native speakers, then merge draft PR #3 after editorial sign-off. Next, complete specialist translation of safety, legal, accessibility, and learner pages; keep the private Python API and child-data gates unchanged. The marketing release evidence is recorded in `docs/DEPLOYMENT_STATUS.md`.
