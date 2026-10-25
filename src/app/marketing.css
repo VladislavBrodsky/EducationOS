@@ -29,6 +29,7 @@
   font-weight:700;
   letter-spacing:-.075em;
   line-height:1;
+  min-height:44px;
   color:#181b16;
 }
 
@@ -58,12 +59,22 @@
 }
 
 .m-nav a {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:44px;
+  min-height:44px;
   padding:10px 0;
   transition:color .2s;
 }
 
 .m-nav a:hover,.m-nav a[aria-current=page] {
   color:#587624;
+}
+
+.m-nav a[aria-current=page] {
+  text-decoration:underline;
+  text-underline-offset:6px;
 }
 
 .m-header-actions {
@@ -81,12 +92,12 @@
 .m-language a {
   display:grid;
   place-items:center;
-  min-width:37px;
-  min-height:31px;
+  min-width:44px;
+  min-height:44px;
   padding:0 5px;
   border-radius:100px;
   color:#60675a;
-  font-size:10px;
+  font-size:11px;
   font-weight:700;
   letter-spacing:.02em;
 }
@@ -106,7 +117,7 @@
   background:#d5fc51;
   font-size:12px;
   font-weight:700;
-  min-height:43px;
+  min-height:44px;
   transition:transform .2s,background .2s;
 }
 
@@ -797,7 +808,7 @@
   white-space:nowrap;
 }
 
-.m-story h3 {
+.m-story :is(h2,h3) {
   margin:25px 0 10px;
   font-size:27px;
   font-weight:600;
@@ -930,8 +941,14 @@
 .m-footer-links {
   display:grid;
   grid-template-columns:repeat(2,minmax(110px,1fr));
-  gap:12px 35px;
-  font-size:12px;
+  gap:0 35px;
+  font-size:13px;
+}
+
+.m-footer-links a {
+  display:flex;
+  align-items:center;
+  min-height:44px;
 }
 
 .m-footer-links a:hover {
@@ -1029,7 +1046,7 @@
   padding:25px;
 }
 
-.m-journal-index .m-story h3 {
+.m-journal-index .m-story h2 {
   font-size:25px;
   margin-top:22px;
 }
@@ -1227,9 +1244,6 @@
     width:31px;
     height:31px;
   }
-  .m-language a {
-    min-width:33px;
-  }
   .m-nav {
     order:3;
     width:100%;
@@ -1237,7 +1251,7 @@
     gap:12px;
     min-height:44px;
     overflow:auto;
-    font-size:11px;
+    font-size:12px;
   }
   .m-nav a {
     white-space:nowrap;
@@ -1436,7 +1450,7 @@
     right:7%;
     transform:scale(.85);
   }
-  .m-story h3 {
+  .m-story :is(h2,h3) {
     font-size:23px;
   }
   .m-journal-index .m-story {
@@ -1577,6 +1591,10 @@
 .m-detail-trust-card .m-inline-link { margin-top:auto; }
 .m-detail-english-note { display:block; margin-top:8px; color:#687363; font-size:11px; }
 .m-detail-trust-grid+.m-detail-notice { margin-bottom:80px; }
+@media(max-width:380px) {
+  .m-brand { gap:6px; font-size:17px; }
+  .m-brand-symbol { width:27px; height:27px; }
+}
 @media(max-width:900px) {
   .m-detail-hero { gap:30px; }
   .m-detail-hero-art { min-height:390px; }

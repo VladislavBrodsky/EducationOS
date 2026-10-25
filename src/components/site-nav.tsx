@@ -4,10 +4,10 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 const links = [
-  { href: '/programs', label: 'Programs' },
-  { href: '/approach', label: 'Approach' },
-  { href: '/blog', label: 'Journal' },
-  { href: '/trust', label: 'Families' },
+  { href: '/en/programs', label: 'Programs' },
+  { href: '/en/approach', label: 'Approach' },
+  { href: '/en/blog', label: 'Journal' },
+  { href: '/en/trust', label: 'Families' },
 ];
 
 export function SiteNav() {

@@ -4,7 +4,7 @@ import AxeBuilder from '@axe-core/playwright';
 const displayRoutes = [
   '/', '/en', '/ru', '/blog', '/en/blog', '/ru/blog',
   '/blog/see-the-invisible', '/en/blog/math-you-can-move', '/ru/blog/paper-glider-experiment',
-  '/programs', '/approach', '/trust', '/demo', '/demo/lab', '/demo/guardian', '/demo/portfolio',
+  '/programs', '/approach', '/trust', '/privacy', '/safety', '/terms', '/accessibility', '/demo', '/demo/lab', '/demo/guardian', '/demo/portfolio',
   '/portal', '/portal/subjects', '/portal/projects', '/portal/labs', '/portal/progress', '/portal/guardian',
 ];
 
@@ -103,7 +103,7 @@ test('localized landing and journal routes pass accessibility checks', async ({ 
 test('article language switch keeps the story and sharing uses the selected language', async ({ page }) => {
   await page.addInitScript(() => Object.defineProperty(navigator, 'share', { configurable: true, value: async () => undefined }));
   await page.goto('/blog/see-the-invisible');
-  await page.getByRole('navigation', { name: 'Language / Idioma / Язык' }).getByRole('link', { name: 'RU' }).click();
+  await page.getByRole('navigation', { name: 'Language / Idioma / Язык' }).getByRole('link', { name: 'Русский' }).click();
   await expect(page).toHaveURL(/\/ru\/blog\/see-the-invisible$/);
   await expect(page.getByRole('heading', { level: 1 })).toContainText('Как увидеть');
   await page.getByRole('button', { name: 'Поделиться историей' }).click();
@@ -124,7 +124,7 @@ test('age, method, and trust pages preserve locale and label English-only destin
       expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth), route).toBeLessThanOrEqual(1);
     }
     await page.goto(`/${section}`);
-    await page.getByRole('navigation', { name: 'Language / Idioma / Язык' }).getByRole('link', { name: 'RU' }).click();
+    await page.getByRole('navigation', { name: 'Language / Idioma / Язык' }).getByRole('link', { name: 'Русский' }).click();
     await expect(page).toHaveURL(new RegExp(`/ru/${section}$`));
   }
   await page.goto('/ru/trust');
@@ -145,8 +145,61 @@ test('landing cards open the matching detail in the selected language', async ({
 
   await page.goto('/ru');
   await page.locator('.m-method-card').nth(1).click();
-  await expect(page).toHaveURL(/\/ru\/approach#step-2$/);
-  await expect(page.locator('#step-2 h2')).toHaveText('Найти противоречие');
+  await expect(page).toHaveURL(/\/ru\/approach#step-3$/);
+  await expect(page.locator('#step-3 h2')).toHaveText('Представить варианты');
+
+  for (const [card, destination] of [
+    ['Observar', 'Observar'],
+    ['Imaginar', 'Imaginar posibilidades'],
+    ['Experimentar', 'Hacer una prueba justa'],
+    ['Explicar', 'Reflexionar sobre la evidencia'],
+  ]) {
+    await page.goto('/');
+    await page.locator('.m-method-card').filter({ has: page.getByRole('heading', { name: card, exact: true }) }).click();
+    await expect(page.getByRole('heading', { name: destination, exact: true })).toBeVisible();
+  }
+});
+
+test('marketing navigation has comfortable targets without crowding narrow screens', async ({ page }) => {
+  for (const width of [320, 390, 768, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    for (const route of ['/', '/en', '/ru']) {
+      await page.goto(route);
+      const metrics = await page.locator('.m-header a, .m-footer-links a').evaluateAll(links => links.filter(link => link.getClientRects().length > 0).map(link => {
+        const box = link.getBoundingClientRect();
+        return { label: link.getAttribute('aria-label') ?? link.textContent, width: box.width, height: box.height };
+      }));
+      for (const metric of metrics) {
+        expect(metric.width, `${route}: ${metric.label} at ${width}px`).toBeGreaterThanOrEqual(44);
+        expect(metric.height, `${route}: ${metric.label} at ${width}px`).toBeGreaterThanOrEqual(44);
+      }
+      expect(await page.locator('.m-nav').evaluate(nav => nav.scrollWidth - nav.clientWidth)).toBeLessThanOrEqual(1);
+      const brand = await page.locator('.m-header .m-brand').boundingBox();
+      const languages = await page.locator('.m-language').boundingBox();
+      expect(brand!.x + brand!.width).toBeLessThanOrEqual(languages!.x);
+      expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(1);
+    }
+  }
+});
+
+test('English policy and demo navigation keeps readers in English', async ({ page }) => {
+  for (const route of ['/privacy', '/safety', '/terms', '/accessibility']) {
+    await page.goto(route);
+    await expect(page.getByRole('navigation', { name: 'Main navigation' }).getByRole('link', { name: 'Approach', exact: true })).toHaveAttribute('href', '/en/approach');
+    await expect(page.locator('.site-header .brand')).toHaveAttribute('href', '/en');
+  }
+  await page.goto('/demo');
+  await page.getByRole('link', { name: 'EducationOS home', exact: true }).click();
+  await expect(page).toHaveURL(/\/en$/);
+  await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+});
+
+test('journal headings describe the page hierarchy', async ({ page }) => {
+  await page.goto('/blog');
+  await expect(page.locator('.m-story h2')).toHaveCount(4);
+  await expect(page.locator('.m-story h3')).toHaveCount(0);
+  await page.goto('/');
+  await expect(page.locator('.m-story h3')).toHaveCount(3);
 });
 
 test('marketing pages expose a share image in each language', async ({ page }) => {

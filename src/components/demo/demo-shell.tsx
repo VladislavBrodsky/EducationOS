@@ -20,11 +20,11 @@ function Shell({ children }: { children: ReactNode }) {
   const program = AGE_PROGRAMS.find((item) => item.ageBand === session.ageBand)!;
   return <div className="demo-shell">
     <aside className="demo-sidebar" aria-label="Demo navigation">
-      <Link href="/" className="demo-brand" aria-label="EducationOS home"><span className="demo-brand-mark" aria-hidden="true"><Sprout size={22} /></span>Education<span>OS</span></Link>
+      <Link href="/en" className="demo-brand" aria-label="EducationOS home"><span className="demo-brand-mark" aria-hidden="true"><Sprout size={22} /></span>Education<span>OS</span></Link>
       <div className="demo-sidebar-label">THE LEARNING SPACE</div>
       <nav>{navigation.map(({ href, label, icon: Icon }) => <Link key={href} href={href} className={`demo-nav-link ${pathname === href ? "is-active" : ""}`} aria-current={pathname === href ? "page" : undefined}><Icon size={19} aria-hidden="true" /><span>{label}</span>{pathname === href && <span className="demo-nav-dot" />}</Link>)}</nav>
-      <div className="demo-sidebar-bottom"><div className="demo-mini-orbit" aria-hidden="true"><FlaskConical size={24} /></div><strong>Small experiments.<br />Bigger possibilities.</strong><p>One question is a good place to start.</p><Link href="/approach">Our learning approach <ArrowUpRight size={15} aria-hidden="true" /></Link></div>
-      <Link className="demo-back-home" href="/">Back to EducationOS <ArrowUpRight size={14} aria-hidden="true" /></Link>
+      <div className="demo-sidebar-bottom"><div className="demo-mini-orbit" aria-hidden="true"><FlaskConical size={24} /></div><strong>Small experiments.<br />Bigger possibilities.</strong><p>One question is a good place to start.</p><Link href="/en/approach">Our learning approach <ArrowUpRight size={15} aria-hidden="true" /></Link></div>
+      <Link className="demo-back-home" href="/en">Back to EducationOS <ArrowUpRight size={14} aria-hidden="true" /></Link>
     </aside>
     <div className="demo-workspace">
       <header className="demo-topbar"><div><span className="demo-status-dot" /><span>Interactive demo</span><span className="demo-topbar-divider">/</span><span className="demo-world-label">{program.worldName}</span></div><label className="demo-age-select">Explore an age group<select aria-label="Explore an age group" value={session.ageBand} onChange={(event) => setAgeBand(event.target.value as AgeBand)} disabled={!ready}>{AGE_PROGRAMS.map((item) => <option key={item.ageBand} value={item.ageBand}>{item.name} · ages {item.ageBand.replace("-", "–")}</option>)}</select></label></header>

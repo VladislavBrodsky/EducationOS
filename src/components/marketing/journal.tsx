@@ -6,12 +6,13 @@ import { getMarketingArticle, marketingJournal } from '@/lib/marketing-journal';
 import { JournalShare } from '@/components/journal-share';
 import { MarketingShell } from './marketing-shell';
 
-export function JournalGrid({ locale, limit }: { locale: Locale; limit?: number }) {
+export function JournalGrid({ locale, limit, headingLevel = 3 }: { locale: Locale; limit?: number; headingLevel?: 2 | 3 }) {
   const copy = marketingCopy[locale];
   const articles = limit ? marketingJournal[locale].slice(0, limit) : marketingJournal[locale];
+  const Heading = headingLevel === 2 ? 'h2' : 'h3';
   return <div className="m-journal-grid">{articles.map(article => <Link href={localizedPath(locale, `blog/${article.slug}`)} className="m-story" key={article.slug}>
     <div className="m-story-image"><Image src={article.image} alt={article.imageAlt} fill sizes="(max-width: 720px) 100vw, 33vw" /></div>
-    <div className="m-story-body"><div className="m-story-meta"><span>{article.category}</span><span><Clock3 size={13} aria-hidden="true" /> {article.minutes} MIN</span></div><h3>{article.title}</h3><p>{article.description}</p><span className="m-story-link">{copy.readStory}<ArrowUpRight size={17} aria-hidden="true" /></span></div>
+    <div className="m-story-body"><div className="m-story-meta"><span>{article.category}</span><span><Clock3 size={13} aria-hidden="true" /> {article.minutes} MIN</span></div><Heading>{article.title}</Heading><p>{article.description}</p><span className="m-story-link">{copy.readStory}<ArrowUpRight size={17} aria-hidden="true" /></span></div>
   </Link>)}</div>;
 }
 
@@ -19,7 +20,7 @@ export function JournalIndex({ locale }: { locale: Locale }) {
   const copy = marketingCopy[locale];
   return <MarketingShell locale={locale} section="blog">
     <section className="m-journal-hero container"><div><span className="m-kicker"><BookOpen size={15} aria-hidden="true" /> {copy.blogTitle}</span><h1>{copy.blogLead}</h1><p>{copy.blogDescription}</p></div><div className="m-journal-hero-art" aria-hidden="true"><span className="m-journal-ring" /><Image src="/images/geometry-mascot.webp" alt="" fill priority sizes="(max-width: 720px) 70vw, 36vw" /></div></section>
-    <section className="container m-journal-index"><JournalGrid locale={locale} /></section>
+    <section className="container m-journal-index"><JournalGrid locale={locale} headingLevel={2} /></section>
   </MarketingShell>;
 }
 

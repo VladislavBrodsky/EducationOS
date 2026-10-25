@@ -52,4 +52,4 @@ The backend remains Python/FastAPI with Pydantic, SQLAlchemy, Alembic, PostgreSQ
 
 ## Immediate action plan
 
-Review the live desktop/mobile screenshots and Spanish/Russian copy with native speakers, then merge draft PR #3 after editorial sign-off. Next, complete specialist translation of safety, legal, accessibility, and learner pages; keep the private Python API and child-data gates unchanged. The marketing release evidence is recorded in `docs/DEPLOYMENT_STATUS.md`.
+The [page-by-page frontend audit](FRONTEND_UX_AUDIT.md) sets the next implementation sequence: correct navigation and target sizes, connect age selection to a coherent first learning session, complete reviewed language continuity, then polish evidence and measure production performance. The first navigation and ergonomics slice is implemented locally. Native-speaker review of Spanish/Russian copy and specialist review of policy translations remain release gates. The deployed marketing release evidence is recorded in `docs/DEPLOYMENT_STATUS.md`.

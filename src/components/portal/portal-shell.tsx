@@ -87,7 +87,7 @@ export function PortalShell({ children, appHost }: { children: ReactNode; appHos
         <div className="p-sidebar-bottom">
           <div className="p-sidebar-note"><span className="p-orbit-mark" aria-hidden="true"><Sprout size={24} strokeWidth={1.5} /></span><p>Follow a question.<br />Make something yours.</p></div>
           <Link href={navigation.href("/guardian")} className="p-guardian-link" aria-current={currentPath === "/guardian" ? "page" : undefined}><ShieldCheck size={19} strokeWidth={1.7} aria-hidden="true" /><span>For parents & guardians</span></Link>
-          <a href="https://educationos.space" className="p-public-link">EducationOS website <ArrowUpRight size={15} aria-hidden="true" /></a>
+          <a href="https://educationos.space/en" className="p-public-link">EducationOS website <ArrowUpRight size={15} aria-hidden="true" /></a>
         </div>
       </aside>
       <div className="p-app">

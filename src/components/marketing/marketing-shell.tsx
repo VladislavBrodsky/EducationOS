@@ -2,6 +2,8 @@ import Link from 'next/link';
 import { ArrowUpRight, Asterisk } from 'lucide-react';
 import { localizedPath, locales, marketingCopy, type Locale } from '@/lib/marketing-i18n';
 
+const languageNames = { es: 'Español', en: 'English', ru: 'Русский' } as const;
+
 export function MarketingShell({ locale, children, section = '' }: { locale: Locale; children: React.ReactNode; section?: string }) {
   const copy = marketingCopy[locale];
   const home = localizedPath(locale);
@@ -17,7 +19,7 @@ export function MarketingShell({ locale, children, section = '' }: { locale: Loc
         </nav>
         <div className="m-header-actions">
           <nav className="m-language" aria-label="Language / Idioma / Язык">
-            {locales.map(item => <Link key={item} href={localizedPath(item, section)} hrefLang={item} lang={item} aria-current={item === locale ? 'page' : undefined}>{item.toUpperCase()}</Link>)}
+            {locales.map(item => <Link key={item} href={localizedPath(item, section)} hrefLang={item} lang={item} aria-label={`${item.toUpperCase()} — ${languageNames[item]}`} title={languageNames[item]} aria-current={item === locale ? 'page' : undefined}>{item.toUpperCase()}</Link>)}
           </nav>
           <Link className="m-header-cta" href="/demo">{copy.demo}<ArrowUpRight size={16} aria-hidden="true" /></Link>
         </div>
