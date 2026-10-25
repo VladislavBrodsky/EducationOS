@@ -136,3 +136,15 @@ test('age, method, and trust pages preserve locale and label English-only destin
     expect(scan.violations, route).toEqual([]);
   }
 });
+
+test('landing cards open the matching detail in the selected language', async ({ page }) => {
+  await page.goto('/');
+  await page.locator('.m-age-card').nth(2).click();
+  await expect(page).toHaveURL(/\/programs#stage-3$/);
+  await expect(page.locator('#stage-3 h2')).toHaveText('Inventores');
+
+  await page.goto('/ru');
+  await page.locator('.m-method-card').nth(1).click();
+  await expect(page).toHaveURL(/\/ru\/approach#step-2$/);
+  await expect(page.locator('#step-2 h2')).toHaveText('Найти противоречие');
+});

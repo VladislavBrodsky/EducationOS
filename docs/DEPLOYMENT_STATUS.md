@@ -1,5 +1,13 @@
 # Live EducationOS frontend deployment
 
+## Core marketing localization on 25 October 2026
+
+The age-group, learning-method, and trust-center pages now share the editorial marketing design and have equivalent Spanish, English, and Russian routes. Railway marketing deployment `f07552c1-7073-4ab7-934f-30e687994b0d` reports `SUCCESS` from frontend-only source commit `0169680` (release tag `v0.6.0-preview.5`) on `codex/marketing-v2-i18n`. The exact upload has 124 files, excludes backend and environment files, and built with the pinned Node 24 Dockerfile. All six GitHub checks and 15 focused local browser checks passed.
+
+Live HTTPS checks returned 200 for all nine new routes, with matching document languages, localized titles, canonical URLs, and `es`/`en`/`ru`/`x-default` alternates. Desktop Spanish programs, mobile Russian approach, and mobile Spanish trust loaded without browser errors or horizontal overflow. The portal homepage still returned 200 with `noindex, nofollow`; Railway confirms its deployment stayed `89e503e6-63c0-4ef9-9f33-5e36ca49f950`. The new marketing release did not change the private Python staging API, DNS, or learner enrollment controls.
+
+Source inventory: [stage 2 manifest](deployment/marketing-stage2-manifest-2026-10-25.json). Verification record: [stage 2 evidence](deployment/marketing-stage2-2026-10-25.json). The marketing PR remains draft while Spanish and Russian copy awaits native-speaker editorial review. Safety, legal, accessibility, and learner demo pages still use English and are labeled as such in localized navigation.
+
 ## Marketing v2 release on 25 October 2026
 
 The Spanish-first landing page and trilingual Curiosity Journal are live at [educationos.space](https://educationos.space). Railway marketing deployment `aab2a994-d81a-4fc5-8fbf-2c3257427bbc` reports `SUCCESS` from a frontend-only snapshot of reviewed source commit `429bf9c` on branch `codex/marketing-v2-i18n`. The snapshot contains 119 files and no backend or environment files. The pinned Node 24 Dockerfile compiled the Next.js application and generated all 39 pages. Automatic GitHub deployment remains disabled; this was an explicit marketing-service upload.

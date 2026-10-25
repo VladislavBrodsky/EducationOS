@@ -9,7 +9,7 @@ test('the visual journal and subject artwork load on narrow screens without hori
   await expect.poll(() => page.locator('.m-stage-object img').evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
   for (const path of ['/programs', '/approach', '/trust']) {
     await page.goto(path);
-    await expect.poll(() => page.locator('.page-hero-scene-art img').evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
+    await expect.poll(() => page.locator('.m-detail-hero-art img').evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), path).toBe(true);
   }
   await page.goto('/');

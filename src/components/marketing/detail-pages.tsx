@@ -12,7 +12,7 @@ const trustIcons = [ShieldCheck, Eye, Users, LockKeyhole, FlaskConical, FileChec
 function DetailHero({ kicker, title, description, image }: { kicker: string; title: string; description: string; image: string }) {
   return <section className="m-detail-hero container">
     <div className="m-detail-hero-copy"><span className="m-kicker">{kicker}</span><h1>{title}</h1><p>{description}</p></div>
-    <div className="m-detail-hero-art page-hero-scene-art"><span className="m-detail-orbit" aria-hidden="true" /><Image src={image} alt="" fill priority sizes="(max-width: 760px) 90vw, 42vw" /></div>
+    <div className="m-detail-hero-art"><span className="m-detail-orbit" aria-hidden="true" /><Image src={image} alt="" fill priority sizes="(max-width: 760px) 90vw, 42vw" /></div>
   </section>;
 }
 
@@ -40,7 +40,7 @@ export function ApproachDetail({ locale }: { locale: Locale }) {
     <DetailHero kicker={copy.kicker} title={copy.title} description={copy.description} image="/images/flight-cutout.webp" />
     <div className="container m-detail-steps">{copy.steps.map((step, index) => {
       const Icon = methodIcons[index];
-      return <section className="m-detail-step" key={step.title}><div className="m-detail-step-top"><span>0{index + 1} / 07</span><Icon size={26} strokeWidth={1.5} aria-hidden="true" /></div><div><h2>{step.title}</h2><p>{step.body}</p></div></section>;
+      return <section className="m-detail-step" id={`step-${index + 1}`} key={step.title}><div className="m-detail-step-top"><span>0{index + 1} / 07</span><Icon size={26} strokeWidth={1.5} aria-hidden="true" /></div><div><h2>{step.title}</h2><p>{step.body}</p></div></section>;
     })}</div>
     <aside className="container m-detail-notice"><ShieldCheck size={24} aria-hidden="true" /><p>{copy.evidence}</p></aside>
     <DetailAction locale={locale} />

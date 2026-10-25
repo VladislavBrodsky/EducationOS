@@ -428,7 +428,9 @@
   border:1px solid #dfe6d5;
   border-radius:14px;
   background:#f7f9f3;
+  transition:transform .2s,box-shadow .2s;
 }
+.m-method-card:hover,.m-method-card:focus-visible { transform:translateY(-4px); box-shadow:0 14px 28px #202c1520; }
 
 .m-method-card:nth-child(2) {
   background:#eef2fb;
@@ -530,6 +532,7 @@
   transform:translateY(-5px);
   background:#2c3523;
 }
+.m-age-card:focus-visible { transform:translateY(-5px); background:#2c3523; outline-color:#d5fc51; }
 
 .m-age-index {
   color:#a3af99;
@@ -1553,6 +1556,7 @@
 .m-detail-stage-art p { margin:5px 0 0; font-size:17px; font-weight:600; letter-spacing:-.03em; }
 .m-detail-steps { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; padding-bottom:50px; }
 .m-detail-step { display:flex; flex-direction:column; justify-content:space-between; min-height:286px; padding:27px; border:1px solid #dfe6d6; border-radius:16px; background:#f5f8f1; }
+.m-detail-step,.m-detail-stage { scroll-margin-top:100px; }
 .m-detail-step:nth-child(3n + 2) { background:#f0f2f9; }
 .m-detail-step:nth-child(3n) { background:#f6f0f8; }
 .m-detail-step-top { display:flex; justify-content:space-between; align-items:center; color:#5b6d43; font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:12px; }
@@ -1590,4 +1594,8 @@
   .m-detail-steps,.m-detail-trust-grid { grid-template-columns:1fr; }
   .m-detail-step,.m-detail-trust-card { min-height:220px; }
   .m-detail-action { padding:27px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .m-method-card,.m-age-card { transition:none; }
+  .m-method-card:hover,.m-method-card:focus-visible,.m-age-card:hover,.m-age-card:focus-visible { transform:none; }
 }
