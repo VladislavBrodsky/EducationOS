@@ -1,5 +1,11 @@
 # Live EducationOS frontend deployment
 
+## Marketing polish on 25 October 2026
+
+The corrected age-group and learning-method hero artwork, linked landing cards, localized Open Graph previews, article-specific social images, and SVG favicon are live at [educationos.space](https://educationos.space). Railway marketing deployment `618375a7-5ef3-40e5-a1fe-643984a143ff` reports `SUCCESS` from source commit `e1a2c29` and release tag `v0.6.0-preview.6`. Its exact frontend-only upload contains 125 files and no backend or environment files. All six GitHub checks passed; five focused browser tests passed against live HTTPS.
+
+Live desktop `/programs` and mobile `/ru/approach` returned 200 with loaded hero images and zero horizontal overflow. The portal deployment remained `89e503e6-63c0-4ef9-9f33-5e36ca49f950`. The Python staging API, DNS, and learner enrollment controls were not changed. [Release evidence](deployment/marketing-polish-2026-10-25.json) and [source manifest](deployment/marketing-polish-manifest-2026-10-25.json) record the exact rollout. The PR remains draft pending native-speaker editorial review; legal, safety, accessibility, and learner demo content still uses English.
+
 ## Core marketing localization on 25 October 2026
 
 The age-group, learning-method, and trust-center pages now share the editorial marketing design and have equivalent Spanish, English, and Russian routes. Railway marketing deployment `f07552c1-7073-4ab7-934f-30e687994b0d` reports `SUCCESS` from frontend-only source commit `0169680` (release tag `v0.6.0-preview.5`) on `codex/marketing-v2-i18n`. The exact upload has 124 files, excludes backend and environment files, and built with the pinned Node 24 Dockerfile. All six GitHub checks and 15 focused local browser checks passed.
