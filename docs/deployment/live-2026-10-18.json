@@ -1,0 +1,314 @@
+{
+  "observedAt": "2026-10-18T08:35:36.234572+00:00",
+  "provider": "Railway",
+  "projectId": "d08710d0-4df1-4c6a-adc8-361c52e7c572",
+  "services": {
+    "portal": {
+      "id": "2e6b7e2f-8ab9-4b7d-9f81-22c9c171c1fa",
+      "name": "educationos-portal",
+      "surface": "portal",
+      "deploymentId": "ef741957-e7da-482b-9b92-f358031e3743",
+      "url": "https://app.educationos.space"
+    },
+    "marketing": {
+      "id": "bf43668a-197d-4b94-94d2-9b09d92e44f9",
+      "name": "educationos-marketing",
+      "surface": "public",
+      "deploymentId": "dc4d7630-dcd5-469c-a979-864415beaebb",
+      "url": "https://educationos.space"
+    }
+  },
+  "source": {
+    "baseCommit": "e96d350",
+    "method": "Frontend-only working-tree snapshot uploaded by Railway CLI, subsequently saved as commit e08c9a7 and published to codex/python-first-foundation in pull request #2. Automatic GitHub deployment is not connected.",
+    "files": 95,
+    "bytes": 1221877,
+    "manifestSha256": "3e481edf79638f38ee2f025d79ca6009443ddfa69b4e31c3371730670f6fcf66",
+    "manifestPath": "frontend-manifest-2026-10-18.json",
+    "packagingOverrides": {
+      ".dockerignore": "node_modules\n.next\n.git\n.env*\nartifacts\n"
+    },
+    "repositoryVerification": {
+      "matchingApplicationAndConfigurationFiles": 94,
+      "packagingOnlyOverrides": 1,
+      "publication": "Published with explicit user approval.",
+      "sourceCommit": "e08c9a79c4e1e7ead7f96556bde2edf7136866dd",
+      "pullRequest": "https://github.com/VladislavBrodsky/EducationOS/pull/2"
+    }
+  },
+  "domainCertificates": {
+    "app.educationos.space": {
+      "ownershipVerified": true,
+      "status": "CERTIFICATE_STATUS_TYPE_VALID"
+    },
+    "educationos.space": {
+      "ownershipVerified": true,
+      "status": "CERTIFICATE_STATUS_TYPE_VALID"
+    },
+    "www.educationos.space": {
+      "ownershipVerified": true,
+      "status": "CERTIFICATE_STATUS_TYPE_VALID"
+    }
+  },
+  "mobile": {
+    "origin": "https://app.educationos.space",
+    "passed": true,
+    "journeys": [
+      {
+        "name": "loop-loom 390x844",
+        "status": "passed",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      {
+        "name": "same-half 390x844",
+        "status": "passed",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      {
+        "name": "hidden-cubes 390x844",
+        "status": "passed",
+        "viewport": {
+          "width": 390,
+          "height": 844
+        }
+      },
+      {
+        "name": "loop-loom 430x932",
+        "status": "passed",
+        "viewport": {
+          "width": 430,
+          "height": 932
+        }
+      },
+      {
+        "name": "same-half 430x932",
+        "status": "passed",
+        "viewport": {
+          "width": 430,
+          "height": 932
+        }
+      },
+      {
+        "name": "hidden-cubes 430x932",
+        "status": "passed",
+        "viewport": {
+          "width": 430,
+          "height": 932
+        }
+      }
+    ],
+    "accessibilityScans": 12,
+    "accessibilityViolations": 0,
+    "uncaughtErrors": 0,
+    "failedAssets": 0,
+    "scope": "Chromium mobile viewport/touch emulation; not a physical iOS or Android device. Default HTTPS certificate verification is enabled. Each class starts in a fresh browser context. Synthetic answers are stored only in sessionStorage. For this run, Chromium selects the portal IP returned by DNS server 1.1.1.1 using a process-only host-resolver rule. HTTPS still uses and validates app.educationos.space. See testNetwork for the exact public answers and rule.",
+    "testNetwork": {
+      "dnsServer": "1.1.1.1",
+      "hostname": "app.educationos.space",
+      "resolvedAt": "2026-10-18T08:30:34.420Z",
+      "publicAnswers": [
+        "69.46.46.27"
+      ],
+      "selectedAddress": "69.46.46.27",
+      "chromiumHostResolverRule": "MAP app.educationos.space 69.46.46.27",
+      "appliesTo": "This Chromium process and the portal hostname only. No system DNS or hosts-file changes.",
+      "httpsCertificateValidation": "Default validation against the actual HTTPS hostname remains enabled."
+    },
+    "normalUserChrome": {
+      "systemNetworkModified": false,
+      "viewport390": [
+        "Loop Loom: predict, six steps in 2D, transfer, record and reload",
+        "Same Half: predict, rearrange, cell selection, equal/unequal-area reasoning and record",
+        "Hidden Cube: predict, 2D layers, actual 3D path change, layer filter, transfer, record and reload"
+      ],
+      "viewport430": "All three layouts fit and retained Activity recorded without horizontal overflow."
+    }
+  },
+  "separation": {
+    "passed": true,
+    "checks": [
+      {
+        "requested": "https://educationos.space/",
+        "url": "https://educationos.space/",
+        "status": 200,
+        "chain": [
+          {
+            "url": "https://educationos.space/",
+            "status": 200
+          }
+        ],
+        "heading": "Big ideasstart witha little curiosity.",
+        "robots": null
+      },
+      {
+        "requested": "https://www.educationos.space/programs?source=deploy-check",
+        "url": "https://educationos.space/programs?source=deploy-check",
+        "status": 200,
+        "chain": [
+          {
+            "url": "https://www.educationos.space/programs?source=deploy-check",
+            "status": 308
+          },
+          {
+            "url": "https://educationos.space/programs?source=deploy-check",
+            "status": 200
+          }
+        ],
+        "heading": "Room to wonder.Space to become.",
+        "robots": null
+      },
+      {
+        "requested": "https://educationos.space/portal/labs/loop-loom?source=deploy-check",
+        "url": "https://app.educationos.space/labs/loop-loom?source=deploy-check",
+        "status": 200,
+        "chain": [
+          {
+            "url": "https://educationos.space/portal/labs/loop-loom?source=deploy-check",
+            "status": 308
+          },
+          {
+            "url": "https://app.educationos.space/labs/loop-loom?source=deploy-check",
+            "status": 200
+          }
+        ],
+        "heading": "Loop Loom",
+        "robots": "noindex, nofollow"
+      },
+      {
+        "requested": "https://app.educationos.space/privacy?source=deploy-check",
+        "url": "https://educationos.space/privacy?source=deploy-check",
+        "status": 200,
+        "chain": [
+          {
+            "url": "https://app.educationos.space/privacy?source=deploy-check",
+            "status": 308
+          },
+          {
+            "url": "https://educationos.space/privacy?source=deploy-check",
+            "status": 200
+          }
+        ],
+        "heading": "Your curiosity. Your privacy.",
+        "robots": null
+      },
+      {
+        "requested": "https://app.educationos.space/labs",
+        "url": "https://app.educationos.space/labs",
+        "status": 200,
+        "chain": [
+          {
+            "url": "https://app.educationos.space/labs",
+            "status": 200
+          }
+        ],
+        "heading": "See an idea from a new side.",
+        "robots": "noindex, nofollow"
+      },
+      {
+        "requested": "https://app.educationos.space/robots.txt",
+        "url": "https://app.educationos.space/robots.txt",
+        "status": 200,
+        "chain": [
+          {
+            "url": "https://app.educationos.space/robots.txt",
+            "status": 200
+          }
+        ],
+        "heading": null,
+        "robots": "noindex, nofollow"
+      },
+      {
+        "requested": "https://app.educationos.space/sitemap.xml",
+        "url": "https://app.educationos.space/sitemap.xml",
+        "status": 404,
+        "chain": [
+          {
+            "url": "https://app.educationos.space/sitemap.xml",
+            "status": 404
+          }
+        ],
+        "heading": "Let\u2019s find another starting point.",
+        "robots": "noindex, nofollow"
+      }
+    ],
+    "networkScope": "Default certificate validation enabled; no system resolver or hosts-file changes."
+  },
+  "dns": {
+    "1.1.1.1": {
+      "educationos.space A": [
+        "69.46.46.105"
+      ],
+      "www.educationos.space CNAME": [
+        "pzh62mvu.up.railway.app."
+      ],
+      "app.educationos.space CNAME": [
+        "21i76llp.up.railway.app."
+      ],
+      "educationos.space MX": [
+        "10 eforward1.registrar-servers.com.",
+        "10 eforward2.registrar-servers.com.",
+        "10 eforward3.registrar-servers.com.",
+        "15 eforward4.registrar-servers.com.",
+        "20 eforward5.registrar-servers.com."
+      ],
+      "educationos.space TXT": [
+        "\"v=spf1 include:spf.efwd.registrar-servers.com ~all\""
+      ]
+    },
+    "8.8.8.8": {
+      "educationos.space A": [
+        "69.46.46.105"
+      ],
+      "www.educationos.space CNAME": [
+        "pzh62mvu.up.railway.app."
+      ],
+      "app.educationos.space CNAME": [
+        "21i76llp.up.railway.app."
+      ],
+      "educationos.space MX": [
+        "10 eforward1.registrar-servers.com.",
+        "10 eforward2.registrar-servers.com.",
+        "10 eforward3.registrar-servers.com.",
+        "15 eforward4.registrar-servers.com.",
+        "20 eforward5.registrar-servers.com."
+      ],
+      "educationos.space TXT": [
+        "\"v=spf1 include:spf.efwd.registrar-servers.com ~all\""
+      ]
+    },
+    "dns1.registrar-servers.com": {
+      "educationos.space A": [
+        "69.46.46.105"
+      ],
+      "www.educationos.space CNAME": [
+        "pzh62mvu.up.railway.app."
+      ],
+      "app.educationos.space CNAME": [
+        "21i76llp.up.railway.app."
+      ],
+      "educationos.space MX": [
+        "10 eforward1.registrar-servers.com.",
+        "10 eforward2.registrar-servers.com.",
+        "10 eforward3.registrar-servers.com.",
+        "15 eforward4.registrar-servers.com.",
+        "20 eforward5.registrar-servers.com."
+      ],
+      "educationos.space TXT": [
+        "\"v=spf1 include:spf.efwd.registrar-servers.com ~all\""
+      ]
+    }
+  },
+  "limits": [
+    "Mobile viewport/touch emulation and actual Chrome responsive checks; no physical iPhone/Android device was used.",
+    "The first standalone mobile report retains a marketing timeout from before the apex cutover. The later host-separation report verifies the completed cutover.",
+    "The CLI/system resolver retained old DNS answers; headless QA selected current public DNS answers in its own process. TLS verification stayed enabled. Normal user Chrome opened both live domains without a resolver override.",
+    "The apex uses Namecheap ALIAS flattening. Railway's literal CNAME field remains blank/REQUIRES_UPDATE; authoritative A answers, domain ownership, valid certificate, and actual HTTPS marketing content were verified.",
+    "Learning work remains browser-tab-only; production accounts, enrollment and a Python API were not deployed."
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "postgres": {
+    "image": "pgvector/pgvector:pg18-bookworm@sha256:2358fcba361ed2233a5ed81b5fe4ca779ccb304120ce531a3bf51c0ed7e2bc11",
+    "verified_at": "2026-10-18T06:33:55.360089+00:00"
+  },
+  "redis": {
+    "image": "redis:8-bookworm@sha256:47670742d7924adbcdb404d1288b6327815b23141969c0939b8e5d61f78c2634",
+    "verified_at": "2026-10-18T06:33:56.083644+00:00"
+  },
+  "python": {
+    "image": "python:3.13-slim-bookworm@sha256:a1165e272e578941b84abc79e4ab38a0305cd12803a5c4247979ac7655f4d641",
+    "verified_at": "2026-10-18T06:33:56.758428+00:00"
+  },
+  "node": {
+    "image": "node:24-bookworm-slim@sha256:a5f4366e834695d5f363b920c104953a535d3a9864d1bdf74566a0ebe01daee5",
+    "verified_at": "2026-10-18T06:33:57.880053+00:00"
+  }
+}

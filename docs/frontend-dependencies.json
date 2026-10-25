@@ -1,0 +1,195 @@
+{
+  "checkedDate": "2026-10-18",
+  "source": "Official npm registry through npm view; retained exact versions plus OpenAPI client tooling",
+  "packages": [
+    {
+      "name": "lucide-react",
+      "requested": "1.59.0",
+      "registry": "https://registry.npmjs.org/lucide-react/1.59.0",
+      "metadata": {
+        "version": "1.59.0",
+        "dist.integrity": "sha512-5qgMyyCPU6OvnKpLS2t693+ZtiqA8oaSweWoUows0BLFKFf6V75m4+CptpmohZHpD5IuOVIBXHBBiv2vpLJmtw=="
+      }
+    },
+    {
+      "name": "next",
+      "requested": "16.4.2",
+      "registry": "https://registry.npmjs.org/next/16.4.2",
+      "metadata": {
+        "version": "16.4.2",
+        "dist.integrity": "sha512-r+oBJojfefUjOiWkBhXgLS+igxX/7BWyK59uHnyOyplMSLtBZ+QLP3okrdYTbrfrbrmNTVWLBPaHDX9KRaIt3w=="
+      }
+    },
+    {
+      "name": "react",
+      "requested": "19.3.1",
+      "registry": "https://registry.npmjs.org/react/19.3.1",
+      "metadata": {
+        "version": "19.3.1",
+        "dist.integrity": "sha512-QNhWdt7nrgVWWQG58QuGsAR3jv3Hbe4mb4vz7w2csnHavciZJgda1CPNaldF6eVxv90ud3jUXpKlHL69gO38yw=="
+      }
+    },
+    {
+      "name": "react-dom",
+      "requested": "19.3.1",
+      "registry": "https://registry.npmjs.org/react-dom/19.3.1",
+      "metadata": {
+        "version": "19.3.1",
+        "dist.integrity": "sha512-Y0bARz53lhEC1NMCASs0/j+faB/zqt3R8hpvg1e8+61ZVJ4UL0UdC4cBbXfZMcIuhrfgeILTLe+ZeBCavQPtKQ=="
+      }
+    },
+    {
+      "name": "tailwindcss",
+      "requested": "4.3.3",
+      "registry": "https://registry.npmjs.org/tailwindcss/4.3.3",
+      "metadata": {
+        "version": "4.3.3",
+        "dist.integrity": "sha512-gOhV3P7ufE62QDGg1zVaTgCR+EtPv92k2nIhVcVKcLmxT1sUBsQGhnZj175j+MqRt4zLF7ic+sCYjfhxMxj7YQ=="
+      }
+    },
+    {
+      "name": "zod",
+      "requested": "4.6.7",
+      "registry": "https://registry.npmjs.org/zod/4.6.7",
+      "metadata": {
+        "version": "4.6.7",
+        "dist.integrity": "sha512-g8W2D2kU6a8untc053fX1uVBKzM7yqAxW/3zwk83+6RyF2+SKOuV+c0wBDhUwzV1PaGapmZH+rmcUzPf+3CGwg=="
+      }
+    },
+    {
+      "name": "openapi-fetch",
+      "requested": "0.17.0",
+      "registry": "https://registry.npmjs.org/openapi-fetch/0.17.0",
+      "metadata": {
+        "version": "0.17.0",
+        "dist.integrity": "sha512-PsbZR1wAPcG91eEthKhN+Zn92FMHxv+/faECIwjXdxfTODGSGegYv0sc1Olz+HYPvKOuoXfp+0pA2XVt2cI0Ig=="
+      }
+    },
+    {
+      "name": "@axe-core/playwright",
+      "requested": "4.10.2",
+      "registry": "https://registry.npmjs.org/@axe-core%2fplaywright/4.10.2",
+      "metadata": {
+        "version": "4.10.2",
+        "dist.integrity": "sha512-6/b5BJjG6hDaRNtgzLIfKr5DfwyiLHO4+ByTLB0cJgWSM8Ll7KqtdblIS6bEkwSF642/Ex91vNqIl3GLXGlceg=="
+      }
+    },
+    {
+      "name": "@playwright/test",
+      "requested": "1.64.1",
+      "registry": "https://registry.npmjs.org/@playwright%2ftest/1.64.1",
+      "metadata": {
+        "version": "1.64.1",
+        "dist.integrity": "sha512-IaYGml/nSOiZWROfPtuIL7neuu9qDOZ3TNvNljUIrhDMxiGTgPjzj/g9p9RxpS2tSepPDRY+UwAaEeiKtUvIAg=="
+      }
+    },
+    {
+      "name": "@tailwindcss/postcss",
+      "requested": "4.3.3",
+      "registry": "https://registry.npmjs.org/@tailwindcss%2fpostcss/4.3.3",
+      "metadata": {
+        "version": "4.3.3",
+        "dist.integrity": "sha512-JTSZZGQi1AyKirbLN3azmjVzef92tcX7h+iSqPdaeStyFpGpDlKvvpxeOE8njhbUanbRwr3z8DyzhICWnMtQeg=="
+      }
+    },
+    {
+      "name": "@types/node",
+      "requested": "22.19.1",
+      "registry": "https://registry.npmjs.org/@types%2fnode/22.19.1",
+      "metadata": {
+        "version": "22.19.1",
+        "dist.integrity": "sha512-LCCV0HdSZZZb34qifBsyWlUmok6W7ouER+oQIGBScS8EsZsQbrtFTUrDX4hOl+CS6p7cnNC4td+qrSVGSCTUfQ=="
+      }
+    },
+    {
+      "name": "@types/react",
+      "requested": "19.2.7",
+      "registry": "https://registry.npmjs.org/@types%2freact/19.2.7",
+      "metadata": {
+        "version": "19.2.7",
+        "dist.integrity": "sha512-MWtvHrGZLFttgeEj28VXHxpmwYbor/ATPYbBfSFZEIRK0ecCFLl2Qo55z52Hss+UV9CRN7trSeq1zbgx7YDWWg=="
+      }
+    },
+    {
+      "name": "@types/react-dom",
+      "requested": "19.2.3",
+      "registry": "https://registry.npmjs.org/@types%2freact-dom/19.2.3",
+      "metadata": {
+        "version": "19.2.3",
+        "dist.integrity": "sha512-jp2L/eY6fn+KgVVQAOqYItbF0VY/YApe5Mz2F0aykSO8gx31bYCZyvSeYxCHKvzHG5eZjc+zyaS5BrBWya2+kQ=="
+      }
+    },
+    {
+      "name": "eslint",
+      "requested": "9.39.1",
+      "registry": "https://registry.npmjs.org/eslint/9.39.1",
+      "metadata": {
+        "version": "9.39.1",
+        "dist.integrity": "sha512-BhHmn2yNOFA9H9JmmIVKJmd288g9hrVRDkdoIgRCRuSySRUHH7r/DI6aAXW9T1WwUuY3DFgrcaqB+deURBLR5g=="
+      }
+    },
+    {
+      "name": "typescript",
+      "requested": "5.9.3",
+      "registry": "https://registry.npmjs.org/typescript/5.9.3",
+      "metadata": {
+        "version": "5.9.3",
+        "dist.integrity": "sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw=="
+      }
+    },
+    {
+      "name": "vitest",
+      "requested": "5.0.5",
+      "registry": "https://registry.npmjs.org/vitest/5.0.5",
+      "metadata": {
+        "version": "5.0.5",
+        "dist.integrity": "sha512-cPODOMF8YnkiiYtDdHo6n4wWmBrOBBbOIYH2d33M4l3CdNn72h+qMmO6uXffUN6A5AZFXNND/d+krS9mgkXRfg=="
+      }
+    },
+    {
+      "name": "openapi-typescript",
+      "requested": "7.13.0",
+      "registry": "https://registry.npmjs.org/openapi-typescript/7.13.0",
+      "metadata": {
+        "version": "7.13.0",
+        "dist.integrity": "sha512-EFP392gcqXS7ntPvbhBzbF8TyBA+baIYEm791Hy5YkjDYKTnk/Tn5OQeKm5BIZvJihpp8Zzr4hzx0Irde1LNGQ=="
+      }
+    },
+    {
+      "name": "@eslint/js",
+      "requested": "9.39.5",
+      "registry": "https://registry.npmjs.org/@eslint%2fjs/9.39.5",
+      "metadata": {
+        "version": "9.39.5",
+        "dist.integrity": "sha512-QywQuszQh77pIXCsq998c8hbhSTI/azTty1Z6N53dmAudKHhy573j3yvRLsX2BSp8YpLtoCEG8E9DJe+8zUh4A=="
+      }
+    },
+    {
+      "name": "typescript-eslint",
+      "requested": "8.71.2",
+      "registry": "https://registry.npmjs.org/typescript-eslint/8.71.2",
+      "metadata": {
+        "version": "8.71.2",
+        "dist.integrity": "sha512-Rz4effbMy2g9wnvOJZG6SbVavX313Lap1vNEbk1RUochzickvzP8P4HB+bkNg5e50eVz1hQGjh9K1omI1xB4Bw=="
+      }
+    },
+    {
+      "name": "eslint-plugin-react-hooks",
+      "requested": "7.1.1",
+      "registry": "https://registry.npmjs.org/eslint-plugin-react-hooks/7.1.1",
+      "metadata": {
+        "version": "7.1.1",
+        "dist.integrity": "sha512-f2I7Gw6JbvCexzIInuSbZpfdQ44D7iqdWX01FKLvrPgqxoE7oMj8clOfto8U6vYiz4yd5oKu39rRSVOe1zRu0g=="
+      }
+    },
+    {
+      "name": "eslint-plugin-jsx-a11y",
+      "requested": "6.10.2",
+      "registry": "https://registry.npmjs.org/eslint-plugin-jsx-a11y/6.10.2",
+      "metadata": {
+        "version": "6.10.2",
+        "dist.integrity": "sha512-scB3nz4WmG75pV8+3eRUQOHZlNSUhFNq37xnpgRkCCELU3XMvXAxLk1eqWWyE22Ki4Q01Fnsw9BA3cJHDPgn2Q=="
+      }
+    }
+  ]
+}

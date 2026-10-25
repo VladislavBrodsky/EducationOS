@@ -1,0 +1,44 @@
+{
+  "source": "Anatomy e9488296a44211c42701ff71705b7901470ec78f",
+  "activity": "Hidden Cube Builder",
+  "environment": {
+    "browser": "Playwright bundled Chromium (Playwright 1.64.1)",
+    "host": "Local macOS host",
+    "viewport": "1440×1000 CSS pixels",
+    "cpuThrottle": "none",
+    "mode": "Production Next build served on 127.0.0.1:3100"
+  },
+  "fixture": {
+    "preset": "3x2x2",
+    "parts": 12,
+    "stepDegrees": 0.5,
+    "firstYaw": 0,
+    "lastYaw": 359.5,
+    "samples": 720
+  },
+  "runtime": {
+    "metric": "Synchronous Anatomy controller.set reported JavaScript work, excluding browser style/layout/paint and network",
+    "p95Ms": 0.19999998807907104,
+    "maxMs": 1,
+    "forcedOrders": 0,
+    "unseparated": 0
+  },
+  "observations": {
+    "quarterTurnChangesProjectedPaths": true,
+    "consoleErrors": [],
+    "returnTo2DRemovesGlobalController": true,
+    "screenshot": "artifacts/hidden-cubes-desktop.png"
+  },
+  "artifacts": {
+    "sceneJsonBytes": 76671,
+    "sceneJsonGzipBytes": 7652,
+    "runtimeSourceBytes": 139815,
+    "runtimeSourceGzipBytes": 36193,
+    "sizeScope": "Source/data sizes, not final webpack chunks or total route transfer. Optional scene and runtime load only after choosing 3D."
+  },
+  "limits": [
+    "Full upstream non-quick orbit audit started but canceled during 8-part continuity scan; no full orbit result is claimed.",
+    "Performance on throttled phone hardware and browser paint timings not measured in this run.",
+    "Unit/model tests cover all four fixture counts, layers and mathematical rotation invariants independently of these timings."
+  ]
+}

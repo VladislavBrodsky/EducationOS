@@ -1,0 +1,309 @@
+{
+  "title": "EducationOS Anatomy source audit evidence",
+  "reviewDate": "2026-10-18",
+  "repository": "https://github.com/wheresryan22/anatomy",
+  "revision": "e9488296a44211c42701ff71705b7901470ec78f",
+  "sourceLicense": "MIT; Copyright (c) 2026 Ryan",
+  "nodeVersion": "v24.12.0",
+  "scope": "Read-only source audit and original lesson/prompt specifications. No Anatomy runtime has been added to the portal.",
+  "uncompressedFileBytes": {
+    "examples/dial-indicator/dial-indicator-light.html": 136489,
+    "examples/desk-computer/desk-computer-light.html": 237394,
+    "examples/ripple-tank/ripple-tank-light.html": 505499,
+    "examples/turning-dial/turning-dial-light.html": 673894,
+    "examples/arcade-cabinet/arcade-cabinet-light.html": 1007953,
+    "examples/raptor-engine/raptor-engine-light.html": 1610583,
+    "kit/iso-kit.mjs": 35175,
+    "kit/turn.mjs": 139815
+  },
+  "sourceTreeTrackedDiff": "",
+  "regressionSubset": {
+    "command": "node --test scripts/audit-profile.test.mjs scripts/turn-convex-check.test.mjs scripts/turn-audit-samples.test.mjs scripts/curve-density.test.mjs scripts/audit-empty-clipping.test.mjs scripts/turn-group-reference.test.mjs",
+    "files": 6,
+    "passed": 35,
+    "failed": 0,
+    "skipped": 0,
+    "environmentNote": "Browser-dependent cases initially could not start Chrome in the filesystem sandbox. Repeated outside that sandbox with browser launch permission; final subset passed."
+  },
+  "builds": [
+    {
+      "command": "node examples/dial-indicator/build.mjs --light",
+      "result": "passed",
+      "outputBytes": 136489
+    },
+    {
+      "command": "node examples/turning-dial/build.mjs --light --verify",
+      "result": "passed",
+      "liveParts": 88,
+      "outputBytes": 701752,
+      "note": "Emits verification data; this command does not execute the complete orbit audit."
+    }
+  ],
+  "nodeGeometryBenchmark": {
+    "command": "node scripts/turn-bench.mjs examples/turning-dial/build.mjs --rounds 2",
+    "parts": 88,
+    "angles": 360,
+    "rounds": 2,
+    "reportedWallMillisecondsPerFrame": 5.597,
+    "reportedCpuMillisecondsPerFrame": 5.104,
+    "reportedOrderMillisecondsPerFrame": 0.438,
+    "conditions": "Local macOS host; Node v24.12.0; tool geometry emission/order only. Excludes DOM, SVG paint, GPU and full browser frames; not a mobile frame-rate measurement."
+  },
+  "browserSmoke": [
+    {
+      "example": "dial-indicator",
+      "noWebGL": false,
+      "reducedMotion": true,
+      "keyboard": "End",
+      "before": "18",
+      "after": "10",
+      "readout": "block 3 · reads 10.0 px",
+      "desktop": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "paths": 342
+      },
+      "phone": {
+        "width": 390,
+        "scrollWidth": 390
+      },
+      "pageErrors": [],
+      "axeViolations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": [
+            {
+              "target": [
+                "span[data-corner=\"title\"]"
+              ],
+              "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.23 (foreground color: #8c8c90, background color: #fbfbfa, font size: 7.9pt (10.5px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": [
+                "span[data-corner=\"hint\"]"
+              ],
+              "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.23 (foreground color: #8c8c90, background color: #fbfbfa, font size: 7.9pt (10.5px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": [
+                ".iso-key:nth-child(1)"
+              ],
+              "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.98 (foreground color: #8c8c90, background color: #f2f2ef, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": [
+                ".iso-key:nth-child(2)"
+              ],
+              "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.98 (foreground color: #8c8c90, background color: #f2f2ef, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": [
+                ".iso-caption"
+              ],
+              "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.98 (foreground color: #8c8c90, background color: #f2f2ef, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "example": "dial-indicator",
+      "noWebGL": true,
+      "reducedMotion": true,
+      "keyboard": "End",
+      "before": "18",
+      "after": "10",
+      "readout": "block 3 · reads 10.0 px",
+      "desktop": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "paths": 342
+      },
+      "phone": {
+        "width": 390,
+        "scrollWidth": 390
+      },
+      "pageErrors": [],
+      "axeViolations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": [
+            {
+              "target": [
+                "span[data-corner=\"title\"]"
+              ],
+              "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.23 (foreground color: #8c8c90, background color: #fbfbfa, font size: 7.9pt (10.5px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": [
+                "span[data-corner=\"hint\"]"
+              ],
+              "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.23 (foreground color: #8c8c90, background color: #fbfbfa, font size: 7.9pt (10.5px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": [
+                ".iso-key:nth-child(1)"
+              ],
+              "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.98 (foreground color: #8c8c90, background color: #f2f2ef, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": [
+                ".iso-key:nth-child(2)"
+              ],
+              "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.98 (foreground color: #8c8c90, background color: #f2f2ef, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": [
+                ".iso-caption"
+              ],
+              "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.98 (foreground color: #8c8c90, background color: #f2f2ef, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "example": "turning-dial",
+      "noWebGL": false,
+      "reducedMotion": true,
+      "keyboard": "ArrowRight",
+      "before": "86",
+      "after": "87",
+      "readout": "dial 87 · 356.4°",
+      "desktop": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "paths": 1109
+      },
+      "phone": {
+        "width": 390,
+        "scrollWidth": 390
+      },
+      "pageErrors": [],
+      "axeViolations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": [
+            {
+              "target": [
+                "span[data-corner=\"title\"]"
+              ],
+              "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.23 (foreground color: #8c8c90, background color: #fbfbfa, font size: 7.9pt (10.5px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": [
+                "span[data-corner=\"hint\"]"
+              ],
+              "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.23 (foreground color: #8c8c90, background color: #fbfbfa, font size: 7.9pt (10.5px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": [
+                ".iso-key:nth-child(1)"
+              ],
+              "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.98 (foreground color: #8c8c90, background color: #f2f2ef, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": [
+                ".iso-key:nth-child(2)"
+              ],
+              "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.98 (foreground color: #8c8c90, background color: #f2f2ef, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": [
+                ".iso-caption"
+              ],
+              "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.98 (foreground color: #8c8c90, background color: #f2f2ef, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "example": "turning-dial",
+      "noWebGL": true,
+      "reducedMotion": true,
+      "keyboard": "ArrowRight",
+      "before": "86",
+      "after": "87",
+      "readout": "dial 87 · 356.4°",
+      "desktop": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "paths": 1109
+      },
+      "phone": {
+        "width": 390,
+        "scrollWidth": 390
+      },
+      "pageErrors": [],
+      "axeViolations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": [
+            {
+              "target": [
+                "span[data-corner=\"title\"]"
+              ],
+              "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.23 (foreground color: #8c8c90, background color: #fbfbfa, font size: 7.9pt (10.5px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": [
+                "span[data-corner=\"hint\"]"
+              ],
+              "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.23 (foreground color: #8c8c90, background color: #fbfbfa, font size: 7.9pt (10.5px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": [
+                ".iso-key:nth-child(1)"
+              ],
+              "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.98 (foreground color: #8c8c90, background color: #f2f2ef, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": [
+                ".iso-key:nth-child(2)"
+              ],
+              "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.98 (foreground color: #8c8c90, background color: #f2f2ef, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": [
+                ".iso-caption"
+              ],
+              "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.98 (foreground color: #8c8c90, background color: #f2f2ef, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "browserScope": "Upstream light pages, keyboard response, settled readouts, widths1440/390, reduced-motion preference, WebGL available/disabled. Axe scans at390. Not a complete accessibility conformance or child-usability test.",
+  "notRun": [
+    "complete upstream test suite",
+    "full per-figure geometry audit",
+    "full orbit audit",
+    "turn-check fidelity/order/pops/line suite",
+    "real-device performance",
+    "dark-theme accessibility scans",
+    "EducationOS lesson implementation",
+    "supervised child usability and transfer pilot"
+  ],
+  "artifactsDirectory": "artifacts/anatomy",
+  "documents": [
+    "README.md",
+    "AUDIT.md",
+    "CLASS_PLAN.md",
+    "PROMPTS.md"
+  ],
+  "promptReview": {
+    "result": "reviewed and corrected",
+    "corrections": [
+      "Loop readouts and source derive from the selected repeat count.",
+      "Countable tray slots and preset answers remain hidden until prediction reveal.",
+      "Isometric quarter turns are named separately from orthographic views.",
+      "Default fixture and transfer presets match between class plan and prompt."
+    ]
+  }
+}

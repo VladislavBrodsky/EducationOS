@@ -1,0 +1,292 @@
+[
+  {
+    "id": "e0500000-0000-4000-8000-000000000001",
+    "missionId": "e0501000-0000-4000-8000-000000000001",
+    "version": 1,
+    "title": "A little paper. A stronger bridge.",
+    "ageBand": "5-6",
+    "world": "curiosity-grove",
+    "publishedAt": "2026-10-18T00:00:00.000Z",
+    "content": {
+      "summary": "Use the shape of one sheet of paper to explore a classic design contradiction. Notice, imagine, predict, test, and explain what your own evidence shows.",
+      "materials": [
+        "One sheet of paper",
+        "Two stable books",
+        "One large, light toy block",
+        "Ruler",
+        "Timer",
+        "A clear, dry tabletop"
+      ],
+      "adultGuidance": "An adult should choose suitable materials and support the activity, especially for younger learners. Use a large, light block with no small parts. Keep books low and stable on a clear, dry table. Do not use heavy loads, sharp tools, liquids, or raised surfaces. Stop if materials become unstable. Record only made-up demo notes; never enter names, photos, or personal information.",
+      "steps": [
+        {
+          "kind": "notice",
+          "title": "Notice the system",
+          "prompt": "With a grown-up, put a sheet of paper between two books 10 cm apart. Set one large, light toy block in the middle. What happens? Tell your grown-up or type what you notice."
+        },
+        {
+          "kind": "contradiction",
+          "title": "Find the contradiction",
+          "prompt": "We want our paper bridge to stand for longer. We also want to use just one sheet. What makes these two wishes tricky together?"
+        },
+        {
+          "kind": "imagine",
+          "title": "Imagine alternatives",
+          "prompt": "Imagine two different bridges. Could you fold the paper like a fan? Could you curve it? Describe or ask your grown-up to record two ideas."
+        },
+        {
+          "kind": "hypothesis",
+          "title": "Make a hypothesis",
+          "prompt": "Make a guess: if I change the shape of the paper, then the bridge will… Tell us which shape you want to try and why."
+        },
+        {
+          "kind": "experiment",
+          "title": "Test your idea",
+          "prompt": "Ask a grown-up to time the flat bridge, then your changed bridge, using the same large light block. Stop each trial after 60 seconds. Record both times and what happened."
+        },
+        {
+          "kind": "reflect",
+          "title": "Reflect on the evidence",
+          "prompt": "Look at your two times. What surprised you? A bridge falling is useful information too. What would you try again?"
+        },
+        {
+          "kind": "transfer",
+          "title": "Transfer the principle",
+          "prompt": "Where else could a fold make something stronger? Think of a paper tent, a card, or a roof. Share one new place to try your idea."
+        }
+      ]
+    }
+  },
+  {
+    "id": "e0500000-0000-4000-8000-000000000002",
+    "missionId": "e0501000-0000-4000-8000-000000000002",
+    "version": 1,
+    "title": "A little paper. A stronger bridge.",
+    "ageBand": "7-9",
+    "world": "builder-harbor",
+    "publishedAt": "2026-10-18T00:00:00.000Z",
+    "content": {
+      "summary": "Use the shape of one sheet of paper to explore a classic design contradiction. Notice, imagine, predict, test, and explain what your own evidence shows.",
+      "materials": [
+        "One sheet of paper",
+        "Two stable books",
+        "One large, light toy block",
+        "Ruler",
+        "Timer",
+        "A clear, dry tabletop"
+      ],
+      "adultGuidance": "An adult should choose suitable materials and support the activity, especially for younger learners. Use a large, light block with no small parts. Keep books low and stable on a clear, dry table. Do not use heavy loads, sharp tools, liquids, or raised surfaces. Stop if materials become unstable. Record only made-up demo notes; never enter names, photos, or personal information.",
+      "steps": [
+        {
+          "kind": "notice",
+          "title": "Notice the system",
+          "prompt": "Balance one sheet of paper across two books 10 cm apart. With an adult nearby, place one large, light toy block in the center. Observe what bends, moves, or stays still."
+        },
+        {
+          "kind": "contradiction",
+          "title": "Find the contradiction",
+          "prompt": "Your challenge is to make a bridge stand longer without adding paper. Explain the tradeoff between using less material and making a stronger structure."
+        },
+        {
+          "kind": "imagine",
+          "title": "Imagine alternatives",
+          "prompt": "Invent at least two different shapes. Think about folds, a curve, or changing where the paper touches the books. Give each idea a short description."
+        },
+        {
+          "kind": "hypothesis",
+          "title": "Make a hypothesis",
+          "prompt": "Choose one idea. Finish the thought: if I change…, then I predict…, because… Keep the distance between the books the same."
+        },
+        {
+          "kind": "experiment",
+          "title": "Test your idea",
+          "prompt": "Time the flat bridge and your new bridge with the same large, light block. Stop at 60 seconds. Keep the gap, paper, block, and position the same. Record both results and any differences you noticed."
+        },
+        {
+          "kind": "reflect",
+          "title": "Reflect on the evidence",
+          "prompt": "Did your observation match your prediction? Explain one thing your experiment showed and one thing you would like to check again."
+        },
+        {
+          "kind": "transfer",
+          "title": "Transfer the principle",
+          "prompt": "Find another everyday structure that uses shape to stay strong. Describe how you could borrow your bridge idea there."
+        }
+      ]
+    }
+  },
+  {
+    "id": "e0500000-0000-4000-8000-000000000003",
+    "missionId": "e0501000-0000-4000-8000-000000000003",
+    "version": 1,
+    "title": "A little paper. A stronger bridge.",
+    "ageBand": "10-12",
+    "world": "orbit-lab",
+    "publishedAt": "2026-10-18T00:00:00.000Z",
+    "content": {
+      "summary": "Use the shape of one sheet of paper to explore a classic design contradiction. Notice, imagine, predict, test, and explain what your own evidence shows.",
+      "materials": [
+        "One sheet of paper",
+        "Two stable books",
+        "One large, light toy block",
+        "Ruler",
+        "Timer",
+        "A clear, dry tabletop"
+      ],
+      "adultGuidance": "An adult should choose suitable materials and support the activity, especially for younger learners. Use a large, light block with no small parts. Keep books low and stable on a clear, dry table. Do not use heavy loads, sharp tools, liquids, or raised surfaces. Stop if materials become unstable. Record only made-up demo notes; never enter names, photos, or personal information.",
+      "steps": [
+        {
+          "kind": "notice",
+          "title": "Notice the system",
+          "prompt": "Create a baseline: span two books 10 cm apart with one sheet of paper. Place one large, light block in the middle, with adult support. Describe the bending and likely weak point."
+        },
+        {
+          "kind": "contradiction",
+          "title": "Find the contradiction",
+          "prompt": "State the contradiction: the bridge should resist bending, while its amount of material stays fixed. Which property do you want to improve, and which constraint must remain?"
+        },
+        {
+          "kind": "imagine",
+          "title": "Imagine alternatives",
+          "prompt": "Propose at least two distinct structures. Try a TRIZ lens: change the shape, divide the surface into folds, or redistribute support. Explain how each might help."
+        },
+        {
+          "kind": "hypothesis",
+          "title": "Make a hypothesis",
+          "prompt": "Write a testable prediction for one design: if…, then…, because…. Name the variable you will change and the variables you will keep constant."
+        },
+        {
+          "kind": "experiment",
+          "title": "Test your idea",
+          "prompt": "Compare flat and redesigned paper using the same gap, paper, block, and placement. Measure time until collapse, capped at 60 seconds. Record both values and observations. These are single trials, not proof."
+        },
+        {
+          "kind": "reflect",
+          "title": "Reflect on the evidence",
+          "prompt": "Compare the recorded results with your prediction. What alternative explanation or measurement limitation could affect your conclusion?"
+        },
+        {
+          "kind": "transfer",
+          "title": "Transfer the principle",
+          "prompt": "Apply the principle of changing shape to a different design problem. Explain the shared principle and one thing that would need a new test."
+        }
+      ]
+    }
+  },
+  {
+    "id": "e0500000-0000-4000-8000-000000000004",
+    "missionId": "e0501000-0000-4000-8000-000000000004",
+    "version": 1,
+    "title": "A little paper. A stronger bridge.",
+    "ageBand": "13-15",
+    "world": "future-city",
+    "publishedAt": "2026-10-18T00:00:00.000Z",
+    "content": {
+      "summary": "Use the shape of one sheet of paper to explore a classic design contradiction. Notice, imagine, predict, test, and explain what your own evidence shows.",
+      "materials": [
+        "One sheet of paper",
+        "Two stable books",
+        "One large, light toy block",
+        "Ruler",
+        "Timer",
+        "A clear, dry tabletop"
+      ],
+      "adultGuidance": "An adult should choose suitable materials and support the activity, especially for younger learners. Use a large, light block with no small parts. Keep books low and stable on a clear, dry table. Do not use heavy loads, sharp tools, liquids, or raised surfaces. Stop if materials become unstable. Record only made-up demo notes; never enter names, photos, or personal information.",
+      "steps": [
+        {
+          "kind": "notice",
+          "title": "Notice the system",
+          "prompt": "Build a baseline paper bridge over a 10 cm gap between two books. Use one large, light block as a fixed load, with adult support. Describe deformation, support, and the likely failure mode."
+        },
+        {
+          "kind": "contradiction",
+          "title": "Find the contradiction",
+          "prompt": "Formulate the technical contradiction: increase resistance to bending while keeping material quantity fixed. Explain how optimizing one property could make another property worse."
+        },
+        {
+          "kind": "imagine",
+          "title": "Imagine alternatives",
+          "prompt": "Develop at least two structurally different concepts using TRIZ prompts: geometry transformation, segmentation, or local quality. State the mechanism behind each concept."
+        },
+        {
+          "kind": "hypothesis",
+          "title": "Make a hypothesis",
+          "prompt": "Choose one concept and predict its effect on time to collapse. Specify the independent variable, expected direction, and why your mechanism should work."
+        },
+        {
+          "kind": "experiment",
+          "title": "Test your idea",
+          "prompt": "Measure baseline and modified time to collapse, with a 60-second cap. Control paper, gap, block, placement, and timing method. Record the results and any confounders. One pair of trials supports only a tentative conclusion."
+        },
+        {
+          "kind": "reflect",
+          "title": "Reflect on the evidence",
+          "prompt": "Interpret the change without overstating certainty. Discuss whether the observations support your mechanism, possible confounders, and a useful repeat trial."
+        },
+        {
+          "kind": "transfer",
+          "title": "Transfer the principle",
+          "prompt": "Transfer the same principle to a structure or product beyond bridges. Identify the new constraint and propose a test before claiming it works."
+        }
+      ]
+    }
+  },
+  {
+    "id": "e0500000-0000-4000-8000-000000000005",
+    "missionId": "e0501000-0000-4000-8000-000000000005",
+    "version": 1,
+    "title": "A little paper. A stronger bridge.",
+    "ageBand": "16-17",
+    "world": "frontier-studio",
+    "publishedAt": "2026-10-18T00:00:00.000Z",
+    "content": {
+      "summary": "Use the shape of one sheet of paper to explore a classic design contradiction. Notice, imagine, predict, test, and explain what your own evidence shows.",
+      "materials": [
+        "One sheet of paper",
+        "Two stable books",
+        "One large, light toy block",
+        "Ruler",
+        "Timer",
+        "A clear, dry tabletop"
+      ],
+      "adultGuidance": "An adult should choose suitable materials and support the activity, especially for younger learners. Use a large, light block with no small parts. Keep books low and stable on a clear, dry table. Do not use heavy loads, sharp tools, liquids, or raised surfaces. Stop if materials become unstable. Record only made-up demo notes; never enter names, photos, or personal information.",
+      "steps": [
+        {
+          "kind": "notice",
+          "title": "Notice the system",
+          "prompt": "Define a baseline system: a single paper sheet spanning a 10 cm gap, supporting one fixed large, light block. With adult support, document boundary conditions, deformation, and a plausible failure mechanism."
+        },
+        {
+          "kind": "contradiction",
+          "title": "Find the contradiction",
+          "prompt": "Model the contradiction between flexural performance and fixed material quantity. Define the desired improvement and any secondary property your redesign might compromise."
+        },
+        {
+          "kind": "imagine",
+          "title": "Imagine alternatives",
+          "prompt": "Generate at least two concepts with different mechanisms. Consider geometric transformation, segmentation, and local reinforcement through redistribution. Explain the causal rationale for each."
+        },
+        {
+          "kind": "hypothesis",
+          "title": "Make a hypothesis",
+          "prompt": "Commit to a falsifiable hypothesis for one concept, naming the independent variable, expected outcome, controlled conditions, and the mechanism connecting them."
+        },
+        {
+          "kind": "experiment",
+          "title": "Test your idea",
+          "prompt": "Compare a baseline and redesigned bridge under matched conditions. Record time to collapse, censored at 60 seconds, and qualitative observations. Document timing uncertainty or confounders. A single pair of measurements cannot establish reproducibility."
+        },
+        {
+          "kind": "reflect",
+          "title": "Reflect on the evidence",
+          "prompt": "Assess the hypothesis against the recorded data. Separate observation from inference, identify uncertainty, and specify what replication or a contrasting test would add."
+        },
+        {
+          "kind": "transfer",
+          "title": "Transfer the principle",
+          "prompt": "Translate the principle to a new context. Explain the limits of the analogy, a competing constraint, and a measurable validation experiment."
+        }
+      ]
+    }
+  }
+]

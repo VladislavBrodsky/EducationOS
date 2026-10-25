@@ -1,0 +1,116 @@
+{
+  "fastapi": {
+    "version": "0.143.3",
+    "upload_time": "2026-10-16T14:14:11.763072Z",
+    "metadata_url": "https://pypi.org/pypi/fastapi/json",
+    "requires_python": ">=3.10"
+  },
+  "uvicorn": {
+    "version": "0.54.0",
+    "upload_time": "2026-09-25T06:52:35.829563Z",
+    "metadata_url": "https://pypi.org/pypi/uvicorn/json",
+    "requires_python": ">=3.10"
+  },
+  "pydantic": {
+    "version": "2.14.1",
+    "upload_time": "2026-10-11T18:37:53.437059Z",
+    "metadata_url": "https://pypi.org/pypi/pydantic/json",
+    "requires_python": ">=3.10"
+  },
+  "pydantic-settings": {
+    "version": "2.16.0",
+    "upload_time": "2026-10-14T12:44:08.233310Z",
+    "metadata_url": "https://pypi.org/pypi/pydantic-settings/json",
+    "requires_python": ">=3.11"
+  },
+  "sqlalchemy": {
+    "version": "2.1.5",
+    "upload_time": "2026-10-16T20:52:20.570556Z",
+    "metadata_url": "https://pypi.org/pypi/sqlalchemy/json",
+    "requires_python": ">=3.11"
+  },
+  "alembic": {
+    "version": "1.20.0",
+    "upload_time": "2026-09-11T19:09:11.126570Z",
+    "metadata_url": "https://pypi.org/pypi/alembic/json",
+    "requires_python": ">=3.10"
+  },
+  "psycopg": {
+    "version": "3.3.6",
+    "upload_time": "2026-09-18T13:15:29.374570Z",
+    "metadata_url": "https://pypi.org/pypi/psycopg/json",
+    "requires_python": ">=3.10"
+  },
+  "redis": {
+    "version": "8.1.0",
+    "upload_time": "2026-07-30T08:50:58.497552Z",
+    "metadata_url": "https://pypi.org/pypi/redis/json",
+    "requires_python": ">=3.10"
+  },
+  "pgvector": {
+    "version": "0.5.1",
+    "upload_time": "2026-10-09T01:50:21.614621Z",
+    "metadata_url": "https://pypi.org/pypi/pgvector/json",
+    "requires_python": ">=3.10"
+  },
+  "mcp": {
+    "version": "2.3.0",
+    "upload_time": "2026-10-02T22:06:52.119073Z",
+    "metadata_url": "https://pypi.org/pypi/mcp/json",
+    "requires_python": ">=3.10"
+  },
+  "opentelemetry-api": {
+    "version": "1.45.1",
+    "upload_time": "2026-10-06T17:32:33.506615Z",
+    "metadata_url": "https://pypi.org/pypi/opentelemetry-api/json",
+    "requires_python": ">=3.10"
+  },
+  "opentelemetry-sdk": {
+    "version": "1.45.1",
+    "upload_time": "2026-10-06T17:32:55.040419Z",
+    "metadata_url": "https://pypi.org/pypi/opentelemetry-sdk/json",
+    "requires_python": ">=3.10"
+  },
+  "opentelemetry-instrumentation-fastapi": {
+    "version": "0.66b1",
+    "upload_time": "2026-10-06T17:35:32.827963Z",
+    "metadata_url": "https://pypi.org/pypi/opentelemetry-instrumentation-fastapi/json",
+    "requires_python": ">=3.10"
+  },
+  "opentelemetry-exporter-otlp-proto-http": {
+    "version": "1.45.1",
+    "upload_time": "2026-10-06T17:32:43.946253Z",
+    "metadata_url": "https://pypi.org/pypi/opentelemetry-exporter-otlp-proto-http/json",
+    "requires_python": ">=3.10"
+  },
+  "pytest": {
+    "version": "9.1.1",
+    "upload_time": "2026-06-19T10:58:31.347074Z",
+    "metadata_url": "https://pypi.org/pypi/pytest/json",
+    "requires_python": ">=3.10"
+  },
+  "pytest-asyncio": {
+    "version": "1.4.0",
+    "upload_time": "2026-05-26T09:56:02.576082Z",
+    "metadata_url": "https://pypi.org/pypi/pytest-asyncio/json",
+    "requires_python": ">=3.10"
+  },
+  "httpx": {
+    "version": "0.28.1",
+    "upload_time": "2024-12-06T15:37:21.509172Z",
+    "metadata_url": "https://pypi.org/pypi/httpx/json",
+    "requires_python": ">=3.8"
+  },
+  "aiosqlite": {
+    "version": "0.22.1",
+    "upload_time": "2025-12-23T19:25:42.139290Z",
+    "metadata_url": "https://pypi.org/pypi/aiosqlite/json",
+    "requires_python": ">=3.9"
+  },
+  "ruff": {
+    "version": "0.17.1",
+    "upload_time": "2026-10-15T15:22:33.667796Z",
+    "metadata_url": "https://pypi.org/pypi/ruff/json",
+    "requires_python": ">=3.7"
+  }
+}
