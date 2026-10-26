@@ -8,7 +8,9 @@ import { OrbitingCircles } from '@/components/magicui/orbiting-circles';
 import { MagicCard } from '@/components/magicui/magic-card';
 import { MotionToggle } from './motion-surface';
 import { LearningBento } from './learning-bento';
+import { VisualWorlds } from './visual-worlds';
 import { showcaseCopy } from '@/lib/marketing-showcase';
+import { visualWorldCopy } from '@/lib/marketing-worlds';
 
 // The four-part introduction links into the corresponding seven-step cycle.
 const methodDetailSteps = [1, 3, 5, 6] as const;
@@ -30,11 +32,12 @@ export function LandingPage({ locale }: { locale: Locale }) {
           <span id="hero-mission-details">{copy.heroMission}</span>
           <span className="m-hero-note" id="hero-demo-note"><ShieldCheck size={14} aria-hidden="true" /><span>{copy.heroNote}</span></span>
         </div>
+        <span className="m-concept-note">{visualWorldCopy[locale].concept}</span>
       </div>
       <div className="m-hero-stage fx-hero-stage">
         <span className="m-stage-label"><span className="fx-status-dot" />{copy.visualLabel}</span><MotionToggle locale={locale} />
         <OrbitingCircles radius="clamp(108px, 17vw, 210px)" duration={42}><Atom size={24} /><Code2 size={24} /><FlaskConical size={24} /><Shapes size={24} /></OrbitingCircles>
-        <div className="m-stage-object"><Image src="/images/learning-objects.webp" alt="" fill priority sizes="(max-width: 760px) 88vw, 46vw" /></div>
+        <div className="m-stage-object"><Image src="/images/hero-ar-physics.webp" alt="" fill priority sizes="(max-width: 760px) 88vw, 46vw" /></div>
         <a href="#paper-bridge-challenge" className="m-stage-card"><span>{showcaseCopy[locale].heroTag}</span><strong>{copy.visualCard}</strong><span>{showcaseCopy[locale].heroChallengeAction}<ArrowUpRight size={16} aria-hidden="true" /></span></a>
       </div>
     </section>
@@ -42,6 +45,7 @@ export function LandingPage({ locale }: { locale: Locale }) {
     <section id="method" className="m-section container m-method"><div className="m-section-heading"><div><span className="m-kicker">{copy.methodKicker}</span><h2>{copy.methodTitle}</h2></div><p>{copy.methodDescription}</p></div><div className="m-method-grid">{copy.methodSteps.map(([number, title, description], index) => <MagicCard className="m-method-card" href={`${localizedPath(locale, 'approach')}#step-${methodDetailSteps[index]}`} key={number}><div className="m-method-card-top"><span>{number} / 04</span>{index === 0 ? <Lightbulb aria-hidden="true" /> : index === 1 ? <Sparkles aria-hidden="true" /> : index === 2 ? <FlaskConical aria-hidden="true" /> : <Layers3 aria-hidden="true" />}</div><div><h3>{title}</h3><p>{description}</p></div><ArrowDownRight className="m-method-arrow" size={18} aria-hidden="true" /></MagicCard>)}</div></section>
     <section id="ages" className="m-ages"><div className="container m-section"><div className="m-section-heading"><div><span className="m-kicker">{copy.programsKicker}</span><h2>{copy.programsTitle}</h2></div><p>{copy.programsDescription}</p></div><div className="m-age-grid">{copy.programs.map(([name, ages, description], index) => <MagicCard className="m-age-card" href={`${localizedPath(locale, 'programs')}#stage-${index + 1}`} key={ages}><span className="m-age-index">0{index + 1} <span>/</span> 05</span><div className="m-age-glyph" aria-hidden="true"><Image src={`/images/${ageArtwork[index]}.webp`} alt="" fill sizes="(max-width: 760px) 42vw, 18vw" /></div><span className="m-age-years">{ages}</span><h3>{name}</h3><p>{description}</p><span className="fx-age-arrow"><ArrowUpRight size={18} aria-hidden="true" /></span></MagicCard>)}</div></div></section>
     <LearningBento locale={locale} />
+    <VisualWorlds locale={locale} />
     <section className="m-journal-preview"><div className="container m-section"><div className="m-section-heading"><div><span className="m-kicker">{copy.journalKicker}</span><h2>{copy.journalTitle}</h2></div><div><p>{copy.journalDescription}</p><Link className="m-inline-link" href={localizedPath(locale, 'blog')}>{copy.journalAction}<ArrowUpRight size={17} aria-hidden="true" /></Link></div></div><JournalGrid locale={locale} limit={3} /></div></section>
     <section id="care" className="container m-care"><div className="m-care-icon"><ShieldCheck size={28} aria-hidden="true" /></div><div><span className="m-kicker">{copy.careKicker}</span><h2>{copy.careTitle}</h2><p>{copy.careDescription}</p></div><Link className="m-inline-link" href={localizedPath(locale, 'trust')}>{copy.careAction}<ChevronRight size={18} aria-hidden="true" /></Link></section>
     <section className="m-closing"><div className="container"><span className="m-closing-icon"><Check size={24} aria-hidden="true" /></span><h2>{copy.closingTitle}</h2><Link className="m-button m-button-dark fx-shimmer" href="/demo/lab">{copy.closingAction}<ArrowRight size={19} aria-hidden="true" /></Link></div></section>

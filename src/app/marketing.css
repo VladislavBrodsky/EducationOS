@@ -1059,7 +1059,7 @@
   margin-bottom:42px;
   border:1px solid #dce9cf;
   border-radius:20px;
-  background:radial-gradient(circle at 78% 52%,#dff5d5,#f7fbf2 58%);
+  background:radial-gradient(circle at 78% 52%,#f7faef,#fff 58%);
 }
 
 .m-journal-hero>div:first-child {
@@ -1426,11 +1426,11 @@
   .m-journal-hero {
     min-height:0;
     margin-top:25px;
-    padding-bottom:175px;
+    padding-bottom:150px;
   }
   .m-journal-hero>div:first-child {
     max-width:none;
-    padding:28px;
+    padding:24px 28px;
   }
   .m-journal-hero h1 {
     font-size:clamp(42px,9vw,58px);
@@ -1440,7 +1440,7 @@
   }
   .m-journal-hero-art {
     inset:auto 0 0 20%;
-    height:215px;
+    height:170px;
   }
   .m-journal-index {
     padding-bottom:70px;
@@ -1606,9 +1606,9 @@
   min-height:470px;
   overflow:hidden;
   border-radius:22px;
-  background:radial-gradient(circle at 55% 47%,#f8ffdc,#d9f3a0 56%,#b9db79);
+  background:radial-gradient(circle at 55% 47%,#f7faef,#fff 66%);
 }
-.m-detail-hero-art img { object-fit:contain; padding:28px; z-index:1; }
+.m-detail-hero-art img { object-fit:contain; padding:10px; z-index:1; }
 .m-detail-orbit { position:absolute; inset:11%; border:1px solid #5e8a3e55; border-radius:50%; transform:rotate(-18deg) scaleX(1.2); }
 .m-detail-intro {
   display:flex;

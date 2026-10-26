@@ -71,6 +71,11 @@ test('marketing and product pages fit mobile and tablet viewports', async ({ pag
         });
         expect(inset).toBeGreaterThanOrEqual(16);
       }
+      if (process.env.VISUAL_AUDIT === '1' && width === 390 && ['/', '/blog', '/programs', '/approach', '/trust'].includes(route)) {
+        const selector = route === '/' ? '.m-stage-object img' : route === '/blog' ? '.m-journal-hero-art img' : '.m-detail-hero-art img';
+        await expect.poll(() => page.locator(selector).evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
+        await page.screenshot({ path: `test-results/hero-image-${route === '/' ? 'home' : route.slice(1)}-390.png` });
+      }
       if (route === '/blog' && width === 390) {
         const height = await page.locator('.m-journal-hero').evaluate(element => element.getBoundingClientRect().height);
         expect(height).toBeLessThan(550);
@@ -89,11 +94,23 @@ test('marketing and product pages fit mobile and tablet viewports', async ({ pag
 test('marketing artwork loads and desktop layout has no overflow', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.emulateMedia({ reducedMotion: 'reduce' });
+  const heroArtwork: Record<string, [string, string]> = {
+    '/': ['.m-stage-object img', 'hero-ar-physics.webp'],
+    '/blog': ['.m-journal-hero-art img', 'hero-ar-journal.webp'],
+    '/programs': ['.m-detail-hero-art img', 'hero-ar-programs.webp'],
+    '/approach': ['.m-detail-hero-art img', 'hero-ar-approach.webp'],
+    '/trust': ['.m-detail-hero-art img', 'hero-ar-trust.webp'],
+  };
   for (const route of ['/', '/en', '/ru', '/blog', '/programs', '/approach', '/trust', '/portal']) {
     await page.goto(route);
     expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth), route).toBeLessThanOrEqual(1);
+    if (heroArtwork[route]) {
+      const [selector, filename] = heroArtwork[route];
+      await expect.poll(() => page.locator(selector).evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
+      await expect(page.locator(selector)).toHaveAttribute('src', new RegExp(filename));
+      if (process.env.VISUAL_AUDIT === '1') await page.screenshot({ path: `test-results/hero-image-${route === '/' ? 'home' : route.slice(1)}-1440.png` });
+    }
     if (route === '/') {
-      await expect.poll(() => page.locator('.m-stage-object img').evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
       if (process.env.VISUAL_AUDIT === '1') {
         for (const image of await page.locator('.m-story-image img').all()) await image.scrollIntoViewIfNeeded();
         await page.evaluate(() => scrollTo(0, 0));
@@ -101,6 +118,36 @@ test('marketing artwork loads and desktop layout has no overflow', async ({ page
       }
     }
   }
+});
+
+test('AR concept explorer changes subject, loads every scene, and stays clear about the demo', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/');
+  const choices = page.locator('.m-worlds-choices button');
+  await expect(choices).toHaveCount(8);
+  for (const [index, subject] of ['programming', 'investing', 'anatomy', 'ocean', 'aviation', 'marketing', 'business', 'languages'].entries()) {
+    await choices.nth(index).click();
+    await expect(choices.nth(index)).toHaveAttribute('aria-pressed', 'true');
+    const art = page.locator('.m-worlds-art img');
+    await expect(art).toHaveAttribute('src', new RegExp(`world-ar-${subject}\\.webp`));
+    await expect.poll(() => art.evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
+    if (process.env.VISUAL_AUDIT === '1') await page.locator('.m-worlds-feature').screenshot({ path: `test-results/world-ar-${subject}-desktop.png` });
+  }
+  await expect(page.locator('.m-worlds-concept')).toContainText('no están disponibles en la demo');
+  await choices.last().press('ArrowRight');
+  await expect(choices.first()).toHaveAttribute('aria-pressed', 'true');
+  await expect(choices.first()).toBeFocused();
+  for (const [route, note] of [['/en', 'not available in the demo'], ['/ru', 'недоступны в демоверсии']]) {
+    await page.goto(route);
+    await expect(page.locator('.m-worlds-choices button')).toHaveCount(8);
+    await expect(page.locator('.m-worlds-concept')).toContainText(note);
+  }
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/');
+  await page.locator('.m-worlds-choices button').last().click();
+  await expect(page.locator('.m-worlds-art img')).toHaveAttribute('src', /world-ar-languages\.webp/);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)).toBeLessThanOrEqual(1);
+  if (process.env.VISUAL_AUDIT === '1') await page.locator('.m-worlds-feature').screenshot({ path: 'test-results/world-ar-languages-mobile.png' });
 });
 
 test('localized landing and journal routes pass accessibility checks', async ({ page }) => {
