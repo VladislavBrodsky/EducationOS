@@ -1,0 +1,711 @@
+{
+  "auditDate": "2026-10-25",
+  "baselineCommit": "ecc047cf969bec51fe1ee3d1bbb7bed645ffa973",
+  "environment": "http://127.0.0.1:3100 development server",
+  "viewportSizes": [
+    {
+      "width": 390,
+      "height": 900
+    },
+    {
+      "width": 1440,
+      "height": 900
+    }
+  ],
+  "routeCases": 61,
+  "layoutCases": 122,
+  "validRoutes": 59,
+  "missingPageCases": 2,
+  "automatedAccessibilityScans": 28,
+  "accessibilityTags": [
+    "wcag2a",
+    "wcag2aa",
+    "wcag21aa",
+    "wcag22aa"
+  ],
+  "detectedAccessibilityViolations": 0,
+  "initialViewportScreenshots": 122,
+  "fullPageScreenshots": 64,
+  "rawEvidencePath": "artifacts/ux-audit-2026-10-25/audit.json",
+  "rawEvidenceSha256": "1fdea1895b678d1e4eb9e1ef7f28679628e616af3c9e9d10a52f6975838afccc",
+  "limits": [
+    "Initial states; not every interaction or saved state",
+    "Chromium viewport emulation, not physical mobile devices",
+    "No screen-reader conformance claim",
+    "No production performance measurement",
+    "Full-page visual inspection focused on shared templates and representative content"
+  ],
+  "routes": [
+    {
+      "route": "/",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "es",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/programs",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "es",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/approach",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "es",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/trust",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "es",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/blog",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "es",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/blog/see-the-invisible",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "es",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/blog/math-you-can-move",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "es",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/blog/paper-glider-experiment",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "es",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/blog/program-a-paper-robot",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "es",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/en",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "en",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/en/programs",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "en",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/en/approach",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "en",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/en/trust",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "en",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/en/blog",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "en",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/en/blog/see-the-invisible",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "en",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/en/blog/math-you-can-move",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "en",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/en/blog/paper-glider-experiment",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "en",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/en/blog/program-a-paper-robot",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "en",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/ru",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "ru",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/ru/programs",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "ru",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/ru/approach",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "ru",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/ru/trust",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "ru",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/ru/blog",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "ru",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/ru/blog/see-the-invisible",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "ru",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/ru/blog/math-you-can-move",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "ru",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/ru/blog/paper-glider-experiment",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "ru",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/ru/blog/program-a-paper-robot",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "ru",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/privacy",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "en",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/terms",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "en",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/safety",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "en",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/accessibility",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "en",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/demo",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "en",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/demo/lab",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "en",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/demo/portfolio",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "en",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/demo/guardian",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "en",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/portal",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "en",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/portal/subjects",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "en",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/portal/projects",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "en",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/portal/labs",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "en",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/portal/progress",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "en",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/portal/guardian",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "en",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/portal/learn/programming-first-message",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "en",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/portal/learn/programming-variables",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "en",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/portal/learn/programming-repeat",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "en",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/portal/learn/science-fair-test",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "en",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/portal/learn/science-paper-bridge",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "en",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/portal/learn/science-evidence",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "en",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/portal/learn/mathematics-patterns",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "en",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/portal/learn/mathematics-fractions",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "en",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/portal/learn/mathematics-area",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "en",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/portal/learn/language-precise-description",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "en",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/portal/learn/language-strong-sentence",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "en",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/portal/learn/language-short-story",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "en",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/portal/learn/arts-patterns",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "en",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/portal/learn/arts-color-story",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "en",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/portal/learn/arts-design-brief",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "en",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/portal/labs/loop-loom",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "en",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/portal/labs/same-half",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "en",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/portal/labs/hidden-cubes",
+      "expectedStatus": 200,
+      "statusByWidth": {
+        "390": 200,
+        "1440": 200
+      },
+      "documentLanguage": "en",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/missing-audit-page",
+      "expectedStatus": 404,
+      "statusByWidth": {
+        "390": 404,
+        "1440": 404
+      },
+      "documentLanguage": "en",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    },
+    {
+      "route": "/portal/missing-audit-page",
+      "expectedStatus": 404,
+      "statusByWidth": {
+        "390": 404,
+        "1440": 404
+      },
+      "documentLanguage": "en",
+      "horizontalOverflow": 0,
+      "uncaughtBrowserErrors": 0
+    }
+  ]
+}

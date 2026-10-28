@@ -101,7 +101,7 @@ test("Loop Loom checks new-case understanding, restores recorded work and invali
   await expect(page.locator(".loom-explain .p-assessment-feedback")).toContainText("count Clap, Tap, and Snap");
   await page.getByLabel("How many lines will this new program print?", { exact: true }).fill("12");
   await page.getByRole("button", { name: "Check & record my learning", exact: true }).click();
-  await expect(page.locator(".loom-explain .p-assessment-feedback")).toContainText("Learning recorded.");
+  await expect(page.locator(".loom-explain .p-assessment-feedback")).toContainText("learning recorded");
   await page.getByLabel("Keep a question or explain your idea. (Optional)", { exact: true }).fill("A loop repeats the whole group in order.");
   await page.reload();
   await expect(page.getByLabel("My predicted number of lines", { exact: true })).toHaveValue("3");
@@ -142,7 +142,7 @@ test("Loop Loom mobile and reduced-motion 2D mode work without WebGL and pass co
   scan = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21aa"]).analyze();
   expect(scan.violations, "mobile dark Loop Loom").toEqual([]);
   await solveLoom(page);
-  await expect(page.locator(".loom-explain .p-assessment-feedback")).toContainText("Learning recorded.");
+  await expect(page.locator(".loom-explain .p-assessment-feedback")).toContainText("learning recorded");
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
 });
 

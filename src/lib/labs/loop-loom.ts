@@ -61,19 +61,19 @@ function wholeAnswer(value: string | undefined, max: number): number | null {
 export function assessLoopLoom(record: LabRecord): LabCheck {
   const repeats = loopLoomRepeats(record.settings.repeats);
   if (record.settings.repeats !== undefined && !/^[0-6]$/.test(record.settings.repeats)) {
-    return { passed: false, feedback: "Choose a whole number of repeats from 0 to 6." };
+    return { passed: false, field: "repeats", feedback: "Choose a whole number of repeats from 0 to 6." };
   }
   if (record.answers.predictionSubmitted !== "yes" || wholeAnswer(record.answers.prediction, 12) === null) {
-    return { passed: false, feedback: "Make and submit a prediction first. Your first idea can change after you investigate." };
+    return { passed: false, field: "prediction", feedback: "Make and submit a prediction first. Your first idea can change after you investigate." };
   }
   if (wholeAnswer(record.answers.observation, 12) !== repeats * 2) {
-    return { passed: false, feedback: repeats === 0 ? "Zero repeats runs neither instruction. How many lines can print?" : "There are two instructions in each block. Count the blocks, then multiply by two." };
+    return { passed: false, field: "observation", feedback: repeats === 0 ? "Zero repeats runs neither instruction. How many lines can print?" : "There are two instructions in each block. Count the blocks, then multiply by two." };
   }
   if (wholeAnswer(record.answers.transfer, 24) !== 12) {
-    return { passed: false, feedback: "For the new case, count Clap, Tap, and Snap in one block. Then count four equal blocks." };
+    return { passed: false, field: "transfer", feedback: "For the new case, count Clap, Tap, and Snap in one block. Then count four equal blocks." };
   }
   if (record.answers.transferFirst !== "Clap, Tap, Snap") {
-    return { passed: false, feedback: "Check the order inside the new block. Each whole block runs before the next one starts." };
+    return { passed: false, field: "transferFirst", feedback: "Check the order inside the new block. Each whole block runs before the next one starts." };
   }
   return { passed: true, feedback: "You connected repeats to groups of instructions, and worked out a new three-instruction block. Your original prediction did not have to be right." };
 }

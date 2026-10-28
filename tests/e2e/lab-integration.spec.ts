@@ -12,7 +12,7 @@ test("new lab routes use the clean app host while the public home stays separate
     expect(html).not.toContain('href="/portal/labs');
   }
   const marketing = await request.get("/", { headers: { Host: "educationos.space" } });
-  expect(await marketing.text()).toContain("Big ideas");
+  expect(await marketing.text()).toContain("m-hero-copy");
   expect(await marketing.text()).not.toContain("DISCOVERY LAB / 01");
 });
 

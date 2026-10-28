@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { PORTAL_HOST_HEADER, resolvePortalRoute } from '@/lib/portal-routing';
+import { pageLocale } from '@/lib/page-locale';
 
 export function proxy(request: NextRequest) {
   const nonce = Buffer.from(crypto.randomUUID()).toString('base64');
@@ -18,6 +19,9 @@ export function proxy(request: NextRequest) {
   const route = resolvePortalRoute(incomingHost, request.nextUrl.pathname);
   // Never trust a client-supplied value when the layout chooses its link base.
   requestHeaders.set(PORTAL_HOST_HEADER, String(route.portalHost));
+  const pathname = request.nextUrl.pathname;
+  const marketingLocale = pageLocale(pathname, route.portalHost);
+  requestHeaders.set('x-educationos-locale', marketingLocale);
   const options = { request: { headers: requestHeaders } };
   let response: NextResponse;
   if (route.action === 'next') {

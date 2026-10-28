@@ -1,0 +1,80 @@
+{
+  "release": "marketing-v2",
+  "verifiedDate": "2026-10-25",
+  "sourceCommit": "429bf9cc2b3d852afdaee34ead2ca8d6af5c0bc4",
+  "branch": "codex/marketing-v2-i18n",
+  "pullRequest": "https://github.com/VladislavBrodsky/EducationOS/pull/3",
+  "railway": {
+    "projectId": "d08710d0-4df1-4c6a-adc8-361c52e7c572",
+    "environment": "production",
+    "marketingServiceId": "bf43668a-197d-4b94-94d2-9b09d92e44f9",
+    "marketingDeploymentId": "aab2a994-d81a-4fc5-8fbf-2c3257427bbc",
+    "marketingStatus": "SUCCESS",
+    "portalServiceId": "2e6b7e2f-8ab9-4b7d-9f81-22c9c171c1fa",
+    "unchangedPortalDeploymentId": "89e503e6-63c0-4ef9-9f33-5e36ca49f950"
+  },
+  "upload": {
+    "manifest": "marketing-v2-manifest-2026-10-25.json",
+    "fileCount": 119,
+    "totalBytes": 2531924,
+    "backendIncluded": false,
+    "environmentFilesIncluded": false
+  },
+  "live": {
+    "baseUrl": "https://educationos.space",
+    "routesWithHttp200": [
+      "/",
+      "/en",
+      "/ru",
+      "/blog",
+      "/en/blog",
+      "/ru/blog",
+      "/blog/see-the-invisible",
+      "/blog/math-you-can-move",
+      "/blog/paper-glider-experiment",
+      "/blog/program-a-paper-robot",
+      "/en/blog/see-the-invisible",
+      "/en/blog/math-you-can-move",
+      "/en/blog/paper-glider-experiment",
+      "/en/blog/program-a-paper-robot",
+      "/ru/blog/see-the-invisible",
+      "/ru/blog/math-you-can-move",
+      "/ru/blog/paper-glider-experiment",
+      "/ru/blog/program-a-paper-robot"
+    ],
+    "htmlLanguageChecks": [
+      "es",
+      "en",
+      "ru"
+    ],
+    "seoChecks": [
+      "localized title",
+      "canonical",
+      "hreflang es/en/ru/x-default"
+    ],
+    "homepageImageRequestsWithHttp200": 4,
+    "wwwRedirect": {
+      "from": "https://www.educationos.space/blog?source=release-check",
+      "status": 308,
+      "to": "https://educationos.space/blog?source=release-check"
+    },
+    "desktopViewport": [
+      1440,
+      1000
+    ],
+    "mobileViewport": [
+      390,
+      844
+    ],
+    "browserPageErrors": 0,
+    "horizontalOverflow": false,
+    "portalUrl": "https://app.educationos.space/",
+    "portalStatus": 200,
+    "portalRobotsHeader": "noindex, nofollow"
+  },
+  "scopeNotes": [
+    "English-only learner demo, legal, and trust content remains",
+    "Python API remains private in staging and disconnected from production frontend",
+    "No learner enrollment or child data collection enabled by this release"
+  ]
+}

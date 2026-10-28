@@ -1,0 +1,8 @@
+.root { position:absolute; z-index:3; pointer-events:none; }
+.layer { position:absolute; inset:0; }
+.left,.right { top:0; bottom:0; width:44px; }
+.left { left:0; }
+.right { right:0; }
+.top,.bottom { left:0; right:0; height:44px; }
+.top { top:0; }
+.bottom { bottom:0; }

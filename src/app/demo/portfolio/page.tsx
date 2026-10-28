@@ -5,6 +5,7 @@ import { useState } from "react";
 import { ArrowRight, Check, FileText, FlaskConical, FolderOpen, Lightbulb, ScanLine } from "lucide-react";
 import { evidenceCount, measurementComparison } from "@/lib/demo-state";
 import { useDemo } from "@/components/demo/demo-provider";
+import { ActivityFeedback } from "@/components/learning/activity-feedback";
 import { DemoDataActions } from "@/components/demo/data-actions";
 import { MeasurementComparison } from "@/components/demo/measurement";
 
@@ -26,6 +27,7 @@ export default function PortfolioPage() {
   ].filter((entry) => entry.text.trim());
   const shown = entries.filter((entry) => filter === "All evidence" || entry.category === filter);
   return <>
+    <ActivityFeedback result={count === 7 ? { passed: true, feedback: "Your seven-step evidence trail is ready to review and export. These are your observations, not an automatically graded experiment." } : null} successTitle="Mission complete" />
     <div className="demo-page-heading"><div><p className="demo-eyebrow">SKILLS PORTFOLIO / AGES {session.ageBand.replace("-", "–")}</p><h1>Every idea leaves<br />a little evidence</h1><p>A collection of what you observed, imagined, and tested.</p></div><span className="demo-day-tag"><FolderOpen size={16} aria-hidden="true" /> Your process, made visible</span></div>
     <section className="demo-portfolio-summary"><div><span className="demo-pill"><FlaskConical size={14} aria-hidden="true" /> PAPER BRIDGE / VERSION 1</span><h2>A little paper. A stronger bridge</h2><p>{count === 7 ? "All seven steps have recorded evidence. You can keep refining your work." : `${count} of 7 steps have recorded evidence. Your rough ideas are welcome too.`}</p><progress className="demo-progress" max={7} value={count} aria-label={`${count} of seven steps have evidence`} /><Link className="demo-text-link" href="/demo/lab">{count === 7 ? "Revisit the experiment" : "Continue the experiment"} <ArrowRight size={16} aria-hidden="true" /></Link></div><div className="demo-portfolio-stamp"><span><Check size={22} aria-hidden="true" /></span><strong>{count}<small>/ 7</small></strong><p>steps with evidence</p></div></section>
     <div className="demo-evidence-note"><FileText size={17} aria-hidden="true" /><p>This is self-recorded demo evidence. It is not a verified assessment, an achievement award, or a mastery score.</p></div>

@@ -5,22 +5,24 @@ import { readFile } from 'node:fs/promises';
 test('the visual journal and subject artwork load on narrow screens without horizontal overflow', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/');
-  await expect(page.getByRole('link', { name: 'Journal', exact: true })).toBeVisible();
-  await expect.poll(() => page.locator('.learning-hero-art img').evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
+  await page.locator('.m-mobile-menu summary').click();
+  await expect(page.getByRole('navigation', { name: 'Navegación principal' }).getByRole('link', { name: 'Revista' })).toBeVisible();
+  await expect.poll(() => page.locator('.m-stage-object img').evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
   for (const path of ['/programs', '/approach', '/trust']) {
     await page.goto(path);
-    await expect.poll(() => page.locator('.page-hero-scene-art img').evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
+    await expect.poll(() => page.locator('.m-detail-hero-art img').evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), path).toBe(true);
   }
   await page.goto('/');
-  await page.getByRole('link', { name: 'Journal', exact: true }).click();
-  await expect(page.getByRole('heading', { name: 'Little questions Big discoveries' })).toBeVisible();
-  await expect(page.locator('.journal-card')).toHaveCount(4);
-  await expect.poll(() => page.locator('.journal-card-image img').first().evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
+  await page.locator('.m-mobile-menu summary').click();
+  await page.getByRole('navigation', { name: 'Navegación principal' }).getByRole('link', { name: 'Revista' }).click();
+  await expect(page.getByRole('heading', { name: 'Pequeñas preguntas. Grandes descubrimientos' })).toBeVisible();
+  await expect(page.locator('.m-story')).toHaveCount(4);
+  await expect.poll(() => page.locator('.m-story-image img').first().evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-  await page.getByRole('link', { name: /Math you can turn, fold, and explain/ }).click();
-  await expect(page.getByRole('heading', { name: 'Math you can turn, fold, and explain' })).toBeVisible();
-  await expect.poll(() => page.locator('.journal-article-image img').evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
+  await page.getByRole('link', { name: /Matemáticas que se pueden girar y doblar/ }).click();
+  await expect(page.getByRole('heading', { name: 'Matemáticas que se pueden girar y doblar' })).toBeVisible();
+  await expect.poll(() => page.locator('.m-article-art img').evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 
   await page.goto('/portal');
@@ -74,7 +76,7 @@ test('coding work runs locally, survives reload, appears in progress and can be 
   await expect(page.locator('.p-output pre')).toHaveText('Hello, world!\nI can make things.');
   await expect(page.getByText('Run finished · 2 output lines', { exact: true })).toBeVisible();
   await page.getByRole('button', { name: 'Check & record activity', exact: true }).click();
-  await expect(page.getByRole('status').filter({ hasText: 'Activity recorded.' })).toBeVisible();
+  await expect(page.getByRole('status').filter({ hasText: 'activity recorded' })).toBeVisible();
   await page.getByLabel('My reflection', { exact: false }).fill('The output follows the order of my two instructions.');
   await page.getByRole('link', { name: 'My progress', exact: true }).click();
   const entry = page.locator('.p-notebook-entry').filter({ has: page.getByRole('heading', { name: 'Your first message', exact: true }) });
@@ -111,11 +113,11 @@ test('a maths attempt explains errors and records a corrected answer', async ({ 
   await page.goto('/portal/learn/mathematics-patterns');
   await page.getByRole('radio', { name: '14', exact: true }).check();
   await page.getByRole('button', { name: 'Check my answer', exact: true }).click();
-  await expect(page.getByRole('main').getByRole('alert')).toContainText('Try another way.');
+  await expect(page.getByRole('main').getByRole('alert')).toContainText('Try another way');
   await expect(page.getByRole('main').getByRole('alert')).toContainText('12 + 3 = 15');
   await page.getByRole('radio', { name: '15', exact: true }).check();
   await page.getByRole('button', { name: 'Check my answer', exact: true }).click();
-  await expect(page.getByRole('status').filter({ hasText: 'Activity recorded.' })).toBeVisible();
+  await expect(page.getByRole('status').filter({ hasText: 'activity recorded' })).toBeVisible();
   await page.getByRole('link', { name: 'My progress', exact: true }).click();
   await expect(page.locator('.p-notebook-entry').filter({ has: page.getByRole('heading', { name: 'Find the rule', exact: true }) })).toContainText('Activity recorded');
 });
@@ -129,14 +131,14 @@ test('writing records the visible minimum-length requirement and science accepts
   const story = 'A curious explorer found a small silver key beside the locked garden gate. The plants inside looked thirsty, but nobody knew where the gardener had gone. She chose to ask a neighbour before opening anything. Together they found the owner, watered the flowers, and made a plan to care for the garden each morning.';
   await page.getByLabel('What does the key change?', { exact: true }).fill(story);
   await page.getByRole('button', { name: 'Record my practice', exact: true }).click();
-  await expect(page.getByRole('status').filter({ hasText: 'Activity recorded.' })).toContainText('not writing quality');
+  await expect(page.getByRole('status').filter({ hasText: 'activity recorded' })).toContainText('not writing quality');
 
   await page.goto('/portal/learn/science-paper-bridge');
   await page.getByLabel('Flat bridge: seconds held (0–60)', { exact: true }).fill('0');
   await page.getByLabel('Folded bridge: seconds held (0–60)', { exact: true }).fill('0');
   await page.getByLabel('What happened?', { exact: true }).fill('Both paper bridges slipped before supporting the block.');
   await page.getByRole('button', { name: 'Record my practice', exact: true }).click();
-  await expect(page.getByRole('status').filter({ hasText: 'Activity recorded.' })).toContainText('does not verify the experiment');
+  await expect(page.getByRole('status').filter({ hasText: 'activity recorded' })).toContainText('does not verify the experiment');
   await page.reload();
   await expect(page.getByLabel('Flat bridge: seconds held (0–60)', { exact: true })).toHaveValue('0');
   await page.getByRole('link', { name: 'My progress', exact: true }).click();
@@ -181,7 +183,7 @@ test('the app host serves only the portal and keeps clean paths, policy redirect
 
   const publicHome = await request.get('/', { headers: { Host: 'educationos.space', 'x-educationos-portal-host': 'true' } });
   expect(publicHome.status()).toBe(200);
-  expect(await publicHome.text()).toContain('Big ideas');
+  expect(await publicHome.text()).toContain('m-hero-copy');
   expect(await publicHome.text()).not.toMatch(/<h1[^>]*>What will you discover\?/);
 });
 

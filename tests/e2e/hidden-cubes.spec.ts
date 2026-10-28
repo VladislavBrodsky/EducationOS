@@ -19,7 +19,7 @@ test("cube predictions gate the readouts and checks derive from every preset plu
   await page.goto("/portal/labs/hidden-cubes");
   await expect(page.getByRole("heading", { name: "Hidden Cube Builder", exact: true })).toBeVisible();
   await expect(page.locator(".cube-readout")).toHaveCount(0);
-  await expect(page.getByRole("button", { name: "Open the builder", exact: true })).toBeDisabled();
+  await expect(page.getByRole("button", { name: "Open the builder", exact: true })).toBeEnabled();
   for (const preset of ["3x2x2", "2x2x2", "3x3x2", "3x3x3"]) {
     const [length, width, height] = preset.split("x").map(Number);
     await page.getByLabel("Choose a box: length × width × height").selectOption(preset);
@@ -42,7 +42,7 @@ test("cube predictions gate the readouts and checks derive from every preset plu
     await expect(page.locator(".p-heading")).toContainText("Activity recorded");
   }
   await page.reload();
-  await expect(page.locator(".cube-feedback")).toContainText("Discovery recorded");
+  await expect(page.locator(".cube-feedback")).toContainText("discovery recorded");
   await expect(page.getByLabel("Choose a box: length × width × height")).toHaveValue("3x3x3");
 });
 

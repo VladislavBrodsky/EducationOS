@@ -1,0 +1,39 @@
+import Link from 'next/link';
+import { ArrowUpRight, Asterisk } from 'lucide-react';
+import { localizedPath, marketingCopy, type Locale } from '@/lib/marketing-i18n';
+import { MotionSurface } from './motion-surface';
+import { LanguageSwitcher } from './language-switcher';
+import { MobileMenu } from './mobile-menu';
+import '@fontsource-variable/manrope';
+import './experience.css';
+
+export function MarketingShell({ locale, children, section = '', primaryAction }: { locale: Locale; children: React.ReactNode; section?: string; primaryAction?: { href: string; label: string } }) {
+  const copy = marketingCopy[locale];
+  const home = localizedPath(locale);
+  return <>
+    <header className="m-header">
+      <div className="m-header-inner container">
+        <Link className="m-brand" href={home} aria-label={copy.brandHome}><span className="m-brand-symbol"><Asterisk size={25} strokeWidth={2.2} aria-hidden="true" /></span><span>Education<span className="m-brand-light">OS</span></span></Link>
+        <nav className="m-nav" aria-label={copy.navigation}>
+          <Link href={localizedPath(locale, 'approach')} aria-current={section === 'approach' ? 'page' : undefined}>{copy.nav.method}</Link>
+          <Link href={localizedPath(locale, 'programs')} aria-current={section === 'programs' ? 'page' : undefined}>{copy.nav.programs}</Link>
+          <Link href={localizedPath(locale, 'blog')} aria-current={section.startsWith('blog') ? 'page' : undefined}>{copy.nav.journal}</Link>
+          <Link href={localizedPath(locale, 'trust')} aria-current={section === 'trust' ? 'page' : undefined}>{copy.nav.care}</Link>
+        </nav>
+        <div className="m-header-actions">
+          <LanguageSwitcher key={locale} locale={locale} section={section} />
+          <Link className="m-header-cta" href={primaryAction?.href ?? '/demo/lab'}>{primaryAction?.label ?? copy.demo}<ArrowUpRight size={16} aria-hidden="true" /></Link>
+          <MobileMenu key={`${locale}/${section}`} label={{ es: 'Menú principal', en: 'Main menu', ru: 'Главное меню' }[locale]} navigationLabel={copy.navigation} items={[
+            { href: localizedPath(locale, 'approach'), label: copy.nav.method, current: section === 'approach' },
+            { href: localizedPath(locale, 'programs'), label: copy.nav.programs, current: section === 'programs' },
+            { href: localizedPath(locale, 'blog'), label: copy.nav.journal, current: section.startsWith('blog') },
+            { href: localizedPath(locale, 'trust'), label: copy.nav.care, current: section === 'trust' },
+            { href: primaryAction?.href ?? '/demo/lab', label: primaryAction?.label ?? copy.demo, primary: true },
+          ]} />
+        </div>
+      </div>
+    </header>
+    <MotionSurface>{children}</MotionSurface>
+    <footer className="m-footer"><div className="container"><div className="m-footer-top"><div><Link className="m-brand" href={home} aria-label={copy.brandHome}><span className="m-brand-symbol"><Asterisk size={25} strokeWidth={2.2} aria-hidden="true" /></span><span>Education<span className="m-brand-light">OS</span></span></Link><p>{copy.footerLine}</p></div><div className="m-footer-links"><Link href={localizedPath(locale, 'approach')}>{copy.nav.method}</Link><Link href={localizedPath(locale, 'programs')}>{copy.nav.programs}</Link><Link href={localizedPath(locale, 'blog')}>{copy.nav.journal}</Link><Link href={localizedPath(locale, 'trust')}>{copy.footerLinks.trust}</Link><Link href="/safety">{copy.footerLinks.safety}</Link><Link href="/privacy">{copy.footerLinks.privacy}</Link><Link href="/terms">{copy.footerLinks.terms}</Link><Link href="/accessibility">{copy.footerLinks.accessibility}</Link></div></div><div className="m-footer-bottom"><span>Copyright {new Date().getUTCFullYear()} EducationOS</span><span>{copy.footerStatus}</span><span>{copy.footerLegal}</span></div></div></footer>
+  </>;
+}

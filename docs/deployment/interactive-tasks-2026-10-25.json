@@ -1,0 +1,92 @@
+{
+  "date": "2026-10-25",
+  "sourceCommit": "2fe3e17fe63676203a3edefc20c5ba2264686ca5",
+  "releaseTag": "v0.6.0-preview.8",
+  "deployments": {
+    "marketing": {
+      "url": "https://educationos.space",
+      "serviceId": "bf43668a-197d-4b94-94d2-9b09d92e44f9",
+      "deploymentId": "63047e28-e1fa-4aef-9cc4-b20bd23d4e24",
+      "status": "SUCCESS"
+    },
+    "portal": {
+      "url": "https://app.educationos.space",
+      "serviceId": "2e6b7e2f-8ab9-4b7d-9f81-22c9c171c1fa",
+      "deploymentId": "9151626c-459c-4006-bc70-818a7ee1b96f",
+      "status": "SUCCESS"
+    }
+  },
+  "frontendArchive": {
+    "fileCount": 142,
+    "totalBytes": 2617415,
+    "manifestSha256": "0a4e13b32fcfb4a9dfe3e148361844aecbb5363bef44a9326d696325f79bb659",
+    "gitArchivePaths": [
+      ".dockerignore",
+      "Dockerfile",
+      "next-env.d.ts",
+      "next.config.ts",
+      "package-lock.json",
+      "package.json",
+      "postcss.config.mjs",
+      "tsconfig.json",
+      "public",
+      "src",
+      "shared"
+    ]
+  },
+  "validation": {
+    "githubRuns": [
+      40218588434,
+      40218591559
+    ],
+    "githubChecksPassed": 6,
+    "frontendUnitTestsPassed": 134,
+    "browserTestsPassed": 68,
+    "backendTestsPassed": 39,
+    "liveBrowserTestsPassed": 20,
+    "liveViewportWidths": [
+      390,
+      1280
+    ],
+    "ciViewportWidths": [
+      320,
+      390,
+      430,
+      1440
+    ],
+    "liveChecks": [
+      "landing challenge errors, correction links, success, edit invalidation, reset, and accessibility in Spanish, English, and Russian",
+      "complete seven-step mission, portfolio, export and synthetic note clearing",
+      "blocked incomplete mission completion",
+      "every one of fifteen lessons: incorrect, corrected, restored and edited work",
+      "mobile syntax error recovery",
+      "missing predictions in all three discovery labs and invalid negative cube input"
+    ]
+  },
+  "httpChecks": {
+    "www": {
+      "status": 308,
+      "from": "https://www.educationos.space/demo/lab?source=interactive-release",
+      "to": "https://educationos.space/demo/lab?source=interactive-release"
+    },
+    "portal": {
+      "status": 200,
+      "robots": "noindex, nofollow"
+    },
+    "mission": {
+      "status": 200,
+      "robots": "noindex, nofollow"
+    },
+    "localhost": {
+      "url": "http://127.0.0.1:3100",
+      "status": 200
+    }
+  },
+  "scope": "Existing production marketing and learner portal services only; no DNS, Python API, enrollment or learner-data access changes",
+  "limits": [
+    "Chromium viewport checks, not physical-device or assistive-technology certification",
+    "Paper model checks design constraints, not physical strength",
+    "Writing and physical observations remain self-recorded practice, not verified quality or experimental results",
+    "Legal, safety, accessibility, and learner activities remain English; marketing copy awaits native-speaker editorial review"
+  ]
+}

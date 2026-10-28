@@ -3,6 +3,8 @@ const config: NextConfig = {
   output: 'standalone',
   poweredByHeader: false,
   reactStrictMode: true,
+  // The development badge otherwise covers the mobile Today navigation target.
+  devIndicators: false,
   // Keep same-server rewrites on the original origin. Next otherwise turns
   // 127.0.0.1 into localhost and treats the rewrite as an external request,
   // which reruns the proxy and loses its trusted portal/nonce headers.

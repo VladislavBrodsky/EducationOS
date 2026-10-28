@@ -60,19 +60,19 @@ export function unequalSelectedShare(selectedIndices: readonly number[]): { sele
 export function assessSameHalf(record: LabRecord): LabCheck {
   const { answers } = record;
   if (!["same", "different", "unsure"].includes(answers.prediction ?? "") || answers.revealed !== "yes") {
-    return { passed: false, feedback: "Make a prediction, then open the comparison. A prediction can be a guess." };
+    return { passed: false, field: "prediction", feedback: "Make a prediction, then open the comparison. A prediction can be a guess." };
   }
   if (!isHalf(readHalfSelection(record.settings.selection).length, HALF_GRID.cells)) {
-    return { passed: false, feedback: "Make your own half first: select six of the twelve equal cells. The shape can change." };
+    return { passed: false, field: "selection", feedback: "Make your own half first: select six of the twelve equal cells. The shape can change." };
   }
   if (answers.observation !== "same-half") {
-    return { passed: false, feedback: "Compare the same-sized wholes. Three of six and two of four each cover half the whole." };
+    return { passed: false, field: "observation", feedback: "Compare the same-sized wholes. Three of six and two of four each cover half the whole." };
   }
   if (answers.unequal !== "not-half") {
-    return { passed: false, feedback: "Look at the uneven pieces. The two selected pieces are small; counting pieces only works when the parts are equal." };
+    return { passed: false, field: "unequal", feedback: "Look at the uneven pieces. The two selected pieces are small; counting pieces only works when the parts are equal." };
   }
   if (!/^\s*4\s*$/.test(answers.transfer ?? "") || answers.transferReason !== "equal-groups") {
-    return { passed: false, feedback: "Try the new whole: split eight equal cells into two groups with the same number. How many go in each group?" };
+    return { passed: false, field: /^\s*4\s*$/.test(answers.transfer ?? "") ? "transferReason" : "transfer", feedback: "Try the new whole: split eight equal cells into two groups with the same number. How many go in each group?" };
   }
   return { passed: true, feedback: "You made a half, compared equal areas, spotted unequal pieces, and found that four of eight equal cells make half. Your practice is recorded." };
 }

@@ -47,12 +47,12 @@ const matches = (value: string | undefined, expected: number) => isCubePredictio
 export function assessHiddenCubes(record: LabRecord): LabCheck {
   const answers = record.answers;
   const { perLayer, layers, volume } = cubeQuantities(cubeDimensions(cubePreset(record.settings.preset)));
-  if (!isCubePrediction(answers.prediction) || answers.revealed !== "yes") return { passed: false, feedback: "Make a prediction, then open the builder. Your first guess may change." };
-  if (!matches(answers.perLayer, perLayer)) return { passed: false, feedback: "A face is a surface of a cube. Count the rows in one complete layer: length × width." };
-  if (!matches(answers.layers, layers)) return { passed: false, feedback: "Each layer is one centimetre high. Count all the equal layers, including the ones hidden by this view." };
-  if (!matches(answers.volume, volume)) return { passed: false, feedback: "Side lengths describe edges. For the space inside, multiply cubes in one layer by the number of layers." };
-  if (answers.unit !== "cm3") return { passed: false, feedback: "These are one-centimetre cubes with length, width and height. Choose cubic centimetres." };
-  if (answers.reason !== "equal-layers") return { passed: false, feedback: "Turning changes what you can see. It does not create or remove cubes. Explain the complete object using equal layers." };
-  if (!matches(answers.transferLayer, 8) || !matches(answers.transferLayers, 3) || !matches(answers.transfer, 24)) return { passed: false, feedback: "Try the new 4 × 2 × 3 box. Each layer has 2 rows of 4 cubes; there are 3 equal layers." };
+  if (!isCubePrediction(answers.prediction) || answers.revealed !== "yes") return { passed: false, field: "prediction", feedback: "Make a prediction, then open the builder. Your first guess may change." };
+  if (!matches(answers.perLayer, perLayer)) return { passed: false, field: "perLayer", feedback: "A face is a surface of a cube. Count the rows in one complete layer: length × width." };
+  if (!matches(answers.layers, layers)) return { passed: false, field: "layers", feedback: "Each layer is one centimetre high. Count all the equal layers, including the ones hidden by this view." };
+  if (!matches(answers.volume, volume)) return { passed: false, field: "volume", feedback: "Side lengths describe edges. For the space inside, multiply cubes in one layer by the number of layers." };
+  if (answers.unit !== "cm3") return { passed: false, field: "unit", feedback: "These are one-centimetre cubes with length, width and height. Choose cubic centimetres." };
+  if (answers.reason !== "equal-layers") return { passed: false, field: "reason", feedback: "Turning changes what you can see. It does not create or remove cubes. Explain the complete object using equal layers." };
+  if (!matches(answers.transferLayer, 8) || !matches(answers.transferLayers, 3) || !matches(answers.transfer, 24)) return { passed: false, field: !matches(answers.transferLayer, 8) ? "transferLayer" : !matches(answers.transferLayers, 3) ? "transferLayers" : "transfer", feedback: "Try the new 4 × 2 × 3 box. Each layer has 2 rows of 4 cubes; there are 3 equal layers." };
   return { passed: true, feedback: "Recorded! You counted complete layers and used cubic centimetres, even when some cubes were hidden." };
 }

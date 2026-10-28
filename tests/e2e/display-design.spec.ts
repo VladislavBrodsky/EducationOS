@@ -1,81 +1,395 @@
 import { expect, test } from '@playwright/test';
+import AxeBuilder from '@axe-core/playwright';
 
 const displayRoutes = [
-  '/', '/programs', '/approach', '/trust', '/blog',
-  '/blog/see-the-invisible', '/blog/math-you-can-move', '/blog/paper-glider-experiment',
-  '/demo', '/demo/lab', '/demo/guardian', '/demo/portfolio',
+  '/', '/en', '/ru', '/blog', '/en/blog', '/ru/blog',
+  '/blog/see-the-invisible', '/en/blog/math-you-can-move', '/ru/blog/paper-glider-experiment',
+  '/programs', '/approach', '/trust', '/privacy', '/safety', '/terms', '/accessibility', '/demo', '/demo/lab', '/demo/guardian', '/demo/portfolio',
   '/portal', '/portal/subjects', '/portal/projects', '/portal/labs', '/portal/progress', '/portal/guardian',
 ];
 
 test('display headings never end with a period', async ({ page }) => {
   for (const route of displayRoutes) {
     await page.goto(route);
-    const headings = await page.locator('h1, h2, h3, h4, .hero-description, .page-hero-scene .section-lead, .p-heading > div > p:not(.p-eyebrow)').allTextContents();
-    const violations = headings.map(value => value.trim()).filter(value => value.endsWith('.'));
-    expect(violations, `Headings on ${route}`).toEqual([]);
+    const headings = await page.locator('h1, h2, h3, h4, .m-hero-copy > p, .hero-description, .page-hero-scene .section-lead, .p-heading > div > p:not(.p-eyebrow)').allTextContents();
+    expect(headings.map(value => value.trim()).filter(value => value.endsWith('.')), `Headings on ${route}`).toEqual([]);
   }
 });
 
-test('mobile artwork and sections fit the viewport', async ({ page }) => {
-  test.setTimeout(90000);
-  await page.setViewportSize({ width: 390, height: 844 });
-  await page.emulateMedia({ reducedMotion: 'reduce' });
-  for (const route of ['/', '/programs', '/approach', '/trust', '/blog', '/portal']) {
+test('marketing languages have correct document language, links and localized stories', async ({ page }) => {
+  test.setTimeout(60000);
+  for (const [route, lang, title] of [
+    ['/', 'es', 'Del «¿por qué?»'], ['/en', 'en', 'From “why?”'], ['/ru', 'ru', 'От «почему?»'],
+  ]) {
     await page.goto(route);
-    await page.locator('main').first().waitFor();
-    const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
-    expect(overflow, `Horizontal overflow on ${route}`).toBeLessThanOrEqual(1);
-    if (route === '/portal') {
-      const inset = await page.locator('.p-heading-mascot').evaluate((heading) => {
-        const content = heading.querySelector(':scope > div:first-child');
-        return content ? content.getBoundingClientRect().left - heading.getBoundingClientRect().left : 0;
-      });
-      expect(inset, 'Portal welcome copy keeps its inner margin').toBeGreaterThanOrEqual(16);
+    await expect(page.locator('html')).toHaveAttribute('lang', lang);
+    await expect(page.getByRole('heading', { level: 1 })).toContainText(title);
+    await expect(page.locator('.m-method-card')).toHaveCount(4);
+    await expect(page.locator('.m-age-card')).toHaveCount(5);
+    await expect(page.locator('.fx-bridge-preview')).toBeVisible();
+    const href = lang === 'es' ? '/blog' : `/${lang}/blog`;
+    await expect(page.getByRole('navigation', { name: /Navegación principal|Main navigation|Основная навигация/ }).getByRole('link', { name: /Revista|Journal|Журнал/ })).toHaveAttribute('href', href);
+    await expect(page.locator('link[rel="alternate"][hreflang="ru"]')).toHaveAttribute('href', /\/ru$/);
+  }
+  for (const [route, lang] of [['/blog', 'es'], ['/en/blog', 'en'], ['/ru/blog', 'ru']]) {
+    await page.goto(route);
+    await expect(page.locator('html')).toHaveAttribute('lang', lang);
+    await expect(page.locator('.m-story')).toHaveCount(4);
+    await page.locator('.m-story').first().click();
+    await page.waitForURL(new RegExp(`${route}/see-the-invisible$`), { timeout: 20000 });
+    await expect(page.locator('html')).toHaveAttribute('lang', lang);
+    await expect(page.locator('.m-article-challenge')).toBeVisible();
+  }
+});
+
+test('marketing and product pages fit mobile and tablet viewports', async ({ page }) => {
+  test.setTimeout(90000);
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  for (const width of [320, 390, 560, 640, 768, 1024]) {
+    await page.setViewportSize({ width, height: 844 });
+    const routes = width > 390 ? ['/', '/en', '/ru'] : ['/', '/en', '/ru', '/blog', '/ru/blog', '/programs', '/approach', '/trust', '/portal'];
+    for (const route of routes) {
+      await page.goto(route);
+      const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+      expect(overflow, `Horizontal overflow on ${route} at ${width}px`).toBeLessThanOrEqual(1);
+      if (['/', '/en', '/ru'].includes(route)) {
+        await expect(page.locator('.m-hero-benefits li')).toHaveCount(3);
+        for (const benefit of await page.locator('.m-hero-benefits li').all()) {
+          expect(await benefit.evaluate(element => element.scrollWidth - element.clientWidth), `Benefit text on ${route} at ${width}px`).toBeLessThanOrEqual(1);
+        }
+        const actions = page.locator('.m-hero-actions > a');
+        await expect(actions).toHaveCount(2);
+        for (const action of await actions.all()) {
+          const bounds = await action.boundingBox();
+          expect(bounds?.height, `Hero touch target on ${route} at ${width}px`).toBeGreaterThanOrEqual(44);
+        }
+        if (process.env.VISUAL_AUDIT === '1') {
+          await expect.poll(() => page.locator('.m-stage-object img').evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
+          await page.screenshot({ path: `test-results/hero-${route === '/' ? 'es' : route.slice(1)}-${width}.png` });
+        }
+      }
+      if (route === '/portal') {
+        const inset = await page.locator('.p-heading-mascot').evaluate(heading => {
+          const content = heading.querySelector(':scope > div:first-child');
+          return content ? content.getBoundingClientRect().left - heading.getBoundingClientRect().left : 0;
+        });
+        expect(inset).toBeGreaterThanOrEqual(16);
+      }
+      if (process.env.VISUAL_AUDIT === '1' && width === 390 && ['/', '/blog', '/programs', '/approach', '/trust'].includes(route)) {
+        const selector = route === '/' ? '.m-stage-object img' : route === '/blog' ? '.m-journal-hero-art img' : '.m-detail-hero-art img';
+        await expect.poll(() => page.locator(selector).evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
+        await page.screenshot({ path: `test-results/hero-image-${route === '/' ? 'home' : route.slice(1)}-390.png` });
+      }
+      if (route === '/blog' && width === 390) {
+        const height = await page.locator('.m-journal-hero').evaluate(element => element.getBoundingClientRect().height);
+        expect(height).toBeLessThan(550);
+      }
+      if (process.env.VISUAL_AUDIT === '1' && width === 390 && ['/', '/ru', '/blog'].includes(route)) {
+        for (const image of await page.locator('.m-story-image img').all()) {
+          if (await image.isVisible()) await image.scrollIntoViewIfNeeded();
+        }
+        await page.evaluate(() => scrollTo(0, 0));
+        await page.screenshot({ path: `test-results/marketing-mobile-${route === '/' ? 'es' : route.slice(1).replaceAll('/', '-')}.png`, fullPage: true });
+      }
+    }
+  }
+});
+
+test('marketing artwork loads and desktop layout has no overflow', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  const heroArtwork: Record<string, [string, string]> = {
+    '/': ['.m-stage-object img', 'hero-ar-physics.webp'],
+    '/blog': ['.m-journal-hero-art img', 'hero-ar-journal.webp'],
+    '/programs': ['.m-detail-hero-art img', 'hero-ar-programs.webp'],
+    '/approach': ['.m-detail-hero-art img', 'hero-ar-approach.webp'],
+    '/trust': ['.m-detail-hero-art img', 'hero-ar-trust.webp'],
+  };
+  for (const route of ['/', '/en', '/ru', '/blog', '/programs', '/approach', '/trust', '/portal']) {
+    await page.goto(route);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth), route).toBeLessThanOrEqual(1);
+    if (heroArtwork[route]) {
+      const [selector, filename] = heroArtwork[route];
+      await expect.poll(() => page.locator(selector).evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
+      await expect(page.locator(selector)).toHaveAttribute('src', new RegExp(filename));
+      if (process.env.VISUAL_AUDIT === '1') await page.screenshot({ path: `test-results/hero-image-${route === '/' ? 'home' : route.slice(1)}-1440.png` });
     }
     if (route === '/') {
-      await expect(page.locator('.learning-bento-card')).toHaveCount(4);
-      await expect(page.locator('.bridge-mini svg')).toBeVisible();
-    }
-    if (route === '/blog') {
-      const heroHeight = await page.locator('.page-hero-journal').evaluate(element => element.getBoundingClientRect().height);
-      expect(heroHeight, 'Journal introduction stays compact on mobile').toBeLessThan(550);
-    }
-    const visibleArt = page.locator('main img[src*="cutout"], main img[src*="mascot"]');
-    if (await visibleArt.count()) {
-      const first = visibleArt.first();
-      await first.scrollIntoViewIfNeeded();
-      await expect(first).toHaveJSProperty('complete', true);
-      expect(await first.evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
-    }
-    if (process.env.VISUAL_AUDIT === '1') {
-      await page.screenshot({ path: `test-results/visual-${route === '/' ? 'home' : route.slice(1).replaceAll('/', '-')}.png`, fullPage: true });
-      if (route === '/') {
-        await page.locator('.learning-bento').screenshot({ path: 'test-results/visual-mobile-bento.png' });
-        await page.locator('.lab-card').screenshot({ path: 'test-results/visual-mobile-lab-card.png' });
-        await page.locator('.trust-strip').screenshot({ path: 'test-results/visual-mobile-trust-card.png' });
+      if (process.env.VISUAL_AUDIT === '1') {
+        for (const image of await page.locator('.m-story-image img').all()) await image.scrollIntoViewIfNeeded();
+        await page.evaluate(() => scrollTo(0, 0));
+        await page.screenshot({ path: 'test-results/marketing-desktop-es.png', fullPage: true });
       }
-      if (route === '/blog') await page.locator('.page-hero-journal').screenshot({ path: 'test-results/visual-mobile-journal-hero.png' });
-      if (route === '/portal') await page.locator('.p-heading-mascot').screenshot({ path: 'test-results/visual-mobile-mascot.png' });
     }
   }
 });
 
-test('desktop artwork loads without layout overflow', async ({ page }) => {
-  await page.setViewportSize({ width: 1280, height: 900 });
-  await page.emulateMedia({ reducedMotion: 'reduce' });
-  for (const route of ['/', '/programs', '/approach', '/trust', '/blog', '/portal']) {
+test('AR concept explorer changes subject, loads every scene, and stays clear about the demo', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/');
+  const choices = page.locator('.m-worlds-choices button');
+  await expect(choices).toHaveCount(8);
+  for (const [index, subject] of ['programming', 'investing', 'anatomy', 'ocean', 'aviation', 'marketing', 'business', 'languages'].entries()) {
+    await choices.nth(index).click();
+    await expect(choices.nth(index)).toHaveAttribute('aria-pressed', 'true');
+    const art = page.locator('.m-worlds-art img');
+    await expect(art).toHaveAttribute('src', new RegExp(`world-ar-${subject}\\.webp`));
+    await expect.poll(() => art.evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
+    await art.evaluate((image: HTMLImageElement) => image.decode());
+    await expect(art).toHaveCSS('opacity', '1');
+    if (process.env.VISUAL_AUDIT === '1') await page.locator('.m-worlds-feature').screenshot({ path: `test-results/world-ar-${subject}-desktop.png`, animations: 'disabled' });
+    if (process.env.VISUAL_AUDIT === '1' && subject === 'marketing') await page.locator('.m-scroll-rail').screenshot({ path: 'test-results/subject-rail-desktop.png', animations: 'disabled' });
+  }
+  await expect(page.locator('.m-worlds-concept')).toContainText('no están disponibles en la demo');
+  await choices.last().press('ArrowRight');
+  await expect(choices.first()).toHaveAttribute('aria-pressed', 'true');
+  await expect(choices.first()).toBeFocused();
+  for (const [route, note] of [['/en', 'not available in the demo'], ['/ru', 'недоступны в демоверсии']]) {
     await page.goto(route);
-    const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
-    expect(overflow, `Horizontal overflow on ${route}`).toBeLessThanOrEqual(1);
-    if (route === '/' && process.env.VISUAL_AUDIT === '1') {
-      await page.locator('.hero').screenshot({ path: 'test-results/visual-desktop-hero.png' });
-      await page.locator('.learning-bento').screenshot({ path: 'test-results/visual-desktop-bento.png' });
-      await page.locator('.lab-card').screenshot({ path: 'test-results/visual-desktop-lab-card.png' });
-      await page.locator('.trust-strip').screenshot({ path: 'test-results/visual-desktop-trust-card.png' });
-    }
-    if (route === '/blog' && process.env.VISUAL_AUDIT === '1') await page.locator('.page-hero-journal').screenshot({ path: 'test-results/visual-desktop-journal-hero.png' });
-    if (route === '/portal' && process.env.VISUAL_AUDIT === '1') {
-      await page.locator('.p-heading-mascot').screenshot({ path: 'test-results/visual-desktop-mascot.png' });
+    await expect(page.locator('.m-worlds-choices button')).toHaveCount(8);
+    await expect(page.locator('.m-worlds-concept')).toContainText(note);
+  }
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/');
+  await page.locator('.m-worlds-choices button').last().click();
+  const mobileArt = page.locator('.m-worlds-art img');
+  await expect(mobileArt).toHaveAttribute('src', /world-ar-languages\.webp/);
+  await mobileArt.evaluate((image: HTMLImageElement) => image.decode());
+  await expect(mobileArt).toHaveCSS('opacity', '1');
+  expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)).toBeLessThanOrEqual(1);
+  if (process.env.VISUAL_AUDIT === '1') await page.locator('.m-worlds-feature').screenshot({ path: 'test-results/world-ar-languages-mobile.png', animations: 'disabled' });
+});
+
+test('subject rail scrolls automatically with icons and blur, pauses for readers, and respects reduced motion', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.goto('/#visual-worlds');
+  const rail = page.locator('.m-scroll-rail');
+  const viewport = rail.locator('.m-scroll-rail-viewport');
+  await expect(rail).toHaveAttribute('data-overflow', 'true');
+  await expect(rail.locator('.m-worlds-subject-icon svg')).toHaveCount(8);
+  await expect(rail).toHaveAttribute('data-auto-scroll', 'running');
+  await expect.poll(() => viewport.evaluate(element => element.scrollLeft), { timeout: 6000 }).toBeGreaterThan(8);
+  await viewport.hover();
+  await expect(rail).toHaveAttribute('data-auto-scroll', 'paused');
+  const resting = await viewport.evaluate(element => element.scrollLeft);
+  await page.waitForTimeout(350);
+  expect(await viewport.evaluate(element => element.scrollLeft)).toBe(resting);
+  await rail.getByRole('button', { name: 'Pausar desplazamiento automático' }).click();
+  await expect(page.locator('.m-main')).toHaveAttribute('data-motion', 'paused');
+  await rail.getByRole('button', { name: 'Ver más temas' }).click();
+  await expect.poll(() => viewport.evaluate(element => element.scrollLeft)).toBeGreaterThan(resting + 30);
+  const choices = rail.locator('.m-worlds-choices button');
+  await choices.first().focus();
+  await choices.first().press('End');
+  await expect(choices.last()).toBeFocused();
+  const visible = await viewport.boundingBox();
+  const selected = await choices.last().boundingBox();
+  expect(selected!.x).toBeGreaterThanOrEqual(visible!.x);
+  expect(selected!.x + selected!.width).toBeLessThanOrEqual(visible!.x + visible!.width + 1);
+  await choices.nth(5).click();
+  if (process.env.VISUAL_AUDIT === '1') {
+    await page.locator('.m-worlds-art img').evaluate((image: HTMLImageElement) => image.decode());
+    await page.locator('.m-worlds').screenshot({ path: 'test-results/subject-explorer-mobile.png', animations: 'disabled' });
+  }
+  await rail.getByRole('button', { name: 'Reanudar desplazamiento automático' }).click();
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.mouse.move(0, 0);
+  await expect(rail).toHaveAttribute('data-auto-scroll', 'paused');
+  const reducedPosition = await viewport.evaluate(element => element.scrollLeft);
+  await page.waitForTimeout(350);
+  expect(await viewport.evaluate(element => element.scrollLeft)).toBe(reducedPosition);
+  await expect(rail.locator('.m-scroll-rail-blur-left')).toHaveCSS('pointer-events', 'none');
+  await choices.nth(5).click();
+  if (process.env.VISUAL_AUDIT === '1') await rail.screenshot({ path: 'test-results/subject-rail-mobile.png', animations: 'disabled' });
+});
+
+test('localized landing and journal routes pass accessibility checks', async ({ page }) => {
+  test.setTimeout(120000);
+  for (const width of [390, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    for (const route of ['/', '/en', '/ru', '/blog', '/en/blog', '/ru/blog', '/ru/blog/see-the-invisible']) {
+      await page.goto(route);
+      const scan = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze();
+      expect(scan.violations, `${route} at ${width}px`).toEqual([]);
     }
   }
+});
+
+test('article language switch keeps the story and sharing uses the selected language', async ({ page }) => {
+  await page.addInitScript(() => Object.defineProperty(navigator, 'share', { configurable: true, value: async () => undefined }));
+  await page.goto('/blog/see-the-invisible');
+  const languageTrigger = page.locator('.m-language summary');
+  await languageTrigger.focus();
+  await languageTrigger.press('Enter');
+  const languages = page.getByRole('navigation', { name: 'Language / Idioma / Язык' });
+  await expect(languages).toBeVisible();
+  await expect(languages.getByRole('link', { name: 'Español' })).toHaveAttribute('aria-current', 'page');
+  expect((await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze()).violations).toEqual([]);
+  await languageTrigger.press('Tab');
+  await expect(languages.getByRole('link', { name: 'Español' })).toBeFocused();
+  await page.keyboard.press('Escape');
+  await expect(languages).toBeHidden();
+  await expect(languageTrigger).toBeFocused();
+  await languageTrigger.click();
+  await page.getByRole('heading', { level: 1 }).click();
+  await expect(languages).toBeHidden();
+  await languageTrigger.click();
+  await page.getByRole('navigation', { name: 'Language / Idioma / Язык' }).getByRole('link', { name: 'Русский' }).click();
+  await expect(page).toHaveURL(/\/ru\/blog\/see-the-invisible$/);
+  await expect(page.getByRole('heading', { level: 1 })).toContainText('Как увидеть');
+  await page.getByRole('button', { name: 'Поделиться историей' }).click();
+  await expect(page.getByRole('status')).toHaveText('Отправлено');
+});
+
+test('age, method, and trust pages preserve locale and label English-only destinations', async ({ page }) => {
+  test.setTimeout(120000);
+  await page.setViewportSize({ width: 390, height: 844 });
+  for (const section of ['programs', 'approach', 'trust']) {
+    for (const [prefix, lang] of [['', 'es'], ['/en', 'en'], ['/ru', 'ru']]) {
+      const route = `${prefix}/${section}`;
+      await page.goto(route);
+      await expect(page.locator('html')).toHaveAttribute('lang', lang);
+      await expect(page.locator('main h1')).toBeVisible();
+      await expect(page.locator(`link[rel="canonical"]`)).toHaveAttribute('href', new RegExp(`${route}$`));
+      await expect(page.locator('link[rel="alternate"][hreflang="ru"]')).toHaveAttribute('href', new RegExp(`/ru/${section}$`));
+      expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth), route).toBeLessThanOrEqual(1);
+    }
+    await page.goto(`/${section}`);
+    await page.locator('.m-language summary').click();
+    await page.getByRole('navigation', { name: 'Language / Idioma / Язык' }).getByRole('link', { name: 'Русский' }).click();
+    await expect(page).toHaveURL(new RegExp(`/ru/${section}$`));
+  }
+  await page.goto('/ru/trust');
+  await expect(page.getByText('Подробная информация на английском').first()).toBeVisible();
+  await expect(page.locator('.m-detail-trust-card')).toHaveCount(6);
+  for (const route of ['/programs', '/ru/approach', '/ru/trust']) {
+    await page.goto(route);
+    const scan = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze();
+    expect(scan.violations, route).toEqual([]);
+  }
+});
+
+test('landing cards open the matching detail in the selected language', async ({ page }) => {
+  await page.goto('/');
+  await page.locator('.m-age-card').nth(2).click();
+  await expect(page).toHaveURL(/\/programs#stage-3$/);
+  await expect(page.locator('#stage-3 h2')).toHaveText('Inventores');
+
+  await page.goto('/ru');
+  await page.locator('.m-method-card').nth(1).click();
+  await expect(page).toHaveURL(/\/ru\/approach#step-3$/);
+  await expect(page.locator('#step-3 h2')).toHaveText('Представить варианты');
+
+  for (const [card, destination] of [
+    ['Observar', 'Observar'],
+    ['Imaginar', 'Imaginar posibilidades'],
+    ['Experimentar', 'Hacer una prueba justa'],
+    ['Explicar', 'Reflexionar sobre la evidencia'],
+  ]) {
+    await page.goto('/');
+    await page.locator('.m-method-card').filter({ has: page.getByRole('heading', { name: card, exact: true }) }).click();
+    await expect(page.getByRole('heading', { name: destination, exact: true })).toBeVisible();
+  }
+});
+
+test('marketing navigation has comfortable targets without crowding narrow screens', async ({ page }) => {
+  for (const width of [320, 390, 768, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    for (const route of ['/', '/en', '/ru']) {
+      await page.goto(route);
+      const metrics = await page.locator('.m-header a, .m-header summary, .m-footer-links a').evaluateAll(links => links.filter(link => link.getClientRects().length > 0).map(link => {
+        const box = link.getBoundingClientRect();
+        return { label: link.getAttribute('aria-label') ?? link.textContent, width: box.width, height: box.height };
+      }));
+      for (const metric of metrics) {
+        expect(metric.width, `${route}: ${metric.label} at ${width}px`).toBeGreaterThanOrEqual(44);
+        expect(metric.height, `${route}: ${metric.label} at ${width}px`).toBeGreaterThanOrEqual(44);
+      }
+      expect(await page.locator('.m-nav').evaluate(nav => nav.scrollWidth - nav.clientWidth)).toBeLessThanOrEqual(1);
+      const brand = await page.locator('.m-header .m-brand').boundingBox();
+      const languages = await page.locator('.m-language').boundingBox();
+      expect(brand!.x + brand!.width).toBeLessThanOrEqual(languages!.x);
+      expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(1);
+    }
+  }
+});
+
+test('mobile header opens localized navigation and keeps disclosures independent', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 844 });
+  for (const [prefix, menuLabel, method, navigation] of [
+    ['', 'Menú principal', 'Método', 'Navegación principal'],
+    ['/en', 'Main menu', 'Method', 'Main navigation'],
+    ['/ru', 'Главное меню', 'Метод', 'Основная навигация'],
+  ]) {
+    await page.goto(prefix || '/');
+    const menu = page.locator('.m-mobile-menu summary');
+    await expect(menu).toHaveAttribute('aria-label', menuLabel);
+    const nav = page.getByRole('navigation', { name: navigation, exact: true });
+    await expect(nav).toBeHidden();
+    await menu.focus();
+    await menu.press('Enter');
+    await expect(nav).toBeVisible();
+    await expect(nav.getByRole('link')).toHaveCount(5);
+    expect((await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze()).violations).toEqual([]);
+    await menu.press('Tab');
+    await expect(nav.getByRole('link', { name: method, exact: true })).toBeFocused();
+    await page.keyboard.press('Escape');
+    await expect(nav).toBeHidden();
+    await expect(menu).toBeFocused();
+    await menu.click();
+    await page.locator('.m-language summary').click();
+    await expect(nav).toBeHidden();
+    await expect(page.locator('.m-language-options')).toBeVisible();
+    await menu.click();
+    await expect(page.locator('.m-language-options')).toBeHidden();
+    await nav.getByRole('link', { name: method, exact: true }).click();
+    await expect(page).toHaveURL(new RegExp(`${prefix}/approach$`));
+    await expect(page.locator('.m-mobile-menu')).not.toHaveAttribute('open');
+    await menu.click();
+    await expect(nav.getByRole('link', { name: method, exact: true })).toHaveAttribute('aria-current', 'page');
+    await page.mouse.click(10, 500); // Page gutter below the expanded navigation panel
+    await expect(nav).toBeHidden();
+    expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(1);
+  }
+  await page.setViewportSize({ width: 667, height: 320 });
+  await page.goto('/');
+  await page.locator('.m-mobile-menu summary').click();
+  const demo = page.locator('.m-mobile-menu-cta');
+  await demo.scrollIntoViewIfNeeded();
+  await expect(demo).toBeInViewport({ ratio: 1 });
+});
+
+test('English policy and demo navigation keeps readers in English', async ({ page }) => {
+  for (const route of ['/privacy', '/safety', '/terms', '/accessibility']) {
+    await page.goto(route);
+    await expect(page.getByRole('navigation', { name: 'Main navigation' }).getByRole('link', { name: 'Approach', exact: true })).toHaveAttribute('href', '/en/approach');
+    await expect(page.locator('.site-header .brand')).toHaveAttribute('href', '/en');
+  }
+  await page.goto('/demo');
+  await page.getByRole('link', { name: 'EducationOS home', exact: true }).click();
+  await expect(page).toHaveURL(/\/en$/);
+  await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+});
+
+test('journal headings describe the page hierarchy', async ({ page }) => {
+  await page.goto('/blog');
+  await expect(page.locator('.m-story h2')).toHaveCount(4);
+  await expect(page.locator('.m-story h3')).toHaveCount(0);
+  await page.goto('/');
+  await expect(page.locator('.m-story h3')).toHaveCount(3);
+});
+
+test('marketing pages expose a share image in each language', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.locator('link[rel="icon"]')).toHaveAttribute('href', '/icon.svg');
+  for (const route of ['/', '/en', '/ru', '/blog', '/en/blog', '/ru/blog', '/programs', '/en/approach', '/ru/trust']) {
+    await page.goto(route);
+    await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content', 'https://educationos.space/images/curiosity-hero.webp');
+    await expect(page.locator('meta[name="twitter:image"]')).toHaveAttribute('content', 'https://educationos.space/images/curiosity-hero.webp');
+  }
+  await page.goto('/ru/blog/see-the-invisible');
+  const articleImage = await page.locator('meta[property="og:image"]').getAttribute('content');
+  expect(articleImage).toContain('/images/');
+  await expect(page.locator('meta[name="twitter:image"]')).toHaveAttribute('content', articleImage!);
 });
