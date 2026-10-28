@@ -16,8 +16,10 @@ test('public website opens the current demo and all seven steps produce local ev
   const mutations: string[] = [];
   page.on('request', request => { if (request.url().includes('/api/') && request.method() !== 'GET') mutations.push(request.url()); });
   await page.goto('/');
-  await expect(page.getByRole('heading', { name: /La curiosidad/ })).toBeVisible();
-  await page.getByRole('link', { name: 'Explorar la misión', exact: true }).click();
+  await expect(page.getByRole('heading', { name: /Del «¿por qué\?»/ })).toBeVisible();
+  await page.locator('.m-hero-primary').click();
+  await expect(page.locator('#paper-bridge-challenge')).toBeFocused();
+  await page.locator('.fx-bento-feature-footer a').click();
   await expect(page.getByRole('status').filter({ hasText: 'Published lesson ready' })).toBeVisible();
   await page.getByRole('button', { name: 'Next step', exact: true }).click();
   await expect(page.locator('#demo-step-error')).toContainText('Add a sentence');

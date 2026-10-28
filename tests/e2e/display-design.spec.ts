@@ -19,7 +19,7 @@ test('display headings never end with a period', async ({ page }) => {
 test('marketing languages have correct document language, links and localized stories', async ({ page }) => {
   test.setTimeout(60000);
   for (const [route, lang, title] of [
-    ['/', 'es', 'La curiosidad'], ['/en', 'en', 'Curiosity'], ['/ru', 'ru', 'Любопытство'],
+    ['/', 'es', 'Del «¿por qué?»'], ['/en', 'en', 'From “why?”'], ['/ru', 'ru', 'От «почему?»'],
   ]) {
     await page.goto(route);
     await expect(page.locator('html')).toHaveAttribute('lang', lang);
@@ -53,6 +53,10 @@ test('marketing and product pages fit mobile and tablet viewports', async ({ pag
       const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
       expect(overflow, `Horizontal overflow on ${route} at ${width}px`).toBeLessThanOrEqual(1);
       if (['/', '/en', '/ru'].includes(route)) {
+        await expect(page.locator('.m-hero-benefits li')).toHaveCount(3);
+        for (const benefit of await page.locator('.m-hero-benefits li').all()) {
+          expect(await benefit.evaluate(element => element.scrollWidth - element.clientWidth), `Benefit text on ${route} at ${width}px`).toBeLessThanOrEqual(1);
+        }
         const actions = page.locator('.m-hero-actions > a');
         await expect(actions).toHaveCount(2);
         for (const action of await actions.all()) {

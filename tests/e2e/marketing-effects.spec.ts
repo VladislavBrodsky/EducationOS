@@ -25,6 +25,8 @@ test('decorative motion can be paused and respects the device preference', async
   await expect(page.locator('.fx-orbit-node').first()).toHaveCSS('animation-play-state', 'running');
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await expect(page.locator('.fx-orbit-node').first()).toHaveCSS('animation-name', 'none');
+  expect(await page.locator('.m-hero h1 em').evaluate(element => getComputedStyle(element, '::after').animationName)).toBe('none');
+  await expect(page.locator('.m-hero-benefits li').first()).toHaveCSS('animation-name', 'none');
   await expect(page.locator('.fx-motion-toggle').first()).toBeHidden();
   await page.getByRole('button', { name: 'Folded paper', exact: true }).click();
   await expect(page.locator('.fx-model-status')).toHaveText('The same sheet, a different shape');
@@ -34,7 +36,7 @@ test('the enhanced page keeps its content and links without JavaScript', async (
   const context = await browser.newContext({ javaScriptEnabled: false, baseURL, viewport: { width: 390, height: 844 } });
   const page = await context.newPage();
   await page.goto('/ru');
-  await expect(page.getByRole('heading', { level: 1 })).toContainText('Любопытство');
+  await expect(page.getByRole('heading', { level: 1 })).toContainText('От «почему?»');
   await expect(page.locator('.fx-model-note')).toContainText('Визуальная модель');
   await expect(page.locator('.fx-bento-feature-footer a')).toHaveAttribute('href', '/demo/lab');
   await expect(page.locator('.m-method-card')).toHaveCount(4);

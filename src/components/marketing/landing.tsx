@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowDownRight, ArrowRight, ArrowUpRight, Atom, Check, ChevronRight, Code2, FlaskConical, Layers3, Lightbulb, Shapes, ShieldCheck, Sparkles } from 'lucide-react';
+import { ArrowDownRight, ArrowRight, ArrowUpRight, Atom, Check, ChevronRight, Code2, FlaskConical, Layers3, Lightbulb, MessageCircle, Shapes, ShieldCheck, Sparkles } from 'lucide-react';
 import { localizedPath, marketingCopy, type Locale } from '@/lib/marketing-i18n';
 import { JournalGrid } from './journal';
 import { MarketingShell } from './marketing-shell';
@@ -15,6 +15,7 @@ import { visualWorldCopy } from '@/lib/marketing-worlds';
 // The four-part introduction links into the corresponding seven-step cycle.
 const methodDetailSteps = [1, 3, 5, 6] as const;
 const ageArtwork = ['orbit-mascot', 'geometry-mascot', 'math-cutout', 'code-cutout', 'flight-cutout'];
+const heroBenefitIcons = [Lightbulb, FlaskConical, MessageCircle];
 
 export function LandingPage({ locale }: { locale: Locale }) {
   const copy = marketingCopy[locale];
@@ -24,21 +25,25 @@ export function LandingPage({ locale }: { locale: Locale }) {
         <div className="m-hero-eyebrow"><span className="m-kicker"><span className="m-live-dot" />{copy.eyebrow}</span><span className="m-hero-age">{copy.heroAge}</span></div>
         <h1>{copy.heroLead}<br /><em>{copy.heroAccent}</em></h1>
         <p>{copy.heroDescription}</p>
+        <ul className="m-hero-benefits" aria-label={copy.heroBenefitsLabel}>{copy.heroBenefits.map(([title, description], index) => {
+          const Icon = heroBenefitIcons[index];
+          return <li key={title}><div><Icon size={18} aria-hidden="true" /><strong>{title}</strong></div><span>{description}</span></li>;
+        })}</ul>
         <div className="m-hero-actions">
-          <Link href="/demo/lab" className="m-button m-button-dark m-hero-primary fx-shimmer" aria-describedby="hero-mission-details hero-demo-note">{copy.heroAction}<ArrowUpRight size={18} aria-hidden="true" /></Link>
+          <a href="#paper-bridge-challenge" className="m-button m-button-dark m-hero-primary fx-shimmer" aria-describedby="hero-mission-details hero-demo-note">{copy.heroAction}<ArrowUpRight size={18} aria-hidden="true" /></a>
           <Link href="#method" className="m-button m-button-ghost m-hero-secondary">{copy.heroSecondary}<ArrowRight size={18} aria-hidden="true" /></Link>
         </div>
         <div className="m-hero-context">
           <span id="hero-mission-details">{copy.heroMission}</span>
           <span className="m-hero-note" id="hero-demo-note"><ShieldCheck size={14} aria-hidden="true" /><span>{copy.heroNote}</span></span>
         </div>
-        <span className="m-concept-note">{visualWorldCopy[locale].concept}</span>
       </div>
       <div className="m-hero-stage fx-hero-stage">
         <span className="m-stage-label"><span className="fx-status-dot" />{copy.visualLabel}</span><MotionToggle locale={locale} />
         <OrbitingCircles radius="clamp(108px, 17vw, 210px)" duration={42}><Atom size={24} /><Code2 size={24} /><FlaskConical size={24} /><Shapes size={24} /></OrbitingCircles>
         <div className="m-stage-object"><Image src="/images/hero-ar-physics.webp" alt="" fill priority sizes="(max-width: 760px) 88vw, 46vw" /></div>
         <a href="#paper-bridge-challenge" className="m-stage-card"><span>{showcaseCopy[locale].heroTag}</span><strong>{copy.visualCard}</strong><span>{showcaseCopy[locale].heroChallengeAction}<ArrowUpRight size={16} aria-hidden="true" /></span></a>
+        <span className="m-hero-art-note">{visualWorldCopy[locale].concept}</span>
       </div>
     </section>
     <div className="m-ribbon"><div className="container">{copy.ribbon.map((item, index) => <span key={item}><span className="m-ribbon-number">0{index + 1}</span>{item}</span>)}</div></div>

@@ -183,7 +183,7 @@ test('the app host serves only the portal and keeps clean paths, policy redirect
 
   const publicHome = await request.get('/', { headers: { Host: 'educationos.space', 'x-educationos-portal-host': 'true' } });
   expect(publicHome.status()).toBe(200);
-  expect(await publicHome.text()).toContain('La curiosidad');
+  expect(await publicHome.text()).toContain('m-hero-copy');
   expect(await publicHome.text()).not.toMatch(/<h1[^>]*>What will you discover\?/);
 });
 

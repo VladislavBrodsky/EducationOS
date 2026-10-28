@@ -16,7 +16,7 @@ test('hero entry leads to a localized challenge with honest progress and a clean
   for (const path of ['/', '/en', '/ru']) {
     await page.setViewportSize({ width: path === '/ru' ? 320 : 390, height: 844 });
     await page.goto(`${path}?source=preview`);
-    await page.locator('.m-stage-card').click();
+    await page.locator('.m-hero-primary').click();
     const challenge = page.locator('#paper-bridge-challenge');
     await expect(challenge).toBeFocused();
     expect((await challenge.boundingBox())!.y).toBeGreaterThanOrEqual(82);
