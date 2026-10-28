@@ -6,6 +6,10 @@ on:
         description: Publish tested images to GHCR (does not deploy a service)
         type: boolean
         default: false
+      api_origin:
+        description: Private API origin compiled into web rewrites (no credentials)
+        type: string
+        default: http://api:8000
 permissions:
   contents: read
   packages: write
@@ -30,11 +34,12 @@ jobs:
         if: inputs.publish_images
         env:
           GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PYTHON_API_URL: ${{ inputs.api_origin }}
         run: |
           printf '%s' "$GHCR_TOKEN" | docker login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
           registry="ghcr.io/${GITHUB_REPOSITORY,,}"
           docker build --file backend/Dockerfile --tag "$registry-api:$GITHUB_SHA" .
-          docker build --tag "$registry-web:$GITHUB_SHA" .
+          docker build --build-arg PYTHON_API_URL="$PYTHON_API_URL" --tag "$registry-web:$GITHUB_SHA" .
           docker push "$registry-api:$GITHUB_SHA"
           docker push "$registry-web:$GITHUB_SHA"
       - name: Stop test stack
