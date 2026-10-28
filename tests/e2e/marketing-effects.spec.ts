@@ -1,4 +1,37 @@
 import { expect, test } from '@playwright/test';
+import AxeBuilder from '@axe-core/playwright';
+
+test('learning previews stay readable, clearly labeled and open the real learning surfaces', async ({ page }) => {
+  test.setTimeout(60000);
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  for (const width of [320, 560, 768, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    for (const route of ['/', '/en', '/ru']) {
+      await page.goto(route);
+      const cards = page.locator('.fx-bento-card');
+      await expect(cards).toHaveCount(2);
+      for (const card of await cards.all()) {
+        expect(await card.evaluate(element => element.scrollWidth - element.clientWidth)).toBeLessThanOrEqual(1);
+        await expect(card.getByRole('heading', { level: 3 })).toBeVisible();
+      }
+      await expect(page.locator('.fx-notebook-preview dd')).toHaveCount(3);
+      await expect(page.locator('.fx-code-example code')).toContainText('print("Clap")');
+      if (process.env.VISUAL_AUDIT === '1' && route === '/') {
+        await cards.first().screenshot({ path: `test-results/preview-notebook-${width}.png`, animations: 'disabled' });
+        await cards.last().screenshot({ path: `test-results/preview-code-${width}.png`, animations: 'disabled' });
+      }
+    }
+  }
+  const scan = await new AxeBuilder({ page }).include('.fx-evidence-card').include('.fx-code-card').withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze();
+  expect(scan.violations).toEqual([]);
+  await page.locator('.fx-evidence-card').click();
+  await expect(page).toHaveURL(/\/demo\/portfolio$/);
+  await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+  await page.goto('/');
+  await page.locator('.fx-code-card').click();
+  await expect(page).toHaveURL(/\/portal\/labs\/loop-loom$/);
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Loop Loom');
+});
 
 test('the paper model responds to pointer and keyboard without inventing results', async ({ page }) => {
   await page.goto('/');
