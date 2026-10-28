@@ -134,7 +134,7 @@ test('AR concept explorer changes subject, loads every scene, and stays clear ab
     await art.evaluate((image: HTMLImageElement) => image.decode());
     await expect(art).toHaveCSS('opacity', '1');
     if (process.env.VISUAL_AUDIT === '1') await page.locator('.m-worlds-feature').screenshot({ path: `test-results/world-ar-${subject}-desktop.png`, animations: 'disabled' });
-    if (process.env.VISUAL_AUDIT === '1' && subject === 'marketing') await page.locator('.m-worlds').screenshot({ path: 'test-results/subject-explorer-desktop.png', animations: 'disabled' });
+    if (process.env.VISUAL_AUDIT === '1' && subject === 'marketing') await page.locator('.m-scroll-rail').screenshot({ path: 'test-results/subject-rail-desktop.png', animations: 'disabled' });
   }
   await expect(page.locator('.m-worlds-concept')).toContainText('no están disponibles en la demo');
   await choices.last().press('ArrowRight');
