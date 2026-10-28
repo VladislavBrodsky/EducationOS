@@ -134,6 +134,7 @@ test('AR concept explorer changes subject, loads every scene, and stays clear ab
     await art.evaluate((image: HTMLImageElement) => image.decode());
     await expect(art).toHaveCSS('opacity', '1');
     if (process.env.VISUAL_AUDIT === '1') await page.locator('.m-worlds-feature').screenshot({ path: `test-results/world-ar-${subject}-desktop.png`, animations: 'disabled' });
+    if (process.env.VISUAL_AUDIT === '1' && subject === 'marketing') await page.locator('.m-worlds').screenshot({ path: 'test-results/subject-explorer-desktop.png', animations: 'disabled' });
   }
   await expect(page.locator('.m-worlds-concept')).toContainText('no están disponibles en la demo');
   await choices.last().press('ArrowRight');
@@ -153,6 +154,50 @@ test('AR concept explorer changes subject, loads every scene, and stays clear ab
   await expect(mobileArt).toHaveCSS('opacity', '1');
   expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)).toBeLessThanOrEqual(1);
   if (process.env.VISUAL_AUDIT === '1') await page.locator('.m-worlds-feature').screenshot({ path: 'test-results/world-ar-languages-mobile.png', animations: 'disabled' });
+});
+
+test('subject rail scrolls automatically with icons and blur, pauses for readers, and respects reduced motion', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.goto('/#visual-worlds');
+  const rail = page.locator('.m-scroll-rail');
+  const viewport = rail.locator('.m-scroll-rail-viewport');
+  await expect(rail).toHaveAttribute('data-overflow', 'true');
+  await expect(rail.locator('.m-worlds-subject-icon svg')).toHaveCount(8);
+  await expect(rail).toHaveAttribute('data-auto-scroll', 'running');
+  await expect.poll(() => viewport.evaluate(element => element.scrollLeft), { timeout: 6000 }).toBeGreaterThan(8);
+  await viewport.hover();
+  await expect(rail).toHaveAttribute('data-auto-scroll', 'paused');
+  const resting = await viewport.evaluate(element => element.scrollLeft);
+  await page.waitForTimeout(350);
+  expect(await viewport.evaluate(element => element.scrollLeft)).toBe(resting);
+  await rail.getByRole('button', { name: 'Pausar desplazamiento automático' }).click();
+  await expect(page.locator('.m-main')).toHaveAttribute('data-motion', 'paused');
+  await rail.getByRole('button', { name: 'Ver más temas' }).click();
+  await expect.poll(() => viewport.evaluate(element => element.scrollLeft)).toBeGreaterThan(resting + 30);
+  const choices = rail.locator('.m-worlds-choices button');
+  await choices.first().focus();
+  await choices.first().press('End');
+  await expect(choices.last()).toBeFocused();
+  const visible = await viewport.boundingBox();
+  const selected = await choices.last().boundingBox();
+  expect(selected!.x).toBeGreaterThanOrEqual(visible!.x);
+  expect(selected!.x + selected!.width).toBeLessThanOrEqual(visible!.x + visible!.width + 1);
+  await choices.nth(5).click();
+  if (process.env.VISUAL_AUDIT === '1') {
+    await page.locator('.m-worlds-art img').evaluate((image: HTMLImageElement) => image.decode());
+    await page.locator('.m-worlds').screenshot({ path: 'test-results/subject-explorer-mobile.png', animations: 'disabled' });
+  }
+  await rail.getByRole('button', { name: 'Reanudar desplazamiento automático' }).click();
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.mouse.move(0, 0);
+  await expect(rail).toHaveAttribute('data-auto-scroll', 'paused');
+  const reducedPosition = await viewport.evaluate(element => element.scrollLeft);
+  await page.waitForTimeout(350);
+  expect(await viewport.evaluate(element => element.scrollLeft)).toBe(reducedPosition);
+  await expect(rail.locator('.m-scroll-rail-blur-left')).toHaveCSS('pointer-events', 'none');
+  await choices.nth(5).click();
+  if (process.env.VISUAL_AUDIT === '1') await rail.screenshot({ path: 'test-results/subject-rail-mobile.png', animations: 'disabled' });
 });
 
 test('localized landing and journal routes pass accessibility checks', async ({ page }) => {

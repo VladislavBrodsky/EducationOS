@@ -12,11 +12,15 @@ const labels = {
   ru: { pause: 'Приостановить анимацию', resume: 'Возобновить анимацию' },
 };
 
-export function MotionToggle({ locale }: { locale: Locale }) {
+export function useMarketingMotion() {
+  return useContext(MotionContext);
+}
+
+export function MotionToggle({ locale, className = '', labels: customLabels }: { locale: Locale; className?: string; labels?: { pause: string; resume: string } }) {
   const context = useContext(MotionContext);
   if (!context) return null;
-  const label = labels[locale][context.paused ? 'resume' : 'pause'];
-  return <button className="fx-motion-toggle" type="button" aria-label={label} title={label} aria-pressed={context.paused} onClick={context.toggle}>
+  const label = (customLabels ?? labels[locale])[context.paused ? 'resume' : 'pause'];
+  return <button className={`fx-motion-toggle ${className}`} type="button" aria-label={label} title={label} aria-pressed={context.paused} onClick={context.toggle}>
     {context.paused ? <Play size={16} aria-hidden="true" /> : <Pause size={16} aria-hidden="true" />}
   </button>;
 }
