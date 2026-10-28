@@ -131,7 +131,9 @@ test('AR concept explorer changes subject, loads every scene, and stays clear ab
     const art = page.locator('.m-worlds-art img');
     await expect(art).toHaveAttribute('src', new RegExp(`world-ar-${subject}\\.webp`));
     await expect.poll(() => art.evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
-    if (process.env.VISUAL_AUDIT === '1') await page.locator('.m-worlds-feature').screenshot({ path: `test-results/world-ar-${subject}-desktop.png` });
+    await art.evaluate((image: HTMLImageElement) => image.decode());
+    await expect(art).toHaveCSS('opacity', '1');
+    if (process.env.VISUAL_AUDIT === '1') await page.locator('.m-worlds-feature').screenshot({ path: `test-results/world-ar-${subject}-desktop.png`, animations: 'disabled' });
   }
   await expect(page.locator('.m-worlds-concept')).toContainText('no están disponibles en la demo');
   await choices.last().press('ArrowRight');
@@ -145,9 +147,12 @@ test('AR concept explorer changes subject, loads every scene, and stays clear ab
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/');
   await page.locator('.m-worlds-choices button').last().click();
-  await expect(page.locator('.m-worlds-art img')).toHaveAttribute('src', /world-ar-languages\.webp/);
+  const mobileArt = page.locator('.m-worlds-art img');
+  await expect(mobileArt).toHaveAttribute('src', /world-ar-languages\.webp/);
+  await mobileArt.evaluate((image: HTMLImageElement) => image.decode());
+  await expect(mobileArt).toHaveCSS('opacity', '1');
   expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)).toBeLessThanOrEqual(1);
-  if (process.env.VISUAL_AUDIT === '1') await page.locator('.m-worlds-feature').screenshot({ path: 'test-results/world-ar-languages-mobile.png' });
+  if (process.env.VISUAL_AUDIT === '1') await page.locator('.m-worlds-feature').screenshot({ path: 'test-results/world-ar-languages-mobile.png', animations: 'disabled' });
 });
 
 test('localized landing and journal routes pass accessibility checks', async ({ page }) => {
