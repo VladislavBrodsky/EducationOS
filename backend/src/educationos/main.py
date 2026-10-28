@@ -15,7 +15,7 @@ from sqlalchemy import text
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from educationos import __version__
+from educationos import __version__, adult, studio
 from educationos.auth import Principal, authenticate
 from educationos.cache import PublicCatalogCache
 from educationos.config import Settings
@@ -121,8 +121,8 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         CORSMiddleware,
         allow_origins=settings.allowed_origins,
         allow_credentials=False,
-        allow_methods=["GET", "POST", "DELETE"],
-        allow_headers=["Authorization", "Content-Type"],
+        allow_methods=["GET", "POST", "PATCH", "DELETE"],
+        allow_headers=["Authorization", "Content-Type", "X-CSRF-Token"],
     )
 
     async def safe_dispatch(request, call_next):
@@ -198,7 +198,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             await session.execute(text("SELECT 1"))
             if session.bind.dialect.name == "postgresql":
                 revision = await session.scalar(text("SELECT version_num FROM alembic_version"))
-                if revision != "0001_python_foundation":
+                if revision != "0002_adult_studio":
                     raise unavailable()
             await redis.ping()
         except Exception:
@@ -323,6 +323,8 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         await learning.delete_evidence(principal, evidence_id)
         return DeleteResult()
 
+    app.include_router(adult.router)
+    app.include_router(studio.router)
     return app
 
 

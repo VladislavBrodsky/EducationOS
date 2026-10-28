@@ -27,7 +27,9 @@ type PortalRoute = {
 /** Pure routing policy; proxy.ts preserves the incoming query on every move. */
 export function resolvePortalRoute(host: string, pathname: string, surface = process.env.EDUCATIONOS_SURFACE): PortalRoute {
   const portalHost = isPortalHost(host, surface);
-  const context = { portalHost, noindex: portalHost || isPortalPath(pathname) };
+  const studioPath = pathname === '/studio' || pathname.startsWith('/studio/');
+  const context = { portalHost, noindex: portalHost || isPortalPath(pathname) || studioPath };
+  if (studioPath) return { ...context, action: 'next' };
   if (surface === 'public' && isPortalPath(pathname)) {
     const cleanPath = pathname.slice('/portal'.length).replace(/^\/+/, '/') || '/';
     return { ...context, action: 'redirect', destination: `${PORTAL_URL}${cleanPath}` };

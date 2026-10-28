@@ -1,0 +1,42 @@
+name: Staging container images
+on:
+  workflow_dispatch:
+    inputs:
+      publish_images:
+        description: Publish tested images to GHCR (does not deploy a service)
+        type: boolean
+        default: false
+permissions:
+  contents: read
+  packages: write
+concurrency:
+  group: staging-images-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    environment: staging
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and smoke isolated stack
+        run: |
+          docker compose config --quiet
+          docker compose up --build --wait api web
+          curl --fail http://127.0.0.1:8000/health/ready
+          curl --fail http://127.0.0.1:3000/studio
+          test "$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:3000/api/adult-studio/adults/session)" = 401
+      - name: Publish versioned images only when selected
+        if: inputs.publish_images
+        env:
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          printf '%s' "$GHCR_TOKEN" | docker login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
+          registry="ghcr.io/${GITHUB_REPOSITORY,,}"
+          docker build --file backend/Dockerfile --tag "$registry-api:$GITHUB_SHA" .
+          docker build --tag "$registry-web:$GITHUB_SHA" .
+          docker push "$registry-api:$GITHUB_SHA"
+          docker push "$registry-web:$GITHUB_SHA"
+      - name: Stop test stack
+        if: always()
+        run: docker compose down --volumes

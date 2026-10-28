@@ -60,6 +60,12 @@ describe('portal and public host separation', () => {
     }
   });
 
+  it('keeps adult studio on either surface and excludes it from indexing', () => {
+    for (const host of ['localhost:3000', 'app.educationos.space', 'educationos.space']) {
+      expect(resolvePortalRoute(host, '/studio', 'auto')).toMatchObject({ action: 'next', noindex: true });
+    }
+  });
+
   it('supports local portal preview without treating similar paths as portal', () => {
     expect(resolvePortalRoute('localhost:3000', '/portal/learn/first-program', 'auto')).toEqual({ action: 'next', portalHost: false, noindex: true });
     expect(isPortalPath('/portal')).toBe(true);
@@ -92,7 +98,7 @@ describe('host-specific crawler policy', () => {
     vi.stubEnv('DEPLOYMENT_ENV', 'production');
     vi.mocked(headers).mockResolvedValue(new Headers({ [PORTAL_HOST_HEADER]: 'false' }));
     expect(await robots()).toEqual({
-      rules: { userAgent: '*', allow: '/', disallow: ['/portal', '/demo', '/api/'] },
+      rules: { userAgent: '*', allow: '/', disallow: ['/portal', '/demo', '/studio', '/api/'] },
       sitemap: 'https://educationos.space/sitemap.xml',
     });
   });
