@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { SITE_URL } from '@/lib/site';
 import { locales, localizedPath } from '@/lib/marketing-i18n';
+import { missions } from '@/lib/missions/catalog';
 import { marketingJournal } from '@/lib/marketing-journal';
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -10,6 +11,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     localizedPath(locale, 'programs'),
     localizedPath(locale, 'approach'),
     localizedPath(locale, 'trust'),
+    localizedPath(locale, 'missions'),
+    ...missions.map(mission => localizedPath(locale, `missions/${mission.id}`)),
     ...marketingJournal[locale].map(({ slug }) => localizedPath(locale, `blog/${slug}`)),
   ]);
   const legacy = ['/safety', '/privacy', '/terms', '/accessibility'];

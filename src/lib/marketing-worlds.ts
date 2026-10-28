@@ -1,14 +1,14 @@
 import type { Locale } from './marketing-i18n';
 
 export const visualWorlds = [
-  { id: 'programming', image: '/images/world-ar-programming.webp' },
-  { id: 'investing', image: '/images/world-ar-investing.webp' },
-  { id: 'anatomy', image: '/images/world-ar-anatomy.webp' },
-  { id: 'ocean', image: '/images/world-ar-ocean.webp' },
-  { id: 'aviation', image: '/images/world-ar-aviation.webp' },
-  { id: 'marketing', image: '/images/world-ar-marketing.webp' },
-  { id: 'business', image: '/images/world-ar-business.webp' },
-  { id: 'languages', image: '/images/world-ar-languages.webp' },
+  { id: 'programming', missionId: 'paper-robot', image: '/images/world-ar-programming.webp' },
+  { id: 'investing', missionId: 'risk-lab', image: '/images/world-ar-investing.webp' },
+  { id: 'anatomy', missionId: 'heart-route', image: '/images/world-ar-anatomy.webp' },
+  { id: 'ocean', missionId: 'ocean-web', image: '/images/world-ar-ocean.webp' },
+  { id: 'aviation', missionId: 'glider-lab', image: '/images/world-ar-aviation.webp' },
+  { id: 'marketing', missionId: 'message-lab', image: '/images/world-ar-marketing.webp' },
+  { id: 'business', missionId: 'business-lab', image: '/images/world-ar-business.webp' },
+  { id: 'languages', missionId: 'language-lab', image: '/images/world-ar-languages.webp' },
 ] as const;
 
 type WorldId = (typeof visualWorlds)[number]['id'];

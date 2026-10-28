@@ -4,7 +4,8 @@ import { useState, type KeyboardEvent } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowUpRight, Code2, TrendingUp, HeartPulse, Waves, Plane, Megaphone, BriefcaseBusiness, Languages } from 'lucide-react';
-import type { Locale } from '@/lib/marketing-i18n';
+import { localizedPath, type Locale } from '@/lib/marketing-i18n';
+import { missionUi, translate } from '@/lib/missions/catalog';
 import { visualWorldCopy, visualWorlds } from '@/lib/marketing-worlds';
 import { AutoScrollRail } from './auto-scroll-rail';
 
@@ -34,7 +35,7 @@ export function VisualWorlds({ locale }: { locale: Locale }) {
       </AutoScrollRail>
       <div className="m-worlds-feature">
         <div className="m-worlds-art"><Image key={world.id} src={world.image} alt={subject.alt} fill sizes="(max-width: 760px) 90vw, 46vw" /></div>
-        <div className="m-worlds-copy" aria-live="polite"><span className="m-worlds-counter">{String(active + 1).padStart(2, '0')} / {String(visualWorlds.length).padStart(2, '0')}</span><h3>{subject.question}</h3><p>{subject.detail}</p><span className="m-worlds-concept">{copy.concept}</span><Link className="m-inline-link" href="/demo/lab">{copy.demoLink}<ArrowUpRight size={18} aria-hidden="true" /></Link></div>
+        <div className="m-worlds-copy" aria-live="polite"><span className="m-worlds-counter">{String(active + 1).padStart(2, '0')} / {String(visualWorlds.length).padStart(2, '0')}</span><h3>{subject.question}</h3><p>{subject.detail}</p><span className="m-worlds-concept">{copy.concept}</span><Link className="m-inline-link" href={localizedPath(locale, `missions/${world.missionId}`)}>{translate(locale, missionUi.start)}<ArrowUpRight size={18} aria-hidden="true" /></Link></div>
       </div>
     </div>
   </section>;

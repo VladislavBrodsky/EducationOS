@@ -1,8 +1,11 @@
 import type { Metadata, Viewport } from 'next';
+import { Suspense } from 'react';
 import { connection } from 'next/server';
 import { headers } from 'next/headers';
 import { SITE_URL } from '@/lib/site';
 import { isLocale, marketingCopy } from '@/lib/marketing-i18n';
+import { DocumentLanguage } from '@/components/document-language';
+import { PORTAL_HOST_HEADER } from '@/lib/portal-routing';
 import './globals.css';
 import './marketing.css';
 
@@ -19,7 +22,8 @@ export const metadata: Metadata = {
 export const viewport: Viewport = { width: 'device-width', initialScale: 1, themeColor: '#d5fc51' };
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   await connection();
-  const requestedLocale = (await headers()).get('x-educationos-locale') ?? 'en';
+  const requestHeaders = await headers();
+  const requestedLocale = requestHeaders.get('x-educationos-locale') ?? 'en';
   const locale = isLocale(requestedLocale) ? requestedLocale : 'en';
-  return <html lang={locale} data-scroll-behavior="smooth"><body><a href="#main-content" className="skip-link">{marketingCopy[locale].skip}</a>{children}</body></html>;
+  return <html lang={locale} data-scroll-behavior="smooth"><body><Suspense fallback={<a href="#main-content" className="skip-link">{marketingCopy[locale].skip}</a>}><DocumentLanguage portalHost={requestHeaders.get(PORTAL_HOST_HEADER) === 'true'} skipLabels={{ es: marketingCopy.es.skip, en: marketingCopy.en.skip, ru: marketingCopy.ru.skip }} /></Suspense>{children}</body></html>;
 }

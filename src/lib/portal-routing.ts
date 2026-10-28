@@ -43,7 +43,7 @@ export function resolvePortalRoute(host: string, pathname: string, surface = pro
     return { ...context, action: 'next' };
   }
   const normalizedPath = pathname.replace(/\/$/, '') || '/';
-  if (publicPaths.has(normalizedPath) || normalizedPath === '/blog' || normalizedPath.startsWith('/blog/')) {
+  if (/^(?:\/(?:en|ru))?\/missions(?:\/|$)/.test(normalizedPath) || publicPaths.has(normalizedPath) || normalizedPath === '/blog' || normalizedPath.startsWith('/blog/')) {
     return { ...context, action: 'redirect', destination: `${SITE_URL}${pathname}` };
   }
   if (isPortalPath(pathname)) {

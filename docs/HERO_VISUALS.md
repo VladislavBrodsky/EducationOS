@@ -18,4 +18,21 @@ These original fictional scenes were generated with the built-in image generator
 | Gallery | `world-ar-business.webp` | Recycled desk-organizer prototype and production steps |
 | Gallery | `world-ar-languages.webp` | Two learners connect speech, objects and meaning without invented words |
 
-Shared prompt direction: realistic, diverse fictional learners; visible transparent AR eyewear rather than obscuring headsets; empathetic study actions with physical objects; detailed and coherent 2D annotations plus spatial 3D models; EducationOS white, black and lime with restrained cyan; high-key editorial lighting; no logo, unreadable interface text, fake progress metrics or product claims. The gallery is an interactive visual preview: subject buttons change the image and explanation, and a separate link leads to the real paper-bridge demo.
+Shared prompt direction: realistic, diverse fictional learners; visible transparent AR eyewear rather than obscuring headsets; empathetic study actions with physical objects; detailed and coherent 2D annotations plus spatial 3D models; EducationOS white, black and lime with restrained cyan; high-key editorial lighting; no logo, unreadable interface text, fake progress metrics or product claims. The gallery is an interactive visual preview: subject buttons change the image and explanation, and each scene now opens its own localized browser mission. These tasks use ordinary browser controls; the glasses remain illustrative concepts.
+
+## Contextual mission destinations
+
+| Context | Mission | Interaction |
+|---|---|---|
+| Programming / paper-robot story | `paper-robot` | Adjust a loop, trace a square and predict direction |
+| Physics story | `rolling-lab` | Match release heights and isolate the surface variable |
+| Geometry story | `equal-halves` | Select equal cells and transfer to a new whole |
+| Aviation / glider story | `glider-lab` | Choose a fair test and calculate sample flight means |
+| Investing | `risk-lab` | Allocate fictional tokens and compare two bounded scenarios |
+| Anatomy | `heart-route` | Order a simplified circulation route and identify oxygen addition |
+| Ocean | `ocean-web` | Connect food to consumer and reason about a dependency |
+| Marketing | `message-lab` | Design an honest tree-planting invitation and read sample A/B rates |
+| Business | `business-lab` | Price fictional desk organizers, include fixed costs and consider fewer sales |
+| Languages | `language-lab` | Match English phrases to intentions and apply a map direction |
+
+All ten have ES/EN/RU routes, specific correction feedback, success, edit invalidation, reset and anonymous tab-local drafts. Circulation content uses [NHLBI](https://www.nhlbi.nih.gov/health/heart/blood-flow); the example chain uses [NOAA](https://www.noaa.gov/education/resource-collections/marine-life/aquatic-food-webs); risk framing uses [Investor.gov](https://www.investor.gov/introduction-investing/investing-basics/investment-products/mutual-funds-and-exchange-traded-1). Flight, campaign and business numbers are fictional teaching data, not observations or forecasts.

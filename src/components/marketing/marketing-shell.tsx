@@ -7,7 +7,7 @@ import { MobileMenu } from './mobile-menu';
 import '@fontsource-variable/manrope';
 import './experience.css';
 
-export function MarketingShell({ locale, children, section = '' }: { locale: Locale; children: React.ReactNode; section?: string }) {
+export function MarketingShell({ locale, children, section = '', primaryAction }: { locale: Locale; children: React.ReactNode; section?: string; primaryAction?: { href: string; label: string } }) {
   const copy = marketingCopy[locale];
   const home = localizedPath(locale);
   return <>
@@ -22,13 +22,13 @@ export function MarketingShell({ locale, children, section = '' }: { locale: Loc
         </nav>
         <div className="m-header-actions">
           <LanguageSwitcher key={locale} locale={locale} section={section} />
-          <Link className="m-header-cta" href="/demo/lab">{copy.demo}<ArrowUpRight size={16} aria-hidden="true" /></Link>
+          <Link className="m-header-cta" href={primaryAction?.href ?? '/demo/lab'}>{primaryAction?.label ?? copy.demo}<ArrowUpRight size={16} aria-hidden="true" /></Link>
           <MobileMenu key={`${locale}/${section}`} label={{ es: 'Menú principal', en: 'Main menu', ru: 'Главное меню' }[locale]} navigationLabel={copy.navigation} items={[
             { href: localizedPath(locale, 'approach'), label: copy.nav.method, current: section === 'approach' },
             { href: localizedPath(locale, 'programs'), label: copy.nav.programs, current: section === 'programs' },
             { href: localizedPath(locale, 'blog'), label: copy.nav.journal, current: section.startsWith('blog') },
             { href: localizedPath(locale, 'trust'), label: copy.nav.care, current: section === 'trust' },
-            { href: '/demo/lab', label: copy.demo, primary: true },
+            { href: primaryAction?.href ?? '/demo/lab', label: primaryAction?.label ?? copy.demo, primary: true },
           ]} />
         </div>
       </div>

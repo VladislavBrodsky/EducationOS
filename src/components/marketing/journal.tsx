@@ -4,6 +4,7 @@ import { ArrowLeft, ArrowRight, ArrowUpRight, BookOpen, Clock3 } from 'lucide-re
 import { localizedPath, marketingCopy, type Locale } from '@/lib/marketing-i18n';
 import { getMarketingArticle, marketingJournal } from '@/lib/marketing-journal';
 import { visualWorldCopy } from '@/lib/marketing-worlds';
+import { missionUi, translate } from '@/lib/missions/catalog';
 import { JournalShare } from '@/components/journal-share';
 import { MarketingShell } from './marketing-shell';
 import { MagicCard } from '@/components/magicui/magic-card';
@@ -31,12 +32,12 @@ export function JournalArticle({ locale, slug }: { locale: Locale; slug: string 
   if (!article) return null;
   const copy = marketingCopy[locale];
   const next = marketingJournal[locale][(marketingJournal[locale].indexOf(article) + 1) % marketingJournal[locale].length];
-  return <MarketingShell locale={locale} section={`blog/${slug}`}><article className="container m-article">
+  return <MarketingShell locale={locale} section={`blog/${slug}`} primaryAction={{href:localizedPath(locale,`missions/${article.missionId}`),label:translate(locale,missionUi.start)}}><article className="container m-article">
     <Link className="m-back" href={localizedPath(locale, 'blog')}><ArrowLeft size={16} aria-hidden="true" />{copy.backStories}</Link>
     <header><div className="m-article-meta"><span>{article.category}</span><span>{article.minutes} MIN</span></div><h1>{article.title}</h1><p>{article.description}</p></header>
     <div className="m-article-art"><Image src={article.image} alt={article.imageAlt} fill priority sizes="(max-width: 720px) 100vw, 78vw" /></div>
     <div className="m-article-content">{article.sections.map(section => <section key={section.heading}><h2>{section.heading}</h2>{section.paragraphs.map(paragraph => <p key={paragraph}>{paragraph}</p>)}</section>)}
-      <aside className="m-article-challenge"><span className="m-kicker">{copy.challenge}</span><h2>{article.challenge.question}</h2><dl><div><dt>{copy.gather}</dt><dd>{article.challenge.material}</dd></div><div><dt>{copy.try}</dt><dd>{article.challenge.action}</dd></div></dl><div className="m-article-actions"><JournalShare title={article.title} locale={locale} /><Link className="m-button m-button-dark" href="/demo/lab">{copy.labAction}<ArrowRight size={17} aria-hidden="true" /></Link></div></aside>
+      <aside className="m-article-challenge"><span className="m-kicker">{copy.challenge}</span><h2>{article.challenge.question}</h2><dl><div><dt>{copy.gather}</dt><dd>{article.challenge.material}</dd></div><div><dt>{copy.try}</dt><dd>{article.challenge.action}</dd></div></dl><div className="m-article-actions"><JournalShare title={article.title} locale={locale} /><Link className="m-button m-button-dark" href={localizedPath(locale,`missions/${article.missionId}`)}>{translate(locale,missionUi.start)}<ArrowRight size={17} aria-hidden="true" /></Link></div></aside>
       <div className="m-article-next"><span className="m-kicker">{copy.next}</span><Link href={localizedPath(locale, `blog/${next.slug}`)}>{next.title}<ArrowUpRight size={20} aria-hidden="true" /></Link></div>
     </div>
   </article></MarketingShell>;
