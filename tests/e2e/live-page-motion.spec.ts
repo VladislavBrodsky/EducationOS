@@ -6,7 +6,7 @@ test('method steps and lab actions stay readable and accessible in every languag
   for (const width of [390, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     for (const locale of ['en', 'es', 'ru']) {
-      await page.goto(`/${locale}/approach`);
+      await page.goto(locale === 'es' ? '/approach' : `/${locale}/approach`);
       const list = page.locator('ol[data-animated-list]');
       await list.scrollIntoViewIfNeeded();
       await expect(list.locator(':scope > li')).toHaveCount(7);
