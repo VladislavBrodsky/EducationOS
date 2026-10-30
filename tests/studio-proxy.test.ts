@@ -56,6 +56,7 @@ test('configured non-local studio origin requires HTTPS', async () => {
 });
 
 test('HTTP loopback origin is allowed only outside production', async () => {
+  vi.stubEnv('DEPLOYMENT_ENV', 'production');
   vi.stubEnv('EDUCATIONOS_STUDIO_ORIGIN', 'http://127.0.0.1:3000');
   vi.stubEnv('NODE_ENV', 'test');
   const upstream = vi.fn().mockResolvedValue(Response.json({ adult: { role: 'educator' } }));
@@ -63,5 +64,17 @@ test('HTTP loopback origin is allowed only outside production', async () => {
   expect((await POST(loginRequest('http://127.0.0.1:3000'), context())).status).toBe(200);
   vi.stubEnv('NODE_ENV', 'production');
   expect((await POST(loginRequest('http://127.0.0.1:3000'), context())).status).toBe(503);
+  expect(upstream).toHaveBeenCalledOnce();
+});
+
+test('a production build permits an explicitly marked loopback Compose workspace', async () => {
+  vi.stubEnv('NODE_ENV', 'production');
+  vi.stubEnv('DEPLOYMENT_ENV', 'development');
+  vi.stubEnv('EDUCATIONOS_STUDIO_ORIGIN', 'http://127.0.0.1:3000');
+  const upstream = vi.fn().mockResolvedValue(Response.json({ adult: { role: 'educator' } }));
+  vi.stubGlobal('fetch', upstream);
+  expect((await POST(loginRequest('http://127.0.0.1:3000'), context())).status).toBe(200);
+  vi.stubEnv('EDUCATIONOS_STUDIO_ORIGIN', 'http://remote.example.test');
+  expect((await POST(loginRequest('http://remote.example.test'), context())).status).toBe(503);
   expect(upstream).toHaveBeenCalledOnce();
 });

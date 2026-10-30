@@ -37,7 +37,8 @@ async function forward(request: NextRequest, context: { params: Promise<{ path: 
         if (!['http:', 'https:'].includes(configured.protocol) || configured.username || configured.password || configured.pathname !== '/' || configured.search || configured.hash) {
           return failure(503, 'Adult workspace origin is unavailable.');
         }
-        const localDevelopment = process.env.NODE_ENV !== 'production'
+        // A production build also runs in loopback-only Compose development.
+        const localDevelopment = (process.env.NODE_ENV !== 'production' || process.env.DEPLOYMENT_ENV === 'development')
           && ['localhost', '127.0.0.1', '[::1]'].includes(configured.hostname);
         if (configured.protocol !== 'https:' && !localDevelopment) return failure(503, 'Adult workspace origin requires HTTPS.');
         workspaceOrigin = configured.origin;
