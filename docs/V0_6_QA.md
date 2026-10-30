@@ -1,4 +1,4 @@
-# v0.6.0 QA — 28 October 2026
+# v0.6.0 QA — verified through 30 October 2026
 
 This report records executed checks for the adult-studio milestone, not production readiness. Source baseline: GitHub `codex/marketing-v2-i18n` at `a60895c7fbd866e8bb05e946b6e821de3fa5a401`. The specifically named v0.5 Python ZIP is unavailable locally; available v0.5 artifacts and the later committed Python implementation provide continuity. The original dirty checkout and synced sources were untouched.
 
@@ -15,9 +15,9 @@ This report records executed checks for the adult-studio milestone, not producti
 | Python wheel | Built; unpacked outside checkout, imported app and confirmed studio API + five bundled missions |
 | Browser dependency install | `npm ci`, 354 packages installed |
 | Frontend lint, types, generated API types, no-emoji policy | Passed |
-| Frontend unit tests | **141 passed** |
+| Frontend unit tests | **142 passed** |
 | Production frontend build | Passed, 46 generated routes/pages including studio |
-| Full Chromium regression | **80 passed** including learner lab, portfolio, portal, marketing and six studio checks |
+| Full Chromium regression | **84 passed** including learner lab, portfolio, portal, marketing and six studio checks |
 | Real full-stack Chromium acceptance | **1 passed**, no API mocks: educator → reviewer publication → guardian acknowledgement/revocation, Python + real PG/Redis |
 | Final targeted studio rerun | 6 UI/proxy checks + real full-stack check passed after origin hardening |
 | Accessibility | Automated desktop/mobile studio scans: no detected WCAG A/AA violations or horizontal overflow; broader existing regression also passed |
@@ -29,7 +29,15 @@ The inherited Python lock had certifi 2026.7.22. pip-audit identified advisory P
 
 Browser role-view/form tests use mocked API responses for deterministic UX assertions. The separate `tests/e2e/studio-live.spec.ts` uses actual cookies, CSRF, Python authentication, restricted PostgreSQL credentials and Redis. It is opt-in with `STUDIO_LIVE_E2E=1` and random provisioned synthetic credentials. CI's Compose job provisions disposable adults and runs it automatically; default standalone browser tests skip that one integration test unless configured. No real child or founder identity was used. Screenshots from local tests are kept outside version control in `artifacts/studio-*.png`; the live editor screenshot is `artifacts/studio-live-editor.png`.
 
+The first container browser check exposed an internal-container versus browser-origin mismatch during login. Compose now pins the exact loopback origin; explicit local development permits that loopback HTTP origin even with a production build, while hosted production origins still require HTTPS. A focused regression test covers both acceptance and remote-HTTP refusal.
+
 A first wheel-smoke probe used an obsolete route-inspection assumption; it was corrected to inspect the generated OpenAPI and resolve macOS temporary-directory aliases. The final smoke confirms import from the unpacked wheel, not the editable checkout. The full browser run exercised the existing lab's labeled offline-catalog fallback while the default API port was absent; the separate studio run used a healthy real API.
+
+## UI verification on 30 October
+
+The studio entry, signed-in workspace, marketing cards/detail heroes, learner intro/card grids and policy reading layout were refined following screenshot review. All 60 routed page variants were checked at 390, 768 and 1440px (180 checks): HTTP200, one main heading, no document overflow or off-screen main text. Additional studio checks cover320px and keyboard disclosure; translated method/journal headings are checked at320,390,800,1024px.
+
+The final stable production-build browser run passed **85 tests with zero skipped**, including the actual adult educator/reviewer/guardian workflow against PostgreSQL/Redis. Frontend lint, types, no-emoji policy,142 unit tests and production build passed. Automated accessibility checks passed in the browser suite; this does not substitute for physical-device or assistive-technology testing. Earlier overlapping test/build runs were discarded after they invalidated generated assets or shared temporary traces; the final run used isolated output and no concurrent rebuild. No production deployment was performed. Machine summary: `docs/qa/ui-2026-10-30.json`.
 
 ## Reproduce
 

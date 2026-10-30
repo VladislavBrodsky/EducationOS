@@ -10,13 +10,15 @@
     "redis": "8.0.0"
   },
   "frontend": {
-    "unitPassed": 141,
-    "regressionBrowserPassed": 80,
+    "unitPassed": 142,
+    "regressionBrowserPassed": 84,
     "liveFullstackBrowserPassed": 1,
     "buildPassed": true
   },
   "localDockerExecuted": false,
   "productionDeploymentPerformed": false,
   "childProfilesEnabled": false,
-  "liveChildAIEnabled": false
+  "liveChildAIEnabled": false,
+  "lastVerified": "2026-10-30",
+  "uiRouteViewportChecks": 180
 }

@@ -1,3 +1,11 @@
+# UI refinement — 2026-10-30
+
+- Rebuild studio entry hierarchy around a compact hero, visible access status, expandable safety detail, early mobile sign-in and aligned workflow cards
+- Correct clipped translated method headings and cramped tablet journal cards; improve detail-page heading measure and illustration captions
+- Give learner intro copy its full column and adapt lesson/card grids to readable widths
+- Align policy headings with their reading grid and add keyboard-accessible section navigation
+- Add focused responsive/keyboard regressions and preserve all learning, auth and consent behavior
+
 # v0.6.0 adult studio — 2026-10-28
 
 - Add operator-provisioned adult accounts with expiring hashed sessions, salted scrypt passwords, cookie CSRF, server-controlled roles and explicit production closure.

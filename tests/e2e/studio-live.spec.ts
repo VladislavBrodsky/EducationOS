@@ -75,7 +75,8 @@ test('real adult browser sessions create, independently approve, and revoke cons
     await expect(guardian.getByText('Pending verification', { exact: true })).toBeVisible();
     await guardian.getByRole('button', { name: 'Revoke acknowledgment', exact: true }).click();
     await expect(guardian.getByRole('status')).toContainText('Acknowledgment revoked');
-    await expect(guardian.getByText('Revoked', { exact: true })).toBeVisible();
+    await expect(guardian.getByText('Revoked', { exact: true }).first()).toBeVisible();
+    await expect(guardian.getByText('Pending verification', { exact: true })).toHaveCount(0);
     await expect(guardian.getByText('Child profiles unavailable', { exact: true })).toBeVisible();
   } finally {
     await reviewerContext.close();

@@ -142,6 +142,49 @@ test('login and adult workspaces fit mobile and desktop and pass automated acces
   }
 });
 
+test('studio entry keeps the form close to a compact hero and exposes safety details by keyboard', async ({ page }) => {
+  await mockWorkspace(page, 'educator', false);
+  for (const width of [1440, 768, 320]) {
+    await page.setViewportSize({ width, height: 1000 });
+    await page.goto('/studio');
+    await expect(page.getByRole('heading', { name: 'Adult sign in', exact: true })).toBeVisible();
+    await expect(page.getByText('Child profiles and unrestricted AI are unavailable', { exact: true })).toBeVisible();
+    await expect(page.getByText('Adult identity verification pending', { exact: true })).toBeVisible();
+    const layout = await page.evaluate(() => {
+      const heading = document.querySelector('.studio-intro h1')!;
+      const form = document.querySelector('.studio-login')!.getBoundingClientRect();
+      const guide = document.querySelector('.studio-login-copy')!.getBoundingClientRect();
+      const safety = document.querySelector('.studio-boundary')!.getBoundingClientRect();
+      return {
+        fontSize: Number.parseFloat(getComputedStyle(heading).fontSize),
+        headingHeight: heading.getBoundingClientRect().height,
+        gap: form.top - safety.bottom,
+        formTop: form.top,
+        guideTop: guide.top,
+        formLeft: form.left,
+        guideRight: guide.right,
+        overflow: document.documentElement.scrollWidth > innerWidth,
+      };
+    });
+    expect(layout.fontSize, `heading at ${width}px`).toBeLessThanOrEqual(42);
+    expect(layout.headingHeight, `heading at ${width}px`).toBeLessThan(85);
+    expect(layout.gap, `sign-in gap at ${width}px`).toBeLessThanOrEqual(32);
+    expect(layout.overflow, `entry overflow at ${width}px`).toBe(false);
+    if (width <= 760) expect(layout.formTop).toBeLessThan(layout.guideTop);
+    else expect(layout.formLeft).toBeGreaterThanOrEqual(layout.guideRight);
+    await page.screenshot({ path: `artifacts/studio-entry-layout-${width}.png`, fullPage: true });
+    const disclosure = page.locator('details.studio-boundary');
+    const summary = disclosure.locator('summary');
+    await summary.focus();
+    await summary.press('Enter');
+    await expect(disclosure).toHaveAttribute('open');
+    await expect(disclosure.getByText('Adult accounts are attested, not identity verified.', { exact: false })).toBeVisible();
+    await expect(disclosure.getByText('Guardian acknowledgments are a consent workflow scaffold.', { exact: false })).toBeVisible();
+    await summary.press('Space');
+    await expect(disclosure).not.toHaveAttribute('open');
+  }
+});
+
 test('transport denies arbitrary API paths, cross-origin writes, and oversized bodies', async ({ request, baseURL }) => {
   expect((await request.get('/api/adult-studio/ai/respond')).status()).toBe(404);
   expect((await request.post('/api/adult-studio/adults/login', { headers: { Origin: 'https://example.invalid' }, data: { email: 'a@example.test', password: 'test' } })).status()).toBe(403);
