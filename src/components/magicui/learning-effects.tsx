@@ -32,7 +32,7 @@ export function AnimatedList({ children, label, className = '' }: { children: Re
     if (!canAnimate || !root.current || played.current) return;
     played.current = true;
     const animations = [...root.current.children].map((element, index) => element.animate([
-      { opacity: .7, transform: 'translateX(-8px)' }, { opacity: 1, transform: 'translateX(0)' },
+      { transform: 'translateX(-8px)' }, { transform: 'translateX(0)' },
     ], { duration: 350, delay: Math.min(index, 6) * 80, easing: 'ease-out' }));
     return () => animations.forEach(animation => animation.cancel());
   }, [canAnimate]);

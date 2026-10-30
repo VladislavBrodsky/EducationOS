@@ -334,3 +334,10 @@
 .fx-task-actions .m-button { min-height:46px; white-space:normal; text-align:center; }
 .fx-bridge-preview .fx-shape-controls { margin-top:0; }
 .fx-bridge-preview .fx-model-note { margin-top:14px; }
+
+/* Scoped component integration: preserve method-card geometry and native scroll. */
+ol.m-method-list { margin-inline:auto; list-style:none; }
+ol.m-method-list>li { display:block; min-width:0; padding:0; border:0; border-radius:0; background:transparent; color:inherit; font-size:inherit; }
+ol.m-method-list>li>.m-detail-step { height:100%; }
+.m-detail-action { position:relative; isolation:isolate; overflow:hidden; }
+.m-detail-action>div,.m-detail-action>a { position:relative; z-index:1; }

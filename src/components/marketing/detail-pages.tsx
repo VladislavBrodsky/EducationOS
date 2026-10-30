@@ -6,6 +6,7 @@ import { type Locale } from '@/lib/marketing-i18n';
 import { visualWorldCopy } from '@/lib/marketing-worlds';
 import { MarketingShell } from './marketing-shell';
 import { ShineBorder } from '@/components/magicui/shine-border';
+import { AnimatedList, DotPattern, InteractiveHoverButton } from '@/components/magicui/learning-effects';
 import { MotionToggle } from './motion-surface';
 
 const stageImages = ['/images/orbit-mascot.webp', '/images/geometry-mascot.webp', '/images/math-cutout.webp', '/images/code-cutout.webp', '/images/flight-cutout.webp'];
@@ -21,7 +22,7 @@ function DetailHero({ kicker, title, description, image, locale }: { kicker: str
 
 function DetailAction({ locale }: { locale: Locale }) {
   const copy = detailCopy[locale].shared;
-  return <div className="m-detail-action container"><div><p className="m-kicker">INVENTORS LAB</p><h2>{copy.demo}</h2><p>{copy.demoNote}</p></div><Link className="m-button m-button-dark" href="/demo/lab">{copy.demo}<ArrowUpRight size={18} aria-hidden="true" /></Link></div>;
+  return <div className="m-detail-action container"><DotPattern /><div><p className="m-kicker">INVENTORS LAB</p><h2>{copy.demo}</h2><p>{copy.demoNote}</p></div><InteractiveHoverButton href="/demo/lab">{copy.demo}</InteractiveHoverButton></div>;
 }
 
 export function ProgramsDetail({ locale }: { locale: Locale }) {
@@ -41,10 +42,10 @@ export function ApproachDetail({ locale }: { locale: Locale }) {
   const copy = detailCopy[locale].approach;
   return <MarketingShell locale={locale} section="approach">
     <DetailHero locale={locale} kicker={copy.kicker} title={copy.title} description={copy.description} image="/images/hero-ar-approach.webp" />
-    <div className="container m-detail-steps">{copy.steps.map((step, index) => {
+    <AnimatedList label={copy.title} className="container m-detail-steps m-method-list">{copy.steps.map((step, index) => {
       const Icon = methodIcons[index];
       return <section className="m-detail-step" id={`step-${index + 1}`} key={step.title}><div className="m-detail-step-top"><span>0{index + 1} / 07</span><Icon size={26} strokeWidth={1.5} aria-hidden="true" /></div><div><h2>{step.title}</h2><p>{step.body}</p></div></section>;
-    })}</div>
+    })}</AnimatedList>
     <aside className="container m-detail-notice"><ShieldCheck size={24} aria-hidden="true" /><p>{copy.evidence}</p></aside>
     <DetailAction locale={locale} />
   </MarketingShell>;

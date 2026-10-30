@@ -1,5 +1,8 @@
 # Component studio and accessible motion — 2026-10-30
 
+- Integrate ordered Animated List method cards, Interactive Hover Button lab actions and a scoped Dot Pattern callout on real localized detail pages
+- Keep method text fully opaque during entry motion and remove overlapping reveal animation
+- Add mobile/desktop native-scroll, keyboard, three-language accessibility and no-JavaScript checks for real-page integration
 - Add a searchable Magic UI catalog with 77 official references across eight categories and 16 working local previews
 - Add a localized rolling topic ribbon and rotating words on the homepage, plus a decorative reading-position indicator on journal articles
 - Share pause controls and respect reduced motion, keyboard focus, page visibility and static no-JavaScript fallbacks

@@ -51,7 +51,7 @@ export function MotionSurface({ children }: { children: ReactNode }) {
       }
     }, { threshold: .08 });
     // Content is visible in server HTML; enhancement never gates reading or focus.
-    surface.querySelectorAll('.m-section-heading,.m-method-card,.m-age-card,.m-story,.m-detail-stage,.m-detail-step,.m-detail-trust-card,.fx-bento').forEach(element => {
+    surface.querySelectorAll('.m-section-heading,.m-method-card,.m-age-card,.m-story,.m-detail-stage,.m-detail-trust-card,.fx-bento').forEach(element => {
       if (!revealed.current.has(element)) observer.observe(element);
     });
     const stop = () => { if (preference.matches) animations.forEach(animation => animation.finish()); };
