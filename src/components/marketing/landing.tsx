@@ -9,6 +9,7 @@ import { MagicCard } from '@/components/magicui/magic-card';
 import { MotionToggle } from './motion-surface';
 import { LearningBento } from './learning-bento';
 import { VisualWorlds } from './visual-worlds';
+import { LearningMarquee } from './learning-marquee';
 import { showcaseCopy } from '@/lib/marketing-showcase';
 import { visualWorldCopy } from '@/lib/marketing-worlds';
 
@@ -46,7 +47,7 @@ export function LandingPage({ locale }: { locale: Locale }) {
         <span className="m-hero-art-note">{visualWorldCopy[locale].concept}</span>
       </div>
     </section>
-    <div className="m-ribbon"><div className="container">{copy.ribbon.map((item, index) => <span key={item}><span className="m-ribbon-number">0{index + 1}</span>{item}</span>)}</div></div>
+    <LearningMarquee locale={locale} items={copy.ribbon} />
     <section id="method" className="m-section container m-method"><div className="m-section-heading"><div><span className="m-kicker">{copy.methodKicker}</span><h2>{copy.methodTitle}</h2></div><p>{copy.methodDescription}</p></div><div className="m-method-grid">{copy.methodSteps.map(([number, title, description], index) => <MagicCard className="m-method-card" href={`${localizedPath(locale, 'approach')}#step-${methodDetailSteps[index]}`} key={number}><div className="m-method-card-top"><span>{number} / 04</span>{index === 0 ? <Lightbulb aria-hidden="true" /> : index === 1 ? <Sparkles aria-hidden="true" /> : index === 2 ? <FlaskConical aria-hidden="true" /> : <Layers3 aria-hidden="true" />}</div><div><h3>{title}</h3><p>{description}</p></div><ArrowDownRight className="m-method-arrow" size={18} aria-hidden="true" /></MagicCard>)}</div></section>
     <section id="ages" className="m-ages"><div className="container m-section"><div className="m-section-heading"><div><span className="m-kicker">{copy.programsKicker}</span><h2>{copy.programsTitle}</h2></div><p>{copy.programsDescription}</p></div><div className="m-age-grid">{copy.programs.map(([name, ages, description], index) => <MagicCard className="m-age-card" href={`${localizedPath(locale, 'programs')}#stage-${index + 1}`} key={ages}><span className="m-age-index">0{index + 1} <span>/</span> 05</span><div className="m-age-glyph" aria-hidden="true"><Image src={`/images/${ageArtwork[index]}.webp`} alt="" fill sizes="(max-width: 760px) 42vw, 18vw" /></div><span className="m-age-years">{ages}</span><h3>{name}</h3><p>{description}</p><span className="fx-age-arrow"><ArrowUpRight size={18} aria-hidden="true" /></span></MagicCard>)}</div></div></section>
     <LearningBento locale={locale} />

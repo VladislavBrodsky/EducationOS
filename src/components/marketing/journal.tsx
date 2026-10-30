@@ -7,6 +7,7 @@ import { visualWorldCopy } from '@/lib/marketing-worlds';
 import { JournalShare } from '@/components/journal-share';
 import { MarketingShell } from './marketing-shell';
 import { MagicCard } from '@/components/magicui/magic-card';
+import { ScrollProgress } from '@/components/magicui/scroll-progress';
 
 export function JournalGrid({ locale, limit, headingLevel = 3 }: { locale: Locale; limit?: number; headingLevel?: 2 | 3 }) {
   const copy = marketingCopy[locale];
@@ -31,7 +32,7 @@ export function JournalArticle({ locale, slug }: { locale: Locale; slug: string 
   if (!article) return null;
   const copy = marketingCopy[locale];
   const next = marketingJournal[locale][(marketingJournal[locale].indexOf(article) + 1) % marketingJournal[locale].length];
-  return <MarketingShell locale={locale} section={`blog/${slug}`}><article className="container m-article">
+  return <MarketingShell locale={locale} section={`blog/${slug}`}><ScrollProgress /><article className="container m-article">
     <Link className="m-back" href={localizedPath(locale, 'blog')}><ArrowLeft size={16} aria-hidden="true" />{copy.backStories}</Link>
     <header><div className="m-article-meta"><span>{article.category}</span><span>{article.minutes} MIN</span></div><h1>{article.title}</h1><p>{article.description}</p></header>
     <div className="m-article-art"><Image src={article.image} alt={article.imageAlt} fill priority sizes="(max-width: 720px) 100vw, 78vw" /></div>

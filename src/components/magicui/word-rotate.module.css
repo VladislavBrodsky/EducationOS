@@ -1,0 +1,38 @@
+.root {
+  position: relative;
+  display: inline-grid;
+  max-width: 100%;
+  min-width: 0;
+  vertical-align: baseline;
+}
+.accessible {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.visual {
+  display: grid;
+  min-width: 0;
+  max-width: 100%;
+}
+.word {
+  grid-area: 1 / 1;
+  visibility: hidden;
+  overflow-wrap: anywhere;
+}
+.word[data-active='true'] { visibility: visible; }
+.root[data-motion='running'] .word[data-active='true'] {
+  animation: word-in .28s ease-out;
+}
+@keyframes word-in {
+  from { transform: translateY(.16em); }
+  to { transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .root .word { animation: none !important; }
+}

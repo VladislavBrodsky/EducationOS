@@ -1,3 +1,11 @@
+# Component studio and accessible motion — 2026-10-30
+
+- Add a searchable Magic UI catalog with 77 official references across eight categories and 16 working local previews
+- Add a localized rolling topic ribbon and rotating words on the homepage, plus a decorative reading-position indicator on journal articles
+- Share pause controls and respect reduced motion, keyboard focus, page visibility and static no-JavaScript fallbacks
+- Keep one showcase preview active at a time, preserve learner controls and add no runtime dependencies
+- Document upstream MIT attribution, local adaptations and reference-only entries; add motion, preview, responsive and accessibility regressions
+
 # UI refinement — 2026-10-30
 
 - Rebuild studio entry hierarchy around a compact hero, visible access status, expandable safety detail, early mobile sign-in and aligned workflow cards

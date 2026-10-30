@@ -98,7 +98,7 @@ describe('host-specific crawler policy', () => {
     vi.stubEnv('DEPLOYMENT_ENV', 'production');
     vi.mocked(headers).mockResolvedValue(new Headers({ [PORTAL_HOST_HEADER]: 'false' }));
     expect(await robots()).toEqual({
-      rules: { userAgent: '*', allow: '/', disallow: ['/portal', '/demo', '/studio', '/api/'] },
+      rules: { userAgent: '*', allow: '/', disallow: ['/portal', '/demo', '/studio', '/components', '/api/'] },
       sitemap: 'https://educationos.space/sitemap.xml',
     });
   });

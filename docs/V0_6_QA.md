@@ -41,6 +41,8 @@ The final stable production-build browser run passed **85 tests with zero skippe
 
 ## Reproduce
 
+The subsequent component studio and motion update has separate current evidence in [motion-2026-10-30.md](qa/motion-2026-10-30.md):144 unit tests, production build and9 focused browser checks. The earlier full-suite figures above describe the prior UI revision.
+
 ```sh
 cd backend
 uv sync --frozen

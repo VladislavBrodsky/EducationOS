@@ -29,7 +29,7 @@ export function resolvePortalRoute(host: string, pathname: string, surface = pro
   const portalHost = isPortalHost(host, surface);
   const studioPath = pathname === '/studio' || pathname.startsWith('/studio/');
   const context = { portalHost, noindex: portalHost || isPortalPath(pathname) || studioPath };
-  if (studioPath) return { ...context, action: 'next' };
+  if (studioPath || pathname === '/components') return { ...context, noindex: true, action: 'next' };
   if (surface === 'public' && isPortalPath(pathname)) {
     const cleanPath = pathname.slice('/portal'.length).replace(/^\/+/, '/') || '/';
     return { ...context, action: 'redirect', destination: `${PORTAL_URL}${cleanPath}` };

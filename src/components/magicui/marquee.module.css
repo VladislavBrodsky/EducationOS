@@ -1,0 +1,111 @@
+/* Horizontal repeat/transform pattern adapted from Magic UI (MIT; see LICENSE).
+   Consumers may set --marquee-gap and --marquee-fade-color on their className. */
+.root {
+  --marquee-gap: 16px;
+  --marquee-fade-color: #fff;
+  min-width: 0;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 44px;
+  margin-bottom: 8px;
+}
+
+.label {
+  color: #58654e;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.pause {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 44px;
+  padding: 9px 12px;
+  border: 1px solid #dce4d3;
+  border-radius: 7px;
+  color: #35432f;
+  background: #fff;
+  font: inherit;
+  font-size: 11px;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.pause:hover { border-color: #a6bf8a; background: #eff7e6; }
+.pause:focus-visible, .viewport:focus-visible { outline: 3px solid #6f9a45; outline-offset: 3px; }
+.hint { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+.window {
+  position: relative;
+  min-width: 0;
+  isolation: isolate;
+}
+
+.viewport {
+  overflow-x: auto;
+  padding-block: 5px;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+  scrollbar-color: #c6d2b9 transparent;
+}
+
+.track {
+  display: flex;
+  gap: var(--marquee-gap);
+  width: max-content;
+  transform: none;
+}
+
+.set {
+  display: flex;
+  flex-shrink: 0;
+  align-items: stretch;
+  justify-content: space-around;
+  gap: var(--marquee-gap);
+  min-width: var(--marquee-min-width, 0px);
+}
+
+.item { display: flex; flex: 0 0 auto; align-items: stretch; }
+.clone { display: none; pointer-events: none; user-select: none; }
+
+/* Enhancement requires JavaScript, an allowed motion preference, and visibility.
+   Two equal sets yield a complete wrap without reversing direction at an edge. */
+.root[data-ready=true][data-static=false] .viewport { overflow-x: hidden; }
+.root[data-ready=true][data-static=false] .clone { display: flex; }
+.root[data-ready=true][data-static=false] .track {
+  animation: roll var(--marquee-duration, 40s) linear infinite;
+  animation-play-state: paused;
+  will-change: transform;
+}
+
+.root[data-ready=true][data-static=false][data-motion=running] .track { animation-play-state: running; }
+.root[data-ready=true][data-static=false] .track[data-reverse=true] { animation-direction: reverse; }
+
+.edge::after { position: absolute; inset: 0; content: ''; }
+.left::after { background: linear-gradient(to right, var(--marquee-fade-color), transparent); }
+.right::after { background: linear-gradient(to left, var(--marquee-fade-color), transparent); }
+
+@keyframes roll {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(-50% - var(--marquee-gap) / 2)); }
+}
+
+@media (max-width: 420px) {
+  .toolbar { gap: 10px; }
+  .pause { padding-inline: 9px; font-size: 10px; }
+}
+
+/* CSS also stops motion immediately if the system preference changes before JS. */
+@media (prefers-reduced-motion: reduce) {
+  .root .track { animation: none !important; transform: none !important; will-change: auto; }
+  .root .clone, .root .edge, .root .pause { display: none !important; }
+  .root .viewport { overflow-x: auto !important; }
+}

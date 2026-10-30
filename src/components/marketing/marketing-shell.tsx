@@ -7,7 +7,7 @@ import { MobileMenu } from './mobile-menu';
 import '@fontsource-variable/manrope';
 import './experience.css';
 
-export function MarketingShell({ locale, children, section = '' }: { locale: Locale; children: React.ReactNode; section?: string }) {
+export function MarketingShell({ locale, children, section = '', showLanguageSwitcher = true }: { locale: Locale; children: React.ReactNode; section?: string; showLanguageSwitcher?: boolean }) {
   const copy = marketingCopy[locale];
   const home = localizedPath(locale);
   return <>
@@ -21,7 +21,7 @@ export function MarketingShell({ locale, children, section = '' }: { locale: Loc
           <Link href={localizedPath(locale, 'trust')} aria-current={section === 'trust' ? 'page' : undefined}>{copy.nav.care}</Link>
         </nav>
         <div className="m-header-actions">
-          <LanguageSwitcher key={locale} locale={locale} section={section} />
+          {showLanguageSwitcher && <LanguageSwitcher key={locale} locale={locale} section={section} />}
           <Link className="m-header-cta" href="/demo/lab">{copy.demo}<ArrowUpRight size={16} aria-hidden="true" /></Link>
           <MobileMenu key={`${locale}/${section}`} label={{ es: 'Menú principal', en: 'Main menu', ru: 'Главное меню' }[locale]} navigationLabel={copy.navigation} items={[
             { href: localizedPath(locale, 'approach'), label: copy.nav.method, current: section === 'approach' },
@@ -34,6 +34,6 @@ export function MarketingShell({ locale, children, section = '' }: { locale: Loc
       </div>
     </header>
     <MotionSurface>{children}</MotionSurface>
-    <footer className="m-footer"><div className="container"><div className="m-footer-top"><div><Link className="m-brand" href={home} aria-label={copy.brandHome}><span className="m-brand-symbol"><Asterisk size={25} strokeWidth={2.2} aria-hidden="true" /></span><span>Education<span className="m-brand-light">OS</span></span></Link><p>{copy.footerLine}</p></div><div className="m-footer-links"><Link href={localizedPath(locale, 'approach')}>{copy.nav.method}</Link><Link href={localizedPath(locale, 'programs')}>{copy.nav.programs}</Link><Link href={localizedPath(locale, 'blog')}>{copy.nav.journal}</Link><Link href={localizedPath(locale, 'trust')}>{copy.footerLinks.trust}</Link><Link href="/safety">{copy.footerLinks.safety}</Link><Link href="/privacy">{copy.footerLinks.privacy}</Link><Link href="/terms">{copy.footerLinks.terms}</Link><Link href="/accessibility">{copy.footerLinks.accessibility}</Link></div></div><div className="m-footer-bottom"><span>Copyright {new Date().getUTCFullYear()} EducationOS</span><span>{copy.footerStatus}</span><span>{copy.footerLegal}</span></div></div></footer>
+    <footer className="m-footer"><div className="container"><div className="m-footer-top"><div><Link className="m-brand" href={home} aria-label={copy.brandHome}><span className="m-brand-symbol"><Asterisk size={25} strokeWidth={2.2} aria-hidden="true" /></span><span>Education<span className="m-brand-light">OS</span></span></Link><p>{copy.footerLine}</p></div><div className="m-footer-links"><Link href={localizedPath(locale, 'approach')}>{copy.nav.method}</Link><Link href={localizedPath(locale, 'programs')}>{copy.nav.programs}</Link><Link href={localizedPath(locale, 'blog')}>{copy.nav.journal}</Link><Link href={localizedPath(locale, 'trust')}>{copy.footerLinks.trust}</Link><Link href="/safety">{copy.footerLinks.safety}</Link><Link href="/privacy">{copy.footerLinks.privacy}</Link><Link href="/terms">{copy.footerLinks.terms}</Link><Link href="/accessibility">{copy.footerLinks.accessibility}</Link><Link href="/components">{{ en: 'Component studio (EN)', es: 'Estudio de componentes (EN)', ru: 'Компоненты интерфейса (EN)' }[locale]}</Link></div></div><div className="m-footer-bottom"><span>Copyright {new Date().getUTCFullYear()} EducationOS</span><span>{copy.footerStatus}</span><span>{copy.footerLegal}</span></div></div></footer>
   </>;
 }

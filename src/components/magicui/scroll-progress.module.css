@@ -1,0 +1,11 @@
+.root {
+  position: fixed;
+  z-index: 90;
+  inset: 0 0 auto;
+  height: 3px;
+  background: #a7cc37;
+  transform: scaleX(var(--reading-progress, 0));
+  transform-origin: left;
+  pointer-events: none;
+}
+.root[data-ready='false'] { visibility: hidden; }
