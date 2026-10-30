@@ -22,7 +22,7 @@ export function JournalGrid({ locale, limit, headingLevel = 3 }: { locale: Local
 export function JournalIndex({ locale }: { locale: Locale }) {
   const copy = marketingCopy[locale];
   return <MarketingShell locale={locale} section="blog">
-    <section className="m-journal-hero container"><div><span className="m-kicker"><BookOpen size={15} aria-hidden="true" /> {copy.blogTitle}</span><h1>{copy.blogLead}</h1><p>{copy.blogDescription}</p><span className="m-concept-note">{visualWorldCopy[locale].concept}</span></div><div className="m-journal-hero-art" aria-hidden="true"><span className="m-journal-ring" /><Image src="/images/hero-ar-journal.webp" alt="" fill priority sizes="(max-width: 720px) 70vw, 36vw" /></div></section>
+    <section className="m-journal-hero container"><div><span className="m-kicker"><BookOpen size={15} aria-hidden="true" /> {copy.blogTitle}</span><h1>{copy.blogLead}</h1><p>{copy.blogDescription}</p></div><div className="m-journal-hero-art" aria-hidden="true"><span className="m-journal-ring" /><Image src="/images/hero-ar-journal.webp" alt="" fill priority sizes="(max-width: 720px) 70vw, 36vw" /></div><span className="m-concept-note m-journal-art-note">{visualWorldCopy[locale].concept}</span></section>
     <section className="container m-journal-index"><JournalGrid locale={locale} headingLevel={2} /></section>
   </MarketingShell>;
 }

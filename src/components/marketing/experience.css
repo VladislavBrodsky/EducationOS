@@ -27,7 +27,7 @@
 .m-hero-secondary:hover { background:#f7f8f4; }
 .m-hero-context { display:flex; flex-wrap:wrap; align-items:center; gap:6px 16px; margin-top:15px; color:#666e60; font-size:12px; line-height:1.6; }
 .m-hero-context>.m-hero-note { gap:6px; margin:0; font-size:inherit; font-weight:400; }
-.m-kicker { font-size:10px; letter-spacing:.095em; }
+.m-kicker { font-size:10px; letter-spacing:.065em; }
 .m-button { border-radius:10px; letter-spacing:-.015em; }
 .m-button-dark { box-shadow:inset 0 1px 0 #ffffff1a,0 3px 0 #171a160d; }
 .fx-shimmer { position:relative; isolation:isolate; overflow:hidden; }
@@ -67,7 +67,7 @@
 }
 .m-method-card { border:1px solid #dfe5d9; border-radius:18px; box-shadow:0 3px 4px #20351802,0 15px 36px -28px #20351835; }
 .m-method-card:hover { border-color:#abc58a; box-shadow:0 15px 32px -20px #2035184d; }
-.m-method-card h3 { font-weight:550; }
+.m-method-card h3 { font-weight:550; overflow-wrap:anywhere; }
 .m-section-heading h2 { font-weight:600; letter-spacing:-.055em; }
 .m-ages { background:radial-gradient(ellipse at 75% 0,#374c27 0,transparent 53%),#151d16; }
 .m-age-index { color:#bbcbb2; }
@@ -201,8 +201,9 @@
   .m-story-body { padding:22px; }.m-story :is(h2,h3) { font-size:24px; }
 }
 @media(max-width:520px) {
+  .m-method-card h3 { font-size:clamp(20px,5.4vw,23px); }
   .m-hero-eyebrow { gap:10px; }
-  .m-hero-eyebrow .m-kicker { font-size:10px; letter-spacing:.08em; }
+  .m-hero-eyebrow .m-kicker { font-size:10px; letter-spacing:.06em; }
   .m-hero-age { font-size:10px; min-height:26px; }
   .m-hero-actions { display:grid; grid-template-columns:minmax(0,1fr); }
   .m-hero-actions>.m-button { justify-content:space-between; font-size:14px; }
@@ -249,6 +250,8 @@
 .m-worlds { border-top:1px solid #e5e9df; border-bottom:1px solid #e5e9df; background:#fff; }
 .m-concept-note { display:block; max-width:520px; margin-top:17px; padding-left:11px; border-left:2px solid #a6c45f; color:#697464; font-size:11px; line-height:1.55; }
 .m-hero-copy>.m-concept-note { margin-top:14px; }
+.m-detail-art-note { max-width:none; margin:12px 6px 0; padding-left:0; border-left:0; }
+.m-journal-art-note { max-width:none; margin-top:0; padding-left:0; border-left:0; }
 .m-worlds-inner { padding-top:88px; padding-bottom:94px; }
 .m-worlds-intro { max-width:780px; }
 .m-worlds-intro h2 { margin:18px 0 16px; font-size:clamp(42px,5vw,68px); font-weight:600; line-height:1.04; letter-spacing:-.065em; }

@@ -1,4 +1,26 @@
-# EducationOS
+# EducationOS v0.6.0 — Adult curriculum studio
+
+A runnable Python-first milestone extending the existing Inventors Lab, evidence portfolio and premium white/black/lime frontend. Adult workspace: `/studio`. FastAPI owns all authentication, role checks, consent-intent records, validation, publication, versioning and audit history. The original learner demo remains at `/demo/lab` and `/demo/portfolio`. No mastery scores or unrestricted child AI are introduced.
+
+Educators create five age variants, submit a version for review, and a different reviewer explicitly confirms safety before publishing. Edits use optimistic version checks; published snapshots and audit/revision history remain immutable. Guardians can record or revoke a consent intent; child profiles remain unavailable. No public signup or client-selected staff roles exist. Production adult access is closed in code.
+
+Start with [the tested release report](docs/V0_6_QA.md), [local and staging instructions](docs/V0_6_STAGING.md), [architecture decision](docs/adr/0002-adult-studio.md), and [v0.7 priorities](docs/V0_7_ROADMAP.md).
+
+```sh
+docker compose up --build --wait api web
+docker compose run --rm migrate python -m educationos.seed_adults --role educator --tenant 60000000-0000-4000-8000-000000000001 --adult-attested
+docker compose run --rm migrate python -m educationos.seed_adults --role reviewer --tenant 60000000-0000-4000-8000-000000000001 --adult-attested
+```
+
+Provision educator and reviewer in the same tenant using separate operator prompts. Open `http://127.0.0.1:3000/studio`. No default credentials are shipped. For non-Docker setup and exact tests, see the staging and QA guides. Python dependencies use `uv sync --frozen`; browser dependencies use `npm ci`. Docker availability and executed tests are reported separately in QA.
+
+**Release boundary:** adult attestation and guardian intent are unverified scaffolding. Child profiles, verified consent and production adult access remain closed. Legal/jurisdiction review, verified adult identity, security assessment, retention/deletion operations and safeguarding validation are still required. Heuristic moderation is incomplete and requires human judgment.
+
+The referenced `EducationOS_Python_First_Fullstack_Source_v0.5.0.zip` is not present in this workspace. Continuity uses the available local v0.5 artifacts and the latest committed Python-first branch `a60895c7fbd866e8bb05e946b6e821de3fa5a401`, verified against GitHub on 28 October 2026. Uncommitted changes in the prior checkout were preserved. Earlier frontend/deployment history follows and must not be read as a deployment claim for this studio milestone.
+
+---
+
+## Earlier project context
 
 **Working rule for this project and all active documents:** use the Pareto principle. Prioritize the smallest roughly 20% of work that delivers 80–100% of the useful result, ship it first, and stop adding scope once the outcome is clear and verified. See [AGENTS.md](AGENTS.md) for the standing development and copy rules.
 

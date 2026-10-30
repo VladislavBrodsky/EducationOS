@@ -3,6 +3,7 @@ import asyncio
 from sqlalchemy.ext.asyncio import create_async_engine
 
 from alembic import context
+from educationos import adult, studio  # noqa: F401 -- register migration metadata
 from educationos.config import Settings
 from educationos.models import Base
 

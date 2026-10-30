@@ -1,0 +1,24 @@
+{
+  "version": "0.6.0",
+  "date": "2026-10-28",
+  "baseline": "a60895c7fbd866e8bb05e946b6e821de3fa5a401",
+  "backend": {
+    "passed": 74,
+    "skipped": 0,
+    "postgresql": "16.15",
+    "pgvector": "0.8.0",
+    "redis": "8.0.0"
+  },
+  "frontend": {
+    "unitPassed": 142,
+    "regressionBrowserPassed": 84,
+    "liveFullstackBrowserPassed": 1,
+    "buildPassed": true
+  },
+  "localDockerExecuted": false,
+  "productionDeploymentPerformed": false,
+  "childProfilesEnabled": false,
+  "liveChildAIEnabled": false,
+  "lastVerified": "2026-10-30",
+  "uiRouteViewportChecks": 180
+}

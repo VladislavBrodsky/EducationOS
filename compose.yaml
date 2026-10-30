@@ -80,6 +80,9 @@ services:
     environment:
       NODE_ENV: production
       NEXT_TELEMETRY_DISABLED: '1'
+      EDUCATIONOS_API_INTERNAL_URL: http://api:8000
+      EDUCATIONOS_STUDIO_ORIGIN: http://127.0.0.1:3000
+      DEPLOYMENT_ENV: development
     ports: ["127.0.0.1:3000:3000"]
     init: true
     depends_on:

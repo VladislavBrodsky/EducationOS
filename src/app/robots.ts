@@ -8,7 +8,7 @@ export default async function robots(): Promise<MetadataRoute.Robots> {
   if (portalHost) return { rules: { userAgent: '*', disallow: '/' } };
   return {
     rules: process.env.DEPLOYMENT_ENV === 'production'
-      ? { userAgent: '*', allow: '/', disallow: ['/portal', '/demo', '/api/'] }
+      ? { userAgent: '*', allow: '/', disallow: ['/portal', '/demo', '/studio', '/api/'] }
       : { userAgent: '*', disallow: '/' },
     sitemap: `${SITE_URL}/sitemap.xml`,
   };

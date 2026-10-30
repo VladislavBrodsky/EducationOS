@@ -14,8 +14,8 @@ const trustIcons = [ShieldCheck, Eye, Users, LockKeyhole, FlaskConical, FileChec
 
 function DetailHero({ kicker, title, description, image, locale }: { kicker: string; title: string; description: string; image: string; locale: Locale }) {
   return <section className="m-detail-hero container">
-    <div className="m-detail-hero-copy"><span className="m-kicker">{kicker}</span><h1>{title}</h1><p>{description}</p><span className="m-concept-note">{visualWorldCopy[locale].concept}</span></div>
-    <div className="m-detail-hero-art"><ShineBorder color="#aacd47" /><MotionToggle locale={locale} /><span className="m-detail-orbit" aria-hidden="true" /><Image src={image} alt="" fill priority sizes="(max-width: 760px) 90vw, 42vw" /></div>
+    <div className="m-detail-hero-copy"><span className="m-kicker">{kicker}</span><h1>{title}</h1><p>{description}</p></div>
+    <figure className="m-detail-hero-visual"><div className="m-detail-hero-art"><ShineBorder color="#aacd47" /><MotionToggle locale={locale} /><span className="m-detail-orbit" aria-hidden="true" /><Image src={image} alt="" fill priority sizes="(max-width: 760px) 90vw, 42vw" /></div><figcaption className="m-concept-note m-detail-art-note">{visualWorldCopy[locale].concept}</figcaption></figure>
   </section>;
 }
 
