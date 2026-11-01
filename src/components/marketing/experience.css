@@ -353,6 +353,7 @@ ol.m-method-list>li>.m-detail-step { height:100%; }
 .m-section-heading h2::after{content:'';display:block;width:56px;height:4px;margin-top:18px;border-radius:10px;background:#badf45}
 .m-main .m-kicker{font-size:11px;line-height:1.5;letter-spacing:.09em;font-weight:650}
 .m-button{min-height:48px;border-radius:12px;font-weight:650;transition:background .18s,box-shadow .18s,border-color .18s}
+.m-main .m-button:is(:hover,:focus-visible){transform:none}
 .m-button>svg{transition:transform .18s}
 .m-button:is(:hover,:focus-visible)>svg{transform:translateX(3px)}
 .m-button-dark:is(:hover,:focus-visible){box-shadow:0 6px 18px #1b2a1e26}

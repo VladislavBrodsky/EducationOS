@@ -50,3 +50,23 @@ test('shared typography and controls retain accessible contrast on adult and lea
     }
   }
 });
+
+test('challenge actions keep their hit area fixed when hovered at the edge', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.setViewportSize({ width: 390, height: 1000 });
+  await page.goto('/en');
+  const button = page.locator('.fx-bridge-preview button[type=submit]');
+  await button.scrollIntoViewIfNeeded();
+  const before = (await button.boundingBox())!;
+  await page.mouse.move(before.x + before.width / 2, before.y + before.height - 1);
+  const samples = await button.evaluate(el => new Promise<number[]>(resolve => {
+    const values: number[] = [];
+    function sample() {
+      values.push(el.getBoundingClientRect().y);
+      if (values.length === 12) resolve(values);
+      else requestAnimationFrame(sample);
+    }
+    requestAnimationFrame(sample);
+  }));
+  expect(Math.max(...samples) - Math.min(...samples)).toBeLessThan(.5);
+});

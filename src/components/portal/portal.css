@@ -451,6 +451,6 @@ pre.p-code-editor { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; }
 .p-primary,.p-secondary { border-radius:11px; font-weight:650; }
 .p-card,.p-subject-card,.p-project,.p-subject-path { border-radius:18px; }
 @media(hover:hover) and (prefers-reduced-motion:no-preference) {
- .p-primary:not(:disabled),.p-secondary:not(:disabled){transition:background .18s,border-color .18s,box-shadow .18s;}
+ .p-primary:not(:disabled),.p-secondary:not(:disabled){transition:border-color .18s,box-shadow .18s;}
  .p-primary:hover:not(:disabled){box-shadow:0 4px 14px #96be3c26;}
 }
