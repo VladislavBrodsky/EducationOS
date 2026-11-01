@@ -5,9 +5,7 @@ import { detailCopy } from '@/lib/marketing-details';
 import { type Locale } from '@/lib/marketing-i18n';
 import { visualWorldCopy } from '@/lib/marketing-worlds';
 import { MarketingShell } from './marketing-shell';
-import { ShineBorder } from '@/components/magicui/shine-border';
 import { AnimatedList, DotPattern, InteractiveHoverButton } from '@/components/magicui/learning-effects';
-import { MotionToggle } from './motion-surface';
 
 const stageImages = ['/images/orbit-mascot.webp', '/images/geometry-mascot.webp', '/images/math-cutout.webp', '/images/code-cutout.webp', '/images/flight-cutout.webp'];
 const methodIcons = [ScanSearch, Scale, Sparkles, Lightbulb, FlaskConical, RefreshCcw, Waypoints];
@@ -16,7 +14,7 @@ const trustIcons = [ShieldCheck, Eye, Users, LockKeyhole, FlaskConical, FileChec
 function DetailHero({ kicker, title, description, image, locale }: { kicker: string; title: string; description: string; image: string; locale: Locale }) {
   return <section className="m-detail-hero container">
     <div className="m-detail-hero-copy"><span className="m-kicker">{kicker}</span><h1>{title}</h1><p>{description}</p></div>
-    <figure className="m-detail-hero-visual"><div className="m-detail-hero-art"><ShineBorder color="#aacd47" /><MotionToggle locale={locale} /><span className="m-detail-orbit" aria-hidden="true" /><Image src={image} alt="" fill priority sizes="(max-width: 760px) 90vw, 42vw" /></div><figcaption className="m-concept-note m-detail-art-note">{visualWorldCopy[locale].concept}</figcaption></figure>
+    <figure className="m-detail-hero-visual"><div className="m-detail-hero-art"><Image src={image} alt="" fill priority sizes="(max-width: 760px) 90vw, 42vw" /></div><figcaption className="m-concept-note m-detail-art-note">{visualWorldCopy[locale].concept}</figcaption></figure>
   </section>;
 }
 

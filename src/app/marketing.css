@@ -1624,13 +1624,13 @@
 .m-detail-hero-visual { min-width:0; margin:0; }
 .m-detail-hero-art {
   position:relative;
-  min-height:470px;
+  aspect-ratio:1;
+  min-height:0;
   overflow:hidden;
   border-radius:22px;
-  background:radial-gradient(circle at 55% 47%,#f7faef,#fff 66%);
+  background:#fff;
 }
-.m-detail-hero-art img { object-fit:contain; padding:10px; z-index:1; }
-.m-detail-orbit { position:absolute; inset:11%; border:1px solid #5e8a3e55; border-radius:50%; transform:rotate(-18deg) scaleX(1.2); }
+.m-detail-hero-art img { object-fit:contain; padding:0; z-index:1; }
 .m-detail-intro {
   display:flex;
   align-items:center;
@@ -1692,14 +1692,12 @@
 }
 @media(max-width:900px) {
   .m-detail-hero { gap:30px; }
-  .m-detail-hero-art { min-height:390px; }
   .m-detail-steps,.m-detail-trust-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
 }
 @media(max-width:760px) {
   .m-detail-hero { grid-template-columns:1fr; padding-top:43px; padding-bottom:42px; }
   .m-detail-hero-copy h1 { font-size:clamp(38px,8.8vw,56px); }
   .m-detail-hero-copy p { font-size:16px; }
-  .m-detail-hero-art { min-height:350px; }
 }
 @media(max-width:700px) {
   .m-detail-intro,.m-detail-action { flex-direction:column; align-items:flex-start; }

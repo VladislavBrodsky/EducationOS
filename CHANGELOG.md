@@ -1,3 +1,10 @@
+# Hero media correction — 2026-11-01
+
+- Replace overlapping static/animated photo borders with one neutral rounded frame on Programs, Method and Safety pages
+- Remove photo padding, the background orbit and overlaid motion control; use the square assets' natural proportions at every breakpoint
+- Restore method-list alternating card colors and bottom spacing
+- Verify image/frame geometry at320/390/768/1440px, captions, translated accessibility, native scrolling and static HTML
+
 # Component studio and accessible motion — 2026-10-30
 
 - Integrate ordered Animated List method cards, Interactive Hover Button lab actions and a scoped Dot Pattern callout on real localized detail pages

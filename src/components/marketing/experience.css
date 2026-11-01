@@ -146,7 +146,7 @@
 .m-closing>.container { position:relative; }
 .m-closing h2 { max-width:950px; text-wrap:balance; font-weight:550; letter-spacing:-.06em; }
 .m-footer { background:radial-gradient(ellipse at 90% 100%,#293a22,transparent 50%),#151d16; }
-.m-detail-hero-art { border:1px solid #d3e1bd; box-shadow:0 20px 50px -35px #304b2855; }
+.m-detail-hero-art { border:1px solid #e0e6da; }
 .m-detail-stage-art { border:1px solid #e0e6da; }
 .m-detail-step,.m-detail-trust-card { box-shadow:0 10px 25px -24px #34492d66; }
 .m-journal-hero { border:1px solid #e1e9d8; box-shadow:0 20px 45px -38px #3f582b55; }
@@ -336,8 +336,12 @@
 .fx-bridge-preview .fx-model-note { margin-top:14px; }
 
 /* Scoped component integration: preserve method-card geometry and native scroll. */
-ol.m-method-list { margin-inline:auto; list-style:none; }
+ol.m-method-list { margin-inline:auto; padding-bottom:50px; list-style:none; }
 ol.m-method-list>li { display:block; min-width:0; padding:0; border:0; border-radius:0; background:transparent; color:inherit; font-size:inherit; }
 ol.m-method-list>li>.m-detail-step { height:100%; }
 .m-detail-action { position:relative; isolation:isolate; overflow:hidden; }
 .m-detail-action>div,.m-detail-action>a { position:relative; z-index:1; }
+
+/* Cards now live in semantic list items, so alternate the item rather than its child. */
+.m-method-list>li:nth-child(3n + 2)>.m-detail-step { background:#f0f2f9; }
+.m-method-list>li:nth-child(3n)>.m-detail-step { background:#f6f0f8; }
