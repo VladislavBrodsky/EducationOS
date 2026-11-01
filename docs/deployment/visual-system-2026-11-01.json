@@ -1,0 +1,48 @@
+{
+  "date": "2026-11-01",
+  "contentRoutes": 61,
+  "missingPageStates": 2,
+  "routesAndStates": 63,
+  "viewportChecks": 189,
+  "widths": [
+    390,
+    768,
+    1440
+  ],
+  "unexpectedHTTP": 0,
+  "documentOverflow": 0,
+  "clippedHeadings": 0,
+  "offscreenHeadings": 0,
+  "focusedBrowserTestsPassed": 8,
+  "unitTestsPassed": 144,
+  "localProductionBuildPassed": true,
+  "limitations": "Initial rendered pages; Chromium viewport simulation, not physical devices. Account-dependent states remain covered by existing UI tests.",
+  "layoutAuditCommit": "af0118e4d54d31041c7163eaba02b0a4929df890",
+  "applicationCommit": "abc6ebc537287087ab5bcc174d24f38713942fb7",
+  "finalCorrections": "Stable hover hit areas and immediate dark-theme button colors; audited page geometry unchanged",
+  "liveBrowserTestsPassed": 9,
+  "ci": {
+    "url": "https://github.com/VladislavBrodsky/EducationOS/actions/runs/41323640061",
+    "allJobsPassed": true,
+    "backendTestsPassed": 74,
+    "unitTestsPassed": 144,
+    "browserTestsPassed": 101,
+    "standaloneBrowserTestsSkipped": 1,
+    "realFullstackBrowserTestsPassed": 1
+  },
+  "deployments": {
+    "marketing": {
+      "id": "61deeb83-caeb-49c9-b84e-e5163b10cecc",
+      "status": "SUCCESS",
+      "url": "https://educationos.space"
+    },
+    "portal": {
+      "id": "d12e024e-f34e-4f72-a00f-c5a75e86b280",
+      "status": "SUCCESS",
+      "url": "https://app.educationos.space"
+    }
+  },
+  "sourcePinned": true,
+  "dnsChanged": false,
+  "backendDeployed": false
+}

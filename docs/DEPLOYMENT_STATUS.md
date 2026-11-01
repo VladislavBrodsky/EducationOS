@@ -1,5 +1,16 @@
 # Live EducationOS frontend deployment
 
+## Shared frontend refinement — verified 1 November 2026
+
+Both [marketing](https://educationos.space) and [learner portal](https://app.educationos.space) are live from pinned application commit `abc6ebc537287087ab5bcc174d24f38713942fb7`. Successful deployments: marketing `61deeb83-caeb-49c9-b84e-e5163b10cecc`; portal `d12e024e-f34e-4f72-a00f-c5a75e86b280`.
+
+The release unifies typography and action feedback, refines bento cards, replaces the journal's absolute artwork/caption positioning with document flow, adds an asymmetric desktop story grid, clears decoration from progress explanations, and introduces a finite motion-aware Border Beam challenge accent. The workbench now has 17 local previews and 60 clearly marked official references. Photo frames retain their earlier single-frame correction. No runtime package was added.
+
+A read-only audit covered 61 content routes plus two missing-page states at 390/768/1440px: 189 checks, expected HTTP statuses, no document overflow or clipped/off-screen headings. Nine live browser checks passed across actual HTTPS hosts, including all 17 previews, journal layout, challenge sharing/click stability, reduced motion, keyboard access and light/dark learner contrast. [All four CI jobs passed](https://github.com/VladislavBrodsky/EducationOS/actions/runs/41323640061): 74 backend tests, 144 unit tests, 101 standalone browser tests (one gated integration skip), and the separate real Python/PostgreSQL/Redis browser workflow.
+
+Host routing and surface settings were retained. No DNS/mail changes, backend service rollout, child onboarding or unrestricted AI activation occurred. Full audit and limitations: [visual-system QA](qa/visual-system-2026-11-01.md); machine summary: [visual-system deployment](deployment/visual-system-2026-11-01.json). Screenshots are browser viewport emulation, not physical-device certification.
+
+
 ## Shared hero frame correction — verified 1 November 2026
 
 The Programs, Method and Safety photo heroes now use one rounded neutral frame without an animated duplicate border, inset image padding, decorative orbit or overlaid motion control. The square assets fill their frame cleanly; AR disclaimers remain below. Method-list alternating card colors and bottom spacing are restored. Application source `5c67838637b0d8c24e4451ad212f3c9bdf5aae23` is pinned to successful Railway deployment `ab21a085-c485-47a7-a2c6-56f30e7721d1` at [educationos.space](https://educationos.space).
