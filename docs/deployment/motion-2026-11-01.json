@@ -1,0 +1,31 @@
+{
+  "verifiedDate": "2026-11-01",
+  "sourceCommit": "5ad2ee44fb7e267d419ec066793ba8a5c48e0a9b",
+  "testCorrectionCommit": "47c1262b86544e21d7f102203b3fde3c4f1ebb10",
+  "applicationDiffBetweenThoseCommits": false,
+  "sourcePinned": true,
+  "projectId": "d08710d0-4df1-4c6a-adc8-361c52e7c572",
+  "environmentId": "8d2458e6-4c99-40d7-8d8e-4a884e3d0b8e",
+  "serviceId": "bf43668a-197d-4b94-94d2-9b09d92e44f9",
+  "deploymentId": "2f289cd1-8d87-4683-8f3f-edc02042444e",
+  "status": "SUCCESS",
+  "baseUrl": "https://educationos.space",
+  "liveBrowserTestsPassed": 10,
+  "realPageWidths": [
+    390,
+    1440
+  ],
+  "motionWidths": [
+    320,
+    390,
+    768,
+    1440
+  ],
+  "localUnitTestsPassed": 144,
+  "portalDeploymentUnchanged": "9151626c-459c-4006-bc70-818a7ee1b96f",
+  "dnsChanged": false,
+  "backendDeployed": false,
+  "childEnrollmentEnabled": false,
+  "screenshots": "artifacts/live-motion-2026-11-01 (local, ignored)",
+  "priorDeploymentForRollback": "a2529671-acaa-4c32-8525-cede27bf8c17"
+}
