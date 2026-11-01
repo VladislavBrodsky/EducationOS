@@ -1,0 +1,33 @@
+{
+  "verifiedDate": "2026-11-01",
+  "applicationCommit": "5c67838637b0d8c24e4451ad212f3c9bdf5aae23",
+  "deploymentId": "ab21a085-c485-47a7-a2c6-56f30e7721d1",
+  "status": "SUCCESS",
+  "baseUrl": "https://educationos.space",
+  "sourcePinned": true,
+  "liveBrowserTestsPassed": 4,
+  "imageFrameChecks": 12,
+  "widths": [
+    320,
+    390,
+    768,
+    1440
+  ],
+  "affectedSections": [
+    "programs",
+    "approach",
+    "trust"
+  ],
+  "ci": {
+    "url": "https://github.com/VladislavBrodsky/EducationOS/actions/runs/41320200053",
+    "allJobsPassed": true,
+    "pythonTestsPassed": 74,
+    "unitTestsPassed": 144,
+    "browserTestsPassed": 97,
+    "standaloneBrowserTestsSkipped": 1
+  },
+  "priorDeploymentForRollback": "2f289cd1-8d87-4683-8f3f-edc02042444e",
+  "dnsChanged": false,
+  "backendDeployed": false,
+  "portalRedeployed": false
+}

@@ -1,5 +1,12 @@
 # Live EducationOS frontend deployment
 
+## Shared hero frame correction — verified 1 November 2026
+
+The Programs, Method and Safety photo heroes now use one rounded neutral frame without an animated duplicate border, inset image padding, decorative orbit or overlaid motion control. The square assets fill their frame cleanly; AR disclaimers remain below. Method-list alternating card colors and bottom spacing are restored. Application source `5c67838637b0d8c24e4451ad212f3c9bdf5aae23` is pinned to successful Railway deployment `ab21a085-c485-47a7-a2c6-56f30e7721d1` at [educationos.space](https://educationos.space).
+
+Four focused checks passed locally and again over actual HTTPS, covering all three heroes at320/390/768/1440px, image/frame alignment, captions, translated accessibility, native scrolling, keyboard access and no-JavaScript content. Desktop/mobile screenshots were visually inspected. [CI on the application commit](https://github.com/VladislavBrodsky/EducationOS/actions/runs/41320200053) passed all four jobs:74 backend tests,144 frontend unit tests and97 browser tests; one gated integration test is skipped in the standalone browser job, with the separate container workflow passing. Audit: [hero media QA](qa/hero-media-2026-11-01.md). No backend, portal-service, DNS, enrollment or AI-gate changes were made.
+
+
 ## Component studio and real-page motion — verified 1 November 2026
 
 The marketing site at [educationos.space](https://educationos.space) is live from application commit `5ad2ee44fb7e267d419ec066793ba8a5c48e0a9b`. Railway deployment `2f289cd1-8d87-4683-8f3f-edc02042444e` completed successfully on30 October and was independently rechecked on1 November. The service is pinned to that exact GitHub commit; later branch pushes do not automatically deploy. Test-only correction `47c1262` uses the existing canonical Spanish route and does not change application files.
