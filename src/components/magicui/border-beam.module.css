@@ -1,0 +1,5 @@
+.frame{position:absolute!important;inset:0;z-index:3;border-radius:inherit;pointer-events:none;padding:2px;mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask-composite:exclude}
+.beam{position:absolute;left:0;top:0;width:100px;height:100px;opacity:0;background:linear-gradient(100deg,transparent,#d5fc51 45%,#628c25 65%,transparent);offset-path:inset(0 round 24px);offset-distance:0%;offset-anchor:center}
+@supports (offset-path:inset(0 round 24px)) and (mask-composite:exclude){.frame[data-motion=running] .beam{animation:travel 4.2s linear 1}}
+@keyframes travel{0%{offset-distance:0%;opacity:0}10%{opacity:1}90%{opacity:1}100%{offset-distance:100%;opacity:0}}
+@media(prefers-reduced-motion:reduce){.frame .beam{animation:none!important}}

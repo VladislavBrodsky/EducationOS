@@ -17,7 +17,7 @@ describe('reviewed Magic UI inventory', () => {
     }
   });
   it('distinguishes the adapted previews from reference-only components', () => {
-    expect(MAGIC_UI_COMPONENTS.filter(item => item.implementation !== 'reference')).toHaveLength(16);
-    expect(MAGIC_UI_COMPONENTS.filter(item => item.implementation === 'reference')).toHaveLength(61);
+    expect(MAGIC_UI_COMPONENTS.filter(item => item.implementation !== 'reference')).toHaveLength(17);
+    expect(MAGIC_UI_COMPONENTS.filter(item => item.implementation === 'reference')).toHaveLength(60);
   });
 });

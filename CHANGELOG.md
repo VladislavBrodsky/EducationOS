@@ -1,3 +1,12 @@
+# Shared visual system — 2026-11-01
+
+- Unify Manrope typography across marketing, demo, policy, studio and learner pages; refine buttons, focus feedback and bento card surfaces
+- Rebuild the journal hero in normal flow with a separate image/caption and an asymmetric desktop story grid
+- Remove artwork from behind portal progress explanations and improve card/control hierarchy in both themes
+- Add a finite, motion-aware Border Beam challenge accent and its showcase preview;17 local previews and60 official references remain clearly distinguished
+- Coalesce Magic Card pointer updates to animation frames and respect manual pause
+- Add a reproducible route-layout audit and responsive, contrast, finite-motion and translated-journal checks; no new runtime dependency
+
 # Hero media correction — 2026-11-01
 
 - Replace overlapping static/animated photo borders with one neutral rounded frame on Programs, Method and Safety pages

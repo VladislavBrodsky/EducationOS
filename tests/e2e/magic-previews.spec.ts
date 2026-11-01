@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
-const previews = ['Marquee', 'Word Rotate', 'Scroll Progress', 'Animated List', 'Blur Fade', 'Ripple Button', 'Interactive Hover Button', 'Terminal', 'Dot Pattern', 'Grid Pattern', 'Orbiting Circles', 'Shine Border', 'Magic Card', 'Bento Grid', 'Progressive Blur', 'Shimmer Button'];
+const previews = ['Border Beam', 'Marquee', 'Word Rotate', 'Scroll Progress', 'Animated List', 'Blur Fade', 'Ripple Button', 'Interactive Hover Button', 'Terminal', 'Dot Pattern', 'Grid Pattern', 'Orbiting Circles', 'Shine Border', 'Magic Card', 'Bento Grid', 'Progressive Blur', 'Shimmer Button'];
 
 test('every local component preview renders within phone and desktop bounds', async ({ page }) => {
   test.setTimeout(90000);

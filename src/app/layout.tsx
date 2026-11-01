@@ -3,6 +3,7 @@ import { connection } from 'next/server';
 import { headers } from 'next/headers';
 import { SITE_URL } from '@/lib/site';
 import { isLocale, marketingCopy } from '@/lib/marketing-i18n';
+import '@fontsource-variable/manrope';
 import './globals.css';
 import './marketing.css';
 

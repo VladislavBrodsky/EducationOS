@@ -810,3 +810,10 @@
 @media (prefers-reduced-motion: reduce) {
   .studio-root *, .studio-root *::before, .studio-root *::after { transition: none; }
 }
+
+/* Match the public site's type and controls without changing auth or editing behavior. */
+.studio-root :is(h1,h2,h3){font-weight:600;letter-spacing:-.04em}
+.studio-primary,.studio-secondary{border-radius:11px;font-weight:650}
+.studio-root input:not([type=checkbox]),.studio-root textarea{border-radius:9px;font-size:16px}
+.studio-panel{box-shadow:0 12px 32px -30px #2b432b66}
+.studio-process>li{box-shadow:0 8px 24px -25px #2b432b55}

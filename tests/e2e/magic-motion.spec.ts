@@ -20,7 +20,7 @@ test('the component studio distinguishes working previews from the full official
   await expect(cards).toHaveCount(77);
   await expect(page.getByRole('status')).toHaveText('77 of 77 components');
   await page.getByRole('button', { name: 'Live previews', exact: true }).click();
-  await expect(cards).toHaveCount(16);
+  await expect(cards).toHaveCount(17);
   await expect(cards.getByText('Official reference', { exact: true })).toHaveCount(0);
   await page.getByRole('button', { name: 'All', exact: true }).click();
   await page.getByRole('combobox', { name: 'Filter by category' }).selectOption('Device Mocks');

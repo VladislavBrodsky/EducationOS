@@ -4,6 +4,7 @@ import { useRef, useState } from 'react';
 import { useMotionPreference } from '@/components/magicui/use-motion-preference';
 import { ArrowRight, ArrowUpRight, Atom, BookOpen, Check, Code2, FlaskConical, Layers3, Lightbulb, RotateCcw, Search, ShieldCheck, Sparkles } from 'lucide-react';
 import { MAGIC_UI_COMPONENTS } from '@/lib/magic-ui-catalog';
+import { BorderBeam } from '@/components/magicui/border-beam';
 import { Marquee } from '@/components/magicui/marquee';
 import { WordRotate } from '@/components/magicui/word-rotate';
 import { ScrollProgress } from '@/components/magicui/scroll-progress';
@@ -16,11 +17,12 @@ import { ProgressiveBlur } from '@/components/magicui/progressive-blur';
 import { MotionToggle } from '@/components/marketing/motion-surface';
 import styles from './component-studio.module.css';
 
-export const LIVE_PREVIEW_IDS = ['marquee', 'word-rotate', 'scroll-progress', 'animated-list', 'blur-fade', 'ripple-button', 'interactive-hover-button', 'terminal', 'dot-pattern', 'grid-pattern', 'orbiting-circles', 'shine-border', 'magic-card', 'bento-grid', 'progressive-blur', 'shimmer-button'];
+export const LIVE_PREVIEW_IDS = ['border-beam', 'marquee', 'word-rotate', 'scroll-progress', 'animated-list', 'blur-fade', 'ripple-button', 'interactive-hover-button', 'terminal', 'dot-pattern', 'grid-pattern', 'orbiting-circles', 'shine-border', 'magic-card', 'bento-grid', 'progressive-blur', 'shimmer-button'];
 const topics = [{ title: 'Ask a question', icon: Lightbulb }, { title: 'Try an experiment', icon: FlaskConical }, { title: 'Explore a pattern', icon: Layers3 }, { title: 'Explain an idea', icon: BookOpen }];
 const categories = [...new Set(MAGIC_UI_COMPONENTS.map(item => item.category))];
 
 function Preview({ id, onInteract }: { id: string; onInteract: () => void }) {
+  if (id === 'border-beam') return <div className={styles.shinePreview}><BorderBeam /><Lightbulb size={28} aria-hidden="true" /><strong>A brief accent for one idea</strong><p>The border highlight makes one pass, then rests</p></div>;
   if (id === 'marquee') return <Marquee label="Rolling learning topics" duration={32}>{topics.map(({ title, icon: Icon }) => <span className={styles.topic} key={title}><Icon aria-hidden="true" size={24} /><strong>{title}</strong></span>)}</Marquee>;
   if (id === 'word-rotate') return <div className={styles.wordPreview}><span>Make room for</span><WordRotate words={['curiosity', 'experiments', 'possibilities']} /></div>;
   if (id === 'animated-list') return <AnimatedList label="A learning mission">{topics.map(({ title, icon: Icon }) => <span key={title}><Icon size={20} aria-hidden="true" />{title}</span>)}</AnimatedList>;

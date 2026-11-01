@@ -4,6 +4,7 @@ import type { Locale } from '@/lib/marketing-i18n';
 import { marketingCopy } from '@/lib/marketing-i18n';
 import { showcaseCopy } from '@/lib/marketing-showcase';
 import { LOOP_LOOM_INSTRUCTIONS, loopLoomSource } from '@/lib/labs/loop-loom';
+import { BorderBeam } from '@/components/magicui/border-beam';
 import { BentoGrid } from '@/components/magicui/bento-grid';
 import { MagicCard } from '@/components/magicui/magic-card';
 import { BridgePreview } from './bridge-preview';
@@ -15,7 +16,7 @@ export function LearningBento({ locale }: { locale: Locale }) {
     <div className="m-section-heading"><div><span className="m-kicker">{copy.kicker}</span><h2 id="learning-in-motion">{copy.title}</h2></div><p>{copy.description}</p></div>
     <BentoGrid>
       <article id="paper-bridge-challenge" className="fx-bento-feature" tabIndex={-1} aria-labelledby="paper-bridge-title">
-        <div className="fx-bento-feature-head"><span className="fx-icon-tile"><FlaskConical size={22} aria-hidden="true" /></span><span className="m-kicker">{copy.model}</span></div>
+        <BorderBeam /><div className="fx-bento-feature-head"><span className="fx-icon-tile"><FlaskConical size={22} aria-hidden="true" /></span><span className="m-kicker">{copy.model}</span></div>
         <h3 id="paper-bridge-title">{marketing.labTitle}</h3><p className="fx-bento-description">{copy.materials}</p>
         <BridgePreview locale={locale} />
         <div className="fx-bento-feature-footer"><Link className="m-button m-button-dark fx-shimmer" href="/demo/lab">{marketing.labAction}<ArrowUpRight size={18} aria-hidden="true" /></Link><span>{copy.language}</span></div>

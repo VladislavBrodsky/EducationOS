@@ -18,7 +18,7 @@
   grid-template-columns: 238px minmax(0, 1fr);
   background: var(--p-paper);
   color: var(--p-ink);
-  font: 16px/1.6 Arial, Helvetica, sans-serif;
+  font: 16px/1.6 'Manrope Variable', Arial, Helvetica, sans-serif;
   color-scheme: light;
   isolation: isolate;
 }
@@ -442,4 +442,15 @@ pre.p-code-editor { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; }
 @media (max-width: 760px) {
   .p-portal .p-heading:not(.p-heading-mascot) { padding: 20px 21px; }
   .p-resume-list { grid-template-columns: 1fr; }
+}
+
+/* Keep progress explanations clear of decorative artwork in both themes. */
+.p-portal .p-progress-summary::after { display:none; }
+.p-portal .p-progress-summary { border:1px solid var(--p-line); background:linear-gradient(115deg,var(--p-soft),var(--p-surface)); border-radius:18px; }
+.p-portal :is(h1,h2,h3) { font-weight:600; text-wrap:balance; }
+.p-primary,.p-secondary { border-radius:11px; font-weight:650; }
+.p-card,.p-subject-card,.p-project,.p-subject-path { border-radius:18px; }
+@media(hover:hover) and (prefers-reduced-motion:no-preference) {
+ .p-primary:not(:disabled),.p-secondary:not(:disabled){transition:background .18s,border-color .18s,box-shadow .18s;}
+ .p-primary:hover:not(:disabled){box-shadow:0 4px 14px #96be3c26;}
 }

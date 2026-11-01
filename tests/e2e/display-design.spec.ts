@@ -82,7 +82,8 @@ test('marketing and product pages fit mobile and tablet viewports', async ({ pag
       }
       if (route === '/blog' && width === 390) {
         const height = await page.locator('.m-journal-hero').evaluate(element => element.getBoundingClientRect().height);
-        expect(height).toBeLessThan(550);
+        // Flow layout reserves real artwork and caption space while fitting the phone viewport.
+        expect(height).toBeLessThan(650);
       }
       if (process.env.VISUAL_AUDIT === '1' && width === 390 && ['/', '/ru', '/blog'].includes(route)) {
         for (const image of await page.locator('.m-story-image img').all()) {

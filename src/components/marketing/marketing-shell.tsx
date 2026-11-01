@@ -4,7 +4,6 @@ import { localizedPath, marketingCopy, type Locale } from '@/lib/marketing-i18n'
 import { MotionSurface } from './motion-surface';
 import { LanguageSwitcher } from './language-switcher';
 import { MobileMenu } from './mobile-menu';
-import '@fontsource-variable/manrope';
 import './experience.css';
 
 export function MarketingShell({ locale, children, section = '', showLanguageSwitcher = true }: { locale: Locale; children: React.ReactNode; section?: string; showLanguageSwitcher?: boolean }) {
