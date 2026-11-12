@@ -4,6 +4,7 @@ import { useId, useState } from 'react';
 import { Share2 } from 'lucide-react';
 import type { Locale } from '@/lib/marketing-i18n';
 import { SITE_URL } from '@/lib/site';
+import { trackEvent } from '@/lib/analytics';
 
 const labels = {
   es: { button: 'Compartir historia', shared: 'Compartido', copied: 'Enlace copiado', manual: 'Copia el enlace para compartirlo', link: 'Enlace para compartir' },
@@ -28,6 +29,7 @@ export function ShareLink({ title, locale, url, buttonLabel }: { title: string; 
       if (navigator.share) {
         try {
           await navigator.share({ title, url: link });
+          trackEvent('share', { method: 'web_share', content_type: 'article', item_id: new URL(link).pathname });
           setMessage(copy.shared);
           return;
         } catch (error) {
@@ -36,6 +38,7 @@ export function ShareLink({ title, locale, url, buttonLabel }: { title: string; 
       }
       try {
         await navigator.clipboard.writeText(link);
+        trackEvent('share', { method: 'copy_link', content_type: 'article', item_id: new URL(link).pathname });
         setMessage(copy.copied);
       } catch {
         setManualUrl(link);

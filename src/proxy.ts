@@ -1,21 +1,25 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { PORTAL_HOST_HEADER, resolvePortalRoute } from '@/lib/portal-routing';
+import { GA_CSP } from '@/lib/analytics';
 
 export function proxy(request: NextRequest) {
   const nonce = Buffer.from(crypto.randomUUID()).toString('base64');
   const dev = process.env.NODE_ENV === 'development';
+  const incomingHost = request.headers.get('host') ?? request.nextUrl.host;
+  const route = resolvePortalRoute(incomingHost, request.nextUrl.pathname);
+  // Google Analytics hosts are allowed on the public marketing host only, never the learner portal.
+  const ga = !route.portalHost && process.env.DEPLOYMENT_ENV === 'production' && Boolean(process.env.GA_MEASUREMENT_ID);
+  const extra = (hosts: readonly string[]) => (ga ? ` ${hosts.join(' ')}` : '');
   const policy = [
     "default-src 'self'",
-    `script-src 'self' 'nonce-${nonce}' 'strict-dynamic'${dev ? " 'unsafe-eval'" : ''}`,
+    `script-src 'self' 'nonce-${nonce}' 'strict-dynamic'${extra(GA_CSP.script)}${dev ? " 'unsafe-eval'" : ''}`,
     "style-src 'self' 'unsafe-inline'",
-    "img-src 'self' data: blob:", "font-src 'self'", `connect-src 'self'${dev ? ' ws: wss:' : ''}`,
+    `img-src 'self' data: blob:${extra(GA_CSP.img)}`, "font-src 'self'", `connect-src 'self'${extra(GA_CSP.connect)}${dev ? ' ws: wss:' : ''}`,
     "object-src 'none'", "base-uri 'self'", "form-action 'self'", "frame-ancestors 'none'",
   ].join('; ');
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set('x-nonce', nonce);
   requestHeaders.set('Content-Security-Policy', policy);
-  const incomingHost = request.headers.get('host') ?? request.nextUrl.host;
-  const route = resolvePortalRoute(incomingHost, request.nextUrl.pathname);
   // Never trust a client-supplied value when the layout chooses its link base.
   requestHeaders.set(PORTAL_HOST_HEADER, String(route.portalHost));
   const pathname = request.nextUrl.pathname;

@@ -3,6 +3,9 @@ import { connection } from 'next/server';
 import { headers } from 'next/headers';
 import { SITE_URL } from '@/lib/site';
 import { isLocale, marketingCopy } from '@/lib/marketing-i18n';
+import { isValidMeasurementId } from '@/lib/analytics';
+import { PORTAL_HOST_HEADER } from '@/lib/portal-routing';
+import { Analytics } from '@/components/analytics';
 import '@fontsource-variable/manrope';
 import './globals.css';
 import './marketing.css';
@@ -20,7 +23,11 @@ export const metadata: Metadata = {
 export const viewport: Viewport = { width: 'device-width', initialScale: 1, themeColor: '#d5fc51' };
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   await connection();
-  const requestedLocale = (await headers()).get('x-educationos-locale') ?? 'en';
+  const requestHeaders = await headers();
+  const requestedLocale = requestHeaders.get('x-educationos-locale') ?? 'en';
   const locale = isLocale(requestedLocale) ? requestedLocale : 'en';
-  return <html lang={locale} data-scroll-behavior="smooth"><body><a href="#main-content" className="skip-link">{marketingCopy[locale].skip}</a>{children}</body></html>;
+  // Public marketing site in production only; never the learner portal host.
+  const measurementId = process.env.GA_MEASUREMENT_ID;
+  const analytics = process.env.DEPLOYMENT_ENV === 'production' && requestHeaders.get(PORTAL_HOST_HEADER) !== 'true' && isValidMeasurementId(measurementId);
+  return <html lang={locale} data-scroll-behavior="smooth"><body><a href="#main-content" className="skip-link">{marketingCopy[locale].skip}</a>{children}{analytics && <Analytics measurementId={measurementId} locale={locale} />}</body></html>;
 }
