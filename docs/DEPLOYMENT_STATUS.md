@@ -1,5 +1,9 @@
 # Live EducationOS frontend deployment
 
+## Consent-gated Google Analytics 4 — verified 12 November 2026
+
+The marketing service at [educationos.space](https://educationos.space) runs application commit `ab5c65c` (Railway deployment `03f3b432-834f-402a-9d37-88167473b37b`) with `GA_MEASUREMENT_ID=G-P5EBK61FRJ` set on `educationos-marketing` only. A localized consent banner loads GA4 only after opt-in; the demo, studio, component workbench, API routes and the learner portal are never measured. The portal service was not redeployed and has no measurement ID; `app.educationos.space` keeps `connect-src 'self'` and serves no tag. Live checks: no Google request before consent; after opt-in one `page_view` and one `demo_start` reached the property with ads storage denied (`gcs=G101`, `npa=1`) and appeared in GA Realtime; navigation into `/demo` set `ga-disable`. Local checks: lint, types, 161 unit tests and a production build with a fake ID. GA admin: 14-month retention without reset, ads personalisation off in all regions, Google signals off, history-based page views and form interactions off, industry Jobs & Education. `demo_start` is to be marked as a key event once GA lists it (up to 24 hours). The pre-existing `/api/v1/missions` 500 on the demo (Python API not connected) is unrelated. Details: [ANALYTICS.md](ANALYTICS.md).
+
 ## Shared frontend refinement — verified 1 November 2026
 
 Both [marketing](https://educationos.space) and [learner portal](https://app.educationos.space) are live from pinned application commit `abc6ebc537287087ab5bcc174d24f38713942fb7`. Successful deployments: marketing `61deeb83-caeb-49c9-b84e-e5163b10cecc`; portal `d12e024e-f34e-4f72-a00f-c5a75e86b280`.

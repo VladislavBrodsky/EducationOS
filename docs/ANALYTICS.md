@@ -29,7 +29,7 @@ Use `trackEvent(name, params)` from `@/lib/analytics` for new events; it is a no
 
 ## GA4 admin settings (applied 2026-11-12)
 
-Data retention 14 months; Google signals off; ads personalization off; enhanced measurement “page changes based on browser history events” off (the site sends page views itself); `demo_start` marked as a key event; industry category Jobs & Education.
+Data retention 14 months; Google signals off; ads personalization off; enhanced measurement “page changes based on browser history events” off (the site sends page views itself); industry category Jobs & Education. Pending: star `demo_start` as a key event in Admin → Events once GA lists it (it first arrived 2026-11-12).
 
 ## Testing locally
 
